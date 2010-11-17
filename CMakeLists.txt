@@ -10,7 +10,7 @@ add_definitions (-Wall)
 
 # Version.
 
-set (VERSION "0.1.0")
+set (VERSION "0.1.1")
 set (VERSION_LONG "${VERSION}")
 set (BRANCH "master")
 
