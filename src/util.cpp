@@ -281,10 +281,22 @@ parse_quvi_support (QWidget *parent, const QString& path) {
         QString::fromLocal8Bit(proc.readAll());
 
     foreach (QString ln, output.split("\n")) {
-        if (ln.isEmpty()) continue;
+
+        if (ln.isEmpty())
+            continue;
+
         if (re.indexIn(ln) != -1) {
-            hosts[re.cap(1).simplified()] =
-                re.cap(2).simplified().split("|");
+
+            const QString host  = re.cap (1).simplified ();
+            QStringList formats = re.cap (2).simplified ().split ("|");
+
+            // Keep "default" at the beginning of the list.
+
+            const QString top = formats.takeFirst ();
+            formats.sort ();
+            formats.prepend (top);
+
+            hosts[host] = formats;
         }
     }
 
