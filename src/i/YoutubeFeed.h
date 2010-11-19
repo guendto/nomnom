@@ -34,7 +34,9 @@ private slots:
     void onTypeChanged (int);
     // Umph.
     void onFinished (QString);
+#ifdef _0
     void onError    ();
+#endif
 protected:
     void done (int);
     void closeEvent (QCloseEvent*);

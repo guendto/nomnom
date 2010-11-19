@@ -43,7 +43,9 @@ YoutubeFeed::YoutubeFeed (QWidget *parent)
     _prog = new ProcessProgressDialog (this);
 
     connect (_prog, SIGNAL (finished (QString)), this, SLOT (onFinished (QString)));
+#ifdef _0
     connect (_prog, SIGNAL (error ()), this, SLOT (onError ()));
+#endif
 }
 
 bool YoutubeFeed::gotItems () const { return _got_items; }
@@ -129,12 +131,13 @@ YoutubeFeed::onFinished (QString s) {
     NomNom::crit (this, error);
 }
 
+#ifdef _0
 // Slot: Umph: error.
 
 void
-YoutubeFeed::onError () { }
-#ifdef _0
+YoutubeFeed::onError ()
     { NomNom::crit (this, s); }
+
 #endif
 
 // Done. QDialog and closeEvent design glitch workaround.
