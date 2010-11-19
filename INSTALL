@@ -5,14 +5,16 @@ NomNom
 
 PREREQUISITES
 
-* quvi (0.2.8+)
-* curl (7.20.0+)
-* qt   (4.7+)
+* quvi (0.2.8+)     <http://quvi.googlecode.com/>
+* curl (7.20.0+)    <http://curl.haxx.se/>
+* qt   (4.7+)       <http://qt.nokia.com/>
 * media player
   - that supports streaming (e.g. vlc)
 
--- To compile
+-- Optional
+* umph (0.1.7+)     <http://umph.googlecode.com/>
 
+-- To compile
 * gcc/g++   (4.5.0+)
 * cmake     (2.8.2+)
 
