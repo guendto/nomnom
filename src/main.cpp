@@ -44,6 +44,9 @@ History history;
 // Global: Log.
 Log log;
 
+// Global: Feed.
+NomNom::FeedHash feed;
+
 int
 main (int argc, char *argv[]) {
 

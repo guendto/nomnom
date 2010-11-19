@@ -28,6 +28,8 @@
 
 namespace NomNom {
 
+typedef QHash<QString,QString> FeedHash;
+
 void
 restore_size(
     QSettings&,
@@ -99,6 +101,9 @@ format_filename (
 
 QString
 to_process_errmsg (QProcess::ProcessError);
+
+bool
+choose_from_feed (QWidget *, QString&);
 
 } // End of namespace.
 

@@ -66,11 +66,13 @@ configure_file (
 set (nomnom_src
     # UI.
     src/i/Preferences.cpp
+    src/i/YoutubeFeed.cpp
     src/i/MainWindow.cpp
     src/i/Reminder.cpp
     src/i/LogView.cpp
     src/i/About.cpp
     # Other.
+    src/ProcProgDiag.cpp
     src/Download.cpp
     src/History.cpp
     src/Video.cpp
@@ -89,9 +91,11 @@ set (nomnom_hdr
 
 set (nomnom_moc_hdr
     src/i/Preferences.h
+    src/i/YoutubeFeed.h
     src/i/MainWindow.h
     src/i/Reminder.h
     src/i/LogView.h
+    src/ProcProgDiag.h
     src/Download.h
     src/i/About.h
     src/Video.h
@@ -99,6 +103,7 @@ set (nomnom_moc_hdr
 
 set (nomnom_ui
     i/Preferences.ui
+    i/YoutubeFeed.ui
     i/MainWindow.ui
     i/Reminder.ui
     i/LogView.ui

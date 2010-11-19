@@ -34,6 +34,7 @@
 extern QMap<QString,QStringList> hosts;
 extern QMap<QString,QString> qmFiles;
 extern QStringList qmLangNames;
+extern NomNom::FeedHash feed;
 
 namespace NomNom {
 
@@ -425,6 +426,38 @@ to_process_errmsg (QProcess::ProcessError n) {
     }
 
     return e;
+}
+
+bool
+choose_from_feed (QWidget *parent, QString& dst) {
+
+    if (feed.isEmpty ())
+        return false;
+
+    QHashIterator<QString,QString> i (feed);
+    QStringList items;
+
+    while (i.hasNext ()) {
+        i.next ();
+        items << i.key ();
+    }
+
+    bool ok = false;
+
+    QString title = QInputDialog::getItem (
+        parent,
+        QObject::tr ("Choose video"),
+        QObject::tr ("Video"),
+        items,
+        0,
+        false,
+        &ok
+    );
+
+    if (ok)
+        dst = feed[title];
+
+    return ok;
 }
 
 } // End of namespace.

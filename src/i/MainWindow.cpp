@@ -29,6 +29,7 @@
 #include "Preferences.h"
 #include "LogView.h"
 #include "Reminder.h"
+#include "YoutubeFeed.h"
 #include "MainWindow.h"
 
 #define QSETTINGS_GROUP             "MainWindow"
@@ -125,8 +126,8 @@ MainWindow::createContextMenu () {
     } while (0)
 
     creat_a (tr("Address..."), onAddress,   false);
-#ifdef _0
     creat_a (tr("Feed..."), onFeed, false);
+#ifdef _0
     creat_a (tr("Rake..."), onRake, false);
 #endif
     creat_a (tr("History..."), onHistory, false);
@@ -146,8 +147,8 @@ MainWindow::createContextMenu () {
     // Add key shortcuts.
 
     actions[tr("Address...")]->setShortcut  (QKeySequence(tr("Ctrl+A")));
-#ifdef _0
     actions[tr("Feed...")]->setShortcut (QKeySequence(tr("Ctrl+F")));
+#ifdef _0
     actions[tr("Rake...")]->setShortcut (QKeySequence(tr("Ctrl+C")));
 #endif
     actions[tr("Overwrite")]->setShortcut(QKeySequence(tr("Ctrl+W")));
@@ -624,10 +625,49 @@ MainWindow::onStop () {
         proc.kill();
 }
 
+// main.cpp
+extern QHash<QString,QString> feed;
+
 // Slot: on feed.
 
 void
 MainWindow::onFeed () {
+
+    const QString path =
+        shPrefs.get (SharedPreferences::UmphPath).toString ();
+
+    if (path.isEmpty ()) {
+        NomNom::crit (this,
+            tr ("Specify path to the umph(1) command in the Preferences."));
+        return;
+    }
+
+    QString url;
+
+    if (!feed.empty ()) {
+
+        const int rc = NomNom::ask (this, tr ("Choose from old results?"));
+
+        if (rc == QMessageBox::Yes) {
+            if (!NomNom::choose_from_feed (this, url))
+                return;
+        }
+
+    }
+
+    if (url.isEmpty ()) {
+
+        YoutubeFeed d (this);
+
+        if (d.exec () != QDialog::Accepted || !d.gotItems ())
+            return;
+
+        if (!NomNom::choose_from_feed (this, url))
+            return;
+
+    }
+
+    handleURL (url);
 }
 
 // Slot: on scan.

@@ -47,6 +47,8 @@ Download::Download (QWidget *parent/*=NULL*/)
 
     setWindowModality (Qt::WindowModal);
     setAutoClose (false);
+
+    _proc.setProcessChannelMode (QProcess::MergedChannels);
 }
 
 void
@@ -68,8 +70,6 @@ Download::start (const QString& cmd, const QString& fpath, Video *video) {
     args.replaceInStrings ("%f", fpath);
 
     log << args.join (" ") + "\n";
-
-    _proc.setProcessChannelMode (QProcess::MergedChannels);
 
     show ();
     _proc.start (args.takeFirst (), args);

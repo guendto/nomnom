@@ -62,14 +62,16 @@ Preferences::Preferences (QWidget *parent)
     umphPathEdit->setText (
         shPrefs.get (SharedPreferences::UmphPath).toString ());
 
+#ifdef _0
     if (umphPathEdit->text ().isEmpty ())
-        umphPathEdit->setText ("umph --json %u");
+        umphPathEdit->setText ("umph");
+#endif
 
     grakePathEdit->setText (
         shPrefs.get (SharedPreferences::GrakePath).toString ());
 
     if (grakePathEdit->text ().isEmpty ())
-        grakePathEdit->setText ("grake --json %u");
+        grakePathEdit->setText ("grake");
 
     saveDirEdit->setText (
         shPrefs.get (SharedPreferences::SaveDir).toString ());
@@ -111,10 +113,6 @@ Preferences::Preferences (QWidget *parent)
     );
 
     onRefresh ();
-
-    // grake, umph paths. Disabled for now.
-
-    tabWidget->setTabEnabled (1, false);
 }
 
 bool Preferences::restartAfter () const { return _restartAfter; }
@@ -329,10 +327,10 @@ Preferences::done (int r) {
             append (playerPathEdit));
 
         shPrefs.set (SharedPreferences::UmphPath,
-            append (umphPathEdit, QStringList() << "%u" << "--json"));
+            umphPathEdit->text ());
 
         shPrefs.set (SharedPreferences::GrakePath,
-            append (grakePathEdit, QStringList() << "%u" << "--json"));
+            grakePathEdit->text ());
 
         shPrefs.set (SharedPreferences::SaveDir,
             saveDirEdit->text ());
