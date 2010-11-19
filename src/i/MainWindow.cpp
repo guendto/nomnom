@@ -348,7 +348,7 @@ MainWindow::handleURL (const QString& url) {
         QString s = QInputDialog::getItem (
             this,
             tr ("Choose format"),
-            tr ("Format"),
+            tr ("Format:"),
             formats,
             0,
             false,
