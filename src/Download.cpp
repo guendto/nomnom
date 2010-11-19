@@ -25,7 +25,7 @@
 extern Log log;
 
 Download::Download (QWidget *parent/*=NULL*/)
-    : QProgressDialog (parent)
+    : QProgressDialog (parent), _canceled (false)
 {
 
 #define _wrap(s,sl) \
@@ -54,9 +54,7 @@ Download::Download (QWidget *parent/*=NULL*/)
 void
 Download::start (const QString& cmd, const QString& fpath, Video *video) {
 
-#ifdef _0
     qDebug () << __PRETTY_FUNCTION__;
-#endif
 
     Q_ASSERT (!cmd.isEmpty ());
     Q_ASSERT (!fpath.isEmpty ());
@@ -71,6 +69,8 @@ Download::start (const QString& cmd, const QString& fpath, Video *video) {
 
     log << args.join (" ") + "\n";
 
+    _canceled = false;
+
     show ();
     _proc.start (args.takeFirst (), args);
     exec ();
@@ -82,11 +82,11 @@ Download::onCurlStarted ()
 
 void
 Download::onCurlError (QProcess::ProcessError n) {
-#ifdef _0
-    qDebug () << __PRETTY_FUNCTION__;
-#endif
-    emit error (NomNom::to_process_errmsg (n));
-    cancel ();
+
+    if (!_canceled) {
+        emit error (NomNom::to_process_errmsg (n));
+        cancel ();
+    }
 }
 
 static const QRegExp rx_prog ("^(\\d+).*(\\d+:\\d+:\\d+|\\d+d \\d+h)\\s+(\\w+)$");
@@ -95,10 +95,6 @@ static const QRegExp rx_rate ("(\\D+)");   // rate unit
 
 void
 Download::onCurlReadyRead () {
-
-#ifdef _0
-    qDebug () << __PRETTY_FUNCTION__;
-#endif
 
     static char data[1024];
 
@@ -160,29 +156,14 @@ Download::onCurlReadyRead () {
 }
 
 void
-Download::onCurlFinished (int exitCode, QProcess::ExitStatus es) {
+Download::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
 
-#ifdef _0
-    qDebug () << __PRETTY_FUNCTION__;
-#endif
-
-    switch (es) {
-
-    case QProcess::NormalExit:
-
-        switch (exitCode) {
-
-        default: emit error (_lastError); break;
-
-        case  0: break;
-
-        } // Switch exitCode.
-
-    break; // NormalExit.
-
-    default: break;
-
-    } // Switch ExitStatus.
+    if (exitStatus == QProcess::NormalExit && exitCode == 0)
+        ;
+    else {
+        if (!_canceled)
+            emit error (_lastError);
+    }
 
     cancel ();
 }
@@ -190,9 +171,7 @@ Download::onCurlFinished (int exitCode, QProcess::ExitStatus es) {
 void
 Download::onCanceled () {
 
-#ifdef _0
-    qDebug () << __PRETTY_FUNCTION__;
-#endif
+    _canceled = true;
 
     if (_proc.state () == QProcess::Running)
         _proc.kill ();

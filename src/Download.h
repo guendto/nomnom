@@ -40,6 +40,7 @@ private slots:
 private:
     QString _lastError;
     QProcess _proc;
+    bool _canceled;
 };
 
 #endif

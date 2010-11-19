@@ -74,6 +74,7 @@ private:
     QPointer<QMenu> trayMenu;
     QPointer<Video> video;
     QProcess proc;
+    bool canceled;
     QString json;
 };
 

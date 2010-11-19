@@ -48,8 +48,9 @@ enum { StreamVideo=0, DownloadVideo };
 
 // Ctor.
 
-MainWindow::MainWindow  () {
-
+MainWindow::MainWindow  ()
+    : canceled (false)
+{
     setupUi(this);
 
     readSettings();
@@ -98,6 +99,8 @@ MainWindow::MainWindow  () {
 
     connect (download, SIGNAL (error (QString)),
         this, SLOT (onDownloadError (QString)));
+
+    proc.setProcessChannelMode (QProcess::MergedChannels);
 
     log << tr ("Program started.") + "\n";
 }
@@ -360,12 +363,11 @@ MainWindow::handleURL (const QString& url) {
             return false;
     }
 
-    // quvi.
-
     log << args.join (" ") + "\n";
-    json.clear ();
 
-    proc.setProcessChannelMode (QProcess::MergedChannels);
+    json.clear ();
+    canceled = false;
+
     proc.start (args.takeFirst (), args);
 
     return true;
@@ -634,8 +636,10 @@ MainWindow::onAddress() {
 
 void
 MainWindow::onStop () {
-    if (proc.state() != QProcess::NotRunning)
+    if (proc.state() != QProcess::NotRunning) {
+        canceled = true;
         proc.kill();
+    }
 }
 
 // main.cpp
@@ -703,8 +707,10 @@ MainWindow::onQuviStarted ()
 // Slot: Process error.
 
 void
-MainWindow::onQuviError (QProcess::ProcessError n)
-    { NomNom::crit (this, NomNom::to_process_errmsg (n)); }
+MainWindow::onQuviError (QProcess::ProcessError n) {
+    if (!canceled)
+        NomNom::crit (this, NomNom::to_process_errmsg (n));
+}
 
 // Slot: Ready read. Note that we use merged channels (stdout + stderr).
 
@@ -737,38 +743,22 @@ MainWindow::onQuviReadyRead () {
 // Slot: Process finished.
 
 void
-MainWindow::onQuviFinished (int exitCode, QProcess::ExitStatus es) {
+MainWindow::onQuviFinished (int exitCode, QProcess::ExitStatus exitStatus) {
 
-    statusLabel->setText( tr("Ready.") );
+    statusLabel->setText (tr ("Ready."));
 
-    switch (es) {
-
-    case QProcess::NormalExit:
-
-        switch (exitCode) {
-
-        case 0:
-
-            if (parseOK ()) {
-
-                if (modeCBox->currentIndex() == StreamVideo)
-                    streamVideo();
-                else
-                    downloadVideo();
-            }
-
-        break;
-
-        default: parseError (); break;
-
-        } // Switch ExitCode.
-
-    break; // NormalExit.
-
-    default: break;
-
-    } // Switch ExitStatus.
-
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        if (parseOK ()) {
+            if (modeCBox->currentIndex() == StreamVideo)
+                streamVideo();
+            else
+                downloadVideo();
+        }
+    }
+    else {
+        if (!canceled)
+            parseError  ();
+    }
 }
 
 // Slot: download error.
