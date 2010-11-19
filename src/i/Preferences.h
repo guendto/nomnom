@@ -61,7 +61,8 @@ public:
         MinToTray,
         StayOnTop,
         PlayWhenDone,
-        ShowReminder
+        ShowReminder,
+        DontPromptFilename
     };
 public:
     void     write   () const;
@@ -81,6 +82,7 @@ private:
     bool stayOnTop;
     bool playWhenDone;
     bool showReminder;
+    bool dontPromptFilename;
 };
 
 #endif

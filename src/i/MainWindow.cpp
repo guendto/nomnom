@@ -298,11 +298,8 @@ MainWindow::handleURL (const QString& url) {
         shPrefs.get (SharedPreferences::QuviPath).toString ().simplified ();
 
     if (quviPath.isEmpty ()) {
-
         NomNom::crit (this, tr ("You must specify path to the quvi command."));
-
         onPreferences ();
-
         return false;
     }
 
@@ -426,20 +423,26 @@ MainWindow::downloadVideo () {
 
     fpath = QDir::toNativeSeparators (fpath +"/"+ fname);
 
-    QFileDialog::Options opts =
-        QFileDialog::DontConfirmOverwrite;
+    const bool dont_prompt =
+        shPrefs.get (SharedPreferences::DontPromptFilename).toBool ();
 
-    fpath = QFileDialog::getSaveFileName(
-        this, 
-        tr("Save video as"),
-        fpath,
-        suffix, // Filter.
-        0,      // Selected filter.
-        opts
-    );
+    if (!dont_prompt) {
 
-    if (fpath.isEmpty ())
-        return;
+        const QFileDialog::Options opts =
+            QFileDialog::DontConfirmOverwrite;
+
+        fpath = QFileDialog::getSaveFileName (
+            this,
+            tr ("Save video as"),
+            fpath,
+            suffix, // Filter.
+            0,      // Selected filter.
+            opts
+        );
+
+        if (fpath.isEmpty ())
+            return;
+    }
 
     if (actions[tr("Overwrite")]->isChecked ())
         QDir ().remove (fpath);

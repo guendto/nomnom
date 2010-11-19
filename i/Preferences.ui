@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>200</height>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -328,17 +328,10 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_9">
+       <item row="2" column="0" colspan="2">
+        <widget class="QCheckBox" name="dontPromptFilenameBox">
          <property name="text">
-          <string>Config:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="configEdit">
-         <property name="readOnly">
-          <bool>true</bool>
+          <string>&amp;Do not prompt for filename</string>
          </property>
         </widget>
        </item>
@@ -353,6 +346,20 @@
         <widget class="QPushButton" name="languageBtn">
          <property name="text">
           <string>&amp;Language...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Config:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="configEdit">
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

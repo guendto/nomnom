@@ -112,6 +112,12 @@ Preferences::Preferences (QWidget *parent)
             : Qt::Unchecked
     );
 
+    dontPromptFilenameBox->setChecked (
+        shPrefs.get (SharedPreferences::DontPromptFilename).toBool ()
+            ? Qt::Checked
+            : Qt::Unchecked
+    );
+
     onRefresh ();
 }
 
@@ -353,6 +359,9 @@ Preferences::done (int r) {
         shPrefs.set (SharedPreferences::ShowReminder,
             showReminderBox->isChecked ());
 
+        shPrefs.set (SharedPreferences::DontPromptFilename,
+            dontPromptFilenameBox->isChecked ());
+
         shPrefs.write ();
     }
 
@@ -389,6 +398,7 @@ SharedPreferences::write () const {
     s.setValue ("stayOnTop",    stayOnTop);
     s.setValue ("playWhenDone", playWhenDone);
     s.setValue ("showReminder", showReminder);
+    s.setValue ("dontPromptFilename", dontPromptFilename);
 
     s.endGroup ();
 }
@@ -413,6 +423,7 @@ SharedPreferences::read () {
     stayOnTop    = s.value ("stayOnTop").toBool ();
     playWhenDone = s.value ("playWhenDone").toBool ();
     showReminder = s.value ("showReminder").toBool ();
+    dontPromptFilename = s.value ("dontPromptFilename").toBool ();
 
     s.endGroup ();
 }
@@ -434,6 +445,7 @@ SharedPreferences::set (Option opt, const QVariant& v) {
     case StayOnTop      : stayOnTop    = v.toBool (); break;
     case PlayWhenDone   : playWhenDone = v.toBool (); break;
     case ShowReminder   : showReminder = v.toBool (); break;
+    case DontPromptFilename: dontPromptFilename = v.toBool (); break;
     default:
         qDebug()
             << __PRETTY_FUNCTION__
@@ -461,6 +473,7 @@ SharedPreferences::get (Option opt) const {
     case StayOnTop    : return QVariant (stayOnTop);
     case PlayWhenDone : return QVariant (playWhenDone);
     case ShowReminder : return QVariant (showReminder);
+    case DontPromptFilename:return QVariant (dontPromptFilename);
     default:
         qDebug()
             << __PRETTY_FUNCTION__
