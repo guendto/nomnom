@@ -216,6 +216,12 @@ MainWindow::hideEvent (QHideEvent *e) {
     e->accept();
 }
 
+static void
+still_running (QWidget *p) {
+    NomNom::crit (p,
+        QObject::tr ("Stop the running quvi(1) process first, and try again."));
+}
+
 // Close event.
 
 void
@@ -278,15 +284,12 @@ MainWindow::readSettings () {
 bool
 MainWindow::handleURL (const QString& url) {
 
-    // Check paths.
-
     if (proc.state() != QProcess::NotRunning) {
-
-        NomNom::crit(this,
-            tr("Stop the running quvi process first, and try again."));
-
+        still_running (this);
         return false;
     }
+
+    // Check paths.
 
     const QString quviPath =
         shPrefs.get (SharedPreferences::QuviPath).toString ().simplified ();
@@ -579,6 +582,11 @@ MainWindow::onHistory () {
         return;
     }
 
+    if (proc.state() != QProcess::NotRunning) {
+        still_running (this);
+        return;
+    }
+
     bool ok = false;
 
     const QString s = QInputDialog::getItem(
@@ -607,6 +615,11 @@ MainWindow::onLog ()
 
 void
 MainWindow::onAddress() {
+
+    if (proc.state() != QProcess::NotRunning) {
+        still_running (this);
+        return;
+    }
 
     const QString url =
         QInputDialog::getText (this, tr ("Address"), tr ("Video URL:"));
@@ -639,6 +652,11 @@ MainWindow::onFeed () {
     if (path.isEmpty ()) {
         NomNom::crit (this,
             tr ("Specify path to the umph(1) command in the Preferences."));
+        return;
+    }
+
+    if (proc.state() != QProcess::NotRunning) {
+        still_running (this);
         return;
     }
 
