@@ -91,7 +91,7 @@ MainWindow::MainWindow  ()
 
     // Create Download dialog.
 
-    download = new Download (this);
+    download = new DownloadDialog (this);
 #ifdef _0
     download->setLabelText (tr ("Copying..."));
     download->setCancelButtonText (tr ("&Abort"));

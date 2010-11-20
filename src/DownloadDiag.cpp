@@ -19,12 +19,12 @@
 
 #include "util.h"
 #include "Log.h"
-#include "Download.h"
+#include "DownloadDiag.h"
 
 // main.cpp
 extern Log log;
 
-Download::Download (QWidget *parent/*=NULL*/)
+DownloadDialog::DownloadDialog (QWidget *parent/*=NULL*/)
     : QProgressDialog (parent), _canceled (false)
 {
 
@@ -52,7 +52,7 @@ Download::Download (QWidget *parent/*=NULL*/)
 }
 
 void
-Download::start (const QString& cmd, const QString& fpath, Video *video) {
+DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video) {
 
     Q_ASSERT (!cmd.isEmpty ());
     Q_ASSERT (!fpath.isEmpty ());
@@ -75,11 +75,11 @@ Download::start (const QString& cmd, const QString& fpath, Video *video) {
 }
 
 void
-Download::onCurlStarted ()
+DownloadDialog::onCurlStarted ()
     { setLabelText (tr ("Starting download ...")); }
 
 void
-Download::onCurlError (QProcess::ProcessError n) {
+DownloadDialog::onCurlError (QProcess::ProcessError n) {
 
     if (!_canceled) {
         emit error (NomNom::to_process_errmsg (n));
@@ -92,7 +92,7 @@ static const QRegExp rx_err  ("curl:\\s+(.*)$");
 static const QRegExp rx_rate ("(\\D+)");   // rate unit
 
 void
-Download::onCurlReadyRead () {
+DownloadDialog::onCurlReadyRead () {
 
     static char data[1024];
 
@@ -154,7 +154,7 @@ Download::onCurlReadyRead () {
 }
 
 void
-Download::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
+DownloadDialog::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
 
     if (exitStatus == QProcess::NormalExit && exitCode == 0)
         ;
@@ -167,7 +167,7 @@ Download::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
 }
 
 void
-Download::onCanceled () {
+DownloadDialog::onCanceled () {
 
     _canceled = true;
 

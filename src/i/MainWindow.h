@@ -26,7 +26,7 @@
 #include <QHash>
 
 #include "Video.h"
-#include "Download.h"
+#include "DownloadDiag.h"
 
 #include "ui_MainWindow.h"
 
@@ -69,8 +69,8 @@ private slots:
     void onDownloadError    (QString);
 private:
     QPointer<QSystemTrayIcon> trayIcon;
+    QPointer<DownloadDialog> download;
     QHash<QString,QAction*> actions;
-    QPointer<Download> download;
     QPointer<QMenu> trayMenu;
     QPointer<Video> video;
     QProcess proc;

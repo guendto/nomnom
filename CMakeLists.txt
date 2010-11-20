@@ -72,8 +72,8 @@ set (nomnom_src
     src/i/LogView.cpp
     src/i/About.cpp
     # Other.
+    src/DownloadDiag.cpp
     src/ProcProgDiag.cpp
-    src/Download.cpp
     src/History.cpp
     src/Video.cpp
     src/Log.cpp
@@ -95,8 +95,8 @@ set (nomnom_moc_hdr
     src/i/MainWindow.h
     src/i/Reminder.h
     src/i/LogView.h
+    src/DownloadDiag.h
     src/ProcProgDiag.h
-    src/Download.h
     src/i/About.h
     src/Video.h
 )

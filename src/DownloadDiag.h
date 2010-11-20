@@ -15,18 +15,18 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef nomnom_download_h
-#define nomnom_download_h
+#ifndef nomnom_downloaddiag_h
+#define nomnom_downloaddiag_h
 
 #include <QProgressDialog>
 #include <QProcess>
 
 #include "Video.h"
 
-class Download : public QProgressDialog {
+class DownloadDialog : public QProgressDialog {
     Q_OBJECT
 public:
-    Download (QWidget *parent=NULL);
+    DownloadDialog (QWidget *parent=NULL);
 public:
     void start (const QString&, const QString&, Video*);
 signals:
