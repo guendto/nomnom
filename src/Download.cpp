@@ -54,8 +54,6 @@ Download::Download (QWidget *parent/*=NULL*/)
 void
 Download::start (const QString& cmd, const QString& fpath, Video *video) {
 
-    qDebug () << __PRETTY_FUNCTION__;
-
     Q_ASSERT (!cmd.isEmpty ());
     Q_ASSERT (!fpath.isEmpty ());
     Q_ASSERT (video != NULL);
