@@ -87,7 +87,6 @@ DownloadDialog::onCurlError (QProcess::ProcessError n) {
     }
 }
 
-static const QRegExp rx_prog ("^(\\d+).*(\\d+:\\d+:\\d+|\\d+d \\d+h)\\s+(\\w+)$");
 static const QRegExp rx_err  ("curl:\\s+(.*)$");
 static const QRegExp rx_rate ("(\\D+)");   // rate unit
 
@@ -105,50 +104,33 @@ DownloadDialog::onCurlReadyRead () {
             continue;
         }
 
-        if (ln.split (" ").count () < 12)
-            continue; // Full line updates only, PLZKTHXBYE.
+        QStringList lst = ln.split (" ");
+
+        if (lst.count () < 12)
+            continue; // Full line updates only.
 
 #ifdef _0
-        qDebug () << ln;
-        qDebug () << "--";
+        qDebug () << lst;
 #endif
 
-        if (rx_prog.indexIn (ln) != -1) {
+        enum {
+            PERCENT = 0,
+            ETA     = 10,
+            RATE    = 11
+        };
 
-            enum {
-                PERCENT = 1,
-                ETA,
-                RATE
-            };
+        setValue (lst[PERCENT].toInt ());
 
-#ifdef _0
-            qDebug ()
-                << rx_prog.cap (PERCENT)
-                << rx_prog.cap (ETA)
-                << rx_prog.cap (RATE);
-            qDebug ()
-                << ln;
-#endif
+        QString rate = lst[RATE];
 
-            setValue (rx_prog.cap (PERCENT).toInt ());
+        if (rx_rate.indexIn (rate) == -1)
+            rate = QString ("%1k").arg (rate.toLongLong ()/1024.0,2,'f',1);
 
-            QString rate = rx_prog.cap (RATE);
+        const QString s = tr("Copying at %1, %2")
+            .arg (rate)
+            .arg (lst[ETA]);
 
-            if (rx_rate.indexIn (rate) == -1) {
-                rate = QString ("%1k").arg (rate.toLongLong ()/1024.0,2,'f',1);
-            }
-
-            const QString s = tr("Copying at %1, %2")
-                .arg (rate)
-                .arg (rx_prog.cap (ETA))
-                ;
-
-            setLabelText (s);
-        }
-
-        else
-            log << ln;
-
+        setLabelText (s);
     }
 
 }
