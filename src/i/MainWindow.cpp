@@ -94,8 +94,8 @@ MainWindow::MainWindow  ()
     download = new Download (this);
 #ifdef _0
     download->setLabelText (tr ("Copying..."));
-#endif
     download->setCancelButtonText (tr ("&Abort"));
+#endif
 
     connect (download, SIGNAL (error (QString)),
         this, SLOT (onDownloadError (QString)));
@@ -450,7 +450,7 @@ MainWindow::downloadVideo () {
     const qint64 expected_bytes =
         video->get (Video::Length).toLongLong ();
 
-    if (QFileInfo (fpath).size () != expected_bytes) {
+    if (QFileInfo (fpath).size () < expected_bytes) {
 
         const QString cmd =
             shPrefs.get (SharedPreferences::CurlPath).toString ().simplified ();
@@ -459,10 +459,18 @@ MainWindow::downloadVideo () {
     }
 
     const bool completeFile =
-        QFileInfo (fpath).size () == expected_bytes;
+        QFileInfo (fpath).size () >= expected_bytes;
 
     const bool playWhenDone = 
         shPrefs.get (SharedPreferences::PlayWhenDone).toBool ();
+
+#ifdef _0
+    qDebug ()
+        << QFileInfo (fpath).size ()
+        << expected_bytes
+        << completeFile
+        << playWhenDone;
+#endif
 
     if (completeFile && playWhenDone) {
 
