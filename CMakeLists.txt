@@ -74,7 +74,7 @@ set (nomnom_src
     # Other.
     src/DownloadDiag.cpp
     src/ProcProgDiag.cpp
-    src/History.cpp
+    src/Recent.cpp
     src/Video.cpp
     src/Log.cpp
     src/main.cpp
@@ -83,7 +83,7 @@ set (nomnom_src
 )
 
 set (nomnom_hdr
-    src/History.h
+    src/Recent.h
     src/Log.h
     src/util.h
     src/tips.h

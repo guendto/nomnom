@@ -22,7 +22,7 @@
 #include <QDebug>
 
 #include "util.h"
-#include "History.h"
+#include "Recent.h"
 #include "Log.h"
 // UI:
 #include "Preferences.h"
@@ -38,8 +38,8 @@ QStringList qmLangNames;
 // Global: Preferences.
 SharedPreferences shPrefs;
 
-// Global: History.
-History history;
+// Global: Recent.
+Recent recent;
 
 // Global: Log.
 Log log;
@@ -90,9 +90,9 @@ main (int argc, char *argv[]) {
     shPrefs.read();
 #endif
 
-    // Read history.
+    // Read recent.
 
-    history.read();
+    recent.read();
 
     // Show main window.
 

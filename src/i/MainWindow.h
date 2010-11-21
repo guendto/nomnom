@@ -58,7 +58,7 @@ private slots:
     void onFeed         ();
     void onRake         ();
     void onAbout        ();
-    void onHistory      ();
+    void onRecent       ();
     void onLog          ();
     // Process (quvi).
     void onQuviStarted      ();

@@ -18,26 +18,26 @@
 #include <QSettings>
 #include <QDebug>
 
-#include "History.h"
+#include "Recent.h"
 
-#define QSETTINGS_GROUP "History"
+#define QSETTINGS_GROUP "Recent"
 
-History::History  () :maxItems (10) { }
-History::~History () { }
+Recent::Recent  () :maxItems (10) { }
+Recent::~Recent () { }
 
 void
-History::write () const
+Recent::write () const
     { QSettings ().setValue(QString("%1/drops").arg(QSETTINGS_GROUP), drops); }
 
 void
-History::read () {
+Recent::read () {
     drops = QSettings ().value (QString ("%1/drops")
         .arg (QSETTINGS_GROUP))
         .toStringList ();
 }
 
 void
-History::append (const QString& s) {
+Recent::append (const QString& s) {
 
     drops << s;
 
@@ -47,13 +47,13 @@ History::append (const QString& s) {
         drops.takeFirst ();
 }
 
-History&
-History::operator<<(const QString& s) {
+Recent&
+Recent::operator<<(const QString& s) {
     append (s);
     return *this;
 }
 
-QStringList History::toStringList () const { return drops; }
-void        History::clear        ()       { drops.clear (); }
+QStringList Recent::toStringList () const { return drops; }
+void        Recent::clear        ()       { drops.clear (); }
 
 

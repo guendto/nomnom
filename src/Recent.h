@@ -15,15 +15,15 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef nomnom_history_h
-#define nomnom_history_h
+#ifndef nomnom_recent_h
+#define nomnom_recent_h
 
 #include <QStringList>
 
-class History {
+class Recent {
 public:
-    History ();
-    virtual ~History();
+    Recent ();
+    virtual ~Recent();
 public:
     void setMaxItems(const int);
 public:
@@ -34,7 +34,7 @@ public:
 public:
     QStringList toStringList () const;
 public:
-    History& operator<< (const QString&);
+    Recent& operator<< (const QString&);
 private:
     QStringList drops;
     int maxItems;

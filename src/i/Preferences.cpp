@@ -20,7 +20,7 @@
 #include <QDebug>
 
 #include "util.h"
-#include "History.h"
+#include "Recent.h"
 #include "Preferences.h"
 
 #define QSETTINGS_GROUP "Preferences"
@@ -255,13 +255,13 @@ Preferences::onRefresh () {
 
 // main.cpp
 
-extern History history;
+extern Recent recent;
 
-// Slot: clear history.
+// Slot: clear recent.
 
 void
-Preferences::onClearHistory ()
-    { history.clear (); }
+Preferences::onClearRecent ()
+    { recent.clear (); }
 
 // Slot: language.
 

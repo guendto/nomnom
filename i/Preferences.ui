@@ -311,9 +311,9 @@
        <item row="0" column="1">
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
-          <widget class="QPushButton" name="clearHistoryBtn">
+          <widget class="QPushButton" name="clearRecentBtn">
            <property name="text">
-            <string>Cl&amp;ear history</string>
+            <string>Cl&amp;ear recent</string>
            </property>
           </widget>
          </item>
@@ -383,7 +383,7 @@
   <tabstop>stayOnTopBox</tabstop>
   <tabstop>showReminderBox</tabstop>
   <tabstop>dontPromptFilenameBox</tabstop>
-  <tabstop>clearHistoryBtn</tabstop>
+  <tabstop>clearRecentBtn</tabstop>
   <tabstop>languageBtn</tabstop>
   <tabstop>configEdit</tabstop>
   <tabstop>buttonBox</tabstop>
@@ -455,10 +455,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearHistoryBtn</sender>
+   <sender>clearRecentBtn</sender>
    <signal>clicked()</signal>
    <receiver>Preferences</receiver>
-   <slot>onClearHistory()</slot>
+   <slot>onClearRecent()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
@@ -586,7 +586,7 @@
  <slots>
   <slot>onBrowseQuvi()</slot>
   <slot>onBrowsePlayer()</slot>
-  <slot>onClearHistory()</slot>
+  <slot>onClearRecent()</slot>
   <slot>onBrowseUmph()</slot>
   <slot>onFilenameFormatChanged(int)</slot>
   <slot>onRegexpChanged(int)</slot>

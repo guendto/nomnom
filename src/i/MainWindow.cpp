@@ -23,7 +23,7 @@
 
 #include "util.h"
 #include "Log.h"
-#include "History.h"
+#include "Recent.h"
 // UI
 #include "About.h"
 #include "Preferences.h"
@@ -39,7 +39,7 @@
 
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
-extern History history;
+extern Recent recent;
 extern Log log;
 
 // Modes.
@@ -133,7 +133,7 @@ MainWindow::createContextMenu () {
 #ifdef _0
     creat_a (tr("Rake..."), onRake, false);
 #endif
-    creat_a (tr("History..."), onHistory, false);
+    creat_a (tr("Recent..."), onRecent, false);
     add_s;
     creat_a (tr("Overwrite"), _,      true);
     creat_a (tr("Stop"),      onStop, false);
@@ -157,7 +157,7 @@ MainWindow::createContextMenu () {
     actions[tr("Overwrite")]->setShortcut(QKeySequence(tr("Ctrl+W")));
     actions[tr("Stop")]->setShortcut    (QKeySequence(tr("Ctrl+S")));
     actions[tr("Log...")]->setShortcut  (QKeySequence(tr("Ctrl+L")));
-    actions[tr("History...")]->setShortcut     (QKeySequence(tr("Ctrl+R")));
+    actions[tr("Recent...")]->setShortcut     (QKeySequence(tr("Ctrl+R")));
     actions[tr("Preferences...")]->setShortcut (QKeySequence(tr("Ctrl+E")));
     actions[tr("Quit")]->setShortcut    (QKeySequence(tr("Ctrl+Q")));
 
@@ -254,7 +254,7 @@ MainWindow::closeEvent (QCloseEvent *e) {
     s.setValue("modeCBox", modeCBox->currentIndex());
     s.endGroup();
 
-    history.write();
+    recent.write();
 
     e->accept();
 }
@@ -322,9 +322,9 @@ MainWindow::handleURL (const QString& url) {
         return false;
     }
 
-    // History.
+    // Recent.
 
-    history << url;
+    recent << url;
 
     // quvi args.
 
@@ -583,29 +583,29 @@ void
 MainWindow::onAbout ()
     { About(this).exec(); }
 
-// Slot: History.
+// Slot: Recent.
 
 void
-MainWindow::onHistory () {
+MainWindow::onRecent () {
 
-    const QStringList lst = history.toStringList();
+    const QStringList lst = recent.toStringList ();
 
-    if (lst.size() == 0) {
-        NomNom::info (this, tr ("No record of previously visited URLs found."));
+    if (lst.size () == 0) {
+        NomNom::info (this, tr ("No record of recently visited URLs found."));
         return;
     }
 
-    if (proc.state() != QProcess::NotRunning) {
+    if (proc.state () != QProcess::NotRunning) {
         still_running (this);
         return;
     }
 
     bool ok = false;
 
-    const QString s = QInputDialog::getItem(
+    const QString s = QInputDialog::getItem (
         this,
-        tr("History"),
-        tr("Visited URL:"),
+        tr ("Recent URLs"),
+        tr ("Select URL:"),
         lst,
         0,
         false,
@@ -615,7 +615,7 @@ MainWindow::onHistory () {
     if (!ok)
         return;
 
-    handleURL(s);
+    handleURL (s);
 }
 
 // Slot: Log.

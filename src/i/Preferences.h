@@ -40,7 +40,7 @@ private slots:
     void onFilenameFormatEditingFinished ();
     void onRegexpEditingFinished();
     void onRefresh              ();
-    void onClearHistory         ();
+    void onClearRecent         ();
     void onLanguage             ();
 private:
     bool _restartAfter;
