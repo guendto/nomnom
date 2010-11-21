@@ -155,19 +155,19 @@ YoutubeFeed::done (int r) {
         QStringList args =
             shPrefs.get (SharedPreferences::UmphPath).toString ().split (" ");
 
-        args << "--json"
-             << "--quiet"
-             << "--start-index" << startIndexSpin->text ()
-             << "--max-results" << maxResultsSpin->text ()
-             << id
-             << "--type";
+        QString type;
 
         switch (typeCombo->currentIndex ()) {
         default:
-        case  0: args << "p"; break;
-        case  1: args << "f"; break;
-        case  2: args << "u"; break;
+        case  0: type = "p"; break;
+        case  1: type = "f"; break;
+        case  2: type = "u"; break;
         }
+
+        args.replaceInStrings ("%t", type);
+        args.replaceInStrings ("%s", startIndexSpin->text ());
+        args.replaceInStrings ("%m", maxResultsSpin->text ());
+        args.replaceInStrings ("%i", id);
 
         _prog->setLabelText (tr ("Checking ..."));
         _prog->setMaximum (0);

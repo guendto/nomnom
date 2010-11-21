@@ -62,10 +62,8 @@ Preferences::Preferences (QWidget *parent)
     umphPathEdit->setText (
         shPrefs.get (SharedPreferences::UmphPath).toString ());
 
-#ifdef _0
     if (umphPathEdit->text ().isEmpty ())
-        umphPathEdit->setText ("umph");
-#endif
+        umphPathEdit->setText ("umph -q --json -t %t -s %s -m %m %i");
 
     saveDirEdit->setText (
         shPrefs.get (SharedPreferences::SaveDir).toString ());
@@ -293,11 +291,17 @@ Preferences::onLanguage () {
 
 static QString
 append (QLineEdit *w, const QStringList& l = QStringList() << "%u") {
+
     QString s = w->text ();
+
+    if (s.isEmpty ())
+        return QString ();
+
     foreach (QString w, l) {
         if (!s.contains (w))
             s += " " + w;
     }
+
     return s;
 }
 
@@ -321,7 +325,19 @@ Preferences::done (int r) {
             append (playerPathEdit));
 
         shPrefs.set (SharedPreferences::UmphPath,
-            umphPathEdit->text ());
+            append (umphPathEdit,
+                QStringList ()
+                    << "-q"
+                    << "--json"
+                    << "-t"
+                    << "%t"
+                    << "-s"
+                    << "%s"
+                    << "-m"
+                    << "%m"
+                    << "%i"
+                )
+        );
 
         shPrefs.set (SharedPreferences::SaveDir,
             saveDirEdit->text ());
