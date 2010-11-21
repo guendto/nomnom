@@ -67,12 +67,6 @@ Preferences::Preferences (QWidget *parent)
         umphPathEdit->setText ("umph");
 #endif
 
-    grakePathEdit->setText (
-        shPrefs.get (SharedPreferences::GrakePath).toString ());
-
-    if (grakePathEdit->text ().isEmpty ())
-        grakePathEdit->setText ("grake");
-
     saveDirEdit->setText (
         shPrefs.get (SharedPreferences::SaveDir).toString ());
 
@@ -156,12 +150,6 @@ Preferences::onBrowseCurl()
 void
 Preferences::onBrowseUmph ()
     { browse (this, umphPathEdit); }
-
-// Slot: browse grake.
-
-void
-Preferences::onBrowseGrake ()
-    { browse (this, grakePathEdit); }
 
 // Slot: browse save dir.
 
@@ -335,9 +323,6 @@ Preferences::done (int r) {
         shPrefs.set (SharedPreferences::UmphPath,
             umphPathEdit->text ());
 
-        shPrefs.set (SharedPreferences::GrakePath,
-            grakePathEdit->text ());
-
         shPrefs.set (SharedPreferences::SaveDir,
             saveDirEdit->text ());
 
@@ -390,7 +375,6 @@ SharedPreferences::write () const {
     s.setValue ("curlPath",     curlPath);
     s.setValue ("playerPath",   playerPath);
     s.setValue ("umphPath",     umphPath);
-    s.setValue ("grakePath",    grakePath);
     s.setValue ("saveDir",      saveDir);
     s.setValue ("filenameFormat", filenameFormat);
     s.setValue ("regexp",       regexp);
@@ -415,7 +399,6 @@ SharedPreferences::read () {
     curlPath     = s.value ("curlPath").toString ();
     playerPath   = s.value ("playerPath").toString ();
     umphPath     = s.value ("umphPath").toString ();
-    grakePath    = s.value ("grakePath").toString ();
     saveDir      = s.value ("saveDir").toString ();
     filenameFormat = s.value ("filenameFormat").toString ();
     regexp       = s.value ("regexp").toString ();
@@ -437,7 +420,6 @@ SharedPreferences::set (Option opt, const QVariant& v) {
     case CurlPath       : curlPath     = v.toString (); break;
     case PlayerPath     : playerPath   = v.toString (); break;
     case UmphPath       : umphPath     = v.toString (); break;
-    case GrakePath      : grakePath    = v.toString (); break;
     case SaveDir        : saveDir      = v.toString (); break;
     case FilenameFormat : filenameFormat = v.toString (); break;
     case Regexp         : regexp       = v.toString (); break;
@@ -465,7 +447,6 @@ SharedPreferences::get (Option opt) const {
     case CurlPath     : return QVariant (curlPath);
     case PlayerPath   : return QVariant (playerPath);
     case UmphPath     : return QVariant (umphPath);
-    case GrakePath    : return QVariant (grakePath);
     case SaveDir      : return QVariant (saveDir);
     case FilenameFormat:return QVariant (filenameFormat);
     case Regexp       : return QVariant (regexp);

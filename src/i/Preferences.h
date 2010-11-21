@@ -40,7 +40,6 @@ private slots:
     void onFilenameFormatEditingFinished ();
     void onRegexpEditingFinished();
     void onRefresh              ();
-    void onBrowseGrake          ();
     void onClearHistory         ();
     void onLanguage             ();
 private:
@@ -75,7 +74,6 @@ private:
     QString playerPath;
     QString umphPath;
     QString saveDir;
-    QString grakePath;
     QString filenameFormat;
     QString regexp;
     bool minToTray;

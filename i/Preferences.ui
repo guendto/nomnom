@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>207</height>
+    <height>259</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,14 +34,14 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="0" column="1" colspan="2">
         <widget class="QLineEdit" name="quviPathEdit">
          <property name="text">
           <string>&lt;replace with path and any additional options&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="0" column="3">
         <widget class="QPushButton" name="browseQuviBtn">
          <property name="text">
           <string>&amp;Browse...</string>
@@ -51,127 +51,96 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>&amp;curl:</string>
+          <string>c&amp;url:</string>
          </property>
          <property name="buddy">
           <cstring>curlPathEdit</cstring>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="1" column="1" colspan="2">
         <widget class="QLineEdit" name="curlPathEdit">
          <property name="text">
           <string>&lt;replace with path and any additional options&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
+       <item row="1" column="3">
         <widget class="QPushButton" name="browseCurlBtn">
          <property name="text">
-          <string>Bro&amp;wse...</string>
+          <string>B&amp;rowse...</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Pl&amp;ayer:</string>
+          <string>P&amp;layer:</string>
          </property>
          <property name="buddy">
           <cstring>playerPathEdit</cstring>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="2" column="1" colspan="2">
         <widget class="QLineEdit" name="playerPathEdit">
          <property name="text">
           <string>&lt;replace with path and any additional options&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="2" column="3">
         <widget class="QPushButton" name="browsePlayerBtn">
          <property name="text">
-          <string>Brow&amp;se...</string>
+          <string>Bro&amp;wse...</string>
          </property>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>&amp;More Paths</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>&amp;umph:</string>
+          <string>u&amp;mph:</string>
          </property>
          <property name="buddy">
           <cstring>umphPathEdit</cstring>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" colspan="2">
+       <item row="3" column="1" colspan="2">
         <widget class="QLineEdit" name="umphPathEdit">
          <property name="text">
           <string>&lt;replace with path and any additional options&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
+       <item row="3" column="3">
         <widget class="QPushButton" name="browseUmphBtn">
          <property name="text">
-          <string>&amp;Browse...</string>
+          <string>Brow&amp;se...</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>&amp;grake:</string>
-         </property>
-         <property name="buddy">
-          <cstring>grakePathEdit</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="2">
-        <widget class="QLineEdit" name="grakePathEdit">
-         <property name="text">
-          <string>&lt;replace with path and any additional options&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="browseGrakeBtn">
-         <property name="text">
-          <string>B&amp;rowse...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
+       <item row="4" column="0" colspan="2">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>&amp;Save videos:</string>
+          <string>S&amp;ave videos:</string>
          </property>
          <property name="buddy">
           <cstring>saveDirEdit</cstring>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="4" column="2">
         <widget class="QLineEdit" name="saveDirEdit">
          <property name="text">
           <string>&lt;replace with video save directory path&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="4" column="3">
         <widget class="QPushButton" name="browseSaveDirBtn">
          <property name="text">
-          <string>Bro&amp;wse...</string>
+          <string>Brows&amp;e...</string>
          </property>
         </widget>
        </item>
@@ -181,7 +150,7 @@
       <attribute name="title">
        <string>&amp;Filename</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5">
+      <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
@@ -221,7 +190,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>&amp;Title regexp:</string>
+          <string>Tit&amp;le regexp:</string>
          </property>
          <property name="buddy">
           <cstring>regexpEdit</cstring>
@@ -297,71 +266,83 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>&amp;Other</string>
+       <string>Op&amp;tions</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="minToTrayBox">
-         <property name="text">
-          <string>&amp;Minimize to system tray</string>
-         </property>
-        </widget>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="minToTrayBox">
+           <property name="text">
+            <string>&amp;Minimize to system tray</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="playWhenDoneBox">
+           <property name="text">
+            <string>Pl&amp;ay video when done downloading</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="stayOnTopBox">
+           <property name="text">
+            <string>&amp;Stay on top</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="showReminderBox">
+           <property name="text">
+            <string>S&amp;how reminder when NomNom starts</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="dontPromptFilenameBox">
+           <property name="text">
+            <string>&amp;Do not prompt for filename</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="0" column="2" colspan="2">
-        <widget class="QCheckBox" name="playWhenDoneBox">
-         <property name="text">
-          <string>Pl&amp;ay video when done downloading</string>
-         </property>
-        </widget>
+       <item row="0" column="1">
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="clearHistoryBtn">
+           <property name="text">
+            <string>Cl&amp;ear history</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="languageBtn">
+           <property name="text">
+            <string>&amp;Language...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QCheckBox" name="stayOnTopBox">
-         <property name="text">
-          <string>&amp;Stay on top</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2" colspan="2">
-        <widget class="QCheckBox" name="showReminderBox">
-         <property name="text">
-          <string>S&amp;how reminder when NomNom starts</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QCheckBox" name="dontPromptFilenameBox">
-         <property name="text">
-          <string>&amp;Do not prompt for filename</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="clearHistoryBtn">
-         <property name="text">
-          <string>&amp;Clear history</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="languageBtn">
-         <property name="text">
-          <string>&amp;Language...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Config:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="configEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Config:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="configEdit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -389,8 +370,6 @@
   <tabstop>browsePlayerBtn</tabstop>
   <tabstop>umphPathEdit</tabstop>
   <tabstop>browseUmphBtn</tabstop>
-  <tabstop>grakePathEdit</tabstop>
-  <tabstop>browseGrakeBtn</tabstop>
   <tabstop>saveDirEdit</tabstop>
   <tabstop>browseSaveDirBtn</tabstop>
   <tabstop>filenameFormatEdit</tabstop>
@@ -403,8 +382,10 @@
   <tabstop>playWhenDoneBox</tabstop>
   <tabstop>stayOnTopBox</tabstop>
   <tabstop>showReminderBox</tabstop>
-  <tabstop>configEdit</tabstop>
+  <tabstop>dontPromptFilenameBox</tabstop>
   <tabstop>clearHistoryBtn</tabstop>
+  <tabstop>languageBtn</tabstop>
+  <tabstop>configEdit</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
@@ -486,38 +467,6 @@
     <hint type="destinationlabel">
      <x>299</x>
      <y>94</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>browseGrakeBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>Preferences</receiver>
-   <slot>onBrowseGrake()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>539</x>
-     <y>110</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>96</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>browseUmphBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>Preferences</receiver>
-   <slot>onBrowseUmph()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>539</x>
-     <y>66</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>96</y>
     </hint>
    </hints>
   </connection>
@@ -618,22 +567,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>browseSaveDirBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>Preferences</receiver>
-   <slot>onBrowseSaveDir()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>539</x>
-     <y>124</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>99</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>languageBtn</sender>
    <signal>clicked()</signal>
    <receiver>Preferences</receiver>
@@ -655,7 +588,6 @@
   <slot>onBrowsePlayer()</slot>
   <slot>onClearHistory()</slot>
   <slot>onBrowseUmph()</slot>
-  <slot>onBrowseGrake()</slot>
   <slot>onFilenameFormatChanged(int)</slot>
   <slot>onRegexpChanged(int)</slot>
   <slot>onRefresh()</slot>
