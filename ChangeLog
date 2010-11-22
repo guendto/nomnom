@@ -1,12 +1,17 @@
 
 0.1.1
 Changes:
+        - Replace QStatusBar use with ProcessProgressDialog
+        - Rename History.* -> Recent.*
+        - Rename Download.* -> DownloadDiag.*
         - Preferences: Add save directory for videos
         - Preferences: Add "Do not prompt for filename"
         - Block attempts to other functions (e.g. Address) if quvi is running
         - Sort format IDs in "Choose format" dialog
         - Ignore error messages for canceled processes
         - Add Youtube feed (playlist, uploads, favorites) support (umph)
+Bugfixes:
+        - Restore if minimized (to tray) and error occurs
 
 
 0.1.0  Mon Nov 15 2010  legatvs
