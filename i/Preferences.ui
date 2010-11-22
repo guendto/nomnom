@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>259</height>
+    <height>278</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -272,34 +272,41 @@
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
-          <widget class="QCheckBox" name="minToTrayBox">
+          <widget class="QCheckBox" name="minWhenStartsBox">
            <property name="text">
-            <string>&amp;Minimize to system tray</string>
+            <string>&amp;Minimize when download starts</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
+          <widget class="QCheckBox" name="minToTrayBox">
+           <property name="text">
+            <string>M&amp;inimize to system tray</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
           <widget class="QCheckBox" name="playWhenDoneBox">
            <property name="text">
             <string>Pl&amp;ay video when done downloading</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QCheckBox" name="stayOnTopBox">
            <property name="text">
             <string>&amp;Stay on top</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="4" column="0">
           <widget class="QCheckBox" name="showReminderBox">
            <property name="text">
             <string>S&amp;how reminder when NomNom starts</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
+         <item row="5" column="0">
           <widget class="QCheckBox" name="dontPromptFilenameBox">
            <property name="text">
             <string>&amp;Do not prompt for filename</string>
@@ -378,6 +385,7 @@
   <tabstop>regexpCombo</tabstop>
   <tabstop>previewEdit</tabstop>
   <tabstop>refreshBtn</tabstop>
+  <tabstop>minWhenStartsBox</tabstop>
   <tabstop>minToTrayBox</tabstop>
   <tabstop>playWhenDoneBox</tabstop>
   <tabstop>stayOnTopBox</tabstop>

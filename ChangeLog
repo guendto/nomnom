@@ -1,6 +1,7 @@
 
 0.1.1
 Changes:
+        - Add "Minimize when download starts"
         - Replace QStatusBar use with ProcessProgressDialog
         - Rename History.* -> Recent.*
         - Rename Download.* -> DownloadDiag.*

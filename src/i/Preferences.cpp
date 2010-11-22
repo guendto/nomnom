@@ -80,6 +80,12 @@ Preferences::Preferences (QWidget *parent)
     if (regexpEdit->text ().isEmpty ())
         onRegexpChanged (0);
 
+    minWhenStartsBox->setChecked (
+        shPrefs.get (SharedPreferences::MinWhenStarts).toBool ()
+            ? Qt::Checked
+            : Qt::Unchecked
+    );
+
     minToTrayBox->setChecked (
         shPrefs.get (SharedPreferences::MinToTray).toBool ()
             ? Qt::Checked
@@ -347,6 +353,9 @@ Preferences::done (int r) {
         shPrefs.set (SharedPreferences::Regexp,
             regexpEdit->text ());
 
+        shPrefs.set (SharedPreferences::MinWhenStarts,
+            minWhenStartsBox->isChecked ());
+
         shPrefs.set (SharedPreferences::MinToTray,
             minToTrayBox->isChecked ());
 
@@ -393,6 +402,7 @@ SharedPreferences::write () const {
     s.setValue ("saveDir",      saveDir);
     s.setValue ("filenameFormat", filenameFormat);
     s.setValue ("regexp",       regexp);
+    s.setValue ("minWhenStarts",minWhenStarts);
     s.setValue ("minToTray",    minToTray);
     s.setValue ("stayOnTop",    stayOnTop);
     s.setValue ("playWhenDone", playWhenDone);
@@ -417,6 +427,7 @@ SharedPreferences::read () {
     saveDir      = s.value ("saveDir").toString ();
     filenameFormat = s.value ("filenameFormat").toString ();
     regexp       = s.value ("regexp").toString ();
+    minWhenStarts= s.value ("minWhenStarts").toBool ();
     minToTray    = s.value ("minToTray").toBool ();
     stayOnTop    = s.value ("stayOnTop").toBool ();
     playWhenDone = s.value ("playWhenDone").toBool ();
@@ -438,6 +449,7 @@ SharedPreferences::set (Option opt, const QVariant& v) {
     case SaveDir        : saveDir      = v.toString (); break;
     case FilenameFormat : filenameFormat = v.toString (); break;
     case Regexp         : regexp       = v.toString (); break;
+    case MinWhenStarts  : minWhenStarts= v.toBool (); break;
     case MinToTray      : minToTray    = v.toBool (); break;
     case StayOnTop      : stayOnTop    = v.toBool (); break;
     case PlayWhenDone   : playWhenDone = v.toBool (); break;
@@ -465,6 +477,7 @@ SharedPreferences::get (Option opt) const {
     case SaveDir      : return QVariant (saveDir);
     case FilenameFormat:return QVariant (filenameFormat);
     case Regexp       : return QVariant (regexp);
+    case MinWhenStarts: return QVariant (minWhenStarts);
     case MinToTray    : return QVariant (minToTray);
     case StayOnTop    : return QVariant (stayOnTop);
     case PlayWhenDone : return QVariant (playWhenDone);

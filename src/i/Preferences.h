@@ -57,6 +57,7 @@ public:
         SaveDir,
         FilenameFormat,
         Regexp,
+        MinWhenStarts,
         MinToTray,
         StayOnTop,
         PlayWhenDone,
@@ -76,6 +77,7 @@ private:
     QString saveDir;
     QString filenameFormat;
     QString regexp;
+    bool minWhenStarts;
     bool minToTray;
     bool stayOnTop;
     bool playWhenDone;

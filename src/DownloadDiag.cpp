@@ -19,9 +19,11 @@
 
 #include "util.h"
 #include "Log.h"
+#include "Preferences.h"
 #include "DownloadDiag.h"
 
 // main.cpp
+extern SharedPreferences shPrefs;
 extern Log log;
 
 DownloadDialog::DownloadDialog (QWidget *parent/*=NULL*/)
@@ -75,8 +77,11 @@ DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video) {
 }
 
 void
-DownloadDialog::onCurlStarted ()
-    { setLabelText (tr ("Starting download ...")); }
+DownloadDialog::onCurlStarted () {
+    setLabelText (tr ("Starting download ..."));
+    if (shPrefs.get (SharedPreferences::MinWhenStarts).toBool ())
+        parentWidget ()->showMinimized ();
+}
 
 void
 DownloadDialog::onCurlError (QProcess::ProcessError n) {
