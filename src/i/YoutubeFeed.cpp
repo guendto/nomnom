@@ -44,9 +44,9 @@ YoutubeFeed::YoutubeFeed (QWidget *parent)
 
     connect (_proc, SIGNAL (finished (QString)),
         this, SLOT (onFinished (QString)));
-#ifdef _0
-    connect (_proc, SIGNAL (error ()), this, SLOT (onError ()));
-#endif
+
+    _proc->setLabelText (tr ("Checking ..."));
+    _proc->setMaximum (0);
 }
 
 bool YoutubeFeed::gotItems () const { return _got_items; }
@@ -170,8 +170,6 @@ YoutubeFeed::done (int r) {
         args.replaceInStrings ("%m", maxResultsSpin->text ());
         args.replaceInStrings ("%i", id);
 
-        _proc->setLabelText (tr ("Checking ..."));
-        _proc->setMaximum (0);
         _proc->start (args);
 
         if (!_got_items)
