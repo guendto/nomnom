@@ -48,34 +48,16 @@ enum { StreamVideo=0, DownloadVideo };
 
 // Ctor.
 
-MainWindow::MainWindow  ()
-    : canceled (false)
-{
-    setupUi(this);
+MainWindow::MainWindow  () {
 
-    readSettings();
+    setupUi (this);
 
-#define _wrap(sig,slot) \
-    do { \
-        connect(&proc, SIGNAL(sig), this, SLOT(slot)); \
-    } while (0)
-
-    _wrap(started(), onQuviStarted());
-
-    _wrap(error(QProcess::ProcessError),
-        onQuviError(QProcess::ProcessError));
-
-    _wrap(readyRead(), onQuviReadyRead());
-
-    _wrap(finished(int,QProcess::ExitStatus),
-        onQuviFinished(int,QProcess::ExitStatus));
-
-#undef _wrap
+    readSettings ();
 
     // Stay on top?
 
-    if (shPrefs.get(SharedPreferences::StayOnTop).toBool())
-        setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+    if (shPrefs.get (SharedPreferences::StayOnTop).toBool ())
+        setWindowFlags (windowFlags () | Qt::WindowStaysOnTopHint);
 
     // Create Video instance.
 
@@ -83,24 +65,33 @@ MainWindow::MainWindow  ()
 
     // Create context menu.
 
-    createContextMenu();
+    createContextMenu ();
 
     // Create system tray icon.
 
-    createTray();
+    createTray ();
 
     // Create Download dialog.
 
     download = new DownloadDialog (this);
-#ifdef _0
-    download->setLabelText (tr ("Copying..."));
-    download->setCancelButtonText (tr ("&Abort"));
-#endif
 
     connect (download, SIGNAL (error (QString)),
         this, SLOT (onDownloadError (QString)));
 
-    proc.setProcessChannelMode (QProcess::MergedChannels);
+    // Create Process Progress dialog for quvi.
+
+    proc = new ProcessProgressDialog (this);
+
+    connect (proc, SIGNAL (finished (QString)),
+        this, SLOT (onProcFinished (QString)));
+
+    QHash<QString,QRegExp> h;
+
+    h[tr ("Checking ...")]  = QRegExp ("^:: Check");
+    h[tr ("Fetching ...")]  = QRegExp ("^:: Fetch");
+    h[tr ("Verifying ...")] = QRegExp ("^:: Verify");
+
+    proc->setLabelRegExp (h);
 
     log << tr ("Program started.") + "\n";
 }
@@ -130,13 +121,9 @@ MainWindow::createContextMenu () {
 
     creat_a (tr("Address..."), onAddress,   false);
     creat_a (tr("Feed..."), onFeed, false);
-#ifdef _0
-    creat_a (tr("Rake..."), onRake, false);
-#endif
     creat_a (tr("Recent..."), onRecent, false);
     add_s;
     creat_a (tr("Overwrite"), _,      true);
-    creat_a (tr("Stop"),      onStop, false);
     add_s;
     creat_a (tr("Log..."),         onLog,         false);
     creat_a (tr("Preferences..."), onPreferences, false);
@@ -149,17 +136,16 @@ MainWindow::createContextMenu () {
 
     // Add key shortcuts.
 
-    actions[tr("Address...")]->setShortcut  (QKeySequence(tr("Ctrl+A")));
-    actions[tr("Feed...")]->setShortcut (QKeySequence(tr("Ctrl+F")));
-#ifdef _0
-    actions[tr("Rake...")]->setShortcut (QKeySequence(tr("Ctrl+C")));
-#endif
-    actions[tr("Overwrite")]->setShortcut(QKeySequence(tr("Ctrl+W")));
-    actions[tr("Stop")]->setShortcut    (QKeySequence(tr("Ctrl+S")));
-    actions[tr("Log...")]->setShortcut  (QKeySequence(tr("Ctrl+L")));
-    actions[tr("Recent...")]->setShortcut     (QKeySequence(tr("Ctrl+R")));
-    actions[tr("Preferences...")]->setShortcut (QKeySequence(tr("Ctrl+E")));
-    actions[tr("Quit")]->setShortcut    (QKeySequence(tr("Ctrl+Q")));
+    actions[tr ("Address...")]->setShortcut  (QKeySequence (tr ("Ctrl+A")));
+    actions[tr ("Feed...")]->setShortcut     (QKeySequence (tr ("Ctrl+F")));
+    actions[tr ("Recent...")]->setShortcut      (QKeySequence (tr ("Ctrl+R")));
+    // --
+    actions[tr ("Overwrite")]->setShortcut   (QKeySequence (tr ("Ctrl+W")));
+    // --
+    actions[tr ("Log...")]->setShortcut      (QKeySequence (tr ("Ctrl+L")));
+    actions[tr ("Preferences...")]->setShortcut (QKeySequence (tr ("Ctrl+E")));
+    // --
+    actions[tr ("Quit")]->setShortcut        (QKeySequence (tr ("Ctrl+Q")));
 
     // Add the context menu.
 
@@ -219,44 +205,22 @@ MainWindow::hideEvent (QHideEvent *e) {
     e->accept();
 }
 
-static void
-still_running (QWidget *p) {
-    NomNom::crit (p,
-        QObject::tr ("Stop the running quvi(1) process first, and try again."));
-}
-
 // Close event.
 
 void
 MainWindow::closeEvent (QCloseEvent *e) {
 
-    int rc = QMessageBox::Yes;
-
-    if (proc.state() != QProcess::NotRunning) {
-        rc = NomNom::ask(
-            this,
-            tr("quvi is still running, really quit?")
-        );
-    }
-
-    if (rc == QMessageBox::Yes)
-        proc.kill();
-    else {
-        e->ignore();
-        return;
-    }
-
     QSettings s;
-    NomNom::save_size(s, this, QSETTINGS_GROUP);
-    NomNom::save_pos(s, this, QSETTINGS_GROUP);
+    NomNom::save_size (s, this, QSETTINGS_GROUP);
+    NomNom::save_pos (s, this, QSETTINGS_GROUP);
 
-    s.beginGroup(QSETTINGS_GROUP);
-    s.setValue("modeCBox", modeCBox->currentIndex());
-    s.endGroup();
+    s.beginGroup (QSETTINGS_GROUP);
+    s.setValue ("modeCBox", modeCBox->currentIndex ());
+    s.endGroup ();
 
-    recent.write();
+    recent.write ();
 
-    e->accept();
+    e->accept ();
 }
 
 // Read.
@@ -284,13 +248,8 @@ MainWindow::readSettings () {
 
 // Handle (dropped) URL.
 
-bool
+void
 MainWindow::handleURL (const QString& url) {
-
-    if (proc.state() != QProcess::NotRunning) {
-        still_running (this);
-        return false;
-    }
 
     // Check paths.
 
@@ -300,12 +259,12 @@ MainWindow::handleURL (const QString& url) {
     if (quviPath.isEmpty ()) {
         NomNom::crit (this, tr ("You must specify path to the quvi command."));
         onPreferences ();
-        return false;
+        return;
     }
 
     if (hosts.isEmpty ()) {
         const bool ok = NomNom::parse_quvi_support (this, quviPath);
-        if (!ok) return false;
+        if (!ok) return;
     }
 
     const QString playerPath =
@@ -314,12 +273,12 @@ MainWindow::handleURL (const QString& url) {
     if (playerPath.isEmpty ()) {
 
         NomNom::crit (this,
-            tr("You must specify path to a stream-capable media "
+            tr ("You must specify path to a stream-capable media "
                 "player command."));
 
         onPreferences ();
 
-        return false;
+        return;
     }
 
     // Recent.
@@ -357,17 +316,23 @@ MainWindow::handleURL (const QString& url) {
         if (ok)
             args << "-f" << s;
         else
-            return false;
+            return;
     }
 
     log << args.join (" ") + "\n";
 
     json.clear ();
-    canceled = false;
 
-    proc.start (args.takeFirst (), args);
+    proc->setLabelText (tr ("Checking ..."));
+    proc->setMaximum (0);
+    proc->start (args);
 
-    return true;
+    if (parseOK ()) {
+        if (modeCBox->currentIndex() == StreamVideo)
+            streamVideo ();
+        else
+            downloadVideo();
+   }
 }
 
 // View video (stream).
@@ -498,32 +463,19 @@ MainWindow::downloadVideo () {
 bool
 MainWindow::parseOK () {
 
-    QString error = tr ("Could not find the JSON data in quvi output.");
     const int n   = json.indexOf ("{");
 
-    if (n != -1) {
-        if (video->fromJSON (json.mid (n), error))
-            return true;
+    if (n == -1)
+        return false;
+
+    QString error;
+
+    if (!video->fromJSON (json.mid (n), error)) {
+        NomNom::crit (this, error);
+        return false;
     }
 
-    NomNom::crit (this, error);
-
-    return false;
-}
-
-// Parse error from data returned by quvi.
-
-void
-MainWindow::parseError () {
-
-    QRegExp re ("error:\\s+(.*)$");
-
-    QString error = tr ("Unknown error");
-
-    if (re.indexIn (json) != -1)
-        error = re.cap (1);
-
-    NomNom::crit (this, error.simplified ());
+    return true;
 }
 
 // Slot: Icon activated.
@@ -581,7 +533,7 @@ MainWindow::onPreferences () {
 
 void
 MainWindow::onAbout ()
-    { About(this).exec(); }
+    { About (this).exec (); }
 
 // Slot: Recent.
 
@@ -592,11 +544,6 @@ MainWindow::onRecent () {
 
     if (lst.size () == 0) {
         NomNom::info (this, tr ("No record of recently visited URLs found."));
-        return;
-    }
-
-    if (proc.state () != QProcess::NotRunning) {
-        still_running (this);
         return;
     }
 
@@ -629,11 +576,6 @@ MainWindow::onLog ()
 void
 MainWindow::onAddress() {
 
-    if (proc.state() != QProcess::NotRunning) {
-        still_running (this);
-        return;
-    }
-
     const QString url =
         QInputDialog::getText (this, tr ("Address"), tr ("Video URL:"));
 
@@ -641,16 +583,6 @@ MainWindow::onAddress() {
         return;
 
     handleURL (url);
-}
-
-// Slot: Stop quvi process.
-
-void
-MainWindow::onStop () {
-    if (proc.state() != QProcess::NotRunning) {
-        canceled = true;
-        proc.kill();
-    }
 }
 
 // main.cpp
@@ -667,11 +599,6 @@ MainWindow::onFeed () {
     if (path.isEmpty ()) {
         NomNom::crit (this,
             tr ("Specify path to the umph(1) command in the Preferences."));
-        return;
-    }
-
-    if (proc.state() != QProcess::NotRunning) {
-        still_running (this);
         return;
     }
 
@@ -703,74 +630,11 @@ MainWindow::onFeed () {
     handleURL (url);
 }
 
-// Slot: on scan.
+// Slot: quvi finished.
 
 void
-MainWindow::onRake () {
-}
-
-// Slot: Process started.
-
-void
-MainWindow::onQuviStarted ()
-    { statusLabel->setText (tr ("Starting parser ...")); }
-
-// Slot: Process error.
-
-void
-MainWindow::onQuviError (QProcess::ProcessError n) {
-    if (!canceled)
-        NomNom::crit (this, NomNom::to_process_errmsg (n));
-}
-
-// Slot: Ready read. Note that we use merged channels (stdout + stderr).
-
-void
-MainWindow::onQuviReadyRead () {
-
-    static char data[1024];
-
-    while (proc.readLine (data, sizeof(data))) {
-
-        QString ln = QString::fromLocal8Bit (data);
-
-        log << ln;
-        json += ln;
-        ln.remove ("\n");
-
-        if (ln.startsWith (":: Check"))
-            statusLabel->setText (tr ("Checking..."));
-
-        else if (ln.startsWith (":: Fetch"))
-            statusLabel->setText (tr ("Fetching..."));
-
-        else if (ln.startsWith (":: Verify"))
-            statusLabel->setText (tr ("Verifying..."));
-
-        // Leave JSON and error parsing to finished slot.
-    }
-}
-
-// Slot: Process finished.
-
-void
-MainWindow::onQuviFinished (int exitCode, QProcess::ExitStatus exitStatus) {
-
-    statusLabel->setText (tr ("Ready."));
-
-    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        if (parseOK ()) {
-            if (modeCBox->currentIndex() == StreamVideo)
-                streamVideo();
-            else
-                downloadVideo();
-        }
-    }
-    else {
-        if (!canceled)
-            parseError  ();
-    }
-}
+MainWindow::onProcFinished (QString output )
+    { json = output; }
 
 // Slot: download error.
 
@@ -793,13 +657,8 @@ MainWindow::dragEnterEvent (QDragEnterEvent *e) {
 
 void
 MainWindow::dropEvent (QDropEvent *e) {
-
-    const QString url = e->mimeData()->text().simplified();
-
-    if (handleURL(url))
-        e->acceptProposedAction();
-    else
-        e->ignore();
+    handleURL (e->mimeData ()->text ().simplified ());
+    e->acceptProposedAction ();
 }
 
 

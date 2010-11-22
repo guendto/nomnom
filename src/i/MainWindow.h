@@ -27,6 +27,7 @@
 
 #include "Video.h"
 #include "DownloadDiag.h"
+#include "ProcProgDiag.h"
 
 #include "ui_MainWindow.h"
 
@@ -44,37 +45,30 @@ private:
     void createContextMenu  ();
     void createTray         ();
     void readSettings       ();
-    bool handleURL          (const QString&);
+    void handleURL          (const QString&);
+    bool parseOK            ();
     void streamVideo        ();
     void downloadVideo      ();
-    bool parseOK            ();
-    void parseError         ();
 private slots:
     // UI
     void onTrayActivated(QSystemTrayIcon::ActivationReason);
     void onPreferences  ();
     void onAddress      ();
-    void onStop         ();
     void onFeed         ();
-    void onRake         ();
     void onAbout        ();
     void onRecent       ();
     void onLog          ();
-    // Process (quvi).
-    void onQuviStarted      ();
-    void onQuviError        (QProcess::ProcessError);
-    void onQuviReadyRead    ();
-    void onQuviFinished     (int, QProcess::ExitStatus);
+    // quvi.
+    void onProcFinished (QString);
     // Download (dialog).
-    void onDownloadError    (QString);
+    void onDownloadError(QString);
 private:
+    QPointer<ProcessProgressDialog> proc;
     QPointer<QSystemTrayIcon> trayIcon;
     QPointer<DownloadDialog> download;
     QHash<QString,QAction*> actions;
     QPointer<QMenu> trayMenu;
     QPointer<Video> video;
-    QProcess proc;
-    bool canceled;
     QString json;
 };
 
