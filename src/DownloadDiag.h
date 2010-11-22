@@ -30,7 +30,7 @@ public:
 public:
     void start (const QString&, const QString&, Video*);
 signals:
-    void error (QString);
+    void error ();
 private slots:
     void onCurlStarted   ();
     void onCurlError     (QProcess::ProcessError);

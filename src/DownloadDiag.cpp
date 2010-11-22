@@ -82,7 +82,9 @@ void
 DownloadDialog::onCurlError (QProcess::ProcessError n) {
 
     if (!_canceled) {
-        emit error (NomNom::to_process_errmsg (n));
+        hide ();
+        NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
+        emit error ();
         cancel ();
     }
 }
@@ -141,8 +143,11 @@ DownloadDialog::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
     if (exitStatus == QProcess::NormalExit && exitCode == 0)
         ;
     else {
-        if (!_canceled)
-            emit error (_lastError);
+        if (!_canceled) {
+            hide ();
+            NomNom::crit (parentWidget (), _lastError);
+            emit error ();
+        }
     }
 
     cancel ();

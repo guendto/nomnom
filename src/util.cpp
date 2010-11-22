@@ -67,16 +67,22 @@ save_pos (QSettings& s, QWidget *w, const QString& g)
     { s.setValue (QString ("%1/pos").arg (g), w->pos ()); }
 
 void
-info (QWidget *p, const QString& m)
-    { QMessageBox::information (p, QCoreApplication::applicationName(), m); }
+info (QWidget *p, const QString& m) {
+    p->showNormal ();
+    QMessageBox::information (p, QCoreApplication::applicationName(), m);
+}
 
 void
-crit (QWidget *p, const QString& m)
-    { QMessageBox::critical (p, QCoreApplication::applicationName (), m); }
+crit (QWidget *p, const QString& m) {
+    p->showNormal ();
+    QMessageBox::critical (p, QCoreApplication::applicationName (), m);
+}
 
 QMessageBox::StandardButton
 ask (QWidget *p, const QString& m, QMessageBox::StandardButtons b/*=Yes|No*/) {
-    return QMessageBox::question(p, QCoreApplication::applicationName(), m, b); }
+    p->showNormal ();
+    return QMessageBox::question(p, QCoreApplication::applicationName(), m, b);
+}
 
 static QFileInfoList
 scan_dir (const QString path, const bool show_paths) {

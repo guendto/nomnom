@@ -60,8 +60,6 @@ private slots:
     void onLog          ();
     // quvi.
     void onProcFinished (QString);
-    // Download (dialog).
-    void onDownloadError(QString);
 private:
     QPointer<ProcessProgressDialog> proc;
     QPointer<QSystemTrayIcon> trayIcon;

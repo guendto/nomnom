@@ -84,7 +84,8 @@ ProcessProgressDialog::onProcStarted () { }
 void
 ProcessProgressDialog::onProcError (QProcess::ProcessError n) {
     if (!_canceled) {
-        NomNom::crit (this, NomNom::to_process_errmsg (n));
+        hide ();
+        NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
         emit error ();
     }
     cancel ();
@@ -134,7 +135,8 @@ ProcessProgressDialog::onProcFinished (
             if (_rx_error.indexIn (_buffer) != -1)
                 err = "error: " + _rx_error.cap (1).simplified ();
 
-            NomNom::crit (this, err);
+            hide ();
+            NomNom::crit (parentWidget (), err);
 
             emit error ();
         }

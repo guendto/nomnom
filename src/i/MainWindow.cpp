@@ -75,9 +75,6 @@ MainWindow::MainWindow  () {
 
     download = new DownloadDialog (this);
 
-    connect (download, SIGNAL (error (QString)),
-        this, SLOT (onDownloadError (QString)));
-
     // Create Process Progress dialog for quvi.
 
     proc = new ProcessProgressDialog (this);
@@ -635,12 +632,6 @@ MainWindow::onFeed () {
 void
 MainWindow::onProcFinished (QString output )
     { json = output; }
-
-// Slot: download error.
-
-void
-MainWindow::onDownloadError (QString e)
-    { NomNom::crit (this, e); }
 
 // Event: DragEnter.
 
