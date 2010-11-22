@@ -40,11 +40,12 @@ YoutubeFeed::YoutubeFeed (QWidget *parent)
     QSettings s;
     NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (215,165));
 
-    _prog = new ProcessProgressDialog (this);
+    _proc = new ProcessProgressDialog (this);
 
-    connect (_prog, SIGNAL (finished (QString)), this, SLOT (onFinished (QString)));
+    connect (_proc, SIGNAL (finished (QString)),
+        this, SLOT (onFinished (QString)));
 #ifdef _0
-    connect (_prog, SIGNAL (error ()), this, SLOT (onError ()));
+    connect (_proc, SIGNAL (error ()), this, SLOT (onError ()));
 #endif
 }
 
@@ -169,9 +170,9 @@ YoutubeFeed::done (int r) {
         args.replaceInStrings ("%m", maxResultsSpin->text ());
         args.replaceInStrings ("%i", id);
 
-        _prog->setLabelText (tr ("Checking ..."));
-        _prog->setMaximum (0);
-        _prog->start (args);
+        _proc->setLabelText (tr ("Checking ..."));
+        _proc->setMaximum (0);
+        _proc->start (args);
 
         if (!_got_items)
             return;

@@ -43,7 +43,7 @@ protected:
 private:
     bool fromJSON (const QString&, QString&);
 private:
-    QPointer<ProcessProgressDialog> _prog;
+    QPointer<ProcessProgressDialog> _proc;
     bool _got_items;
 };
 
