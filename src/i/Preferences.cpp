@@ -63,7 +63,7 @@ Preferences::Preferences (QWidget *parent)
         shPrefs.get (SharedPreferences::UmphPath).toString ());
 
     if (umphPathEdit->text ().isEmpty ())
-        umphPathEdit->setText ("umph -q --json -t %t -s %s -m %m %i");
+        umphPathEdit->setText ("umph --json -t %t -s %s -m %m %i");
 
     saveDirEdit->setText (
         shPrefs.get (SharedPreferences::SaveDir).toString ());
@@ -327,7 +327,6 @@ Preferences::done (int r) {
         shPrefs.set (SharedPreferences::UmphPath,
             append (umphPathEdit,
                 QStringList ()
-                    << "-q"
                     << "--json"
                     << "-t"
                     << "%t"
