@@ -1,6 +1,7 @@
 
 0.1.1
 Changes:
+        - Install: Add WITHOUT_DESKTOP, WITHOUT_QM, WITHOUT_DOC
         - Add "Minimize when download starts"
         - Replace QStatusBar use with ProcessProgressDialog
         - Rename History.* -> Recent.*
