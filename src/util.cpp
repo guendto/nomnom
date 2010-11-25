@@ -68,18 +68,21 @@ save_pos (QSettings& s, QWidget *w, const QString& g)
 
 void
 info (QWidget *p, const QString& m) {
+    p->show (); // Make sure window is not hidden (e.g. minimized to tray).
     p->showNormal ();
     QMessageBox::information (p, QCoreApplication::applicationName(), m);
 }
 
 void
 crit (QWidget *p, const QString& m) {
+    p->show (); // See `info' function above.
     p->showNormal ();
     QMessageBox::critical (p, QCoreApplication::applicationName (), m);
 }
 
 QMessageBox::StandardButton
 ask (QWidget *p, const QString& m, QMessageBox::StandardButtons b/*=Yes|No*/) {
+    p->show (); // See `info' function above.
     p->showNormal ();
     return QMessageBox::question(p, QCoreApplication::applicationName(), m, b);
 }
