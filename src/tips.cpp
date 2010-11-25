@@ -67,6 +67,11 @@ static const char* tips[] = {
         "favorites and uploads -- choose \"Feed\" (Ctrl+F) from the "
         "context menu. "
     ),
+    QT_TRANSLATE_NOOP("Tips",
+        "Check \"Do not prompt for filename\" in the Preferences (Ctrl+E) "
+        "if you do not want to choose the video output file everytime you "
+        "start a download."
+    ),
     NULL // End.
 };
 
