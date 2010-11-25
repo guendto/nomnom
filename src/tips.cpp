@@ -54,13 +54,13 @@ static const char* tips[] = {
         "capable of streaming media)."
     ),
     QT_TRANSLATE_NOOP("Tips",
-        "Nomnom resumes file transfers by default (determined by the curl "
+        "NomNom resumes file transfers by default (determined by the curl "
         "command in the Preferences). Check \"Overwrite\" in the context "
         "menu if you want to overwrite the existing files."
     ),
     QT_TRANSLATE_NOOP("Tips",
-        "To clear the History data, open the Preferences (Ctrl+E), select "
-        "\"Other\" and click \"Clear history\"."
+        "To clear the list of recently visited URLs, open the Preferences "
+        "(Ctrl+E), select \"Other\" and click \"Clear recent\"."
     ),
     NULL // End.
 };
