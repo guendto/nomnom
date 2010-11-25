@@ -47,6 +47,12 @@ if (NOT CMAKE_BUILD_TYPE)
     set (CMAKE_BUILD_TYPE "debug")
 endif ()
 
+# Set default for WITHOUT_DOC.
+
+if (NOT WITHOUT_DOC)
+    set (WITHOUT_DOC false)
+endif ()
+
 # config.h
 
 configure_file (
@@ -111,7 +117,7 @@ set (nomnom_ui
 )
 
 set (nomnom_rc rc/nomnom.qrc)
-file (GLOB nomnom_ts tr/*.ts)
+file (GLOB nomnom_ts "${CMAKE_CURRENT_SOURCE_DIR}/tr/*.ts")
 
 # Prerequisites.
 
@@ -142,6 +148,10 @@ add_executable (nomnom
     ${nomnom_qm}
 )
 
+# Subdirs.
+
+subdirs (doc)
+
 # Status.
 
 message (STATUS)
@@ -159,6 +169,7 @@ else ()
     message (STATUS "date program       : (not found)")
 endif ()
 message (STATUS "verbose make       : ${CMAKE_VERBOSE_MAKEFILE}")
+message (STATUS "without doc        : ${WITHOUT_DOC}")
 message (STATUS)
 
 # Force these variables to be written to cache.
@@ -171,6 +182,9 @@ set (CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 
 set (CMAKE_VERBOSE_MAKEFILE "${CMAKE_VERBOSE_MAKEFILE}" CACHE BOOL
     "Build with verbose makefiles: true, false" FORCE)
+
+set (WITHOUT_DOC "${WITHOUT_DOC}" CACHE BOOL
+    "Install without documentation: true, false" FORCE)
 
 # Link.
 
