@@ -47,6 +47,12 @@ if (NOT CMAKE_BUILD_TYPE)
     set (CMAKE_BUILD_TYPE "debug")
 endif ()
 
+# Set default for WITHOUT_QM.
+
+if (NOT WITHOUT_QM)
+    set (WITHOUT_QM false)
+endif ()
+
 # Set default for WITHOUT_DOC.
 
 if (NOT WITHOUT_DOC)
@@ -117,7 +123,10 @@ set (nomnom_ui
 )
 
 set (nomnom_rc rc/nomnom.qrc)
-file (GLOB nomnom_ts "${CMAKE_CURRENT_SOURCE_DIR}/tr/*.ts")
+
+if (NOT WITHOUT_QM)
+    file (GLOB nomnom_ts "${CMAKE_CURRENT_SOURCE_DIR}/tr/*.ts")
+endif ()
 
 # Prerequisites.
 
@@ -125,7 +134,9 @@ find_package (Qt4 4.5.0 COMPONENTS QtCore QtGui QtScript REQUIRED)
 include (${QT_USE_FILE})
 
 qt4_add_resources   (nomnom_rc_src  ${nomnom_rc})
-qt4_add_translation (nomnom_qm      ${nomnom_ts})
+if (NOT WITHOUT_QM)
+    qt4_add_translation (nomnom_qm  ${nomnom_ts})
+endif ()
 qt4_wrap_ui         (nomnom_ui_hdr  ${nomnom_ui})
 qt4_wrap_cpp        (nomnom_moc_src ${nomnom_moc_hdr})
 
@@ -139,14 +150,19 @@ include_directories (
     ${CMAKE_CURRENT_SOURCE_DIR}/src/i
 )
 
-add_executable (nomnom
+set (exec_components
     ${nomnom_src}
     ${nomnom_hdr}
     ${nomnom_moc_src}
     ${nomnom_rc_src}
     ${nomnom_ui_hdr}
-    ${nomnom_qm}
 )
+
+if (NOT WITHOUT_QM)
+    set (exec_components ${exec_components} ${nomnom_qm})
+endif ()
+
+add_executable (nomnom ${exec_components})
 
 # Subdirs.
 
@@ -169,6 +185,7 @@ else ()
     message (STATUS "date program       : (not found)")
 endif ()
 message (STATUS "verbose make       : ${CMAKE_VERBOSE_MAKEFILE}")
+message (STATUS "without transl.    : ${WITHOUT_QM}")
 message (STATUS "without doc        : ${WITHOUT_DOC}")
 message (STATUS)
 
@@ -182,6 +199,9 @@ set (CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 
 set (CMAKE_VERBOSE_MAKEFILE "${CMAKE_VERBOSE_MAKEFILE}" CACHE BOOL
     "Build with verbose makefiles: true, false" FORCE)
+
+set (WITHOUT_QM "${WITHOUT_QM}" CACHE BOOL
+    "Install without translation files: true, false" FORCE)
 
 set (WITHOUT_DOC "${WITHOUT_DOC}" CACHE BOOL
     "Install without documentation: true, false" FORCE)
@@ -227,10 +247,12 @@ include (CPack)
 install (PROGRAMS
     "${CMAKE_CURRENT_BINARY_DIR}/nomnom" DESTINATION bin/)
 
-install (FILES ${nomnom_qm} DESTINATION share/nomnom/tr/)
+if (NOT WITHOUT_QM)
+    install (FILES ${nomnom_qm} DESTINATION share/nomnom/tr/)
+endif ()
 
-install (FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/nomnom.desktop" DESTINATION share/applications/)
+install (FILES "${CMAKE_CURRENT_BINARY_DIR}/nomnom.desktop"
+    DESTINATION share/applications/)
 
 install (FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/rc/img/nomnom.png" DESTINATION share/pixmaps/)
