@@ -44,6 +44,9 @@ These may be some of the frequently used ones.
     * CMAKE_VERBOSE_MAKEFILE=(true,false)
         Build with verbose makefiles, default is "false".
 
+    * WITHOUT_DESKTOP=(true,false)
+        Install without desktop integration files (e.g. .desktop, nomnom.png).
+
     * WITHOUT_QM=(true,false)
         Install without translations (e.g. *.qm files).
 

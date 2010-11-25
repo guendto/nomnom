@@ -47,6 +47,12 @@ if (NOT CMAKE_BUILD_TYPE)
     set (CMAKE_BUILD_TYPE "debug")
 endif ()
 
+# Set default for WITHOUT_DESKTOP.
+
+if (NOT WITHOUT_DESKTOP)
+    set (WITHOUT_DESKTOP false)
+endif ()
+
 # Set default for WITHOUT_QM.
 
 if (NOT WITHOUT_QM)
@@ -185,6 +191,7 @@ else ()
     message (STATUS "date program       : (not found)")
 endif ()
 message (STATUS "verbose make       : ${CMAKE_VERBOSE_MAKEFILE}")
+message (STATUS "without desktop    : ${WITHOUT_DESKTOP}")
 message (STATUS "without transl.    : ${WITHOUT_QM}")
 message (STATUS "without doc        : ${WITHOUT_DOC}")
 message (STATUS)
@@ -199,6 +206,9 @@ set (CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 
 set (CMAKE_VERBOSE_MAKEFILE "${CMAKE_VERBOSE_MAKEFILE}" CACHE BOOL
     "Build with verbose makefiles: true, false" FORCE)
+
+set (WITHOUT_DESKTOP "${WITHOUT_DESKTOP}" CACHE BOOL
+    "Install without desktop integration files: true, false" FORCE)
 
 set (WITHOUT_QM "${WITHOUT_QM}" CACHE BOOL
     "Install without translation files: true, false" FORCE)
@@ -251,11 +261,13 @@ if (NOT WITHOUT_QM)
     install (FILES ${nomnom_qm} DESTINATION share/nomnom/tr/)
 endif ()
 
-install (FILES "${CMAKE_CURRENT_BINARY_DIR}/nomnom.desktop"
-    DESTINATION share/applications/)
+if (NOT WITHOUT_DESKTOP)
+    install (FILES "${CMAKE_CURRENT_BINARY_DIR}/nomnom.desktop"
+        DESTINATION share/applications/)
 
-install (FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/rc/img/nomnom.png" DESTINATION share/pixmaps/)
+    install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/rc/img/nomnom.png"
+        DESTINATION share/pixmaps/)
+endif ()
 
 # Uninstall.
 
