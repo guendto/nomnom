@@ -62,6 +62,11 @@ static const char* tips[] = {
         "To clear the list of recently visited URLs, open the Preferences "
         "(Ctrl+E), select \"Other\" and click \"Clear recent\"."
     ),
+    QT_TRANSLATE_NOOP("Tips",
+        "To access Youtube feeds -- including Youtube users playlists, "
+        "favorites and uploads -- choose \"Feed\" (Ctrl+F) from the "
+        "context menu. "
+    ),
     NULL // End.
 };
 
