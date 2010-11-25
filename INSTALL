@@ -44,6 +44,9 @@ These may be some of the frequently used ones.
     * CMAKE_VERBOSE_MAKEFILE=(true,false)
         Build with verbose makefiles, default is "false".
 
+    * WITHOUT_DOC=(true,false)
+        Install without documentation (e.g. doc/Howto* files).
+
 Example:
     % mkdir tmp; cd tmp
     % cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
