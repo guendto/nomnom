@@ -72,6 +72,10 @@ static const char* tips[] = {
         "if you do not want to choose the video output file everytime you "
         "start a download."
     ),
+    QT_TRANSLATE_NOOP("Tips",
+        "NomNom can minimize automatically when download starts; check "
+        "\"Minimize when download starts\" in the Preferences (Ctrl+E)."
+    ),
     NULL // End.
 };
 
