@@ -148,6 +148,9 @@ qt4_wrap_cpp        (nomnom_moc_src ${nomnom_moc_hdr})
 
 # http://www.vtk.org/Wiki/CMake_2.8.0_Docs : qt4_create_translation
 
+set (qt_VERSION
+    "${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH}")
+
 # The executable.
 
 include_directories (
@@ -177,23 +180,24 @@ subdirs (doc)
 # Status.
 
 message (STATUS)
-message (STATUS "nomnom version     : ${VERSION}")
-message (STATUS "host setup         : ${HOST_SETUP}")
-message (STATUS "install prefix     : ${CMAKE_INSTALL_PREFIX}")
-message (STATUS "build type         : ${CMAKE_BUILD_TYPE}")
-message (STATUS "  (debug, release, relwithdebinfo, minsizerel)")
-message (STATUS "compiler           : ${CMAKE_CXX_COMPILER}")
-message (STATUS "linker             : ${CMAKE_LINKER}")
-message (STATUS "make program       : ${CMAKE_MAKE_PROGRAM}")
-if (DATE_PROG)
-    message (STATUS "date program       : ${DATE_PROG}")
-else ()
-    message (STATUS "date program       : (not found)")
-endif ()
-message (STATUS "verbose make       : ${CMAKE_VERBOSE_MAKEFILE}")
-message (STATUS "without desktop    : ${WITHOUT_DESKTOP}")
-message (STATUS "without transl.    : ${WITHOUT_QM}")
-message (STATUS "without doc        : ${WITHOUT_DOC}")
+message (STATUS "Configuration for")
+message (STATUS "   NomNom ${VERSION_LONG}")
+message (STATUS)
+message (STATUS "Options:")
+message (STATUS "   Install prefix: ${CMAKE_INSTALL_PREFIX}")
+message (STATUS "   Host setup    : ${HOST_SETUP}")
+message (STATUS "   Build type    : ${CMAKE_BUILD_TYPE}")
+message (STATUS "       (debug, release, relwithdebinfo, minsizerel)")
+message (STATUS "   Verbose make   : ${CMAKE_VERBOSE_MAKEFILE}")
+message (STATUS "   Without desktop: ${WITHOUT_DESKTOP}")
+message (STATUS "   Without transl.: ${WITHOUT_QM}")
+message (STATUS "   Without doc    : ${WITHOUT_DOC}")
+message (STATUS)
+message (STATUS "Found:")
+message (STATUS "   Compiler: ${CMAKE_CXX_COMPILER}")
+message (STATUS "   Linker  : ${CMAKE_LINKER}")
+message (STATUS "   Make    : ${CMAKE_MAKE_PROGRAM}")
+message (STATUS "   Qt      : ${qt_VERSION}")
 message (STATUS)
 
 # Force these variables to be written to cache.
