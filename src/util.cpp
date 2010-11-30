@@ -28,6 +28,7 @@
 #include <QSize>
 #include <QDir>
 
+#include "Log.h"
 #include "util.h"
 
 // main.cpp
@@ -35,6 +36,7 @@ extern QMap<QString,QStringList> hosts;
 extern QMap<QString,QString> qmFiles;
 extern QStringList qmLangNames;
 extern NomNom::FeedHash feed;
+extern Log log;
 
 namespace NomNom {
 
@@ -267,10 +269,14 @@ parse_quvi_support (QWidget *parent, const QString& path) {
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
 
-    QStringList args = path.split(" ");
-    args << "--support";
+    // Use command path (arg0) and "--support only.
 
-    const QString cmdPath = args.takeFirst();
+    QStringList args =
+        QStringList () << path.split (" ").takeFirst () << "--support";
+
+    log << args.join (" ");
+
+    const QString cmdPath = args.takeFirst ();
 
     proc.start(cmdPath, args);
 
@@ -293,6 +299,8 @@ parse_quvi_support (QWidget *parent, const QString& path) {
 
         if (ln.isEmpty())
             continue;
+
+        log << ln;
 
         if (re.indexIn(ln) != -1) {
 
