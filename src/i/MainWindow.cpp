@@ -84,9 +84,14 @@ MainWindow::MainWindow  () {
 
     QHash<QString,QRegExp> h;
 
-    h[tr ("Checking ...")]  = QRegExp ("^:: Check");
-    h[tr ("Fetching ...")]  = QRegExp ("^:: Fetch");
-    h[tr ("Verifying ...")] = QRegExp ("^:: Verify");
+#define _wrap(s,r) \
+    do { h[s] = QRegExp(r); } while (0)
+
+    _wrap(tr("Checking..."),    "^:: Check");
+    _wrap(tr("Fetching..."),    "^:: Fetch");
+    _wrap(tr("Verifying..."),   "^:: Verify");
+
+#undef _wrap
 
     proc->setLabelRegExp (h);
 
@@ -116,33 +121,38 @@ MainWindow::createContextMenu () {
         textBrowser->addAction (a); \
     } while (0)
 
-    creat_a (tr("Address..."), onAddress,   false);
-    creat_a (tr("Feed..."), onFeed, false);
-    creat_a (tr("Recent..."), onRecent, false);
+    creat_a (tr("Address..."),  onAddress,  false);
+    creat_a (tr("Feed..."),     onFeed,     false);
+    creat_a (tr("Recent..."),   onRecent,   false);
     add_s;
-    creat_a (tr("Overwrite"), _,      true);
+    creat_a (tr("Overwrite"),   _,          true);
     add_s;
     creat_a (tr("Log..."),         onLog,         false);
     creat_a (tr("Preferences..."), onPreferences, false);
     add_s;
-    creat_a (tr("About..."), onAbout, false);
-    creat_a (tr("Quit"),     close,   false );
+    creat_a (tr("About..."),    onAbout,    false);
+    creat_a (tr("Quit"),        close,      false);
 
 #undef add_s
 #undef creat_a
 
     // Add key shortcuts.
 
-    actions[tr ("Address...")]->setShortcut  (QKeySequence (tr ("Ctrl+A")));
-    actions[tr ("Feed...")]->setShortcut     (QKeySequence (tr ("Ctrl+F")));
-    actions[tr ("Recent...")]->setShortcut      (QKeySequence (tr ("Ctrl+R")));
+#define _wrap(s,k) \
+    do { actions[s]->setShortcut (QKeySequence(k)); } while (0)
+
+    _wrap (tr("Address..."),    "Ctrl+A");
+    _wrap (tr("Feed..."),       "Ctrl+F");
+    _wrap (tr("Recent..."),     "Ctrl+R");
     // --
-    actions[tr ("Overwrite")]->setShortcut   (QKeySequence (tr ("Ctrl+W")));
+    _wrap (tr("Overwrite"),     "Ctrl+W");
     // --
-    actions[tr ("Log...")]->setShortcut      (QKeySequence (tr ("Ctrl+L")));
-    actions[tr ("Preferences...")]->setShortcut (QKeySequence (tr ("Ctrl+E")));
+    _wrap (tr("Log..."),        "Ctrl+L");
+    _wrap (tr("Preferences..."),"Ctrl+E");
     // --
-    actions[tr ("Quit")]->setShortcut        (QKeySequence (tr ("Ctrl+Q")));
+    _wrap (tr("Quit"),          "Ctrl+Q");
+
+#undef _wrap
 
     // Add the context menu.
 
