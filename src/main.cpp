@@ -55,7 +55,7 @@ main (int argc, char *argv[]) {
     QApplication app(argc, argv);
 
 #define APPNAME   "NomNom"
-#define APPDOMAIN "nomnom.googlecode.com"
+#define APPDOMAIN "nomnom.sourceforge.net"
 
     QCoreApplication::setOrganizationName   (APPNAME);
     QCoreApplication::setOrganizationDomain (APPDOMAIN);
