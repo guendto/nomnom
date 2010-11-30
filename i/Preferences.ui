@@ -590,6 +590,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>browseUmphBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Preferences</receiver>
+   <slot>onBrowseUmph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onBrowseQuvi()</slot>
