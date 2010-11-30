@@ -138,164 +138,151 @@ p, li { white-space: pre-wrap; }
         <translation>Kopioi</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="93"/>
+        <location filename="../src/i/MainWindow.cpp" line="98"/>
         <source>Program started.</source>
         <translation>Ohjelma käynnistetty.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="120"/>
+        <location filename="../src/i/MainWindow.cpp" line="125"/>
+        <location filename="../src/i/MainWindow.cpp" line="145"/>
         <source>Feed...</source>
         <translation>Syöte...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="123"/>
+        <location filename="../src/i/MainWindow.cpp" line="128"/>
+        <location filename="../src/i/MainWindow.cpp" line="148"/>
         <source>Overwrite</source>
         <translation>Ylikirjoita</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="125"/>
+        <location filename="../src/i/MainWindow.cpp" line="130"/>
+        <location filename="../src/i/MainWindow.cpp" line="150"/>
         <source>Log...</source>
         <translation>Loki...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="126"/>
+        <location filename="../src/i/MainWindow.cpp" line="131"/>
+        <location filename="../src/i/MainWindow.cpp" line="151"/>
         <source>Preferences...</source>
         <translation>Asetukset...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="128"/>
+        <location filename="../src/i/MainWindow.cpp" line="133"/>
         <source>About...</source>
         <translation>Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="129"/>
-        <location filename="../src/i/MainWindow.cpp" line="169"/>
+        <location filename="../src/i/MainWindow.cpp" line="134"/>
+        <location filename="../src/i/MainWindow.cpp" line="153"/>
+        <location filename="../src/i/MainWindow.cpp" line="179"/>
         <source>Quit</source>
         <translation>Lopeta</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="137"/>
-        <source>Ctrl+F</source>
-        <translation></translation>
+        <location filename="../src/i/MainWindow.cpp" line="90"/>
+        <source>Checking...</source>
+        <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="140"/>
-        <source>Ctrl+W</source>
-        <translation></translation>
+        <location filename="../src/i/MainWindow.cpp" line="91"/>
+        <source>Fetching...</source>
+        <translation>Haetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="142"/>
-        <source>Ctrl+L</source>
-        <translation></translation>
+        <location filename="../src/i/MainWindow.cpp" line="92"/>
+        <source>Verifying...</source>
+        <translation>Todennetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="136"/>
-        <source>Ctrl+A</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="119"/>
+        <location filename="../src/i/MainWindow.cpp" line="124"/>
+        <location filename="../src/i/MainWindow.cpp" line="144"/>
         <source>Address...</source>
         <translation>Osoite...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="121"/>
+        <location filename="../src/i/MainWindow.cpp" line="126"/>
+        <location filename="../src/i/MainWindow.cpp" line="146"/>
         <source>Recent...</source>
         <translation>Aiempi...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="138"/>
-        <source>Ctrl+R</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="143"/>
-        <source>Ctrl+E</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="145"/>
-        <source>Ctrl+Q</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="167"/>
+        <location filename="../src/i/MainWindow.cpp" line="177"/>
         <source>Open</source>
         <translation>Avaa</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="307"/>
+        <location filename="../src/i/MainWindow.cpp" line="317"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="323"/>
+        <location filename="../src/i/MainWindow.cpp" line="333"/>
         <source>Checking ...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="543"/>
+        <location filename="../src/i/MainWindow.cpp" line="553"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Aiempia tietoja ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="551"/>
+        <location filename="../src/i/MainWindow.cpp" line="561"/>
         <source>Recent URLs</source>
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="552"/>
+        <location filename="../src/i/MainWindow.cpp" line="562"/>
         <source>Select URL:</source>
         <translation>Valitse osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="598"/>
+        <location filename="../src/i/MainWindow.cpp" line="608"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="606"/>
+        <location filename="../src/i/MainWindow.cpp" line="616"/>
         <source>Choose from old results?</source>
         <translation>Valitse aiemmin haetuista tiedoista?</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="257"/>
+        <location filename="../src/i/MainWindow.cpp" line="267"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="273"/>
+        <location filename="../src/i/MainWindow.cpp" line="283"/>
         <source>You must specify path to a stream-capable media player command.</source>
         <translation>Määrittelemätön polku suoratoistoon pystyvään komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="306"/>
+        <location filename="../src/i/MainWindow.cpp" line="316"/>
         <source>Choose format</source>
         <translation>Valitse videomuoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="352"/>
-        <location filename="../src/i/MainWindow.cpp" line="451"/>
+        <location filename="../src/i/MainWindow.cpp" line="362"/>
+        <location filename="../src/i/MainWindow.cpp" line="461"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Toisto-komennon käynnistäminen epäonnistui, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="398"/>
+        <location filename="../src/i/MainWindow.cpp" line="408"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="577"/>
+        <location filename="../src/i/MainWindow.cpp" line="587"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="577"/>
+        <location filename="../src/i/MainWindow.cpp" line="587"/>
         <source>Video URL:</source>
         <translation>Video-osoite:</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="142"/>
+        <location filename="../src/util.cpp" line="144"/>
         <source>English</source>
         <translation>Suomi</translation>
     </message>
@@ -519,63 +506,63 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/util.cpp" line="192"/>
+        <location filename="../src/util.cpp" line="194"/>
         <source>Select language</source>
         <translation>Valitse kieli</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="193"/>
+        <location filename="../src/util.cpp" line="195"/>
         <source>Language:</source>
         <translation>Kieli:</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="251"/>
-        <location filename="../src/util.cpp" line="280"/>
+        <location filename="../src/util.cpp" line="253"/>
+        <location filename="../src/util.cpp" line="286"/>
         <source>error: %1: %2</source>
         <translation>virhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="336"/>
+        <location filename="../src/util.cpp" line="344"/>
         <source>Expected Perl-style regular expression, e.g. /pattern/flags</source>
         <translation>Käytä Perl-tyylistä regular expression rakennetta, esim. /pattern/flags</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="403"/>
+        <location filename="../src/util.cpp" line="411"/>
         <source>The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.</source>
         <translation>Komennon suorittaminen epäonnistui. Tarkasta ohjelman polku ja käyttöoikeudet ohjelmaan.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="411"/>
+        <location filename="../src/util.cpp" line="419"/>
         <source>The process crashed some time after starting successfully.</source>
         <translation>Ohjelman suoritus keskeytyi sen käynnistämisen jälkeen.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="417"/>
+        <location filename="../src/util.cpp" line="425"/>
         <source>The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="425"/>
+        <location filename="../src/util.cpp" line="433"/>
         <source>An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="433"/>
+        <location filename="../src/util.cpp" line="441"/>
         <source>An error occurred when attempting to read from the process. For example, the process may not be running.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="441"/>
+        <location filename="../src/util.cpp" line="449"/>
         <source>An unknown error occurred. This is the default return value of error().</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="470"/>
+        <location filename="../src/util.cpp" line="478"/>
         <source>Choose video</source>
         <translation>Valitse video</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="471"/>
+        <location filename="../src/util.cpp" line="479"/>
         <source>Video</source>
         <translation></translation>
     </message>
