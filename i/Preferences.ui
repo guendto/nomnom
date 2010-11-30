@@ -606,6 +606,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>browseSaveDirBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Preferences</receiver>
+   <slot>onBrowseSaveDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>537</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onBrowseQuvi()</slot>
