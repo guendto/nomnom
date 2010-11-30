@@ -233,43 +233,45 @@ load_qm () {
     return t;
 }
 
-QString
-parse_quvi_version (QWidget *parent, const QString& path) {
-    QProcess proc;
-    proc.setProcessChannelMode (QProcess::MergedChannels);
+bool
+parse_quvi_version (const QString& path, QString& output) {
 
-    QStringList args = path.split (" ");
-    args << "--version";
+    output.clear ();
+
+    // Use command path (arg0) and "--version" only.
+
+    QStringList args =
+        QStringList () << path.split (" ").takeFirst () << "--version";
+
+    log << args.join (" ");
 
     const QString cmdPath = args.takeFirst ();
 
+    QProcess proc;
+    proc.setProcessChannelMode (QProcess::MergedChannels);
     proc.start (cmdPath, args);
 
-    QString version;
+    if (!proc.waitForFinished ()) {
 
-    if ( !proc.waitForFinished () ) {
-        crit(
-            parent,
+        output =
             QObject::tr ("error: %1: %2")
                 .arg (cmdPath)
-                .arg (proc.errorString ())
-        );
-        return version;
+                .arg (proc.errorString ());
+
+        return false;
     }
 
-    const QString output =
-        QString::fromLocal8Bit (proc.readAll ());
+    output = QString::fromLocal8Bit (proc.readAll ()).simplified ();
 
-    return output;
+    return true;
 }
 
 bool
-parse_quvi_support (QWidget *parent, const QString& path) {
+parse_quvi_support (const QString& path, QString& errmsg) {
 
-    QProcess proc;
-    proc.setProcessChannelMode(QProcess::MergedChannels);
+    errmsg.clear ();
 
-    // Use command path (arg0) and "--support only.
+    // Use command path (arg0) and "--support" only.
 
     QStringList args =
         QStringList () << path.split (" ").takeFirst () << "--support";
@@ -278,15 +280,17 @@ parse_quvi_support (QWidget *parent, const QString& path) {
 
     const QString cmdPath = args.takeFirst ();
 
+    QProcess proc;
+    proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(cmdPath, args);
 
     if (!proc.waitForFinished()) {
-        crit(
-            parent,
+
+        errmsg =
             QObject::tr("error: %1: %2")
                 .arg(cmdPath)
-                .arg(proc.errorString())
-        );
+                .arg(proc.errorString ());
+
         return false;
     }
 

@@ -83,10 +83,10 @@ QTranslator*
 load_qm ();
 
 bool
-parse_quvi_support (QWidget*, const QString&);
+parse_quvi_version (const QString& path, QString& output);
 
-QString
-parse_quvi_version (QWidget*, const QString&);
+bool
+parse_quvi_support (const QString& path, QString& errmsg);
 
 bool
 format_filename (

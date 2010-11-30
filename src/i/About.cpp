@@ -29,6 +29,7 @@
 
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
+extern QString quviVersion;
 
 // Ctor.
 
@@ -40,21 +41,23 @@ About::About (QWidget *parent)
     const QString quviPath =
         shPrefs.get (SharedPreferences::QuviPath).toString ();
 
-    QString errmsg, quvi_version;
+    QString errmsg;
 
     if (hosts.isEmpty ()) {
-        if (!quviPath.isEmpty ()) {
-            if (!NomNom::parse_quvi_support (this, quviPath)) {
-                errmsg =
-                    tr ("Unable to parse --support output from quvi "
-                        "for an unknown reason");
-            }
-            quvi_version = NomNom::parse_quvi_version (this, quviPath);
-            quvi_version.remove ("quvi version ");
-        }
-        else {
+        if (!quviPath.isEmpty ())
+            NomNom::parse_quvi_support (quviPath, errmsg);
+        else
             errmsg = tr ("You must specify path to the quvi command.");
-        }
+    }
+
+    if (!quviPath.isEmpty ()
+        && quviVersion.isEmpty ()
+        && errmsg.isEmpty())
+    {
+        if (NomNom::parse_quvi_version (quviPath, quviVersion))
+            quviVersion.remove ("quvi version ");
+        else
+            errmsg = quviVersion;
     }
 
     if (errmsg.isEmpty()) {
@@ -78,10 +81,10 @@ About::About (QWidget *parent)
     QSettings s;
 
     QString html = textBrowser->toHtml ();
-    html.replace ("$version", version);
-    html.replace ("$quvi_version", quvi_version.simplified ());
-    html.replace ("$qt_version", qVersion ());
-    html.replace ("$config_file", s.fileName ());
+    html.replace ("$version",       version);
+    html.replace ("$quvi_version",  quviVersion);
+    html.replace ("$qt_version",    qVersion ());
+    html.replace ("$config_file",   s.fileName ());
     textBrowser->setHtml (html);
 
     NomNom::restore_size(s, this, QSETTINGS_GROUP, QSize(620,375));

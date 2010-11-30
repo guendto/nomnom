@@ -270,8 +270,11 @@ MainWindow::handleURL (const QString& url) {
     }
 
     if (hosts.isEmpty ()) {
-        const bool ok = NomNom::parse_quvi_support (this, quviPath);
-        if (!ok) return;
+        QString errmsg;
+        if (!NomNom::parse_quvi_support (quviPath, errmsg)) {
+            NomNom::crit (this, errmsg);
+            return;
+        }
     }
 
     const QString playerPath =

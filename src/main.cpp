@@ -31,6 +31,9 @@
 // Global: Hosts (or websites) that quvi supports.
 QMap<QString,QStringList> hosts;
 
+// Global: quvi version.
+QString quviVersion;
+
 // Global: Language.
 QMap<QString,QString> qmFiles;
 QStringList qmLangNames;
