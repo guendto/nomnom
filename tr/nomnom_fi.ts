@@ -64,12 +64,7 @@ p, li { white-space: pre-wrap; }
         <translation>Ohjelma tukee seuraavia sivustoja:</translation>
     </message>
     <message>
-        <location filename="../src/i/About.cpp" line="49"/>
-        <source>Unable to parse --support output from quvi for an unknown reason</source>
-        <translation>quvi-ohjelman palauttamia tietoja ei voitu lukea tuntemattomasta syystä johtuen</translation>
-    </message>
-    <message>
-        <location filename="../src/i/About.cpp" line="56"/>
+        <location filename="../src/i/About.cpp" line="50"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
@@ -211,37 +206,37 @@ p, li { white-space: pre-wrap; }
         <translation>Avaa</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="317"/>
+        <location filename="../src/i/MainWindow.cpp" line="320"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="333"/>
+        <location filename="../src/i/MainWindow.cpp" line="336"/>
         <source>Checking ...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="553"/>
+        <location filename="../src/i/MainWindow.cpp" line="556"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Aiempia tietoja ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="561"/>
+        <location filename="../src/i/MainWindow.cpp" line="564"/>
         <source>Recent URLs</source>
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="562"/>
+        <location filename="../src/i/MainWindow.cpp" line="565"/>
         <source>Select URL:</source>
         <translation>Valitse osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="608"/>
+        <location filename="../src/i/MainWindow.cpp" line="611"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="616"/>
+        <location filename="../src/i/MainWindow.cpp" line="619"/>
         <source>Choose from old results?</source>
         <translation>Valitse aiemmin haetuista tiedoista?</translation>
     </message>
@@ -251,33 +246,33 @@ p, li { white-space: pre-wrap; }
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="283"/>
+        <location filename="../src/i/MainWindow.cpp" line="286"/>
         <source>You must specify path to a stream-capable media player command.</source>
         <translation>Määrittelemätön polku suoratoistoon pystyvään komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="316"/>
+        <location filename="../src/i/MainWindow.cpp" line="319"/>
         <source>Choose format</source>
         <translation>Valitse videomuoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="362"/>
-        <location filename="../src/i/MainWindow.cpp" line="461"/>
+        <location filename="../src/i/MainWindow.cpp" line="365"/>
+        <location filename="../src/i/MainWindow.cpp" line="464"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Toisto-komennon käynnistäminen epäonnistui, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="408"/>
+        <location filename="../src/i/MainWindow.cpp" line="411"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="587"/>
+        <location filename="../src/i/MainWindow.cpp" line="590"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="587"/>
+        <location filename="../src/i/MainWindow.cpp" line="590"/>
         <source>Video URL:</source>
         <translation>Video-osoite:</translation>
     </message>
@@ -516,58 +511,58 @@ p, li { white-space: pre-wrap; }
         <translation>Kieli:</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="253"/>
-        <location filename="../src/util.cpp" line="286"/>
+        <location filename="../src/util.cpp" line="257"/>
+        <location filename="../src/util.cpp" line="290"/>
         <source>error: %1: %2</source>
         <translation>virhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="344"/>
+        <location filename="../src/util.cpp" line="348"/>
         <source>Expected Perl-style regular expression, e.g. /pattern/flags</source>
         <translation>Käytä Perl-tyylistä regular expression rakennetta, esim. /pattern/flags</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="411"/>
+        <location filename="../src/util.cpp" line="415"/>
         <source>The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.</source>
         <translation>Komennon suorittaminen epäonnistui. Tarkasta ohjelman polku ja käyttöoikeudet ohjelmaan.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="419"/>
+        <location filename="../src/util.cpp" line="423"/>
         <source>The process crashed some time after starting successfully.</source>
         <translation>Ohjelman suoritus keskeytyi sen käynnistämisen jälkeen.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="425"/>
+        <location filename="../src/util.cpp" line="429"/>
         <source>The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="433"/>
+        <location filename="../src/util.cpp" line="437"/>
         <source>An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="441"/>
+        <location filename="../src/util.cpp" line="445"/>
         <source>An error occurred when attempting to read from the process. For example, the process may not be running.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="449"/>
+        <location filename="../src/util.cpp" line="453"/>
         <source>An unknown error occurred. This is the default return value of error().</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="478"/>
+        <location filename="../src/util.cpp" line="482"/>
         <source>Choose video</source>
         <translation>Valitse video</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="479"/>
+        <location filename="../src/util.cpp" line="483"/>
         <source>Video</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="82"/>
+        <location filename="../src/main.cpp" line="85"/>
         <source>English</source>
         <extracomment>&quot;English&quot; is the default language. This string is not intended to be translated.</extracomment>
         <translation>Suomi</translation>
