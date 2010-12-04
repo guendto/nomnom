@@ -1,5 +1,5 @@
 
-0.1.1
+0.1.1   Sat Dec 04 2010     Toni Gundogdu
 Changes:
         - Set <http://nomnom.sourceforge.net/> as new home
         - Install: Add WITHOUT_DESKTOP, WITHOUT_QM, WITHOUT_DOC
