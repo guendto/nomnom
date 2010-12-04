@@ -277,6 +277,14 @@ if (NOT WITHOUT_DESKTOP)
         DESTINATION share/pixmaps/)
 endif ()
 
+# dist.
+
+add_custom_target (
+    dist
+    git log --stat >
+        "${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog" && make package_source
+)
+
 # Uninstall.
 
 configure_file (
