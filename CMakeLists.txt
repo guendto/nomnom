@@ -3,8 +3,6 @@ cmake_minimum_required (VERSION 2.8.0)
 
 project (nomnom)
 
-set (CMAKE_VERBOSE_MAKEFILE false)
-
 add_definitions (-Wall)
 #add_definitions (-Werror)
 
@@ -41,25 +39,31 @@ endif ()
 set (HOST_SETUP "${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_PROCESSOR}")
 set (VERSION_LONG "${VERSION_LONG} for ${HOST_SETUP}")
 
-# Set default build type.
+# Set build type default.
 
 if (NOT CMAKE_BUILD_TYPE)
     set (CMAKE_BUILD_TYPE "debug")
 endif ()
 
-# Set default for WITHOUT_DESKTOP.
+# Set verbose makefile default.
+
+if (NOT CMAKE_VERBOSE_MAKEFILE)
+    set (CMAKE_VERBOSE_MAKEFILE false)
+endif ()
+
+# Set WITHOUT_DESKTOP default.
 
 if (NOT WITHOUT_DESKTOP)
     set (WITHOUT_DESKTOP false)
 endif ()
 
-# Set default for WITHOUT_QM.
+# Set WITHOUT_QM default.
 
 if (NOT WITHOUT_QM)
     set (WITHOUT_QM false)
 endif ()
 
-# Set default for WITHOUT_DOC.
+# Set WITHOUT_DOC default.
 
 if (NOT WITHOUT_DOC)
     set (WITHOUT_DOC false)

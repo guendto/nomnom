@@ -13,6 +13,7 @@ Changes:
         - Ignore error messages for canceled processes
         - Add Youtube feed (playlist, uploads, favorites) support (umph)
 Bugfixes:
+        - CMAKE_VERBOSE_MAKEFILE
         - About: quvi version would not show if dialog was opened repeatedly
         - Restore if minimized (to tray) and error occurs
 
