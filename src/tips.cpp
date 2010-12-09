@@ -76,6 +76,10 @@ static const char* tips[] = {
         "NomNom can minimize automatically when download starts; check "
         "\"Minimize when download starts\" in the Preferences (Ctrl+E)."
     ),
+    QT_TRANSLATE_NOOP("Tips",
+        "You can use a custom program icon instead of the default one. "
+        "To do that, open the Preferences (Ctrl+E) and select Appearance."
+    ),
     NULL // End.
 };
 
