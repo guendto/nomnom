@@ -264,6 +264,53 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Appeara&amp;nce</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Program Icon</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="iconCombo">
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Custom</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="iconPathEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="browseIconBtn">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>&amp;Browse...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
        <string>Op&amp;tions</string>
@@ -385,6 +432,9 @@
   <tabstop>regexpCombo</tabstop>
   <tabstop>previewEdit</tabstop>
   <tabstop>refreshBtn</tabstop>
+  <tabstop>iconCombo</tabstop>
+  <tabstop>iconPathEdit</tabstop>
+  <tabstop>browseIconBtn</tabstop>
   <tabstop>minWhenStartsBox</tabstop>
   <tabstop>minToTrayBox</tabstop>
   <tabstop>playWhenDoneBox</tabstop>
@@ -622,6 +672,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>iconCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Preferences</receiver>
+   <slot>onProgramIconChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browseIconBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Preferences</receiver>
+   <slot>onBrowseProgramIcon()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onBrowseQuvi()</slot>
@@ -636,5 +718,7 @@
   <slot>onBrowseCurl()</slot>
   <slot>onBrowseSaveDir()</slot>
   <slot>onLanguage()</slot>
+  <slot>onProgramIconChanged(int)</slot>
+  <slot>onBrowseProgramIcon()</slot>
  </slots>
 </ui>

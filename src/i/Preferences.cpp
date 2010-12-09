@@ -17,6 +17,7 @@
 
 #include <QFileDialog>
 #include <QSettings>
+#include <QImageReader>
 #include <QDebug>
 
 #include "util.h"
@@ -80,6 +81,12 @@ Preferences::Preferences (QWidget *parent)
     if (regexpEdit->text ().isEmpty ())
         onRegexpChanged (0);
 
+    iconCombo->setCurrentIndex (
+        shPrefs.get (SharedPreferences::CustomProgramIcon).toInt ());
+
+    iconPathEdit->setText (
+        shPrefs.get (SharedPreferences::ProgramIconPath).toString ());
+
     minWhenStartsBox->setChecked (
         shPrefs.get (SharedPreferences::MinWhenStarts).toBool ()
             ? Qt::Checked
@@ -122,10 +129,15 @@ Preferences::Preferences (QWidget *parent)
 bool Preferences::restartAfter () const { return _restartAfter; }
 
 static void
-browse (QWidget *p, QLineEdit *w) {
+browse (QWidget *p, QLineEdit *w, QString filter="") {
 
     const QString s =
-        QFileDialog::getOpenFileName (p, QObject::tr ("Browse"));
+        QFileDialog::getOpenFileName (
+            p,
+            QObject::tr ("Browse"),
+            QString (),
+            filter
+        );
 
     if (!s.isEmpty ())
         w->setText (s);
@@ -232,6 +244,32 @@ Preferences::onFilenameFormatEditingFinished ()
 void
 Preferences::onRegexpEditingFinished ()
     { onRefresh (); }
+
+// Slot: program icon combo state changed.
+
+void
+Preferences::onProgramIconChanged (int n) {
+    iconPathEdit ->setEnabled (n != 0);
+    browseIconBtn->setEnabled (n != 0);
+}
+
+// Slot: browse program icon.
+
+void
+Preferences::onBrowseProgramIcon () {
+
+    // Construct "filter".
+
+    QString filter = tr ("Images") + " (";
+
+    foreach (QByteArray b, QImageReader::supportedImageFormats ())
+        filter += "*." +b+ " ";
+
+    filter = filter.simplified ();
+    filter += ")";
+
+    browse (this, iconPathEdit, filter);
+}
 
 // Slot: refresh clicked.
 
@@ -353,6 +391,20 @@ Preferences::done (int r) {
         shPrefs.set (SharedPreferences::Regexp,
             regexpEdit->text ());
 
+        int n = iconCombo->currentIndex ();
+
+        if (n == 1) { // "Custom"
+
+            const QString path = iconPathEdit->text ();
+
+            if (!path.isEmpty ())
+                shPrefs.set (SharedPreferences::ProgramIconPath, path);
+            else
+                n = 0; // "Default"
+        }
+
+        shPrefs.set (SharedPreferences::CustomProgramIcon, n);
+
         shPrefs.set (SharedPreferences::MinWhenStarts,
             minWhenStartsBox->isChecked ());
 
@@ -402,6 +454,8 @@ SharedPreferences::write () const {
     s.setValue ("saveDir",      saveDir);
     s.setValue ("filenameFormat", filenameFormat);
     s.setValue ("regexp",       regexp);
+    s.setValue ("customProgramIcon", customProgramIcon);
+    s.setValue ("programIconPath", programIconPath);
     s.setValue ("minWhenStarts",minWhenStarts);
     s.setValue ("minToTray",    minToTray);
     s.setValue ("stayOnTop",    stayOnTop);
@@ -427,6 +481,8 @@ SharedPreferences::read () {
     saveDir      = s.value ("saveDir").toString ();
     filenameFormat = s.value ("filenameFormat").toString ();
     regexp       = s.value ("regexp").toString ();
+    customProgramIcon = s.value ("customProgramIcon").toBool ();
+    programIconPath = s.value ("programIconPath").toString ();
     minWhenStarts= s.value ("minWhenStarts").toBool ();
     minToTray    = s.value ("minToTray").toBool ();
     stayOnTop    = s.value ("stayOnTop").toBool ();
@@ -449,6 +505,8 @@ SharedPreferences::set (Option opt, const QVariant& v) {
     case SaveDir        : saveDir      = v.toString (); break;
     case FilenameFormat : filenameFormat = v.toString (); break;
     case Regexp         : regexp       = v.toString (); break;
+    case CustomProgramIcon: customProgramIcon = v.toBool (); break;
+    case ProgramIconPath: programIconPath = v.toString (); break;
     case MinWhenStarts  : minWhenStarts= v.toBool (); break;
     case MinToTray      : minToTray    = v.toBool (); break;
     case StayOnTop      : stayOnTop    = v.toBool (); break;
@@ -477,6 +535,8 @@ SharedPreferences::get (Option opt) const {
     case SaveDir      : return QVariant (saveDir);
     case FilenameFormat:return QVariant (filenameFormat);
     case Regexp       : return QVariant (regexp);
+    case CustomProgramIcon: return QVariant (customProgramIcon);
+    case ProgramIconPath: return QVariant (programIconPath);
     case MinWhenStarts: return QVariant (minWhenStarts);
     case MinToTray    : return QVariant (minToTray);
     case StayOnTop    : return QVariant (stayOnTop);

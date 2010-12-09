@@ -39,8 +39,10 @@ private slots:
     void onRegexpChanged        (int);
     void onFilenameFormatEditingFinished ();
     void onRegexpEditingFinished();
+    void onProgramIconChanged   (int);
+    void onBrowseProgramIcon    ();
     void onRefresh              ();
-    void onClearRecent         ();
+    void onClearRecent          ();
     void onLanguage             ();
 private:
     bool _restartAfter;
@@ -57,6 +59,8 @@ public:
         SaveDir,
         FilenameFormat,
         Regexp,
+        CustomProgramIcon,
+        ProgramIconPath,
         MinWhenStarts,
         MinToTray,
         StayOnTop,
@@ -77,12 +81,14 @@ private:
     QString saveDir;
     QString filenameFormat;
     QString regexp;
-    bool minWhenStarts;
-    bool minToTray;
-    bool stayOnTop;
-    bool playWhenDone;
-    bool showReminder;
-    bool dontPromptFilename;
+    bool    customProgramIcon;
+    QString programIconPath;
+    bool    minWhenStarts;
+    bool    minToTray;
+    bool    stayOnTop;
+    bool    playWhenDone;
+    bool    showReminder;
+    bool    dontPromptFilename;
 };
 
 #endif

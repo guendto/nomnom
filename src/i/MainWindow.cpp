@@ -96,6 +96,12 @@ MainWindow::MainWindow  () {
     proc->setLabelRegExp (h);
 
     log << tr ("Program started.") + "\n";
+
+    // Custom program icon.
+
+    if (shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ())
+        changeProgramIcon ();
+
 }
 
 void
@@ -180,10 +186,10 @@ MainWindow::createTray () {
 
 #undef creat_a
 
-    trayIcon = new QSystemTrayIcon(this);
+    trayIcon = new QSystemTrayIcon (this);
 
-    trayIcon->setContextMenu(trayMenu);
-    trayIcon->setIcon(QIcon(":img/nomnom.png"));
+    trayIcon->setContextMenu (trayMenu);
+    trayIcon->setIcon (QIcon (":img/nomnom.png"));
 
     connect(trayIcon, SIGNAL( activated(QSystemTrayIcon::ActivationReason) ),
         this, SLOT( onTrayActivated(QSystemTrayIcon::ActivationReason) ) );
@@ -468,6 +474,31 @@ MainWindow::downloadVideo () {
 
 }
 
+// Change program icon.
+
+void
+MainWindow::changeProgramIcon () {
+
+    const bool customProgramIcon =
+        shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ();
+
+    QString html = textBrowser->toHtml ();
+
+    const QString iconPath =
+        customProgramIcon
+        ? shPrefs.get (SharedPreferences::ProgramIconPath).toString ()
+        : ":img/nomnom.png";
+
+    html.replace (QRegExp ("img src=\".*\""), "img src=\"" +iconPath+ "\"");
+
+    textBrowser->setHtml (html);
+
+    QIcon icon = QIcon (iconPath);
+
+    setWindowIcon     (icon);
+    trayIcon->setIcon (icon);
+}
+
 // Parse JSON data returned by quvi.
 
 bool
@@ -503,6 +534,12 @@ MainWindow::onTrayActivated (QSystemTrayIcon::ActivationReason r) {
 void
 MainWindow::onPreferences () {
 
+    const bool icon_state =
+        shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ();
+
+    const QString icon_path =
+        shPrefs.get (SharedPreferences::ProgramIconPath).toString ();
+
     Preferences dlg (this);
 
     if (dlg.exec () == QDialog::Accepted) {
@@ -533,6 +570,16 @@ MainWindow::onPreferences () {
         if (flags != windowFlags ()) {
             setWindowFlags (flags);
             show ();
+        }
+
+        // Update program icon?
+
+        if (icon_state !=
+            shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ()
+            || icon_path !=
+                shPrefs.get (SharedPreferences::ProgramIconPath).toString ())
+        {
+            changeProgramIcon ();
         }
 
     }

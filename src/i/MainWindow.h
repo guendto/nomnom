@@ -49,6 +49,7 @@ private:
     bool parseOK            ();
     void streamVideo        ();
     void downloadVideo      ();
+    void changeProgramIcon  ();
 private slots:
     // UI
     void onTrayActivated(QSystemTrayIcon::ActivationReason);
