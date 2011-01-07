@@ -524,7 +524,7 @@ MainWindow::parseOK () {
 void
 MainWindow::onTrayActivated (QSystemTrayIcon::ActivationReason r) {
     switch (r) {
-    case QSystemTrayIcon::DoubleClick: showNormal(); break;
+    case QSystemTrayIcon::Trigger: showNormal(); break;
     default: break;
     }
 }
