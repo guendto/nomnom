@@ -138,38 +138,38 @@ p, li { white-space: pre-wrap; }
         <translation>Ohjelma käynnistetty.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="125"/>
-        <location filename="../src/i/MainWindow.cpp" line="145"/>
+        <location filename="../src/i/MainWindow.cpp" line="131"/>
+        <location filename="../src/i/MainWindow.cpp" line="151"/>
         <source>Feed...</source>
         <translation>Syöte...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="128"/>
-        <location filename="../src/i/MainWindow.cpp" line="148"/>
+        <location filename="../src/i/MainWindow.cpp" line="134"/>
+        <location filename="../src/i/MainWindow.cpp" line="154"/>
         <source>Overwrite</source>
         <translation>Ylikirjoita</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="130"/>
-        <location filename="../src/i/MainWindow.cpp" line="150"/>
+        <location filename="../src/i/MainWindow.cpp" line="136"/>
+        <location filename="../src/i/MainWindow.cpp" line="156"/>
         <source>Log...</source>
         <translation>Loki...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="131"/>
-        <location filename="../src/i/MainWindow.cpp" line="151"/>
+        <location filename="../src/i/MainWindow.cpp" line="137"/>
+        <location filename="../src/i/MainWindow.cpp" line="157"/>
         <source>Preferences...</source>
         <translation>Asetukset...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="133"/>
+        <location filename="../src/i/MainWindow.cpp" line="139"/>
         <source>About...</source>
         <translation>Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="134"/>
-        <location filename="../src/i/MainWindow.cpp" line="153"/>
-        <location filename="../src/i/MainWindow.cpp" line="179"/>
+        <location filename="../src/i/MainWindow.cpp" line="140"/>
+        <location filename="../src/i/MainWindow.cpp" line="159"/>
+        <location filename="../src/i/MainWindow.cpp" line="185"/>
         <source>Quit</source>
         <translation>Lopeta</translation>
     </message>
@@ -189,90 +189,90 @@ p, li { white-space: pre-wrap; }
         <translation>Todennetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="124"/>
-        <location filename="../src/i/MainWindow.cpp" line="144"/>
+        <location filename="../src/i/MainWindow.cpp" line="130"/>
+        <location filename="../src/i/MainWindow.cpp" line="150"/>
         <source>Address...</source>
         <translation>Osoite...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="126"/>
-        <location filename="../src/i/MainWindow.cpp" line="146"/>
+        <location filename="../src/i/MainWindow.cpp" line="132"/>
+        <location filename="../src/i/MainWindow.cpp" line="152"/>
         <source>Recent...</source>
         <translation>Aiempi...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="177"/>
+        <location filename="../src/i/MainWindow.cpp" line="183"/>
         <source>Open</source>
         <translation>Avaa</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="320"/>
+        <location filename="../src/i/MainWindow.cpp" line="326"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="336"/>
+        <location filename="../src/i/MainWindow.cpp" line="342"/>
         <source>Checking ...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="556"/>
+        <location filename="../src/i/MainWindow.cpp" line="603"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Aiempia tietoja ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="564"/>
+        <location filename="../src/i/MainWindow.cpp" line="611"/>
         <source>Recent URLs</source>
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="565"/>
+        <location filename="../src/i/MainWindow.cpp" line="612"/>
         <source>Select URL:</source>
         <translation>Valitse osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="611"/>
+        <location filename="../src/i/MainWindow.cpp" line="658"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="619"/>
+        <location filename="../src/i/MainWindow.cpp" line="666"/>
         <source>Choose from old results?</source>
         <translation>Valitse aiemmin haetuista tiedoista?</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="267"/>
+        <location filename="../src/i/MainWindow.cpp" line="273"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="286"/>
+        <location filename="../src/i/MainWindow.cpp" line="292"/>
         <source>You must specify path to a stream-capable media player command.</source>
         <translation>Määrittelemätön polku suoratoistoon pystyvään komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="319"/>
+        <location filename="../src/i/MainWindow.cpp" line="325"/>
         <source>Choose format</source>
         <translation>Valitse videomuoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="365"/>
-        <location filename="../src/i/MainWindow.cpp" line="464"/>
+        <location filename="../src/i/MainWindow.cpp" line="371"/>
+        <location filename="../src/i/MainWindow.cpp" line="470"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Toisto-komennon käynnistäminen epäonnistui, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="411"/>
+        <location filename="../src/i/MainWindow.cpp" line="417"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="590"/>
+        <location filename="../src/i/MainWindow.cpp" line="637"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="590"/>
+        <location filename="../src/i/MainWindow.cpp" line="637"/>
         <source>Video URL:</source>
         <translation>Video-osoite:</translation>
     </message>
@@ -309,6 +309,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../i/Preferences.ui" line="47"/>
+        <location filename="../i/Preferences.ui" line="305"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Selaa...</translation>
     </message>
@@ -350,6 +351,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../i/Preferences.ui" line="175"/>
         <location filename="../i/Preferences.ui" line="211"/>
+        <location filename="../i/Preferences.ui" line="282"/>
         <source>Default</source>
         <translation>Oletusarvo</translation>
     </message>
@@ -366,7 +368,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../i/Preferences.ui" line="54"/>
         <source>c&amp;url:</source>
-        <translation></translation>
+        <translation>cu&amp;rl:</translation>
     </message>
     <message>
         <location filename="../i/Preferences.ui" line="78"/>
@@ -439,61 +441,81 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../i/Preferences.ui" line="269"/>
+        <source>Appeara&amp;nce</source>
+        <translation>&amp;Ulkoasu</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="275"/>
+        <source>Program Icon</source>
+        <translation>Ohjelma-kuvake</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="287"/>
+        <source>Custom</source>
+        <translation>Käyttäjän</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="316"/>
         <source>Op&amp;tions</source>
         <translation>Asetu&amp;kset</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="277"/>
+        <location filename="../i/Preferences.ui" line="324"/>
         <source>&amp;Minimize when download starts</source>
         <translation>P&amp;ienennä ikkuna kopioinnin käynnistyessä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="284"/>
+        <location filename="../i/Preferences.ui" line="331"/>
         <source>M&amp;inimize to system tray</source>
         <translation>Pi&amp;enennä ikkuna järjestelmäpalkkiin</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="291"/>
+        <location filename="../i/Preferences.ui" line="338"/>
         <source>Pl&amp;ay video when done downloading</source>
         <translation>Toist&amp;a kopioitu video</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="298"/>
+        <location filename="../i/Preferences.ui" line="345"/>
         <source>&amp;Stay on top</source>
         <translation>P&amp;ysy muiden ikkunoiden yläpuolella</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="305"/>
+        <location filename="../i/Preferences.ui" line="352"/>
         <source>S&amp;how reminder when NomNom starts</source>
         <translation>&amp;Näytä muistutukset ohjelman käynnistyessä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="312"/>
+        <location filename="../i/Preferences.ui" line="359"/>
         <source>&amp;Do not prompt for filename</source>
         <translation>Älä kysy tallennetta&amp;van tiedoston nimeä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="323"/>
+        <location filename="../i/Preferences.ui" line="370"/>
         <source>Cl&amp;ear recent</source>
         <translation>Poi&amp;sta aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="341"/>
+        <location filename="../i/Preferences.ui" line="388"/>
         <source>Config:</source>
         <translation>Asetukset:</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="330"/>
+        <location filename="../i/Preferences.ui" line="377"/>
         <source>&amp;Language...</source>
         <translation>Kie&amp;li...</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="165"/>
+        <location filename="../src/i/Preferences.cpp" line="177"/>
         <source>Open directory</source>
         <translation>Avaa hakemisto</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="286"/>
+        <location filename="../src/i/Preferences.cpp" line="263"/>
+        <source>Images</source>
+        <translation>Kuvatiedostot</translation>
+    </message>
+    <message>
+        <location filename="../src/i/Preferences.cpp" line="324"/>
         <source>The language will be changed after you restart NomNom. Restart NomNom?</source>
         <translation>Uusi kieli tulee voimaan ohjelman uudelleen käynnistyessä. Käynnistä ohjelma uudelleen?</translation>
     </message>
@@ -568,7 +590,7 @@ p, li { white-space: pre-wrap; }
         <translation>Suomi</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="128"/>
+        <location filename="../src/i/Preferences.cpp" line="137"/>
         <source>Browse</source>
         <translation>Selaa</translation>
     </message>
@@ -642,6 +664,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/tips.cpp" line="75"/>
         <source>NomNom can minimize automatically when download starts; check &quot;Minimize when download starts&quot; in the Preferences (Ctrl+E).</source>
         <translation>Ohjelma voi pienentää itsensä automaattisesti kopioinnin käynnistyessä. Valitse &quot;Pienennä ikkuna kopioinnin käynnistyessä&quot; ohjelman asetuksista (Ctrl+E).</translation>
+    </message>
+    <message>
+        <location filename="../src/tips.cpp" line="79"/>
+        <source>You can use a custom program icon instead of the default one. To do that, open the Preferences (Ctrl+E) and select Appearance.</source>
+        <translation>Voit käyttää omaa ohjelma-kuvaketta: avaa Asetukset (Ctrl+E) ja valitse Ulkoasu.</translation>
     </message>
 </context>
 <context>
