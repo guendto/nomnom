@@ -119,3 +119,4 @@ get_tip (size_t& n, const bool first/*=false*/) {
 } // End namespace.
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:

@@ -46,3 +46,4 @@ const QString& Log::data () const { return _data; }
 void          Log::clear ()       { _data.clear (); }
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:

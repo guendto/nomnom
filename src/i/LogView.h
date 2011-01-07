@@ -35,3 +35,4 @@ protected:
 #endif
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:

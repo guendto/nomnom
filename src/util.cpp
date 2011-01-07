@@ -496,3 +496,4 @@ choose_from_feed (QWidget *parent, QString& dst) {
 } // End of namespace.
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:

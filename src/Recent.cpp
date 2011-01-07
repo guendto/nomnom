@@ -57,3 +57,4 @@ QStringList Recent::toStringList () const { return drops; }
 void        Recent::clear        ()       { drops.clear (); }
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:

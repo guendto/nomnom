@@ -110,3 +110,4 @@ choose_from_feed (QWidget *, QString&);
 #endif
 
 
+// vim: set ts=4 sw=4 tw=72 expandtab:
