@@ -5,7 +5,7 @@
 # This script will commit ChangeLog temporarily so that git-archive
 # picks the updated ChangeLog to the tarball.
 
-project=cclive
+project=nomnom
 branch=master
 
 echo "WARNING!
