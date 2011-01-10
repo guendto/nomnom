@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -26,38 +26,39 @@
 #include <QInputDialog>
 #include <QProcess>
 
-namespace NomNom {
+namespace NomNom
+{
 
 typedef QHash<QString,QString> FeedHash;
 
 void
 restore_size(
-    QSettings&,
-    QWidget*,
-    const QString&,
-    const QSize& defaultSize=QSize(400,350)
+  QSettings&,
+  QWidget*,
+  const QString&,
+  const QSize& defaultSize=QSize(400,350)
 );
 
 void
 restore_pos (
-    QSettings&,
-    QWidget*,
-    const QString&,
-    const QPoint& defaultPos=QPoint(200,200)
+  QSettings&,
+  QWidget*,
+  const QString&,
+  const QPoint& defaultPos=QPoint(200,200)
 );
 
 void
 save_size   (
-    QSettings&,
-    QWidget*,
-    const QString&
+  QSettings&,
+  QWidget*,
+  const QString&
 );
 
 void
 save_pos    (
-    QSettings&,
-    QWidget*,
-    const QString&
+  QSettings&,
+  QWidget*,
+  const QString&
 );
 
 void
@@ -90,13 +91,13 @@ parse_quvi_support (const QString& path, QString& errmsg);
 
 bool
 format_filename (
-    QWidget*,
-    const QString& user_regexp,
-    const QString& title,
-    const QString& suffix,
-    const QString& host,
-    const QString& id,
-    QString& dst
+  QWidget*,
+  const QString& user_regexp,
+  const QString& title,
+  const QString& suffix,
+  const QString& host,
+  const QString& id,
+  QString& dst
 );
 
 QString
@@ -109,5 +110,4 @@ choose_from_feed (QWidget *, QString&);
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

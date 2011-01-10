@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -34,77 +34,83 @@ extern QString quviVersion;
 // Ctor.
 
 About::About (QWidget *parent)
-    : QDialog(parent)
+  : QDialog(parent)
 {
-    setupUi (this);
+  setupUi (this);
 
-    const QString quviPath =
-        shPrefs.get (SharedPreferences::QuviPath).toString ();
+  const QString quviPath =
+    shPrefs.get (SharedPreferences::QuviPath).toString ();
 
-    QString errmsg;
+  QString errmsg;
 
-    if (hosts.isEmpty ()) {
-        if (!quviPath.isEmpty ())
-            NomNom::parse_quvi_support (quviPath, errmsg);
-        else
-            errmsg = tr ("You must specify path to the quvi command.");
-    }
-
-    if (!quviPath.isEmpty ()
-        && quviVersion.isEmpty ()
-        && errmsg.isEmpty())
+  if (hosts.isEmpty ())
     {
-        if (NomNom::parse_quvi_version (quviPath, quviVersion))
-            quviVersion.remove ("quvi version ");
-        else
-            errmsg = quviVersion;
+      if (!quviPath.isEmpty ())
+        NomNom::parse_quvi_support (quviPath, errmsg);
+      else
+        errmsg = tr ("You must specify path to the quvi command.");
     }
 
-    if (errmsg.isEmpty()) {
-        foreach (QString k, hosts.keys ()) {
-            new QListWidgetItem (k, listWidget);
-        }
-    }
-    else {
-        new QListWidgetItem (errmsg, listWidget);
+  if (!quviPath.isEmpty ()
+      && quviVersion.isEmpty ()
+      && errmsg.isEmpty())
+    {
+      if (NomNom::parse_quvi_version (quviPath, quviVersion))
+        quviVersion.remove ("quvi version ");
+      else
+        errmsg = quviVersion;
     }
 
-    QString version;
-    QTextStream qts (&version);
+  if (errmsg.isEmpty())
+    {
+      foreach (QString k, hosts.keys ())
+      {
+        new QListWidgetItem (k, listWidget);
+      }
+    }
+  else
+    {
+      new QListWidgetItem (errmsg, listWidget);
+    }
 
-    qts << QCoreApplication::applicationVersion ()
+  QString version;
+  QTextStream qts (&version);
+
+  qts << QCoreApplication::applicationVersion ()
 #ifdef TARGET_HOST
-        << " (" << TARGET_HOST << ")"
+      << " (" << TARGET_HOST << ")"
 #endif
-        ;
+      ;
 
-    QSettings s;
+  QSettings s;
 
-    QString html = textBrowser->toHtml ();
-    html.replace ("$version",       version);
-    html.replace ("$quvi_version",  quviVersion);
-    html.replace ("$qt_version",    qVersion ());
-    html.replace ("$config_file",   s.fileName ());
-    textBrowser->setHtml (html);
+  QString html = textBrowser->toHtml ();
+  html.replace ("$version",       version);
+  html.replace ("$quvi_version",  quviVersion);
+  html.replace ("$qt_version",    qVersion ());
+  html.replace ("$config_file",   s.fileName ());
+  textBrowser->setHtml (html);
 
-    NomNom::restore_size(s, this, QSETTINGS_GROUP, QSize(620,375));
+  NomNom::restore_size(s, this, QSETTINGS_GROUP, QSize(620,375));
 }
 
 // Done. QDialog and closeEvent design glitch workaround.
 
 void
-About::done (int r) {
-    QSettings s;
-    NomNom::save_size(s, this, QSETTINGS_GROUP);
-    QDialog::done(r);
-    close();
+About::done (int r)
+{
+  QSettings s;
+  NomNom::save_size(s, this, QSETTINGS_GROUP);
+  QDialog::done(r);
+  close();
 }
 
 // Close.
 
 void
 About::closeEvent (QCloseEvent *e)
-    { QDialog::closeEvent(e); }
+{
+  QDialog::closeEvent(e);
+}
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

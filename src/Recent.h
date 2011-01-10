@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,27 +20,27 @@
 
 #include <QStringList>
 
-class Recent {
+class Recent
+{
 public:
-    Recent ();
-    virtual ~Recent();
+  Recent ();
+  virtual ~Recent();
 public:
-    void setMaxItems(const int);
+  void setMaxItems(const int);
 public:
-    void write () const;
-    void read  ();
-    void append(const QString&);
-    void clear ();
+  void write () const;
+  void read  ();
+  void append(const QString&);
+  void clear ();
 public:
-    QStringList toStringList () const;
+  QStringList toStringList () const;
 public:
-    Recent& operator<< (const QString&);
+  Recent& operator<< (const QString&);
 private:
-    QStringList drops;
-    int maxItems;
+  QStringList drops;
+  int maxItems;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

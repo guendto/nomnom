@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -24,27 +24,27 @@
 
 #include "ui_YoutubeFeed.h"
 
-class YoutubeFeed : public QDialog, private Ui::YoutubeFeed {
-    Q_OBJECT
-public: 
-    YoutubeFeed (QWidget *parent);
+class YoutubeFeed : public QDialog, private Ui::YoutubeFeed
+{
+  Q_OBJECT
 public:
-    bool gotItems () const;
+  YoutubeFeed (QWidget *parent);
+public:
+  bool gotItems () const;
 private slots:
-    void onTypeChanged (int);
-    // Umph.
-    void onFinished (QString);
+  void onTypeChanged (int);
+  // Umph.
+  void onFinished (QString);
 protected:
-    void done (int);
-    void closeEvent (QCloseEvent*);
+  void done (int);
+  void closeEvent (QCloseEvent*);
 private:
-    bool fromJSON (const QString&, QString&);
+  bool fromJSON (const QString&, QString&);
 private:
-    QPointer<ProcessProgressDialog> _proc;
-    bool _got_items;
+  QPointer<ProcessProgressDialog> _proc;
+  bool _got_items;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

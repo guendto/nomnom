@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,33 +23,33 @@
 #include <QHash>
 #include <QRegExp>
 
-class ProcessProgressDialog : public QProgressDialog {
-    Q_OBJECT
+class ProcessProgressDialog : public QProgressDialog
+{
+  Q_OBJECT
 public:
-    ProcessProgressDialog (QWidget *parent);
+  ProcessProgressDialog (QWidget *parent);
 public:
-    void start          (QStringList&);
-    void setLabelRegExp (const QHash<QString,QRegExp>&);
-    void setErrorRegExp (const QRegExp&);
+  void start          (QStringList&);
+  void setLabelRegExp (const QHash<QString,QRegExp>&);
+  void setErrorRegExp (const QRegExp&);
 private slots:
-    void onProcStarted   ();
-    void onProcError     (QProcess::ProcessError);
-    void onProcReadyRead ();
-    void onProcFinished  (int, QProcess::ExitStatus);
-    void onCanceled      ();
+  void onProcStarted   ();
+  void onProcError     (QProcess::ProcessError);
+  void onProcReadyRead ();
+  void onProcFinished  (int, QProcess::ExitStatus);
+  void onCanceled      ();
 signals:
-    void finished (QString);
-    void error    ();
+  void finished (QString);
+  void error    ();
 private:
-    QHash<QString,QRegExp> _rx_label;
-    QRegExp _rx_error;
-    QString _buffer;
-    QProcess _proc;
-    QString _error;
-    bool _canceled;
+  QHash<QString,QRegExp> _rx_label;
+  QRegExp _rx_error;
+  QString _buffer;
+  QProcess _proc;
+  QString _error;
+  bool _canceled;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

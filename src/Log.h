@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -18,19 +18,19 @@
 #ifndef nomnom_log_h
 #define nomnom_log_h
 
-class Log {
+class Log
+{
 public:
-    Log ();
-    virtual ~Log ();
+  Log ();
+  virtual ~Log ();
 public:
-    Log& operator<< (const QString&);
-    const QString& data () const;
-    void clear ();
+  Log& operator<< (const QString&);
+  const QString& data () const;
+  void clear ();
 private:
-    QString _data;
+  QString _data;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

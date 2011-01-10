@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -24,41 +24,42 @@
 
 class QLabel;
 
-class Video : public QObject {
-    Q_OBJECT
+class Video : public QObject
+{
+  Q_OBJECT
 public:
-    enum Detail
-        { Link=0, Title, PageURL, ID, Format, Length, Suffix, ContentType, Host };
+  enum Detail
+  { Link=0, Title, PageURL, ID, Format, Length, Suffix, ContentType, Host };
 public:
-    Video ();
-    Video (const Video&);
-    Video& operator=(const Video&);
+  Video ();
+  Video (const Video&);
+  Video& operator=(const Video&);
 public:
-    bool     fromJSON   (const QString&, QString&);
-    QVariant get        (Detail) const;
-    void     set        (Detail, const QString&);
+  bool     fromJSON   (const QString&, QString&);
+  QVariant get        (Detail) const;
+  void     set        (Detail, const QString&);
 private:
-    // Details.
-    QString _id;
-    QString _title;
-    QString _pageURL;
-    QString _link;
-    QString _format;
-    qint64  _length;
-    QString _suffix;
-    QString _ctype;
-    QString _host;
+  // Details.
+  QString _id;
+  QString _title;
+  QString _pageURL;
+  QString _link;
+  QString _format;
+  qint64  _length;
+  QString _suffix;
+  QString _ctype;
+  QString _host;
 };
 
-class VideoException {
+class VideoException
+{
 public:
-    VideoException (const QString&);
-    const QString& what() const;
+  VideoException (const QString&);
+  const QString& what() const;
 private:
-    QString errmsg;
+  QString errmsg;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

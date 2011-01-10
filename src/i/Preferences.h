@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,78 +20,80 @@
 
 #include "ui_Preferences.h"
 
-class Preferences : public QDialog, private Ui::Preferences {
-    Q_OBJECT
-public: 
-    Preferences(QWidget *parent);
+class Preferences : public QDialog, private Ui::Preferences
+{
+  Q_OBJECT
 public:
-    bool restartAfter () const;
+  Preferences(QWidget *parent);
+public:
+  bool restartAfter () const;
 protected:
-    void done(int);
-    void closeEvent(QCloseEvent*);
+  void done(int);
+  void closeEvent(QCloseEvent*);
 private slots:
-    void onBrowsePlayer         ();
-    void onBrowseQuvi           ();
-    void onBrowseCurl           ();
-    void onBrowseUmph           ();
-    void onBrowseSaveDir        ();
-    void onFilenameFormatChanged(int);
-    void onRegexpChanged        (int);
-    void onFilenameFormatEditingFinished ();
-    void onRegexpEditingFinished();
-    void onProgramIconChanged   (int);
-    void onBrowseProgramIcon    ();
-    void onRefresh              ();
-    void onClearRecent          ();
-    void onLanguage             ();
+  void onBrowsePlayer         ();
+  void onBrowseQuvi           ();
+  void onBrowseCurl           ();
+  void onBrowseUmph           ();
+  void onBrowseSaveDir        ();
+  void onFilenameFormatChanged(int);
+  void onRegexpChanged        (int);
+  void onFilenameFormatEditingFinished ();
+  void onRegexpEditingFinished();
+  void onProgramIconChanged   (int);
+  void onBrowseProgramIcon    ();
+  void onRefresh              ();
+  void onClearRecent          ();
+  void onLanguage             ();
 private:
-    bool _restartAfter;
+  bool _restartAfter;
 };
 
-class SharedPreferences {
+class SharedPreferences
+{
 public:
-    enum Option {
-        QuviPath = 0,
-        CurlPath,
-        PlayerPath,
-        UmphPath,
-        GrakePath,
-        SaveDir,
-        FilenameFormat,
-        Regexp,
-        CustomProgramIcon,
-        ProgramIconPath,
-        MinWhenStarts,
-        MinToTray,
-        StayOnTop,
-        PlayWhenDone,
-        ShowReminder,
-        DontPromptFilename
-    };
+  enum Option
+  {
+    QuviPath = 0,
+    CurlPath,
+    PlayerPath,
+    UmphPath,
+    GrakePath,
+    SaveDir,
+    FilenameFormat,
+    Regexp,
+    CustomProgramIcon,
+    ProgramIconPath,
+    MinWhenStarts,
+    MinToTray,
+    StayOnTop,
+    PlayWhenDone,
+    ShowReminder,
+    DontPromptFilename
+  };
 public:
-    void     write   () const;
-    void     read    ();
-    void     set     (Option, const QVariant&);
-    QVariant get     (Option) const;
+  void     write   () const;
+  void     read    ();
+  void     set     (Option, const QVariant&);
+  QVariant get     (Option) const;
 private:
-    QString quviPath;
-    QString curlPath;
-    QString playerPath;
-    QString umphPath;
-    QString saveDir;
-    QString filenameFormat;
-    QString regexp;
-    bool    customProgramIcon;
-    QString programIconPath;
-    bool    minWhenStarts;
-    bool    minToTray;
-    bool    stayOnTop;
-    bool    playWhenDone;
-    bool    showReminder;
-    bool    dontPromptFilename;
+  QString quviPath;
+  QString curlPath;
+  QString playerPath;
+  QString umphPath;
+  QString saveDir;
+  QString filenameFormat;
+  QString regexp;
+  bool    customProgramIcon;
+  QString programIconPath;
+  bool    minWhenStarts;
+  bool    minToTray;
+  bool    stayOnTop;
+  bool    playWhenDone;
+  bool    showReminder;
+  bool    dontPromptFilename;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

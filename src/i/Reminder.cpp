@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -31,66 +31,70 @@
 // Ctor.
 
 Reminder::Reminder (QWidget *parent, const QString& group)
-    : QDialog (parent), showReminder (true), currTip (0), firstRun (true)
+  : QDialog (parent), showReminder (true), currTip (0), firstRun (true)
 {
-    setupUi (this);
+  setupUi (this);
 
-    QSettings s;
-    NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (400,200));
+  QSettings s;
+  NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (400,200));
 
-    firstRunKey     = QString ("%1/%2")
-        .arg (group)
-        .arg (QSETTINGS_REMINDER_FIRSTRUN);
+  firstRunKey     = QString ("%1/%2")
+                    .arg (group)
+                    .arg (QSETTINGS_REMINDER_FIRSTRUN);
 
-    showReminderKey = QString ("%1/%2")
-        .arg (group)
-        .arg (QSETTINGS_REMINDER_SHOWREMINDER);
+  showReminderKey = QString ("%1/%2")
+                    .arg (group)
+                    .arg (QSETTINGS_REMINDER_SHOWREMINDER);
 
-    if (s.contains (firstRunKey))
-        firstRun = s.value (firstRunKey).toBool ();
+  if (s.contains (firstRunKey))
+    firstRun = s.value (firstRunKey).toBool ();
 
-    if (s.contains (showReminderKey))
-        showReminder = s.value (showReminderKey).toBool ();
+  if (s.contains (showReminderKey))
+    showReminder = s.value (showReminderKey).toBool ();
 
-    textBrowser->setHtml (NomNom::get_tip (currTip, firstRun));
+  textBrowser->setHtml (NomNom::get_tip (currTip, firstRun));
 }
 
 // Slot: on Next.
 
 void
 Reminder::onNext ()
-    { textBrowser->setHtml (NomNom::next_tip (currTip)); }
+{
+  textBrowser->setHtml (NomNom::next_tip (currTip));
+}
 
 // Conditional exec, or "until a more elegant way is found".
 
 bool
-Reminder::conditionalExec () {
-    if (showReminder) exec ();
-    return showReminder;
+Reminder::conditionalExec ()
+{
+  if (showReminder) exec ();
+  return showReminder;
 }
 
 // Done. QDialog and closeEvent design glitch workaround.
 
 void
-Reminder::done (int r) {
+Reminder::done (int r)
+{
+  QSettings s;
+  NomNom::save_size (s, this, QSETTINGS_GROUP);
 
-    QSettings s;
-    NomNom::save_size (s, this, QSETTINGS_GROUP);
+  showReminder = showagainBox->isChecked(); // Update.
 
-    showReminder = showagainBox->isChecked(); // Update.
+  s.setValue (firstRunKey, false);
+  s.setValue (showReminderKey, showReminder);
 
-    s.setValue (firstRunKey, false);
-    s.setValue (showReminderKey, showReminder);
-
-    QDialog::done (r);
-    close ();
+  QDialog::done (r);
+  close ();
 }
 
 // Close.
 
 void
 Reminder::closeEvent (QCloseEvent *e)
-    { QDialog::closeEvent(e); }
+{
+  QDialog::closeEvent(e);
+}
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

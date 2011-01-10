@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -27,70 +27,71 @@ extern SharedPreferences shPrefs;
 extern Log log;
 
 DownloadDialog::DownloadDialog (QWidget *parent/*=NULL*/)
-    : QProgressDialog (parent), _canceled (false)
+  : QProgressDialog (parent), _canceled (false)
 {
-
 #define _wrap(s,sl) \
     do { connect (&_proc, SIGNAL(s), this, SLOT(sl)); } while (0)
 
-    _wrap (started (), onCurlStarted ());
+  _wrap (started (), onCurlStarted ());
 
-    _wrap (error (QProcess::ProcessError),
-        onCurlError (QProcess::ProcessError));
+  _wrap (error (QProcess::ProcessError),
+         onCurlError (QProcess::ProcessError));
 
-    _wrap (readyRead (), onCurlReadyRead ());
+  _wrap (readyRead (), onCurlReadyRead ());
 
-    _wrap (finished (int, QProcess::ExitStatus),
-        onCurlFinished (int, QProcess::ExitStatus));
+  _wrap (finished (int, QProcess::ExitStatus),
+         onCurlFinished (int, QProcess::ExitStatus));
 
 #undef _wrap
 
-    connect (this, SIGNAL(canceled()), this, SLOT (onCanceled()));
+  connect (this, SIGNAL(canceled()), this, SLOT (onCanceled()));
 
-    setWindowModality (Qt::WindowModal);
-    setAutoClose (false);
+  setWindowModality (Qt::WindowModal);
+  setAutoClose (false);
 
-    _proc.setProcessChannelMode (QProcess::MergedChannels);
+  _proc.setProcessChannelMode (QProcess::MergedChannels);
 }
 
 void
-DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video) {
+DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video)
+{
+  Q_ASSERT (!cmd.isEmpty ());
+  Q_ASSERT (!fpath.isEmpty ());
+  Q_ASSERT (video != NULL);
 
-    Q_ASSERT (!cmd.isEmpty ());
-    Q_ASSERT (!fpath.isEmpty ());
-    Q_ASSERT (video != NULL);
+  _lastError.clear ();
 
-    _lastError.clear ();
+  QStringList args = cmd.split (" ");
 
-    QStringList args = cmd.split (" ");
+  args.replaceInStrings ("%u", video->get (Video::Link).toString ());
+  args.replaceInStrings ("%f", fpath);
 
-    args.replaceInStrings ("%u", video->get (Video::Link).toString ());
-    args.replaceInStrings ("%f", fpath);
+  log << args.join (" ") + "\n";
 
-    log << args.join (" ") + "\n";
+  _canceled = false;
 
-    _canceled = false;
-
-    show ();
-    _proc.start (args.takeFirst (), args);
-    exec ();
+  show ();
+  _proc.start (args.takeFirst (), args);
+  exec ();
 }
 
 void
-DownloadDialog::onCurlStarted () {
-    setLabelText (tr ("Starting download ..."));
-    if (shPrefs.get (SharedPreferences::MinWhenStarts).toBool ())
-        parentWidget ()->showMinimized ();
+DownloadDialog::onCurlStarted ()
+{
+  setLabelText (tr ("Starting download ..."));
+  if (shPrefs.get (SharedPreferences::MinWhenStarts).toBool ())
+    parentWidget ()->showMinimized ();
 }
 
 void
-DownloadDialog::onCurlError (QProcess::ProcessError n) {
-
-    if (!_canceled) {
-        hide ();
-        NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
-        emit error ();
-        cancel ();
+DownloadDialog::onCurlError (QProcess::ProcessError n)
+{
+  if (!_canceled)
+    {
+      hide ();
+      NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
+      emit error ();
+      cancel ();
     }
 }
 
@@ -98,74 +99,78 @@ static const QRegExp rx_err  ("curl:\\s+(.*)$");
 static const QRegExp rx_rate ("(\\D+)");   // rate unit
 
 void
-DownloadDialog::onCurlReadyRead () {
+DownloadDialog::onCurlReadyRead ()
+{
 
-    static char data[1024];
+  static char data[1024];
 
-    while (_proc.readLine (data, sizeof (data))) {
+  while (_proc.readLine (data, sizeof (data)))
+    {
+      QString ln = QString::fromLocal8Bit (data).simplified ();
 
-        QString ln = QString::fromLocal8Bit (data).simplified ();
-
-        if (rx_err.indexIn (ln) != -1) {
-            _lastError = "curl: " +rx_err.cap (1);
-            continue;
+      if (rx_err.indexIn (ln) != -1)
+        {
+          _lastError = "curl: " +rx_err.cap (1);
+          continue;
         }
 
-        QStringList lst = ln.split (" ");
+      QStringList lst = ln.split (" ");
 
-        if (lst.count () < 12)
-            continue; // Full line updates only.
+      if (lst.count () < 12)
+        continue; // Full line updates only.
 
 #ifdef _0
-        qDebug () << lst;
+      qDebug () << lst;
 #endif
 
-        enum {
-            PERCENT = 0,
-            ETA     = 10,
-            RATE    = 11
-        };
+      enum
+      {
+        PERCENT = 0,
+        ETA     = 10,
+        RATE    = 11
+      };
 
-        setValue (lst[PERCENT].toInt ());
+      setValue (lst[PERCENT].toInt ());
 
-        QString rate = lst[RATE];
+      QString rate = lst[RATE];
 
-        if (rx_rate.indexIn (rate) == -1)
-            rate = QString ("%1k").arg (rate.toLongLong ()/1024.0,2,'f',1);
+      if (rx_rate.indexIn (rate) == -1)
+        rate = QString ("%1k").arg (rate.toLongLong ()/1024.0,2,'f',1);
 
-        const QString s = tr("Copying at %1, %2")
-            .arg (rate)
-            .arg (lst[ETA]);
+      const QString s = tr("Copying at %1, %2")
+                        .arg (rate)
+                        .arg (lst[ETA]);
 
-        setLabelText (s);
+      setLabelText (s);
     }
 
 }
 
 void
-DownloadDialog::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus) {
-
-    if (exitStatus == QProcess::NormalExit && exitCode == 0)
-        ;
-    else {
-        if (!_canceled) {
-            hide ();
-            NomNom::crit (parentWidget (), _lastError);
-            emit error ();
+DownloadDialog::onCurlFinished (int exitCode, QProcess::ExitStatus exitStatus)
+{
+  if (exitStatus == QProcess::NormalExit && exitCode == 0)
+    ;
+  else
+    {
+      if (!_canceled)
+        {
+          hide ();
+          NomNom::crit (parentWidget (), _lastError);
+          emit error ();
         }
     }
 
-    cancel ();
+  cancel ();
 }
 
 void
-DownloadDialog::onCanceled () {
+DownloadDialog::onCanceled ()
+{
+  _canceled = true;
 
-    _canceled = true;
-
-    if (_proc.state () == QProcess::Running)
-        _proc.kill ();
+  if (_proc.state () == QProcess::Running)
+    _proc.kill ();
 }
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

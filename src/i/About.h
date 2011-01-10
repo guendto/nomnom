@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,16 +20,16 @@
 
 #include "ui_About.h"
 
-class About : public QDialog, private Ui::About {
-    Q_OBJECT
-public: 
-    About(QWidget *parent);
+class About : public QDialog, private Ui::About
+{
+  Q_OBJECT
+public:
+  About(QWidget *parent);
 protected:
-    void done(int);
-    void closeEvent(QCloseEvent*);
+  void done(int);
+  void closeEvent(QCloseEvent*);
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

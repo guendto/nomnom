@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -25,56 +25,59 @@
 extern Log log;
 
 ProcessProgressDialog::ProcessProgressDialog (QWidget *parent/*=NULL*/)
-    : QProgressDialog (parent),
-      _rx_error (QRegExp ("error:\\s+(.*)$")),
-      _canceled (false)
+  : QProgressDialog (parent),
+    _rx_error (QRegExp ("error:\\s+(.*)$")),
+    _canceled (false)
 {
-
 #define _conn(s,sl) \
     do { connect (&_proc, SIGNAL(s), this, SLOT(sl)); } while (0)
 
-    _conn (started (), onProcStarted ());
+  _conn (started (), onProcStarted ());
 
-    _conn (error (QProcess::ProcessError),
-        onProcError (QProcess::ProcessError));
+  _conn (error (QProcess::ProcessError),
+         onProcError (QProcess::ProcessError));
 
-    _conn (readyRead (), onProcReadyRead ());
+  _conn (readyRead (), onProcReadyRead ());
 
-    _conn (finished (int, QProcess::ExitStatus),
-        onProcFinished (int, QProcess::ExitStatus));
+  _conn (finished (int, QProcess::ExitStatus),
+         onProcFinished (int, QProcess::ExitStatus));
 
 #undef _conn
 
-    connect (this, SIGNAL(canceled ()), this, SLOT (onCanceled ()));
+  connect (this, SIGNAL(canceled ()), this, SLOT (onCanceled ()));
 
-    setWindowModality (Qt::WindowModal);
-    setAutoClose (false);
+  setWindowModality (Qt::WindowModal);
+  setAutoClose (false);
 
-    _proc.setProcessChannelMode (QProcess::MergedChannels);
+  _proc.setProcessChannelMode (QProcess::MergedChannels);
 
 }
 
 void
 ProcessProgressDialog::setLabelRegExp (const QHash<QString,QRegExp>& h)
-    { _rx_label = h; }
+{
+  _rx_label = h;
+}
 
 void
 ProcessProgressDialog::setErrorRegExp (const QRegExp& rx)
-    { _rx_error = rx; }
+{
+  _rx_error = rx;
+}
 
 void
-ProcessProgressDialog::start (QStringList& args) {
+ProcessProgressDialog::start (QStringList& args)
+{
+  _buffer.clear ();
+  _error.clear  ();
 
-    _buffer.clear ();
-    _error.clear  ();
+  _canceled = false;
 
-    _canceled = false;
+  log << args.join (" ") + "\n";
 
-    log << args.join (" ") + "\n";
-
-    show ();
-    _proc.start (args.takeFirst (), args);
-    exec ();
+  show ();
+  _proc.start (args.takeFirst (), args);
+  exec ();
 
 }
 
@@ -82,35 +85,39 @@ void
 ProcessProgressDialog::onProcStarted () { }
 
 void
-ProcessProgressDialog::onProcError (QProcess::ProcessError n) {
-    if (!_canceled) {
-        hide ();
-        NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
-        emit error ();
+ProcessProgressDialog::onProcError (QProcess::ProcessError n)
+{
+  if (!_canceled)
+    {
+      hide ();
+      NomNom::crit (parentWidget (), NomNom::to_process_errmsg (n));
+      emit error ();
     }
-    cancel ();
+  cancel ();
 }
 
 void
-ProcessProgressDialog::onProcReadyRead () {
+ProcessProgressDialog::onProcReadyRead ()
+{
+  static char data[1024];
 
-    static char data[1024];
+  while (_proc.readLine (data, sizeof (data)))
+    {
 
-    while (_proc.readLine (data, sizeof (data))) {
+      QString ln = QString::fromLocal8Bit (data);
 
-        QString ln = QString::fromLocal8Bit (data);
+      _buffer += ln;
+      log     << ln;
 
-        _buffer += ln;
-        log     << ln;
+      QHashIterator<QString, QRegExp> i (_rx_label);
 
-        QHashIterator<QString, QRegExp> i (_rx_label);
+      while (i.hasNext ())
+        {
 
-        while (i.hasNext ()) {
+          i.next ();
 
-            i.next ();
-
-            if (i.value ().indexIn (ln) != -1)
-                setLabelText (i.key ());
+          if (i.value ().indexIn (ln) != -1)
+            setLabelText (i.key ());
 
         }
 
@@ -120,38 +127,40 @@ ProcessProgressDialog::onProcReadyRead () {
 
 void
 ProcessProgressDialog::onProcFinished (
-    int exitCode,
-    QProcess::ExitStatus exitStatus)
+  int exitCode,
+  QProcess::ExitStatus exitStatus)
 {
-    if (exitStatus == QProcess::NormalExit && exitCode == 0)
-        emit finished (_buffer);
+  if (exitStatus == QProcess::NormalExit && exitCode == 0)
+    emit finished (_buffer);
 
-    else {
+  else
+    {
 
-        if (!_canceled) {
+      if (!_canceled)
+        {
 
-            QString err = _buffer;
+          QString err = _buffer;
 
-            if (_rx_error.indexIn (_buffer) != -1)
-                err = "error: " + _rx_error.cap (1).simplified ();
+          if (_rx_error.indexIn (_buffer) != -1)
+            err = "error: " + _rx_error.cap (1).simplified ();
 
-            hide ();
-            NomNom::crit (parentWidget (), err);
+          hide ();
+          NomNom::crit (parentWidget (), err);
 
-            emit error ();
+          emit error ();
         }
 
     }
 
-    cancel ();
+  cancel ();
 }
 
 void
-ProcessProgressDialog::onCanceled () {
-    _canceled = true;
-    if (_proc.state () == QProcess::Running)
-        _proc.kill ();
+ProcessProgressDialog::onCanceled ()
+{
+  _canceled = true;
+  if (_proc.state () == QProcess::Running)
+    _proc.kill ();
 }
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

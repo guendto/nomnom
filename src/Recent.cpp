@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -27,34 +27,44 @@ Recent::~Recent () { }
 
 void
 Recent::write () const
-    { QSettings ().setValue(QString("%1/drops").arg(QSETTINGS_GROUP), drops); }
-
-void
-Recent::read () {
-    drops = QSettings ().value (QString ("%1/drops")
-        .arg (QSETTINGS_GROUP))
-        .toStringList ();
+{
+  QSettings ().setValue(QString("%1/drops").arg(QSETTINGS_GROUP), drops);
 }
 
 void
-Recent::append (const QString& s) {
+Recent::read ()
+{
+  drops = QSettings ().value (QString ("%1/drops")
+                              .arg (QSETTINGS_GROUP))
+          .toStringList ();
+}
 
-    drops << s;
+void
+Recent::append (const QString& s)
+{
+  drops << s;
 
-    drops.removeDuplicates ();
+  drops.removeDuplicates ();
 
-    if (drops.size () > maxItems)
-        drops.takeFirst ();
+  if (drops.size () > maxItems)
+    drops.takeFirst ();
 }
 
 Recent&
-Recent::operator<<(const QString& s) {
-    append (s);
-    return *this;
+Recent::operator<<(const QString& s)
+{
+  append (s);
+  return *this;
 }
 
-QStringList Recent::toStringList () const { return drops; }
-void        Recent::clear        ()       { drops.clear (); }
+QStringList Recent::toStringList () const
+{
+  return drops;
+}
 
+void Recent::clear ()
+{
+  drops.clear ();
+}
 
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

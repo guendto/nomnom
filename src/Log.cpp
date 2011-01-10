@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -24,26 +24,31 @@ Log::Log  () { }
 Log::~Log () { }
 
 Log&
-Log::operator<<(const QString& s) {
-
-    if (s.simplified ().isEmpty ())
-        return *this;
-
-    if (_data.length () > 32*1024)
-        _data.clear ();
-
-    QDateTime dt = QDateTime::currentDateTime ();
-
-    _data += dt.toString ("hh:mm:ss: ") + s;
-
-    if (!s.endsWith ("\n"))
-        _data += "\n";
-
+Log::operator<<(const QString& s)
+{
+  if (s.simplified ().isEmpty ())
     return *this;
+
+  if (_data.length () > 32*1024)
+    _data.clear ();
+
+  QDateTime dt = QDateTime::currentDateTime ();
+
+  _data += dt.toString ("hh:mm:ss: ") + s;
+
+  if (!s.endsWith ("\n"))
+    _data += "\n";
+
+  return *this;
 }
 
-const QString& Log::data () const { return _data; }
-void          Log::clear ()       { _data.clear (); }
+const QString& Log::data () const
+{
+  return _data;
+}
+void          Log::clear ()
+{
+  _data.clear ();
+}
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

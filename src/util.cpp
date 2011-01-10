@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -38,462 +38,485 @@ extern QStringList qmLangNames;
 extern NomNom::FeedHash feed;
 extern Log log;
 
-namespace NomNom {
+namespace NomNom
+{
 
 void
 restore_size (
-    QSettings& s,
-    QWidget *w,
-    const QString& g,
-    const QSize& defaultSize/*=(400,350)*/)
+  QSettings& s,
+  QWidget *w,
+  const QString& g,
+  const QSize& defaultSize/*=(400,350)*/)
 {
-    w->resize (s.value (QString ("%1/size").arg (g), defaultSize).toSize ());
+  w->resize (s.value (QString ("%1/size").arg (g), defaultSize).toSize ());
 }
 
 void
 restore_pos (
-    QSettings& s,
-    QWidget *w,
-    const QString& g,
-    const QPoint& defaultPos/*=(200,200)*/)
+  QSettings& s,
+  QWidget *w,
+  const QString& g,
+  const QPoint& defaultPos/*=(200,200)*/)
 {
-    w->move (s.value (QString ("%1/pos").arg (g), defaultPos).toPoint ());
+  w->move (s.value (QString ("%1/pos").arg (g), defaultPos).toPoint ());
 }
 
 void
 save_size (QSettings& s, QWidget *w, const QString& g)
-    { s.setValue (QString ("%1/size").arg (g), w->size ()); }
+{
+  s.setValue (QString ("%1/size").arg (g), w->size ());
+}
 
 void
 save_pos (QSettings& s, QWidget *w, const QString& g)
-    { s.setValue (QString ("%1/pos").arg (g), w->pos ()); }
-
-void
-info (QWidget *p, const QString& m) {
-    p->show (); // Make sure window is not hidden (e.g. minimized to tray).
-    p->showNormal ();
-    QMessageBox::information (p, QCoreApplication::applicationName(), m);
+{
+  s.setValue (QString ("%1/pos").arg (g), w->pos ());
 }
 
 void
-crit (QWidget *p, const QString& m) {
-    p->show (); // See `info' function above.
-    p->showNormal ();
-    QMessageBox::critical (p, QCoreApplication::applicationName (), m);
+info (QWidget *p, const QString& m)
+{
+  p->show (); // Make sure window is not hidden (e.g. minimized to tray).
+  p->showNormal ();
+  QMessageBox::information (p, QCoreApplication::applicationName(), m);
+}
+
+void
+crit (QWidget *p, const QString& m)
+{
+  p->show (); // See `info' function above.
+  p->showNormal ();
+  QMessageBox::critical (p, QCoreApplication::applicationName (), m);
 }
 
 QMessageBox::StandardButton
-ask (QWidget *p, const QString& m, QMessageBox::StandardButtons b/*=Yes|No*/) {
-    p->show (); // See `info' function above.
-    p->showNormal ();
-    return QMessageBox::question(p, QCoreApplication::applicationName(), m, b);
+ask (QWidget *p, const QString& m, QMessageBox::StandardButtons b/*=Yes|No*/)
+{
+  p->show (); // See `info' function above.
+  p->showNormal ();
+  return QMessageBox::question(p, QCoreApplication::applicationName(), m, b);
 }
 
 static QFileInfoList
-scan_dir (const QString path, const bool show_paths) {
+scan_dir (const QString path, const bool show_paths)
+{
+  const QDir dir (QDir::toNativeSeparators (path));
 
-    const QDir dir (QDir::toNativeSeparators (path));
+  if (show_paths)
+    qDebug () << dir.absolutePath ();
 
-    if (show_paths)
-        qDebug () << dir.absolutePath ();
-
-    return dir.entryInfoList (QStringList( "*.qm"), QDir::Files);
+  return dir.entryInfoList (QStringList( "*.qm"), QDir::Files);
 }
 
 QMap<QString,QString>
-find_qm (QStringList& langNames) {
+find_qm (QStringList& langNames)
+{
+  QSettings s;
 
-    QSettings s;
+  bool show_paths = false;
 
-    bool show_paths = false;
+  const QString qmShowPaths = "qmShowPaths";
+  if (s.contains (qmShowPaths))
+    show_paths = s.value (qmShowPaths).toBool ();
 
-    const QString qmShowPaths = "qmShowPaths";
-    if (s.contains (qmShowPaths))
-        show_paths = s.value (qmShowPaths).toBool ();
+  if (show_paths)
+    qDebug () << "qm search paths:";
 
-    if (show_paths)
-        qDebug () << "qm search paths:";
+  QStringList paths;
 
-    QStringList paths;
+  const QString qmPath = "qmPath";
+  if (s.contains (qmPath))
+    paths << s.value (qmPath).toString ();
 
-    const QString qmPath = "qmPath";
-    if (s.contains (qmPath))
-        paths << s.value (qmPath).toString ();
-
-    paths
-        << QDir::currentPath () + "/tr"
-        << QDir::homePath () + "/.config/nomnom/tr"
-        << QDir::homePath () + "/.local/share/nomnom/tr"
+  paths
+      << QDir::currentPath () + "/tr"
+      << QDir::homePath () + "/.config/nomnom/tr"
+      << QDir::homePath () + "/.local/share/nomnom/tr"
 #ifdef INSTALL_PREFIX
-        << QString (INSTALL_PREFIX) + "/share/nomnom/tr"
+      << QString (INSTALL_PREFIX) + "/share/nomnom/tr"
 #endif
-        ;
+      ;
 
-    QFileInfoList lst;
+  QFileInfoList lst;
 
-    foreach (QString p, paths)
-        lst << scan_dir (p, show_paths);
+  foreach (QString p, paths)
+  lst << scan_dir (p, show_paths);
 
-    QMap<QString,QString> map;
-    QTranslator t;
+  QMap<QString,QString> map;
+  QTranslator t;
 
-    foreach (QFileInfo fi, lst) {
+  foreach (QFileInfo fi, lst)
+  {
 
-        t.load (fi.filePath ());
+    t.load (fi.filePath ());
 
-        const QString langName = t.translate ("MainWindow", "English");
+    const QString langName = t.translate ("MainWindow", "English");
 
-        if (map.contains (langName)) { // Skip duplicates.
-            if (map[langName] == fi.filePath ())
-                continue;
-        }
+    if (map.contains (langName))   // Skip duplicates.
+      {
+        if (map[langName] == fi.filePath ())
+          continue;
+      }
 
-        map[langName] = fi.filePath ();
+    map[langName] = fi.filePath ();
 
-        langNames << langName;
-    }
+    langNames << langName;
+  }
 
-    return map;
+  return map;
 }
 
 bool
-choose_lang (QWidget *p, QString& langName) {
+choose_lang (QWidget *p, QString& langName)
+{
+  bool showPaths = false;
+  QStringList langNamesWithPaths;
 
-    bool showPaths = false;
-    QStringList langNamesWithPaths;
+  const QString key = "qmShowPaths";
+  QSettings s;
 
-    const QString key = "qmShowPaths";
-    QSettings s;
+  if (s.contains (key))
+    {
 
-    if (s.contains (key)) {
+      showPaths = s.value (key).toBool ();
 
-        showPaths = s.value (key).toBool ();
+      if (showPaths)
+        {
 
-        if (showPaths) {
+          langNamesWithPaths << "English [default, built-in]";
 
-            langNamesWithPaths << "English [default, built-in]";
+          QMapIterator<QString,QString> iter (qmFiles);
 
-            QMapIterator<QString,QString> iter (qmFiles);
+          while (iter.hasNext ())
+            {
 
-            while (iter.hasNext ()) {
+              iter.next ();
 
-                iter.next ();
-
-                langNamesWithPaths << QString ("%1 [%2]")
-                    .arg (iter.key ())
-                    .arg (iter.value ());
+              langNamesWithPaths << QString ("%1 [%2]")
+                                 .arg (iter.key ())
+                                 .arg (iter.value ());
             }
 
         }
     }
 
-    bool ok  = false;
+  bool ok  = false;
 
-    langName = QInputDialog::getItem (
-        p,
-        QObject::tr ("Select language"),
-        QObject::tr ("Language:"),
-        showPaths ? langNamesWithPaths : qmLangNames,
-        0,
-        false,
-        &ok
-    );
+  langName = QInputDialog::getItem (
+               p,
+               QObject::tr ("Select language"),
+               QObject::tr ("Language:"),
+               showPaths ? langNamesWithPaths : qmLangNames,
+               0,
+               false,
+               &ok
+             );
 
-    langName = langName.split ("[")[0].simplified ();
+  langName = langName.split ("[")[0].simplified ();
 
-    return ok;
+  return ok;
 }
 
 QTranslator*
-load_qm () {
+load_qm ()
+{
+  QString langName;
 
-    QString langName;
+  QSettings s;
+  if (s.contains("language"))
+    {
+      const QString v = s.value("language").toString();
 
-    QSettings s;
-    if (s.contains("language")) {
-        const QString v = s.value("language").toString();
+      if (v == "English")
+        return NULL;
 
-        if (v == "English")
-            return NULL;
-
-        if (qmFiles.contains(v))
-            langName = v;
+      if (qmFiles.contains(v))
+        langName = v;
     }
 
-    if (langName.isEmpty()) {
-        if (!choose_lang(NULL, langName))
-            return NULL;
+  if (langName.isEmpty())
+    {
+      if (!choose_lang(NULL, langName))
+        return NULL;
     }
 
-    s.setValue("language", langName);
+  s.setValue("language", langName);
 
-    QTranslator *t = new QTranslator;
-    t->load(qmFiles[langName]);
+  QTranslator *t = new QTranslator;
+  t->load(qmFiles[langName]);
 
-    return t;
+  return t;
 }
 
 bool
-parse_quvi_version (const QString& path, QString& output) {
+parse_quvi_version (const QString& path, QString& output)
+{
+  output.clear ();
 
-    output.clear ();
+  // Use command path (arg0) and "--version" only.
 
-    // Use command path (arg0) and "--version" only.
+  QStringList args =
+    QStringList () << path.split (" ").takeFirst () << "--version";
 
-    QStringList args =
-        QStringList () << path.split (" ").takeFirst () << "--version";
+  log << args.join (" ");
 
-    log << args.join (" ");
+  const QString cmdPath = args.takeFirst ();
 
-    const QString cmdPath = args.takeFirst ();
+  QProcess proc;
+  proc.setProcessChannelMode (QProcess::MergedChannels);
+  proc.start (cmdPath, args);
 
-    QProcess proc;
-    proc.setProcessChannelMode (QProcess::MergedChannels);
-    proc.start (cmdPath, args);
+  if (!proc.waitForFinished ())
+    {
 
-    if (!proc.waitForFinished ()) {
+      output =
+        QObject::tr ("error: %1: %2")
+        .arg (cmdPath)
+        .arg (proc.errorString ());
 
-        output =
-            QObject::tr ("error: %1: %2")
-                .arg (cmdPath)
-                .arg (proc.errorString ());
-
-        return false;
+      return false;
     }
 
-    output = QString::fromLocal8Bit (proc.readAll ()).simplified ();
+  output = QString::fromLocal8Bit (proc.readAll ()).simplified ();
 
-    return true;
+  return true;
 }
 
 bool
-parse_quvi_support (const QString& path, QString& errmsg) {
+parse_quvi_support (const QString& path, QString& errmsg)
+{
+  errmsg.clear ();
 
-    errmsg.clear ();
+  // Use command path (arg0) and "--support" only.
 
-    // Use command path (arg0) and "--support" only.
+  QStringList args =
+    QStringList () << path.split (" ").takeFirst () << "--support";
 
-    QStringList args =
-        QStringList () << path.split (" ").takeFirst () << "--support";
+  log << args.join (" ");
 
-    log << args.join (" ");
+  const QString cmdPath = args.takeFirst ();
 
-    const QString cmdPath = args.takeFirst ();
+  QProcess proc;
+  proc.setProcessChannelMode(QProcess::MergedChannels);
+  proc.start(cmdPath, args);
 
-    QProcess proc;
-    proc.setProcessChannelMode(QProcess::MergedChannels);
-    proc.start(cmdPath, args);
+  if (!proc.waitForFinished())
+    {
 
-    if (!proc.waitForFinished()) {
+      errmsg =
+        QObject::tr("error: %1: %2")
+        .arg(cmdPath)
+        .arg(proc.errorString ());
 
-        errmsg =
-            QObject::tr("error: %1: %2")
-                .arg(cmdPath)
-                .arg(proc.errorString ());
-
-        return false;
+      return false;
     }
 
-    const QRegExp re("(.*)\\s+(.*)$");
+  const QRegExp re("(.*)\\s+(.*)$");
 
-    const QString output =
-        QString::fromLocal8Bit(proc.readAll());
+  const QString output =
+    QString::fromLocal8Bit(proc.readAll());
 
-    foreach (QString ln, output.split("\n")) {
+  foreach (QString ln, output.split("\n"))
+  {
 
-        if (ln.isEmpty())
-            continue;
+    if (ln.isEmpty())
+      continue;
 
-        log << ln;
+    log << ln;
 
-        if (re.indexIn(ln) != -1) {
+    if (re.indexIn(ln) != -1)
+      {
 
-            const QString host  = re.cap (1).simplified ();
-            QStringList formats = re.cap (2).simplified ().split ("|");
+        const QString host  = re.cap (1).simplified ();
+        QStringList formats = re.cap (2).simplified ().split ("|");
 
-            // Keep "default" at the beginning of the list.
+        // Keep "default" at the beginning of the list.
 
-            const QString top = formats.takeFirst ();
-            formats.sort ();
-            formats.prepend (top);
+        const QString top = formats.takeFirst ();
+        formats.sort ();
+        formats.prepend (top);
 
-            hosts[host] = formats;
-        }
-    }
+        hosts[host] = formats;
+      }
+  }
 
-    return true;
+  return true;
 }
 
 static bool
 filter_title (
-    QWidget *p,
-    const QString& user_regexp,
-    const QString& title,
-    QString& dst)
+  QWidget *p,
+  const QString& user_regexp,
+  const QString& title,
+  QString& dst)
 {
-    QString pattern;
+  QString pattern;
 
-    bool g = false;
-    bool i = false;
+  bool g = false;
+  bool i = false;
 
-    QRegExp rx("^\\/(.*)\\/(.*)$");
+  QRegExp rx("^\\/(.*)\\/(.*)$");
 
-    if (rx.indexIn (user_regexp) != -1) {
-        pattern = rx.cap (1);
-        g = rx.cap (2).contains ("g");
-        i = rx.cap (2).contains ("i");
+  if (rx.indexIn (user_regexp) != -1)
+    {
+      pattern = rx.cap (1);
+      g = rx.cap (2).contains ("g");
+      i = rx.cap (2).contains ("i");
     }
-    else {
-        NomNom::crit (p,
-QObject::tr ("Expected Perl-style regular expression, e.g. /pattern/flags"));
-        return false;
-    }
-
-    rx.setPattern (pattern);
-
-    rx.setCaseSensitivity (
-        i
-        ? Qt::CaseInsensitive
-        : Qt::CaseSensitive
-    );
-
-    int pos = 0;
-
-    while ( (pos = rx.indexIn (title, pos)) != -1) {
-        dst += rx.cap (1);
-        pos += rx.matchedLength ();
-        if (!g) break;
+  else
+    {
+      NomNom::crit (p,
+                    QObject::tr ("Expected Perl-style regular expression, e.g. /pattern/flags"));
+      return false;
     }
 
-    dst = dst.simplified ();
+  rx.setPattern (pattern);
 
-    return true;
+  rx.setCaseSensitivity (
+    i
+    ? Qt::CaseInsensitive
+    : Qt::CaseSensitive
+  );
+
+  int pos = 0;
+
+  while ( (pos = rx.indexIn (title, pos)) != -1)
+    {
+      dst += rx.cap (1);
+      pos += rx.matchedLength ();
+      if (!g) break;
+    }
+
+  dst = dst.simplified ();
+
+  return true;
 }
 
 bool
 format_filename (
-    QWidget *p,
-    const QString& user_regexp,
-    const QString& title,
-    const QString& suffix,
-    const QString& host,
-    const QString& id,
-    QString& dst)
+  QWidget *p,
+  const QString& user_regexp,
+  const QString& title,
+  const QString& suffix,
+  const QString& host,
+  const QString& id,
+  QString& dst)
 {
-    // Assumes dst to contain the "filename format".
+  // Assumes dst to contain the "filename format".
 
-    QString filtered_title;
+  QString filtered_title;
 
-    const bool ok = filter_title (
-        p,
-        user_regexp,
-        title,
-        filtered_title
-    );
+  const bool ok = filter_title (
+                    p,
+                    user_regexp,
+                    title,
+                    filtered_title
+                  );
 
-    if (!ok)
-        return ok;
+  if (!ok)
+    return ok;
 
-    dst.replace ("%t", filtered_title);
-    dst.replace ("%s", suffix);
-    dst.replace ("%h", host);
-    dst.replace ("%i", id);
+  dst.replace ("%t", filtered_title);
+  dst.replace ("%s", suffix);
+  dst.replace ("%h", host);
+  dst.replace ("%i", id);
 
-    dst = dst.simplified ();
+  dst = dst.simplified ();
 
-    return true;
+  return true;
 }
 
 QString
-to_process_errmsg (QProcess::ProcessError n) {
+to_process_errmsg (QProcess::ProcessError n)
+{
+  QString e;
 
-    QString e;
-
-    switch (n) {
+  switch (n)
+    {
 
     case QProcess::FailedToStart:
-        e = QObject::tr (
+      e = QObject::tr (
             "The process failed to start. "
             "Either the invoked program is missing, or you may have "
             "insufficient permissions to invoke the program."
-        );
-        break;
+          );
+      break;
 
     case QProcess::Crashed:
-        e = QObject::tr (
+      e = QObject::tr (
             "The process crashed some time after starting successfully."
-        );
-        break;
+          );
+      break;
 
     case QProcess::Timedout:
-        e = QObject::tr (
+      e = QObject::tr (
             "The last waitFor...() function timed out. "
             "The state of QProcess is unchanged, and you can try calling "
             "waitFor...() again."
-        );
-        break;
+          );
+      break;
 
     case QProcess::WriteError:
-        e = QObject::tr (
+      e = QObject::tr (
             "An error occurred when attempting to write to the process. "
             "For example, the process may not be running, or it may have closed "
             "its input channel."
-        );
-        break;
+          );
+      break;
 
     case QProcess::ReadError:
-        e = QObject::tr (
+      e = QObject::tr (
             "An error occurred when attempting to read from the process. "
             "For example, the process may not be running."
-        );
-        break;
+          );
+      break;
 
     case QProcess::UnknownError:
     default:
-        e = QObject::tr (
+      e = QObject::tr (
             "An unknown error occurred. This is the default return value "
             "of error()."
-        );
-        break;
+          );
+      break;
 
     }
 
-    return e;
+  return e;
 }
 
 bool
-choose_from_feed (QWidget *parent, QString& dst) {
+choose_from_feed (QWidget *parent, QString& dst)
+{
+  if (feed.isEmpty ())
+    return false;
 
-    if (feed.isEmpty ())
-        return false;
+  QHashIterator<QString,QString> i (feed);
+  QStringList items;
 
-    QHashIterator<QString,QString> i (feed);
-    QStringList items;
-
-    while (i.hasNext ()) {
-        i.next ();
-        items << i.key ();
+  while (i.hasNext ())
+    {
+      i.next ();
+      items << i.key ();
     }
 
-    bool ok = false;
+  bool ok = false;
 
-    QString title = QInputDialog::getItem (
-        parent,
-        QObject::tr ("Choose video"),
-        QObject::tr ("Video"),
-        items,
-        0,
-        false,
-        &ok
-    );
+  QString title = QInputDialog::getItem (
+                    parent,
+                    QObject::tr ("Choose video"),
+                    QObject::tr ("Video"),
+                    items,
+                    0,
+                    false,
+                    &ok
+                  );
 
-    if (ok)
-        dst = feed[title];
+  if (ok)
+    dst = feed[title];
 
-    return ok;
+  return ok;
 }
 
 } // End of namespace.
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

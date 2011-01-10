@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -31,47 +31,47 @@
 
 #include "ui_MainWindow.h"
 
-class MainWindow : public QMainWindow, private Ui::MainWindow {
-    Q_OBJECT
+class MainWindow : public QMainWindow, private Ui::MainWindow
+{
+  Q_OBJECT
 public:
-    MainWindow  ();
+  MainWindow  ();
 protected:
-    void showEvent      (QShowEvent*);
-    void hideEvent      (QHideEvent*);
-    void closeEvent     (QCloseEvent*);
-    void dragEnterEvent (QDragEnterEvent*);
-    void dropEvent      (QDropEvent*);
+  void showEvent      (QShowEvent*);
+  void hideEvent      (QHideEvent*);
+  void closeEvent     (QCloseEvent*);
+  void dragEnterEvent (QDragEnterEvent*);
+  void dropEvent      (QDropEvent*);
 private:
-    void createContextMenu  ();
-    void createTray         ();
-    void readSettings       ();
-    void handleURL          (const QString&);
-    bool parseOK            ();
-    void streamVideo        ();
-    void downloadVideo      ();
-    void changeProgramIcon  ();
+  void createContextMenu  ();
+  void createTray         ();
+  void readSettings       ();
+  void handleURL          (const QString&);
+  bool parseOK            ();
+  void streamVideo        ();
+  void downloadVideo      ();
+  void changeProgramIcon  ();
 private slots:
-    // UI
-    void onTrayActivated(QSystemTrayIcon::ActivationReason);
-    void onPreferences  ();
-    void onAddress      ();
-    void onFeed         ();
-    void onAbout        ();
-    void onRecent       ();
-    void onLog          ();
-    // quvi.
-    void onProcFinished (QString);
+  // UI
+  void onTrayActivated(QSystemTrayIcon::ActivationReason);
+  void onPreferences  ();
+  void onAddress      ();
+  void onFeed         ();
+  void onAbout        ();
+  void onRecent       ();
+  void onLog          ();
+  // quvi.
+  void onProcFinished (QString);
 private:
-    QPointer<ProcessProgressDialog> proc;
-    QPointer<QSystemTrayIcon> trayIcon;
-    QPointer<DownloadDialog> download;
-    QHash<QString,QAction*> actions;
-    QPointer<QMenu> trayMenu;
-    QPointer<Video> video;
-    QString json;
+  QPointer<ProcessProgressDialog> proc;
+  QPointer<QSystemTrayIcon> trayIcon;
+  QPointer<DownloadDialog> download;
+  QHash<QString,QAction*> actions;
+  QPointer<QMenu> trayMenu;
+  QPointer<Video> video;
+  QString json;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

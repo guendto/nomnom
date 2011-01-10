@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,27 +20,27 @@
 
 #include "ui_Reminder.h"
 
-class Reminder : public QDialog, private Ui::Reminder {
-    Q_OBJECT
+class Reminder : public QDialog, private Ui::Reminder
+{
+  Q_OBJECT
 public:
-    Reminder(QWidget *parent, const QString& group);
+  Reminder(QWidget *parent, const QString& group);
 public:
-    bool conditionalExec();
+  bool conditionalExec();
 protected:
-    void done(int);
-    void closeEvent(QCloseEvent*);
+  void done(int);
+  void closeEvent(QCloseEvent*);
 private slots:
-    // UI
-    void onNext ();
+  // UI
+  void onNext ();
 private:
-    QString showReminderKey;
-    QString firstRunKey;
-    bool showReminder;
-    size_t currTip;
-    bool firstRun;
+  QString showReminderKey;
+  QString firstRunKey;
+  bool showReminder;
+  size_t currTip;
+  bool firstRun;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

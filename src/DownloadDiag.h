@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -23,27 +23,27 @@
 
 #include "Video.h"
 
-class DownloadDialog : public QProgressDialog {
-    Q_OBJECT
+class DownloadDialog : public QProgressDialog
+{
+  Q_OBJECT
 public:
-    DownloadDialog (QWidget *parent=NULL);
+  DownloadDialog (QWidget *parent=NULL);
 public:
-    void start (const QString&, const QString&, Video*);
+  void start (const QString&, const QString&, Video*);
 signals:
-    void error ();
+  void error ();
 private slots:
-    void onCurlStarted   ();
-    void onCurlError     (QProcess::ProcessError);
-    void onCurlReadyRead ();
-    void onCurlFinished  (int, QProcess::ExitStatus);
-    void onCanceled      ();
+  void onCurlStarted   ();
+  void onCurlError     (QProcess::ProcessError);
+  void onCurlReadyRead ();
+  void onCurlFinished  (int, QProcess::ExitStatus);
+  void onCanceled      ();
 private:
-    QString _lastError;
-    QProcess _proc;
-    bool _canceled;
+  QString _lastError;
+  QProcess _proc;
+  bool _canceled;
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

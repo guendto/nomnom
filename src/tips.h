@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,8 @@
 #ifndef nomnom_tips_h
 #define nomnom_tips_h
 
-namespace NomNom {
+namespace NomNom
+{
 
 QString
 next_tip (size_t&);
@@ -30,5 +31,4 @@ get_tip (size_t& n, const bool first=false);
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

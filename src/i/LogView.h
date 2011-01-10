@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -20,19 +20,19 @@
 
 #include "ui_LogView.h"
 
-class LogView : public QDialog, private Ui::LogView {
-    Q_OBJECT
-public: 
-    LogView (QWidget*);
+class LogView : public QDialog, private Ui::LogView
+{
+  Q_OBJECT
+public:
+  LogView (QWidget*);
 private slots:
-    // UI.
-    void onClear ();
+  // UI.
+  void onClear ();
 protected:
-    void done (int);
-    void closeEvent (QCloseEvent*);
+  void done (int);
+  void closeEvent (QCloseEvent*);
 };
 
 #endif
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

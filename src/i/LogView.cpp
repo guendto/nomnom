@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -30,40 +30,43 @@ extern Log log;
 // Ctor.
 
 LogView::LogView (QWidget *parent)
-    : QDialog (parent)
+  : QDialog (parent)
 {
-    setupUi (this);
+  setupUi (this);
 
-    textBrowser->setText (log.data ());
+  textBrowser->setText (log.data ());
 
-    QSettings s;
-    NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (620,375));
+  QSettings s;
+  NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (620,375));
 }
 
 // Slot: clear.
 
 void
-LogView::onClear () {
-    log.clear ();
-    log << tr ("Log cleared.");
-    textBrowser->setText (log.data ());
+LogView::onClear ()
+{
+  log.clear ();
+  log << tr ("Log cleared.");
+  textBrowser->setText (log.data ());
 }
 
 // Done. QDialog and closeEvent design glitch workaround.
 
 void
-LogView::done (int r) {
-    QSettings s;
-    NomNom::save_size (s, this, QSETTINGS_GROUP);
-    QDialog::done (r);
-    close ();
+LogView::done (int r)
+{
+  QSettings s;
+  NomNom::save_size (s, this, QSETTINGS_GROUP);
+  QDialog::done (r);
+  close ();
 }
 
 // Close.
 
 void
 LogView::closeEvent (QCloseEvent *e)
-    { QDialog::closeEvent (e); }
+{
+  QDialog::closeEvent (e);
+}
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:

@@ -1,4 +1,4 @@
-/* 
+/*
 * Copyright (C) 2010 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
@@ -51,58 +51,57 @@ Log log;
 NomNom::FeedHash feed;
 
 int
-main (int argc, char *argv[]) {
+main (int argc, char *argv[])
+{
+  qsrand (time (NULL));
 
-    qsrand (time (NULL));
-
-    QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
 #define APPNAME   "NomNom"
 #define APPDOMAIN "nomnom.sourceforge.net"
 
-    QCoreApplication::setOrganizationName   (APPNAME);
-    QCoreApplication::setOrganizationDomain (APPDOMAIN);
-    QCoreApplication::setApplicationName    (APPNAME);
-    QCoreApplication::setApplicationVersion (VERSION_LONG);
+  QCoreApplication::setOrganizationName   (APPNAME);
+  QCoreApplication::setOrganizationDomain (APPDOMAIN);
+  QCoreApplication::setApplicationName    (APPNAME);
+  QCoreApplication::setApplicationVersion (VERSION_LONG);
 
 #ifdef _0
-    qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    qDebug() << "qt_"+QLocale::system().name();
+  qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  qDebug() << "qt_"+QLocale::system().name();
 #endif
 
-    // Load qt translation, chosen based on the system locale setting.
+  // Load qt translation, chosen based on the system locale setting.
 
-    QTranslator qtTr;
+  QTranslator qtTr;
 
-    qtTr.load("qt_" + QLocale::system().name(),
-        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  qtTr.load("qt_" + QLocale::system().name(),
+            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 
-    app.installTranslator(&qtTr);
+  app.installTranslator(&qtTr);
 
-    // Load NomNom translation, chosen based on user definition.
+  // Load NomNom translation, chosen based on user definition.
 
-    //: "English" is the default language. This string is not intended to be translated.
-    qmLangNames << QObject::tr ("English");
-    qmFiles = NomNom::find_qm(qmLangNames);
+  //: "English" is the default language. This string is not intended to be translated.
+  qmLangNames << QObject::tr ("English");
+  qmFiles = NomNom::find_qm(qmLangNames);
 
-    QTranslator *t = NomNom::load_qm();
-    if (t) QCoreApplication::installTranslator(t);
+  QTranslator *t = NomNom::load_qm();
+  if (t) QCoreApplication::installTranslator(t);
 
 #ifdef _0
-    // Read preferences. Done in MainWindow ctor.
-    shPrefs.read();
+  // Read preferences. Done in MainWindow ctor.
+  shPrefs.read();
 #endif
 
-    // Read recent.
+  // Read recent.
 
-    recent.read();
+  recent.read();
 
-    // Show main window.
+  // Show main window.
 
-    (new MainWindow)->show();
+  (new MainWindow)->show();
 
-    return app.exec();
+  return app.exec();
 }
 
-
-// vim: set ts=4 sw=4 tw=72 expandtab:
+// vim: set ts=2 sw=2 tw=72 expandtab:
