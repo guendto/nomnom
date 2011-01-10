@@ -64,7 +64,7 @@ p, li { white-space: pre-wrap; }
         <translation>Ohjelma tukee seuraavia sivustoja:</translation>
     </message>
     <message>
-        <location filename="../src/i/About.cpp" line="50"/>
+        <location filename="../src/i/About.cpp" line="51"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
@@ -77,7 +77,7 @@ p, li { white-space: pre-wrap; }
         <translation>Aloitetaan kopiointi...</translation>
     </message>
     <message>
-        <location filename="../src/DownloadDiag.cpp" line="136"/>
+        <location filename="../src/DownloadDiag.cpp" line="140"/>
         <source>Copying at %1, %2</source>
         <translation>Kopioidaan nopeudella %1, %2</translation>
     </message>
@@ -95,7 +95,7 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Tyhjennä</translation>
     </message>
     <message>
-        <location filename="../src/i/LogView.cpp" line="48"/>
+        <location filename="../src/i/LogView.cpp" line="49"/>
         <source>Log cleared.</source>
         <translation>Lokitiedot poistettu.</translation>
     </message>
@@ -206,78 +206,78 @@ p, li { white-space: pre-wrap; }
         <translation>Avaa</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="326"/>
+        <location filename="../src/i/MainWindow.cpp" line="334"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="342"/>
+        <location filename="../src/i/MainWindow.cpp" line="350"/>
         <source>Checking ...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="603"/>
+        <location filename="../src/i/MainWindow.cpp" line="632"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Aiempia tietoja ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="611"/>
+        <location filename="../src/i/MainWindow.cpp" line="640"/>
         <source>Recent URLs</source>
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="612"/>
+        <location filename="../src/i/MainWindow.cpp" line="641"/>
         <source>Select URL:</source>
         <translation>Valitse osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="658"/>
+        <location filename="../src/i/MainWindow.cpp" line="690"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="666"/>
+        <location filename="../src/i/MainWindow.cpp" line="699"/>
         <source>Choose from old results?</source>
         <translation>Valitse aiemmin haetuista tiedoista?</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="273"/>
+        <location filename="../src/i/MainWindow.cpp" line="275"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="292"/>
+        <location filename="../src/i/MainWindow.cpp" line="297"/>
         <source>You must specify path to a stream-capable media player command.</source>
         <translation>Määrittelemätön polku suoratoistoon pystyvään komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="325"/>
+        <location filename="../src/i/MainWindow.cpp" line="333"/>
         <source>Choose format</source>
         <translation>Valitse videomuoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="371"/>
-        <location filename="../src/i/MainWindow.cpp" line="470"/>
+        <location filename="../src/i/MainWindow.cpp" line="382"/>
+        <location filename="../src/i/MainWindow.cpp" line="485"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Toisto-komennon käynnistäminen epäonnistui, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="417"/>
+        <location filename="../src/i/MainWindow.cpp" line="429"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="637"/>
+        <location filename="../src/i/MainWindow.cpp" line="668"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="637"/>
+        <location filename="../src/i/MainWindow.cpp" line="668"/>
         <source>Video URL:</source>
         <translation>Video-osoite:</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="144"/>
+        <location filename="../src/util.cpp" line="153"/>
         <source>English</source>
         <translation>Suomi</translation>
     </message>
@@ -505,17 +505,17 @@ p, li { white-space: pre-wrap; }
         <translation>Kie&amp;li...</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="177"/>
+        <location filename="../src/i/Preferences.cpp" line="188"/>
         <source>Open directory</source>
         <translation>Avaa hakemisto</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="263"/>
+        <location filename="../src/i/Preferences.cpp" line="281"/>
         <source>Images</source>
         <translation>Kuvatiedostot</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="324"/>
+        <location filename="../src/i/Preferences.cpp" line="344"/>
         <source>The language will be changed after you restart NomNom. Restart NomNom?</source>
         <translation>Uusi kieli tulee voimaan ohjelman uudelleen käynnistyessä. Käynnistä ohjelma uudelleen?</translation>
     </message>
@@ -523,63 +523,63 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/util.cpp" line="194"/>
+        <location filename="../src/util.cpp" line="207"/>
         <source>Select language</source>
         <translation>Valitse kieli</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="195"/>
+        <location filename="../src/util.cpp" line="208"/>
         <source>Language:</source>
         <translation>Kieli:</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="257"/>
-        <location filename="../src/util.cpp" line="290"/>
+        <location filename="../src/util.cpp" line="273"/>
+        <location filename="../src/util.cpp" line="307"/>
         <source>error: %1: %2</source>
         <translation>virhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="348"/>
+        <location filename="../src/util.cpp" line="369"/>
         <source>Expected Perl-style regular expression, e.g. /pattern/flags</source>
         <translation>Käytä Perl-tyylistä regular expression rakennetta, esim. /pattern/flags</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="415"/>
+        <location filename="../src/util.cpp" line="438"/>
         <source>The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.</source>
         <translation>Komennon suorittaminen epäonnistui. Tarkasta ohjelman polku ja käyttöoikeudet ohjelmaan.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="423"/>
+        <location filename="../src/util.cpp" line="446"/>
         <source>The process crashed some time after starting successfully.</source>
         <translation>Ohjelman suoritus keskeytyi sen käynnistämisen jälkeen.</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="429"/>
+        <location filename="../src/util.cpp" line="452"/>
         <source>The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="437"/>
+        <location filename="../src/util.cpp" line="460"/>
         <source>An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="445"/>
+        <location filename="../src/util.cpp" line="468"/>
         <source>An error occurred when attempting to read from the process. For example, the process may not be running.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="453"/>
+        <location filename="../src/util.cpp" line="476"/>
         <source>An unknown error occurred. This is the default return value of error().</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="482"/>
+        <location filename="../src/util.cpp" line="506"/>
         <source>Choose video</source>
         <translation>Valitse video</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="483"/>
+        <location filename="../src/util.cpp" line="507"/>
         <source>Video</source>
         <translation></translation>
     </message>
@@ -590,7 +590,7 @@ p, li { white-space: pre-wrap; }
         <translation>Suomi</translation>
     </message>
     <message>
-        <location filename="../src/i/Preferences.cpp" line="137"/>
+        <location filename="../src/i/Preferences.cpp" line="140"/>
         <source>Browse</source>
         <translation>Selaa</translation>
     </message>
@@ -616,57 +616,57 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Tips</name>
     <message>
-        <location filename="../src/tips.cpp" line="30"/>
+        <location filename="../src/tips.cpp" line="31"/>
         <source>&lt;p&gt;Looks like you are running NomNom for the first time.&lt;/p&gt;&lt;p&gt;Please make sure you have installed quvi(1) and curl(1) commands to your system. You will also need a streaming capable media player, e.g. vlc(1).&lt;/p&gt;&lt;p&gt;Open the Preferences (Ctrl+E) and check that the paths to these commands have been specified correctly. NomNom will need these commands to work properly.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Ohjelmaa suoritetaan ensimmäistä kertaa.&lt;/p&gt;&lt;p&gt;Ole hyvä ja avaa ohjelman asetukset (Ctrl+E), ja varmista, että polut quv(1)i- ja curl(1) -komentoihin ovat määritelty oikein.&lt;p&gt;Tarkasta myös, että polku suoratoistoon kykenevään media-toistimeen on määritely oikein. Voit käyttää esimerkiksi vlc-ohjelmaa tähän tarkoitukseen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="39"/>
+        <location filename="../src/tips.cpp" line="40"/>
         <source>Right-click opens the context-menu.</source>
         <translation>Hiiren oikeanpuolimmainen painallus ikkunaan avaa ohjelma-valikon.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="42"/>
+        <location filename="../src/tips.cpp" line="43"/>
         <source>You can drag and drop video page URLs onto the window to start the download (or streaming).</source>
         <translation>Voit pudottaa video linkkejä suoraan ohjelman ikkunaan aloittaaksesi kopioinnin (tai suoratoiston).</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="46"/>
+        <location filename="../src/tips.cpp" line="47"/>
         <source>You can make NomNom &quot;hover&quot; over the other windows. Check the &quot;Stay on top&quot; in the Preferences.</source>
         <translation>Voit asettaa ohjelman pysymään muiden ikkunoiden yläpuolella. Varmista, että &quot;Pysy muiden ikkunoiden yläpuolella&quot; on valittu ohjelman asetuksissa (Ctrl+E).</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="50"/>
+        <location filename="../src/tips.cpp" line="51"/>
         <source>You can set NomNom to either &quot;Download&quot; or &quot;Stream&quot; the media. When you choose &quot;Stream&quot;, open the preferences (Ctrl+E) and make sure that you have specified the path to a player command (that is capable of streaming media).</source>
         <translation>Voit valita ohjelman kopioimaan tai suoratoistamaan. Jos valitset &quot;Suoratoista&quot;, varmista, että ohjelman asetuksissa on määritelty polku toisto-komentoon, joka tukee suoratoistoa.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="56"/>
+        <location filename="../src/tips.cpp" line="57"/>
         <source>NomNom resumes file transfers by default (determined by the curl command in the Preferences). Check &quot;Overwrite&quot; in the context menu if you want to overwrite the existing files.</source>
         <translation>Ohjelma pyrkii jatkamaan kopiointia kopioinnin alkaessa. Jos haluat ylikirjoittaa tiedoston kopioinnin yhteydessä, valitse &quot;Ylikirjoita&quot; ohjelman valikosta.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="61"/>
+        <location filename="../src/tips.cpp" line="62"/>
         <source>To clear the list of recently visited URLs, open the Preferences (Ctrl+E), select &quot;Other&quot; and click &quot;Clear recent&quot;.</source>
         <translation>Voit poistaa vierailtujen osoitteiden tiedot ohjelman asetuksista (Ctrl+E): valitse &quot;Asetukset&quot; ja paina &quot;Poista aiemmat osoitteet&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="65"/>
+        <location filename="../src/tips.cpp" line="66"/>
         <source>To access Youtube feeds -- including Youtube users playlists, favorites and uploads -- choose &quot;Feed&quot; (Ctrl+F) from the context menu. </source>
         <translation>Voit käyttää Youtube-sivuston &quot;playlist&quot;, &quot;favorites&quot; ja &quot;uploads&quot; palvelujen tietoja NomNom-ohjelman kanssa. Valitse &quot;Syöte...&quot; ohjelman valikosta.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="70"/>
+        <location filename="../src/tips.cpp" line="71"/>
         <source>Check &quot;Do not prompt for filename&quot; in the Preferences (Ctrl+E) if you do not want to choose the video output file everytime you start a download.</source>
         <translation>Voit ohittaa tallenettavan tiedoston nimeä kysyvän ikkunan valitsemalla &quot;Älä kysy tallennettavan tiedoston nimeä&quot; ohjelman asetuksista.</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="75"/>
+        <location filename="../src/tips.cpp" line="76"/>
         <source>NomNom can minimize automatically when download starts; check &quot;Minimize when download starts&quot; in the Preferences (Ctrl+E).</source>
         <translation>Ohjelma voi pienentää itsensä automaattisesti kopioinnin käynnistyessä. Valitse &quot;Pienennä ikkuna kopioinnin käynnistyessä&quot; ohjelman asetuksista (Ctrl+E).</translation>
     </message>
     <message>
-        <location filename="../src/tips.cpp" line="79"/>
+        <location filename="../src/tips.cpp" line="80"/>
         <source>You can use a custom program icon instead of the default one. To do that, open the Preferences (Ctrl+E) and select Appearance.</source>
         <translation>Voit käyttää omaa ohjelma-kuvaketta: avaa Asetukset (Ctrl+E) ja valitse Ulkoasu.</translation>
     </message>
@@ -674,12 +674,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Video</name>
     <message>
-        <location filename="../src/Video.cpp" line="60"/>
+        <location filename="../src/Video.cpp" line="63"/>
         <source>Uncaught exception at line %1: %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/Video.cpp" line="74"/>
+        <location filename="../src/Video.cpp" line="78"/>
         <source>Expected at least one video link from quvi(1), got none.</source>
         <translation></translation>
     </message>
@@ -713,7 +713,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../i/YoutubeFeed.ui" line="49"/>
-        <location filename="../src/i/YoutubeFeed.cpp" line="106"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="112"/>
         <source>&amp;Playlist ID:</source>
         <translation>T&amp;unnus:</translation>
     </message>
@@ -733,22 +733,22 @@ p, li { white-space: pre-wrap; }
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/YoutubeFeed.cpp" line="65"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="69"/>
         <source>Uncaught exception at line %1: %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/i/YoutubeFeed.cpp" line="74"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="79"/>
         <source>Expected at least one video from umph(1), got none.</source>
         <translation>umph-ohjelma ei palauttanut tietoja.</translation>
     </message>
     <message>
-        <location filename="../src/i/YoutubeFeed.cpp" line="106"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="112"/>
         <source>&amp;Username:</source>
         <translation>&amp;Käyttäjä:</translation>
     </message>
     <message>
-        <location filename="../src/i/YoutubeFeed.cpp" line="123"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="129"/>
         <source>Could not find the JSON data in umph output.</source>
         <translation>umph ei palauttanut JSON-tietoja.</translation>
     </message>
