@@ -574,12 +574,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="506"/>
+        <location filename="../src/util.cpp" line="503"/>
         <source>Choose video</source>
         <translation>Valitse video</translation>
     </message>
     <message>
-        <location filename="../src/util.cpp" line="507"/>
+        <location filename="../src/util.cpp" line="504"/>
         <source>Video</source>
         <translation></translation>
     </message>
