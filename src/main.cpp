@@ -48,7 +48,7 @@ Recent recent;
 Log log;
 
 // Global: Feed.
-NomNom::FeedHash feed;
+NomNom::Feed feed;
 
 int
 main (int argc, char *argv[])

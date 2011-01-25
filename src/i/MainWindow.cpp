@@ -674,7 +674,7 @@ MainWindow::onAddress()
 }
 
 // main.cpp
-extern QHash<QString,QString> feed;
+extern NomNom::Feed feed;
 
 // Slot: on feed.
 

@@ -35,7 +35,7 @@
 extern QMap<QString,QStringList> hosts;
 extern QMap<QString,QString> qmFiles;
 extern QStringList qmLangNames;
-extern NomNom::FeedHash feed;
+extern NomNom::Feed feed;
 extern Log log;
 
 namespace NomNom
@@ -487,17 +487,14 @@ to_process_errmsg (QProcess::ProcessError n)
 bool
 choose_from_feed (QWidget *parent, QString& dst)
 {
-  if (feed.isEmpty ())
+  if (feed.isEmpty())
     return false;
 
-  QHashIterator<QString,QString> i (feed);
+  FeedIterator i(feed);
   QStringList items;
 
-  while (i.hasNext ())
-    {
-      i.next ();
-      items << i.key ();
-    }
+  while (i.hasNext())
+    items << i.next().first;
 
   bool ok = false;
 
@@ -512,7 +509,18 @@ choose_from_feed (QWidget *parent, QString& dst)
                   );
 
   if (ok)
-    dst = feed[title];
+    {
+      i = FeedIterator(feed);
+      while (i.hasNext())
+        {
+          QPair<QString,QString> p = i.next();
+          if (p.first == title)
+            {
+              dst = p.second;
+              break;
+            }
+        }
+    }
 
   return ok;
 }

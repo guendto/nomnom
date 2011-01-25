@@ -55,7 +55,7 @@ bool YoutubeFeed::gotItems () const
 }
 
 // main.cpp
-extern QHash<QString,QString> feed;
+extern NomNom::Feed feed;
 
 bool
 YoutubeFeed::fromJSON (const QString& data, QString& error)
@@ -96,8 +96,8 @@ YoutubeFeed::fromJSON (const QString& data, QString& error)
       t = v.property ("title").toString ();
       u = v.property ("url").toString ();
 
-      feed[t] = u;
-
+      QPair<QString,QString> p(t,u);
+      feed.append(p);
     }
 
   return true;

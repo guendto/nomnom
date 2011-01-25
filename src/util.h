@@ -18,18 +18,18 @@
 #ifndef nomnom_util_h
 #define nomnom_util_h
 
+#include <QInputDialog>
 #include <QMessageBox>
 #include <QStringList>
-#include <QMap>
-#include <QSettings>
 #include <QTranslator>
-#include <QInputDialog>
+#include <QSettings>
 #include <QProcess>
 
 namespace NomNom
 {
 
-typedef QHash<QString,QString> FeedHash;
+typedef QListIterator<QPair<QString,QString> > FeedIterator;
+typedef QList< QPair<QString,QString> > Feed;
 
 void
 restore_size(
