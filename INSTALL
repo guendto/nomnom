@@ -90,6 +90,8 @@ file. You can use the file as a template for your package.
 For example:
 
     quvi: /usr/bin/quvi %u
+# quvi 0.2.12+
+    quvi: /usr/bin/quvi --category-http %u
     curl: /usr/bin/curl -L -C - -o %f %u
     player: /usr/bin/vlc --quiet %u
 
