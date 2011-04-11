@@ -273,7 +273,7 @@ if (NOT WITHOUT_DESKTOP)
     install (FILES "${CMAKE_CURRENT_BINARY_DIR}/nomnom.desktop"
         DESTINATION share/applications/)
 
-    install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/rc/img/nomnom.png"
+    install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/rc/img/nomnom.xpm"
         DESTINATION share/pixmaps/)
 endif ()
 
