@@ -79,7 +79,7 @@ at the upstream if that makes porting easier.
 2) Default system wide configuration file.
 
 From users' perspective, configuring NomNom is likely the most demanding
-part of the application.
+part of using the application.
 
 Please consider including a preconfigured (e.g. system wide) config file
 in your package tailored for your distro.
