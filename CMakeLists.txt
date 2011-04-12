@@ -36,6 +36,21 @@ if (DATE_PROG)
     endif ()
 endif ()
 
+# gzip.
+
+find_program (GZIP_PROG "gzip")
+
+# pod2man.
+
+find_program (POD2MAN_PROG "pod2man")
+if (POD2MAN_PROG)
+    add_custom_target (pod2man
+        "${POD2MAN_PROG}" -c "NomNom manual" -n NomNom -s 1 -r ${VERSION}
+        ${CMAKE_CURRENT_SOURCE_DIR}/man1/nomnom.1.pod
+        ${CMAKE_CURRENT_BINARY_DIR}/man1/nomnom.1
+    )
+endif ()
+
 set (HOST_SETUP "${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_PROCESSOR}")
 set (VERSION_LONG "${VERSION_LONG} for ${HOST_SETUP}")
 
@@ -179,7 +194,7 @@ add_executable (nomnom ${exec_components})
 
 # Subdirs.
 
-subdirs (doc)
+subdirs (doc man1)
 
 # Status.
 
