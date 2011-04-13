@@ -34,10 +34,10 @@ LogView::LogView (QWidget *parent)
 {
   setupUi (this);
 
-  textBrowser->setText (log.data ());
+  textBrowser->setText(NomNom::reverse_line_order(log.data()));
 
   QSettings s;
-  NomNom::restore_size (s, this, QSETTINGS_GROUP, QSize (620,375));
+  NomNom::restore_size(s, this, QSETTINGS_GROUP, QSize (620,375));
 }
 
 // Slot: clear.

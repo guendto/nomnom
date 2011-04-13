@@ -106,6 +106,9 @@ to_process_errmsg (QProcess::ProcessError);
 bool
 choose_from_feed (QWidget *, QString&);
 
+QString
+reverse_line_order(const QString&, const QString& sep="\n");
+
 } // End of namespace.
 
 #endif

@@ -525,6 +525,21 @@ choose_from_feed (QWidget *parent, QString& dst)
   return ok;
 }
 
+QString
+reverse_line_order(const QString& s, const QString& sep/*="\n"*/)
+{
+  QStringListIterator
+  i(s.split(sep, QString::SkipEmptyParts));
+
+  i.toBack();
+
+  QString r;
+  while(i.hasPrevious())
+    r += i.previous() + "\n";
+
+  return r;
+}
+
 } // End of namespace.
 
 // vim: set ts=2 sw=2 tw=72 expandtab:
