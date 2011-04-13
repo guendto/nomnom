@@ -226,9 +226,8 @@ p, li { white-space: pre-wrap; }
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="641"/>
         <source>Select URL:</source>
-        <translation>Valitse osoite:</translation>
+        <translation type="obsolete">Valitse osoite:</translation>
     </message>
     <message>
         <location filename="../src/i/MainWindow.cpp" line="690"/>
@@ -265,6 +264,11 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/i/MainWindow.cpp" line="429"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="641"/>
+        <source>Select URL (most recent first):</source>
+        <translation>Valitse osoite (viimeisin ensimmäisenä):</translation>
     </message>
     <message>
         <location filename="../src/i/MainWindow.cpp" line="668"/>
