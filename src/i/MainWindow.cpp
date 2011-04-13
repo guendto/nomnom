@@ -638,7 +638,7 @@ MainWindow::onRecent ()
   const QString s = QInputDialog::getItem (
                       this,
                       tr ("Recent URLs"),
-                      tr ("Select URL:"),
+                      tr ("Select URL (most recent first):"),
                       lst,
                       0,
                       false,

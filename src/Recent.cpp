@@ -40,14 +40,13 @@ Recent::read ()
 }
 
 void
-Recent::append (const QString& s)
+Recent::append(const QString& s)
 {
-  drops << s;
+  drops.prepend(s);
+  drops.removeDuplicates();
 
-  drops.removeDuplicates ();
-
-  if (drops.size () > maxItems)
-    drops.takeFirst ();
+  if (drops.size() > maxItems)
+    drops.takeFirst();
 }
 
 Recent&
