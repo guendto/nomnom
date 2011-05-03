@@ -313,7 +313,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../i/Preferences.ui" line="47"/>
-        <location filename="../i/Preferences.ui" line="305"/>
+        <location filename="../i/Preferences.ui" line="318"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Selaa...</translation>
     </message>
@@ -355,7 +355,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../i/Preferences.ui" line="175"/>
         <location filename="../i/Preferences.ui" line="211"/>
-        <location filename="../i/Preferences.ui" line="282"/>
+        <location filename="../i/Preferences.ui" line="295"/>
         <source>Default</source>
         <translation>Oletusarvo</translation>
     </message>
@@ -444,67 +444,67 @@ p, li { white-space: pre-wrap; }
         <translation>Päi&amp;vitä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="269"/>
+        <location filename="../i/Preferences.ui" line="282"/>
         <source>Appeara&amp;nce</source>
         <translation>&amp;Ulkoasu</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="275"/>
+        <location filename="../i/Preferences.ui" line="288"/>
         <source>Program Icon</source>
         <translation>Ohjelma-kuvake</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="287"/>
+        <location filename="../i/Preferences.ui" line="300"/>
         <source>Custom</source>
         <translation>Käyttäjän</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="316"/>
+        <location filename="../i/Preferences.ui" line="329"/>
         <source>Op&amp;tions</source>
         <translation>Asetu&amp;kset</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="324"/>
+        <location filename="../i/Preferences.ui" line="337"/>
         <source>&amp;Minimize when download starts</source>
         <translation>P&amp;ienennä ikkuna kopioinnin käynnistyessä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="331"/>
+        <location filename="../i/Preferences.ui" line="344"/>
         <source>M&amp;inimize to system tray</source>
         <translation>Pi&amp;enennä ikkuna järjestelmäpalkkiin</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="338"/>
+        <location filename="../i/Preferences.ui" line="351"/>
         <source>Pl&amp;ay video when done downloading</source>
         <translation>Toist&amp;a kopioitu video</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="345"/>
+        <location filename="../i/Preferences.ui" line="358"/>
         <source>&amp;Stay on top</source>
         <translation>P&amp;ysy muiden ikkunoiden yläpuolella</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="352"/>
+        <location filename="../i/Preferences.ui" line="365"/>
         <source>S&amp;how reminder when NomNom starts</source>
         <translation>&amp;Näytä muistutukset ohjelman käynnistyessä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="359"/>
+        <location filename="../i/Preferences.ui" line="372"/>
         <source>&amp;Do not prompt for filename</source>
         <translation>Älä kysy tallennetta&amp;van tiedoston nimeä</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="370"/>
+        <location filename="../i/Preferences.ui" line="383"/>
         <source>Cl&amp;ear recent</source>
         <translation>Poi&amp;sta aiemmat osoitteet</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="388"/>
+        <location filename="../i/Preferences.ui" line="401"/>
         <source>Config:</source>
         <translation>Asetukset:</translation>
     </message>
     <message>
-        <location filename="../i/Preferences.ui" line="377"/>
+        <location filename="../i/Preferences.ui" line="390"/>
         <source>&amp;Language...</source>
         <translation>Kie&amp;li...</translation>
     </message>
