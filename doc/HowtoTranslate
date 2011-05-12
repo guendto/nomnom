@@ -5,7 +5,7 @@ HOWTO: Translate
 NOTES
 
 If you are unsure where NomNom saves the config file, open the Preferences
-(Ctrl+E) and choose "Other". The same info is also available in the About
+(Ctrl+E) and choose "Options". The same info is also available in the About
 dialog.
 
   * You can set "qmShowPaths=true" in your config file to have NomNom dump
@@ -66,7 +66,7 @@ Test translation
   6) Run "./nomnom".
   
     Skip if you have done this previously:
-        - Open Preferences / Other
+        - Open Preferences / Options
         - Click "Language..." and select the language
         - Restart NomNom
 
