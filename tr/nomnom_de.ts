@@ -4,10 +4,12 @@
 <context>
     <name>About</name>
     <message>
+        <location filename="../i/About.ui" line="14"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
+        <location filename="../i/About.ui" line="34"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -57,10 +59,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="../i/About.ui" line="87"/>
         <source>Website coverage reported by quvi:</source>
-        <translation>Webseiten-Abdeckung angegeben von quvi:</translation>
+        <translation>Webseiten-Abdeckung, wie von quvi angegeben:</translation>
     </message>
     <message>
+        <location filename="../src/i/About.cpp" line="51"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Sie müssen einen Pfad zu quvi angeben.</translation>
     </message>
@@ -68,25 +72,30 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DownloadDialog</name>
     <message>
+        <location filename="../src/DownloadDiag.cpp" line="81"/>
         <source>Starting download ...</source>
         <translation>Beginne das Herunterladen ...</translation>
     </message>
     <message>
+        <location filename="../src/DownloadDiag.cpp" line="140"/>
         <source>Copying at %1, %2</source>
-        <translation>Kopiere bei %1, %2</translation>
+        <translation>Herunterladen mit %1, %2</translation>
     </message>
 </context>
 <context>
     <name>LogView</name>
     <message>
+        <location filename="../i/LogView.ui" line="14"/>
         <source>Log</source>
         <translation>Protokoll</translation>
     </message>
     <message>
+        <location filename="../i/LogView.ui" line="23"/>
         <source>&amp;Clear</source>
         <translation>&amp;Leeren</translation>
     </message>
     <message>
+        <location filename="../src/i/LogView.cpp" line="49"/>
         <source>Log cleared.</source>
         <translation>Protokoll geleert.</translation>
     </message>
@@ -94,14 +103,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
+        <location filename="../i/MainWindow.ui" line="17"/>
         <source>NomNom</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../i/MainWindow.ui" line="28"/>
         <source>Drag and drop URLs here</source>
         <translation>Ziehe URLs mit der Maus hier her und lasse sie hier fallen</translation>
     </message>
     <message>
+        <location filename="../i/MainWindow.ui" line="31"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -111,122 +123,164 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="../i/MainWindow.ui" line="44"/>
         <source>Stream</source>
-        <translation>Datenstrom (Stream)</translation>
+        <translatorcomment>The word &quot;Stream&quot; is hard to translate, as there is no word for that in german.</translatorcomment>
+        <translation>Stream (Direktwiedergabe)</translation>
     </message>
     <message>
+        <location filename="../i/MainWindow.ui" line="49"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <source>Program started.</source>
-        <translation>Programm gestartet.</translation>
-    </message>
-    <message>
-        <source>Feed...</source>
-        <translation>&amp;Feed...</translation>
-    </message>
-    <message>
-        <source>Overwrite</source>
-        <translation>Übersch&amp;reiben</translation>
-    </message>
-    <message>
-        <source>Log...</source>
-        <translation>&amp;Protokoll...</translation>
-    </message>
-    <message>
-        <source>Preferences...</source>
-        <translation>&amp;Einstellungen...</translation>
-    </message>
-    <message>
-        <source>About...</source>
-        <translation>&amp;Über...</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>&amp;Beenden</translation>
-    </message>
-    <message>
+        <location filename="../src/i/MainWindow.cpp" line="90"/>
         <source>Checking...</source>
         <translation>Prüfen...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="91"/>
         <source>Fetching...</source>
         <translation>Hole...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="92"/>
         <source>Verifying...</source>
         <translation>Überprüfen...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="98"/>
+        <source>Program started.</source>
+        <translation>Programm gestartet.</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="130"/>
+        <location filename="../src/i/MainWindow.cpp" line="150"/>
         <source>Address...</source>
         <translation>&amp;Adresse...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="131"/>
+        <location filename="../src/i/MainWindow.cpp" line="151"/>
+        <source>Feed...</source>
+        <translatorcomment>There is no german translation for &quot;feed&quot;.</translatorcomment>
+        <translation>&amp;Feed...</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="132"/>
+        <location filename="../src/i/MainWindow.cpp" line="152"/>
         <source>Recent...</source>
         <translation>&amp;Letzte...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="134"/>
+        <location filename="../src/i/MainWindow.cpp" line="154"/>
+        <source>Overwrite</source>
+        <translation>Übersch&amp;reiben</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="136"/>
+        <location filename="../src/i/MainWindow.cpp" line="156"/>
+        <source>Log...</source>
+        <translation>&amp;Protokoll...</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="137"/>
+        <location filename="../src/i/MainWindow.cpp" line="157"/>
+        <source>Preferences...</source>
+        <translation>&amp;Einstellungen...</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="139"/>
+        <source>About...</source>
+        <translation>&amp;Über...</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="140"/>
+        <location filename="../src/i/MainWindow.cpp" line="159"/>
+        <location filename="../src/i/MainWindow.cpp" line="185"/>
+        <source>Quit</source>
+        <translation>&amp;Beenden</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="183"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>Format:</source>
-        <translation>Format:</translation>
-    </message>
-    <message>
-        <source>Checking ...</source>
-        <translation>Prüfen ...</translation>
-    </message>
-    <message>
-        <source>No record of recently visited URLs found.</source>
-        <translation>Keine Einträge von kürzlich besuchten URLs gefunden.</translation>
-    </message>
-    <message>
-        <source>Recent URLs</source>
-        <translation>Letzte URLs</translation>
-    </message>
-    <message>
-        <source>Specify path to the umph(1) command in the Preferences.</source>
-        <translation>Geben Sie einen Pfad zu umph(1) an.</translation>
-    </message>
-    <message>
-        <source>Choose from old results?</source>
-        <translation>Aus alten Ergebnissen auswählen?</translation>
-    </message>
-    <message>
+        <location filename="../src/i/MainWindow.cpp" line="275"/>
         <source>You must specify path to the quvi command.</source>
         <translation>Sie müssen einen Pfad zu quvi angeben.</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="297"/>
         <source>You must specify path to a stream-capable media player command.</source>
+        <translatorcomment>again: there is no german-translation for &quot;stream&quot; that would make sense here.</translatorcomment>
         <translation>Sie müssen einen stream-fähiges Abspielprogramm angeben.</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="333"/>
         <source>Choose format</source>
         <translation>Format auswählen</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="334"/>
+        <source>Format:</source>
+        <translation>Format:</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="350"/>
+        <source>Checking ...</source>
+        <translation>Prüfen ...</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="382"/>
+        <location filename="../src/i/MainWindow.cpp" line="485"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Konnte Abspielprogramm nicht starten! Bitte überprüfen Sie die Einstellungen.</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="429"/>
         <source>Save video as</source>
-        <translation>Video speichern unter</translation>
+        <translation>Video speichern unter ...</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="632"/>
+        <source>No record of recently visited URLs found.</source>
+        <translation>Keine Einträge von kürzlich besuchten URLs gefunden.</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="640"/>
+        <source>Recent URLs</source>
+        <translation>Letzte URLs</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="641"/>
         <source>Select URL (most recent first):</source>
         <translation>URL auswählen (zuletzt benutze zuerst):</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="668"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="668"/>
         <source>Video URL:</source>
         <translation>Video-URL:</translation>
     </message>
     <message>
+        <location filename="../src/i/MainWindow.cpp" line="690"/>
+        <source>Specify path to the umph(1) command in the Preferences.</source>
+        <translation>Geben Sie in den Einstellungen einen Pfad zu umph(1) an.</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="699"/>
+        <source>Choose from old results?</source>
+        <translation>Aus alten Ergebnissen auswählen?</translation>
+    </message>
+    <message>
+        <location filename="../src/util.cpp" line="153"/>
         <source>English</source>
         <translation>Deutsch</translation>
     </message>
@@ -234,182 +288,234 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Preferences</name>
     <message>
+        <location filename="../i/Preferences.ui" line="14"/>
         <source>Preferences</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="24"/>
         <source>&amp;Paths</source>
         <translation>&amp;Pfade</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="30"/>
         <source>&amp;quvi:</source>
         <translation>&amp;quvi:</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="40"/>
+        <location filename="../i/Preferences.ui" line="64"/>
+        <location filename="../i/Preferences.ui" line="88"/>
+        <location filename="../i/Preferences.ui" line="112"/>
         <source>&lt;replace with path and any additional options&gt;</source>
-        <translation></translation>
+        <translation>&lt;durch den Pfad und zusätzliche Optionen ersetzen&gt;</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="47"/>
+        <location filename="../i/Preferences.ui" line="318"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Durchsuchen...</translation>
     </message>
     <message>
-        <source>Bro&amp;wse...</source>
-        <translation>&amp;Durchsuchen...</translation>
-    </message>
-    <message>
-        <source>Brow&amp;se...</source>
-        <translation>&amp;Durchsuchen...</translation>
-    </message>
-    <message>
-        <source>B&amp;rowse...</source>
-        <translation>&amp;Durchsuchen...</translation>
-    </message>
-    <message>
-        <source>&lt;replace with video save directory path&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&amp;Filename</source>
-        <translation>D&amp;ateiname</translation>
-    </message>
-    <message>
-        <source>F&amp;ilename format:</source>
-        <translation>&amp;Format des Dateinamens:</translation>
-    </message>
-    <message>
-        <source>%t.%s</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Vorgabe</translation>
-    </message>
-    <message>
-        <source>Title, ID, Suffix</source>
-        <translation>Titel, Kennung, Endung</translation>
-    </message>
-    <message>
-        <source>Title, ID, Host, Suffix</source>
-        <translation>Titel, Kennung, Host, Endung</translation>
-    </message>
-    <message>
+        <location filename="../i/Preferences.ui" line="54"/>
         <source>c&amp;url:</source>
         <translation>cu&amp;rl:</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="71"/>
+        <source>B&amp;rowse...</source>
+        <translation>&amp;Durchsuchen...</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="78"/>
         <source>P&amp;layer:</source>
         <translation>Abspie&amp;lprogramm:</translation>
     </message>
     <message>
-        <source>u&amp;mph:</source>
-        <translation></translation>
+        <location filename="../i/Preferences.ui" line="95"/>
+        <source>Bro&amp;wse...</source>
+        <translation>&amp;Durchsuchen...</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="102"/>
+        <source>u&amp;mph:</source>
+        <translation>u&amp;mph:</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="119"/>
+        <source>Brow&amp;se...</source>
+        <translation>&amp;Durchsuchen...</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="126"/>
         <source>S&amp;ave videos:</source>
         <translation>&amp;Videos speichern:</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="136"/>
+        <source>&lt;replace with video save directory path&gt;</source>
+        <translation>&lt;durch den Pfad zum Speichern der Videos ersetzen&gt;</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="143"/>
         <source>Brows&amp;e...</source>
         <translation>&amp;Durchsuchen...</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="151"/>
+        <source>&amp;Filename</source>
+        <translation>D&amp;ateiname</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="157"/>
+        <source>F&amp;ilename format:</source>
+        <translation>&amp;Format des Dateinamens:</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="167"/>
+        <source>%t.%s</source>
+        <translation>%t.%s</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="175"/>
+        <location filename="../i/Preferences.ui" line="211"/>
+        <location filename="../i/Preferences.ui" line="295"/>
+        <source>Default</source>
+        <translation>Vorgabe</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="180"/>
+        <source>Title, ID, Suffix</source>
+        <translation>Titel, Kennung, Endung</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="185"/>
+        <source>Title, ID, Host, Suffix</source>
+        <translatorcomment>host is difficult to translate within this context</translatorcomment>
+        <translation>Titel, Kennung, Host, Endung</translation>
+    </message>
+    <message>
+        <location filename="../i/Preferences.ui" line="193"/>
         <source>Tit&amp;le regexp:</source>
         <translation>&amp;Titel regexp:</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="203"/>
         <source>/(\w|\s)/g</source>
-        <translation></translation>
+        <translation>/(\w|\s)/g</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="216"/>
         <source>Word characters only</source>
         <translation>Nur Buchstaben</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="221"/>
         <source>Digit characters only</source>
         <translation>Nur Ziffern</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="226"/>
         <source>Non-word characters only</source>
-        <translation>keine Buchstaben</translation>
+        <translation>nur nicht-Buchstaben</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="231"/>
         <source>Non-digit characters only</source>
-        <translation>keine Ziffern</translation>
+        <translation>nur nicht-Ziffern</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="236"/>
         <source>Non-whitespace characters only</source>
-        <translation>keine Leerzeichen</translation>
+        <translation>nur nicht-Leerzeichen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="244"/>
         <source>Preview:</source>
         <translation>Vorschau:</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="261"/>
         <source>&amp;Refresh</source>
         <translation>Auff&amp;rischen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="282"/>
         <source>Appeara&amp;nce</source>
         <translation>A&amp;nsicht</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="288"/>
         <source>Program Icon</source>
         <translation>Programmsymbol</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="300"/>
         <source>Custom</source>
         <translation>Individuell</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="329"/>
         <source>Op&amp;tions</source>
         <translation>Op&amp;tionen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="337"/>
         <source>&amp;Minimize when download starts</source>
         <translation>&amp;Minimieren wenn das Herunterladen beginnt</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="344"/>
         <source>M&amp;inimize to system tray</source>
         <translation>In das Benachr&amp;ichtigungsfeld (system tray) minimieren</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="351"/>
         <source>Pl&amp;ay video when done downloading</source>
         <translation>Video n&amp;ach dem Herunterladen abspielen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="358"/>
         <source>&amp;Stay on top</source>
         <translation>Immer im &amp;Vordergrund</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="365"/>
         <source>S&amp;how reminder when NomNom starts</source>
         <translation>Zeige &amp;Erinnerung wenn NomNom startet</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="372"/>
         <source>&amp;Do not prompt for filename</source>
         <translation>Nicht nach &amp;Dateiname fragen</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="383"/>
         <source>Cl&amp;ear recent</source>
         <translation>Liste der zuletzt benutzen URLs l&amp;eeren</translation>
     </message>
     <message>
-        <source>Config:</source>
-        <translation>Einstellung:</translation>
-    </message>
-    <message>
+        <location filename="../i/Preferences.ui" line="390"/>
         <source>&amp;Language...</source>
         <translation>&amp;Sprache...</translation>
     </message>
     <message>
+        <location filename="../i/Preferences.ui" line="401"/>
+        <source>Config:</source>
+        <translation>Einstellung:</translation>
+    </message>
+    <message>
+        <location filename="../src/i/Preferences.cpp" line="188"/>
         <source>Open directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
+        <location filename="../src/i/Preferences.cpp" line="281"/>
         <source>Images</source>
         <translation>Bilder</translation>
     </message>
     <message>
+        <location filename="../src/i/Preferences.cpp" line="344"/>
         <source>The language will be changed after you restart NomNom. Restart NomNom?</source>
         <translation>Die Sprache wird nach einem Neustart von NomNom geändert. NomNom jetzt neu starten?</translation>
     </message>
@@ -417,74 +523,92 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../src/i/Preferences.cpp" line="140"/>
+        <source>Browse</source>
+        <translation>Durchsuchen</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="85"/>
+        <source>English</source>
+        <extracomment>&quot;English&quot; is the default language. This string is not intended to be translated.</extracomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/util.cpp" line="207"/>
         <source>Select language</source>
         <translation>Sprache auswählen</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="208"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="273"/>
+        <location filename="../src/util.cpp" line="307"/>
         <source>error: %1: %2</source>
         <translation>Fehler: %1 %2</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="369"/>
         <source>Expected Perl-style regular expression, e.g. /pattern/flags</source>
         <translation>Regulärer Ausdruck im Perl-Stil erwartet, z.B. /pattern/flags</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="438"/>
         <source>The process failed to start. Either the invoked program is missing, or you may have insufficient permissions to invoke the program.</source>
         <translation>Der Prozess konnte nicht gestartet werden. Entweder fehlt ein eingebundenes Programm oder Sie haben nicht die Rechte das Programm einzubinden.</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="446"/>
         <source>The process crashed some time after starting successfully.</source>
         <translation>Der Prozess stürzte einige Zeit nach seinem erfolgreichen Start ab.</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="452"/>
         <source>The last waitFor...() function timed out. The state of QProcess is unchanged, and you can try calling waitFor...() again.</source>
-        <translation></translation>
+        <translation>Die letzte waitFor...()-Funktion ist abgelaufen. Der Zustand von QProcess ist unverändert, und Sie können versuchen waitFor...() erneut aufzurufen.</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="460"/>
         <source>An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel.</source>
-        <translation></translation>
+        <translation>Ein Fehler trat auf, als zum Prozess geschrieben werden sollte. Der Prozess könnte evtl. gar nicht aktiv sein oder er könnte seinen Eingabekanal geschlossen haben.</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="468"/>
         <source>An error occurred when attempting to read from the process. For example, the process may not be running.</source>
-        <translation></translation>
+        <translation>Ein Fehler trat auf, als vom Prozess gelesen werden sollte. Der Prozess könnte evtl. gar nicht aktiv sein.</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="476"/>
         <source>An unknown error occurred. This is the default return value of error().</source>
-        <translation></translation>
+        <translation>Es trat ein Fehler auf. Dies ist die Vorgaberückgabewert von error().</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="503"/>
         <source>Choose video</source>
         <translation>Video auswählen</translation>
     </message>
     <message>
+        <location filename="../src/util.cpp" line="504"/>
         <source>Video</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>English</source>
-        <extracomment>&quot;English&quot; is the default language. This string is not intended to be translated.</extracomment>
-        <translation>Deutsch</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Durchsuchen</translation>
+        <translation>Video</translation>
     </message>
 </context>
 <context>
     <name>Reminder</name>
     <message>
+        <location filename="../i/Reminder.ui" line="14"/>
         <source>Reminder</source>
         <translation>Erinnerung</translation>
     </message>
     <message>
+        <location filename="../i/Reminder.ui" line="23"/>
         <source>&amp;Show this dialog again when Nomnom starts</source>
         <translation>&amp;Diesen Dialog erneut beim Start von NomNom zeigen</translation>
     </message>
     <message>
+        <location filename="../i/Reminder.ui" line="35"/>
         <source>&amp;Next</source>
         <translation>&amp;Weiter</translation>
     </message>
@@ -492,48 +616,60 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Tips</name>
     <message>
+        <location filename="../src/tips.cpp" line="31"/>
         <source>&lt;p&gt;Looks like you are running NomNom for the first time.&lt;/p&gt;&lt;p&gt;Please make sure you have installed quvi(1) and curl(1) commands to your system. You will also need a streaming capable media player, e.g. vlc(1).&lt;/p&gt;&lt;p&gt;Open the Preferences (Ctrl+E) and check that the paths to these commands have been specified correctly. NomNom will need these commands to work properly.&lt;/p&gt;</source>
+        <translatorcomment>This text doesn&apos;t seem to get displayed as translation. instead the english one shows up each time.</translatorcomment>
         <translation>Scheinbar benutzen Sie NomNom zum ersten Mal.
 Bitte stellen Sie sicher, daß sie quvi und curl installiert haben. Sie bräuchten auch ein Datenstrom-fähiges Abspielprogramm z.B. mplayer(1) oder vlc(1).
 Öffnen Sie die Einstellungen (STRG+E) und prüfen Sie, ob die Pfade zu diesen Programmen korrekt angegeben sind. NomNom benötigt diese Programme um sauber zu arbeiten.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="40"/>
         <source>Right-click opens the context-menu.</source>
         <translation>Rechts-Klick öffnet das Kontextmenü.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="43"/>
         <source>You can drag and drop video page URLs onto the window to start the download (or streaming).</source>
         <translation>Sie können die URL einer Video-Seite in dieses Fenster ziehen und ablegen, um das Herunterladen (oder das Streamen) zu starten.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="47"/>
         <source>You can make NomNom &quot;hover&quot; over the other windows. Check the &quot;Stay on top&quot; in the Preferences.</source>
         <translation>NomNom kann über allen anderen Fenstern &quot;schweben&quot;. Aktivieren Sie dazu die Option &quot;Immer im Vordergrund&quot; in den Einstellungen (STRG+E).</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="51"/>
         <source>You can set NomNom to either &quot;Download&quot; or &quot;Stream&quot; the media. When you choose &quot;Stream&quot;, open the preferences (Ctrl+E) and make sure that you have specified the path to a player command (that is capable of streaming media).</source>
         <translation>Sie können einstellen, ob NomNom die Medien herunterladen oder streamen (Wiedergabe während des Herunterladens) soll. Wenn Sie &quot;Stream&quot; wählen, öffnen Sie die Einstellungen (STRG+E) und stellen Sie sicher, daß der Pfad zu einem Abspielprogramm (das streaming-fähig ist) angegeben ist.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="57"/>
         <source>NomNom resumes file transfers by default (determined by the curl command in the Preferences). Check &quot;Overwrite&quot; in the context menu if you want to overwrite the existing files.</source>
         <translation>NomNom nimmt Dateiübertragungen normalerweise wieder auf (abhängig vom curl-Kommando in den Einstellungen). Wählen Sie &quot;Überschreiben&quot; im Kontextmenü, wenn Sie möchten, daß bereits existierende Dateien überschrieben werden sollen.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="62"/>
         <source>To clear the list of recently visited URLs, open the Preferences (Ctrl+E), select &quot;Other&quot; and click &quot;Clear recent&quot;.</source>
         <translation>Um die Liste der zuletzt benutzten URLs zu leeren, öffnen Sie die Einstellungen (STRG+E) und wählen &quot;Liste der zuletzt benutzen URLs leeren&quot; unter &quot;Optionen&quot;.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="66"/>
         <source>To access Youtube feeds -- including Youtube users playlists, favorites and uploads -- choose &quot;Feed&quot; (Ctrl+F) from the context menu. </source>
-        <translation>Um auf YouTube-Feeds zuzugreifen -- Wiedergabelisten, Favoriten und Uploads eingeschlossen -- wählen Sie im Kontextmenü &quot;Feed&quot; (STRG+F).</translation>
+        <translation>Um auf YouTube-Feeds zuzugreifen -- YouTube-Benutzer-Wiedergabelisten, -Favoriten und -Uploads eingeschlossen -- wählen Sie im Kontextmenü &quot;Feed&quot; (STRG+F).</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="71"/>
         <source>Check &quot;Do not prompt for filename&quot; in the Preferences (Ctrl+E) if you do not want to choose the video output file everytime you start a download.</source>
         <translation>Wählen Sie in den Einstellungen (STRG+E) &quot;Nicht nach Dateiname fragen&quot;, wenn Sie die Video-Ausgabe-Datei nicht jedesmal auswählen möchten.</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="76"/>
         <source>NomNom can minimize automatically when download starts; check &quot;Minimize when download starts&quot; in the Preferences (Ctrl+E).</source>
         <translation>NomNom kann sich automatisch minimieren, wenn das Herunterladen beginnt. Wählen Sie hierzu &quot;In das Benachrichtigungsfeld (system tray) minimieren&quot; in den Einstellungen (STRG+E).</translation>
     </message>
     <message>
+        <location filename="../src/tips.cpp" line="80"/>
         <source>You can use a custom program icon instead of the default one. To do that, open the Preferences (Ctrl+E) and select Appearance.</source>
         <translation>Sie können ein individuelles Programmsymbol statt der Vorgabe verwenden. Um dies zu tun, öffnen Sie die Einstellungen (STRG+E) und wählen &quot;Ansicht&quot;.</translation>
     </message>
@@ -541,67 +677,83 @@ Bitte stellen Sie sicher, daß sie quvi und curl installiert haben. Sie bräucht
 <context>
     <name>Video</name>
     <message>
+        <location filename="../src/Video.cpp" line="63"/>
         <source>Uncaught exception at line %1: %2</source>
-        <translation></translation>
+        <translation>Unbehandelte Ausnahme in Zeile %1: %2</translation>
     </message>
     <message>
+        <location filename="../src/Video.cpp" line="78"/>
         <source>Expected at least one video link from quvi(1), got none.</source>
-        <translation></translation>
+        <translation>Es wurde mindestens ein Link als Ausgabe von quvi(1) erwartet, es wurde jedoch kein Link zurückgegeben.</translation>
     </message>
 </context>
 <context>
     <name>YoutubeFeed</name>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="14"/>
         <source>YouTube Feed</source>
-        <translation>YouTube Feed</translation>
+        <translation>YouTube-Feed</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="20"/>
         <source>&amp;Feed type:</source>
         <translation>Art des &amp;Feed:</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="31"/>
         <source>Playlist</source>
-        <translation></translation>
+        <translation>Wiedergabeliste</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="36"/>
         <source>Favorites</source>
-        <translation></translation>
+        <translation>Favoriten</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="41"/>
         <source>Uploads</source>
-        <translation></translation>
+        <translation>Uploads</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="49"/>
+        <location filename="../src/i/YoutubeFeed.cpp" line="112"/>
         <source>&amp;Playlist ID:</source>
-        <translation>&amp;Kennung:</translation>
+        <translation>&amp;Kennung der Wiedergabeliste</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="66"/>
         <source>&amp;Start index:</source>
-        <translation>&amp;Start index:</translation>
+        <translation>&amp;Startindex:</translation>
     </message>
     <message>
+        <location filename="../i/YoutubeFeed.ui" line="83"/>
         <source>&amp;Max. results:</source>
         <translation>&amp;Max. Ergebnisse:</translation>
     </message>
     <message>
+        <location filename="../src/i/YoutubeFeed.cpp" line="48"/>
         <source>Checking ...</source>
         <translation>Prüfen ...</translation>
     </message>
     <message>
+        <location filename="../src/i/YoutubeFeed.cpp" line="69"/>
         <source>Uncaught exception at line %1: %2</source>
-        <translation></translation>
+        <translation>Unbehandelte Ausnahme in Zeile %1: %2</translation>
     </message>
     <message>
+        <location filename="../src/i/YoutubeFeed.cpp" line="79"/>
         <source>Expected at least one video from umph(1), got none.</source>
-        <translation>Es wurde mindestens ein Video von umph(1) erwartet, es hat aber keine bekommen.</translation>
+        <translation>Es wurde mindestens ein Video von umph(1) erwartet, es hat aber kein Video zurückgegeben.</translation>
     </message>
     <message>
+        <location filename="../src/i/YoutubeFeed.cpp" line="112"/>
         <source>&amp;Username:</source>
         <translation>Ben&amp;utzername:</translation>
     </message>
     <message>
+        <location filename="../src/i/YoutubeFeed.cpp" line="129"/>
         <source>Could not find the JSON data in umph output.</source>
-        <translation>Konnte die JSON-Daten nicht in der Ausgabe von umph finden.</translation>
+        <translation>Konnte die JSON-Daten nicht in der Ausgabe von umph(1) finden.</translation>
     </message>
 </context>
 </TS>
