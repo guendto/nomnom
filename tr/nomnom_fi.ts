@@ -207,35 +207,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/i/MainWindow.cpp" line="334"/>
+        <location filename="../src/i/MainWindow.cpp" line="347"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="350"/>
+        <location filename="../src/i/MainWindow.cpp" line="335"/>
+        <location filename="../src/i/MainWindow.cpp" line="342"/>
+        <source>Enter your own</source>
+        <translation>Anna oma</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="346"/>
+        <source>Enter format</source>
+        <translation>Anna muoto</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="365"/>
         <source>Checking ...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="632"/>
+        <location filename="../src/i/MainWindow.cpp" line="647"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Aiempia tietoja ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="640"/>
+        <location filename="../src/i/MainWindow.cpp" line="655"/>
         <source>Recent URLs</source>
         <translation>Aiemmat osoitteet</translation>
     </message>
     <message>
-        <source>Select URL:</source>
-        <translation type="obsolete">Valitse osoite:</translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="690"/>
+        <location filename="../src/i/MainWindow.cpp" line="705"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Määrittelemätön polku quvi-komentoon, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="699"/>
+        <location filename="../src/i/MainWindow.cpp" line="714"/>
         <source>Choose from old results?</source>
         <translation>Valitse aiemmin haetuista tiedoista?</translation>
     </message>
@@ -255,28 +263,28 @@ p, li { white-space: pre-wrap; }
         <translation>Valitse videomuoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="382"/>
-        <location filename="../src/i/MainWindow.cpp" line="485"/>
+        <location filename="../src/i/MainWindow.cpp" line="397"/>
+        <location filename="../src/i/MainWindow.cpp" line="500"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Toisto-komennon käynnistäminen epäonnistui, katso ohjelman asetukset.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="429"/>
+        <location filename="../src/i/MainWindow.cpp" line="444"/>
         <source>Save video as</source>
         <translation>Tallenna video nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="641"/>
+        <location filename="../src/i/MainWindow.cpp" line="656"/>
         <source>Select URL (most recent first):</source>
         <translation>Valitse osoite (viimeisin ensimmäisenä):</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="668"/>
+        <location filename="../src/i/MainWindow.cpp" line="683"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="668"/>
+        <location filename="../src/i/MainWindow.cpp" line="683"/>
         <source>Video URL:</source>
         <translation>Video-osoite:</translation>
     </message>
