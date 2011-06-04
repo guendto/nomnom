@@ -332,13 +332,28 @@ MainWindow::handleURL (const QString& url)
                     this,
                     tr ("Choose format"),
                     tr ("Format:"),
-                    formats,
+                    formats << tr("Enter your own"),
                     0,
                     false,
                     &ok
                   );
       if (ok)
-        args << "-f" << s;
+        {
+          if (s == tr("Enter your own"))
+            {
+              s = QInputDialog::getText(
+                    this,
+                    tr("Enter format"),
+                    tr("Format:"),
+                    QLineEdit::Normal,
+                    "default",
+                    &ok
+                  );
+              if (!ok || s.isEmpty())
+                return;
+            }
+          args << "-f" << s;
+        }
       else
         return;
     }
