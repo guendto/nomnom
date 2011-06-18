@@ -225,57 +225,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/i/MainWindow.cpp" line="334"/>
+        <location filename="../src/i/MainWindow.cpp" line="347"/>
         <source>Format:</source>
         <translation>Format:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="350"/>
+        <location filename="../src/i/MainWindow.cpp" line="335"/>
+        <location filename="../src/i/MainWindow.cpp" line="342"/>
+        <source>Enter your own</source>
+        <translatorcomment>Machine translation, may need tweaking</translatorcomment>
+        <translation>Geben Sie einfach Ihre eigenen</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="346"/>
+        <source>Enter format</source>
+        <translatorcomment>Machine translation, may need tweaking</translatorcomment>
+        <translation>Geben Sie Format</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="365"/>
         <source>Checking ...</source>
         <translation>Prüfen ...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="382"/>
-        <location filename="../src/i/MainWindow.cpp" line="485"/>
+        <location filename="../src/i/MainWindow.cpp" line="397"/>
+        <location filename="../src/i/MainWindow.cpp" line="500"/>
         <source>Unable to start player command, check the Preferences.</source>
         <translation>Konnte Abspielprogramm nicht starten! Bitte überprüfen Sie die Einstellungen.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="429"/>
+        <location filename="../src/i/MainWindow.cpp" line="444"/>
         <source>Save video as</source>
         <translation>Video speichern unter ...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="632"/>
+        <location filename="../src/i/MainWindow.cpp" line="647"/>
         <source>No record of recently visited URLs found.</source>
         <translation>Keine Einträge von kürzlich besuchten URLs gefunden.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="640"/>
+        <location filename="../src/i/MainWindow.cpp" line="655"/>
         <source>Recent URLs</source>
         <translation>Letzte URLs</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="641"/>
+        <location filename="../src/i/MainWindow.cpp" line="656"/>
         <source>Select URL (most recent first):</source>
         <translation>URL auswählen (zuletzt benutze zuerst):</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="668"/>
+        <location filename="../src/i/MainWindow.cpp" line="683"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="668"/>
+        <location filename="../src/i/MainWindow.cpp" line="683"/>
         <source>Video URL:</source>
         <translation>Video-URL:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="690"/>
+        <location filename="../src/i/MainWindow.cpp" line="705"/>
         <source>Specify path to the umph(1) command in the Preferences.</source>
         <translation>Geben Sie in den Einstellungen einen Pfad zu umph(1) an.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="699"/>
+        <location filename="../src/i/MainWindow.cpp" line="714"/>
         <source>Choose from old results?</source>
         <translation>Aus alten Ergebnissen auswählen?</translation>
     </message>
