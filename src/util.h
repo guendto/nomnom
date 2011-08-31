@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -88,6 +88,8 @@ parse_quvi_version (const QString& path, QString& output);
 
 bool
 parse_quvi_support (const QString& path, QString& errmsg);
+
+void check_query_formats(const QString&);
 
 bool
 format_filename (

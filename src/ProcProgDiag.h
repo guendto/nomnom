@@ -32,6 +32,7 @@ public:
   void start          (QStringList&);
   void setLabelRegExp (const QHash<QString,QRegExp>&);
   void setErrorRegExp (const QRegExp&);
+  bool canceled       () const;
 private slots:
   void onProcStarted   ();
   void onProcError     (QProcess::ProcessError);

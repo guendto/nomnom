@@ -51,6 +51,8 @@ private:
   void streamVideo        ();
   void downloadVideo      ();
   void changeProgramIcon  ();
+  bool queryFormats       (QStringList&, const QString&, const QString&);
+  bool selectFormat       (QStringList&, QString&);
 private slots:
   // UI
   void onTrayActivated(QSystemTrayIcon::ActivationReason);

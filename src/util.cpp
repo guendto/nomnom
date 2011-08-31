@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include "util.h"
 
 // main.cpp
+extern bool is_query_formats_avail_flag;
 extern QMap<QString,QStringList> hosts;
 extern QMap<QString,QString> qmFiles;
 extern QStringList qmLangNames;
@@ -302,7 +303,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
 
   if (!proc.waitForFinished())
     {
-
       errmsg =
         QObject::tr("error: %1: %2")
         .arg(cmdPath)
@@ -318,7 +318,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
 
   foreach (QString ln, output.split("\n"))
   {
-
     if (ln.isEmpty())
       continue;
 
@@ -326,7 +325,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
 
     if (re.indexIn(ln) != -1)
       {
-
         const QString host  = re.cap (1).simplified ();
         QStringList formats = re.cap (2).simplified ().split ("|");
 
@@ -341,6 +339,37 @@ parse_quvi_support (const QString& path, QString& errmsg)
   }
 
   return true;
+}
+
+void check_query_formats(const QString& path)
+{
+  QStringList args = QStringList() << path.split(" ").takeFirst() << "-F";
+  log << args.join(" ");
+
+  const QString cmd = args.takeFirst();
+
+  QProcess p;
+#ifdef _0
+  qDebug() << cmd << args;
+#endif
+  p.start(cmd, args);
+
+  if (!p.waitForFinished())
+    return;
+
+#ifdef _0
+  qDebug() << p.exitStatus() << p.exitCode();
+#endif
+
+  // 0x1 invalid option
+  // 0x3 no input
+
+  is_query_formats_avail_flag =
+    p.exitStatus() == 0x0 && p.exitCode() == 0x3;
+
+#ifdef _0
+  qDebug() << "have_query_formats" << is_query_formats_avail_flag;
+#endif
 }
 
 static bool

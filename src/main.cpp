@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -49,6 +49,9 @@ Log log;
 
 // Global: Feed.
 NomNom::Feed feed;
+
+// Global: --query-formats availability flag
+bool is_query_formats_avail_flag = false;
 
 int
 main (int argc, char *argv[])

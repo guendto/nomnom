@@ -27,6 +27,7 @@
 
 // main.cpp
 
+extern bool is_query_formats_avail_flag;
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
 extern QString quviVersion;
@@ -46,7 +47,11 @@ About::About (QWidget *parent)
   if (hosts.isEmpty ())
     {
       if (!quviPath.isEmpty ())
-        NomNom::parse_quvi_support (quviPath, errmsg);
+        {
+          NomNom::parse_quvi_support (quviPath, errmsg);
+          if (errmsg.isEmpty())
+            NomNom::check_query_formats(quviPath);
+        }
       else
         errmsg = tr ("You must specify path to the quvi command.");
     }

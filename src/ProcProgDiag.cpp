@@ -65,6 +65,11 @@ ProcessProgressDialog::setErrorRegExp (const QRegExp& rx)
   _rx_error = rx;
 }
 
+bool ProcessProgressDialog::canceled() const
+{
+  return _canceled;
+}
+
 void
 ProcessProgressDialog::start (QStringList& args)
 {

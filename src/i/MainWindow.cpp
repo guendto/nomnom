@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 
 // main.cpp
 
+extern bool is_query_formats_avail_flag;
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
 extern Recent recent;
@@ -285,6 +286,7 @@ MainWindow::handleURL (const QString& url)
           NomNom::crit (this, errmsg);
           return;
         }
+      NomNom::check_query_formats(quviPath);
     }
 
   const QString playerPath =
@@ -315,49 +317,36 @@ MainWindow::handleURL (const QString& url)
 
   QStringList formats;
 
-  foreach (QString key, hosts.keys ())
-  {
-    QRegExp re (key);
-    if (re.indexIn (url) != -1)
-      {
-        formats = hosts.value (key);
-        break;
-      }
-  }
-
-  if (formats.size () > 1)   // Assume "default" is always present.
+  if (is_query_formats_avail_flag)
     {
-      bool ok = false;
-      QString s = QInputDialog::getItem (
-                    this,
-                    tr ("Choose format"),
-                    tr ("Format:"),
-                    formats << tr("Enter your own"),
-                    0,
-                    false,
-                    &ok
-                  );
-      if (ok)
-        {
-          if (s == tr("Enter your own"))
-            {
-              s = QInputDialog::getText(
-                    this,
-                    tr("Enter format"),
-                    tr("Format:"),
-                    QLineEdit::Normal,
-                    "default",
-                    &ok
-                  );
-              if (!ok || s.isEmpty())
-                return;
-            }
-          args << "-f" << s;
-        }
-      else
+      if (!queryFormats(formats, quviPath, url))
+        formats.clear();
+
+      if (proc->canceled())
         return;
     }
 
+  if (formats.isEmpty())
+    {
+      foreach (const QString key, hosts.keys())
+      {
+        QString tmp = key;
+        tmp.replace("%", "\\"); // Lua uses '%' to escape. Convert.
+
+        QRegExp rx(tmp);
+        if (rx.indexIn(url) != -1)
+          {
+            formats = hosts.value(key);
+            break;
+          }
+      }
+    }
+
+  QString fmt;
+  if (!selectFormat(formats, fmt))
+    return;
+
+  args << "-f" << fmt;
   log << args.join (" ") + "\n";
 
   json.clear ();
@@ -375,12 +364,84 @@ MainWindow::handleURL (const QString& url)
     }
 }
 
+bool MainWindow::queryFormats(QStringList& formats,
+                              const QString& quviPath,
+                              const QString& url)
+{
+  QStringList args =
+    QStringList()
+    << quviPath.split(" ").replaceInStrings("%u", url)
+    << "-F";
+
+  json.clear();
+
+  proc->setLabelText(tr("Checking ..."));
+  proc->setMaximum(0);
+  proc->start(args);
+
+  QStringList lns = json.split("\n");
+  lns.removeDuplicates();
+
+  const QRegExp rx("^(.*)\\s+:\\s+");
+  foreach (const QString s, lns)
+  {
+    if (rx.indexIn(s) != -1)
+      {
+        formats = QStringList()
+                  << "default"
+                  << "best"
+                  << rx.cap(1).simplified().split("|");
+#ifdef _0
+        qDebug() << __PRETTY_FUNCTION__ << formats;
+#endif
+        return true;
+      }
+  }
+  return false;
+}
+
+bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
+{
+  // Prompt only if count exceeds 1 ("default)".
+  if (formats.size() < 2)
+    {
+      fmt = "default"; // Do not translate. quvi understands only this.
+      return true;
+    }
+
+  bool ok = false;
+
+  fmt = QInputDialog::getItem (
+          this,
+          tr ("Choose format"),
+          tr ("Format:"),
+          formats << tr("Enter your own"),
+          0,
+          false,
+          &ok
+        );
+  if (!ok)
+    return false; // Cancel
+
+  if (fmt == tr("Enter your own"))
+    {
+      fmt = QInputDialog::getText(
+              this,
+              tr("Enter format"),
+              tr("Format:"),
+              QLineEdit::Normal,
+              "default",
+              &ok
+            );
+    }
+  return ok && !fmt.isEmpty();
+}
+
 // View video (stream).
 
 void
 MainWindow::streamVideo ()
 {
-
   QStringList args =
     shPrefs.get (SharedPreferences::PlayerPath)
     .toString ().simplified ().split (" ");
