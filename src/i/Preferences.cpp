@@ -195,18 +195,18 @@ Preferences::onBrowseSaveDir ()
     saveDirEdit->setText (dir);
 }
 
+static const QString fmts[] =
+{
+  "%t.%s",    // Default
+  "%t %i.%s",
+  "%t %i %h.%s"
+};
 
 // Slot: filename format (current index) changed.
 
 void
 Preferences::onFilenameFormatChanged (int n)
 {
-  static const QString fmts[] =
-  {
-    "%t.%s",    // Default
-    "%t %i.%s",
-    "%t %i %h.%s"
-  };
 
   static const int m =
     sizeof (fmts) / sizeof (QString);
@@ -219,20 +219,21 @@ Preferences::onFilenameFormatChanged (int n)
   onRefresh ();
 }
 
+static const QString regexps[] =
+{
+  "/(\\w|\\s)/g", // Default
+  "/(\\w)/g",
+  "/(\\d)/g",
+  "/(\\W)/g",
+  "/(\\D)/g",
+  "/(\\S)/g"
+};
+
 // Slot: regexp (current index) changed.
 
 void
 Preferences::onRegexpChanged (int n)
 {
-  static const QString regexps[] =
-  {
-    "/(\\w|\\s)/g", // Default
-    "/(\\w)/g",
-    "/(\\d)/g",
-    "/(\\W)/g",
-    "/(\\D)/g",
-    "/(\\S)/g"
-  };
 
   static const int m =
     sizeof (regexps) / sizeof (QString);
@@ -517,6 +518,19 @@ SharedPreferences::read ()
   dontPromptFilename = s.value ("dontPromptFilename").toBool ();
 
   s.endGroup ();
+
+  setDefaults();
+}
+
+void SharedPreferences::setDefaults()
+{
+  // Must have defaults.
+
+  if (filenameFormat.isEmpty())
+    filenameFormat = fmts[0];
+
+  if (regexp.isEmpty())
+    regexp = regexps[0];
 }
 
 // SharedPreferences: set.

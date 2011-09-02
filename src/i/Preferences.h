@@ -77,6 +77,8 @@ public:
   void     set     (Option, const QVariant&);
   QVariant get     (Option) const;
 private:
+  void setDefaults();
+private:
   QString quviPath;
   QString curlPath;
   QString playerPath;
