@@ -130,12 +130,10 @@ find_qm (QStringList& langNames)
     paths << s.value (qmPath).toString ();
 
   paths
-      << QDir::currentPath () + "/tr"
-      << QDir::homePath () + "/.config/nomnom/tr"
-      << QDir::homePath () + "/.local/share/nomnom/tr"
-#ifdef INSTALL_PREFIX
-      << QString (INSTALL_PREFIX) + "/share/nomnom/tr"
-#endif
+      << QDir::currentPath() + "/tr"
+      << QDir::homePath() + "/.config/nomnom/tr"
+      << QDir::homePath() + "/.local/share/nomnom/tr"
+      << QString(DATADIR) + "/nomnom/tr"
       ;
 
   QFileInfoList lst;

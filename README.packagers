@@ -1,0 +1,16 @@
+
+PACKAGERS
+=========
+
+Please consider packaging a preconfigured system wide configuration file
+with nomnom. See "examples/NomNom.conf" for an example of this.
+
+nomnom will set the default values (e.g. paths to commands) which may
+not always be correct which is why installing a preconfigured configuration
+file with nomnom is recommended.
+
+You could also run nomnom, edit the preferences and then reuse the
+configuration file in your package. You can see the path to the config
+file in the Preferences / Other.
+
+Please see also the manual page notes.

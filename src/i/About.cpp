@@ -15,6 +15,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
+
 #include <QTextStream>
 #include <QSettings>
 #include <QDebug>
@@ -82,8 +84,8 @@ About::About (QWidget *parent)
   QTextStream qts (&version);
 
   qts << QCoreApplication::applicationVersion ()
-#ifdef TARGET_HOST
-      << " (" << TARGET_HOST << ")"
+#ifdef CANONICAL_TARGET
+      << " for " << CANONICAL_TARGET;
 #endif
       ;
 

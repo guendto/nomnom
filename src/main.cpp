@@ -64,9 +64,9 @@ main (int argc, char *argv[])
 #define APPDOMAIN "nomnom.sourceforge.net"
 
   QCoreApplication::setOrganizationName   (APPNAME);
-  QCoreApplication::setOrganizationDomain (APPDOMAIN);
-  QCoreApplication::setApplicationName    (APPNAME);
-  QCoreApplication::setApplicationVersion (VERSION_LONG);
+  QCoreApplication::setOrganizationDomain(APPDOMAIN);
+  QCoreApplication::setApplicationName   (APPNAME);
+  QCoreApplication::setApplicationVersion(PACKAGE_VERSION);
 
 #ifdef _0
   qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
