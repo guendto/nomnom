@@ -269,16 +269,17 @@ parse_quvi_version (const QString& path, QString& output)
 
   if (!proc.waitForFinished ())
     {
-
       output =
         QObject::tr ("error: %1: %2")
         .arg (cmdPath)
         .arg (proc.errorString ());
-
       return false;
     }
 
-  output = QString::fromLocal8Bit (proc.readAll ()).simplified ();
+  const QString o = QString::fromLocal8Bit(proc.readAll());
+  const QStringList r = o.split("\n");
+
+  output = (*r.begin()).simplified();
 
   return true;
 }
