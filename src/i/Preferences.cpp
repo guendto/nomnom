@@ -46,7 +46,7 @@ Preferences::Preferences (QWidget *parent)
     shPrefs.get (SharedPreferences::QuviPath).toString ());
 
   if (quviPathEdit->text ().isEmpty ())
-    quviPathEdit->setText ("quvi %u");
+    quviPathEdit->setText ("quvi --category-http %u");
 
   curlPathEdit->setText (
     shPrefs.get (SharedPreferences::CurlPath).toString ());
