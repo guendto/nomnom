@@ -28,15 +28,19 @@
 #include <QSize>
 #include <QDir>
 
+#include <NFeed>
+
+#include "Preferences.h"
 #include "Log.h"
 #include "util.h"
 
 // main.cpp
-extern bool is_query_formats_avail_flag;
+extern bool have_quvi_feature_query_formats;
 extern QMap<QString,QStringList> hosts;
 extern QMap<QString,QString> qmFiles;
+extern bool have_umph_feature_all;
+extern SharedPreferences shPrefs;
 extern QStringList qmLangNames;
-extern NomNom::Feed feed;
 extern Log log;
 
 namespace NomNom
@@ -363,11 +367,11 @@ void check_query_formats(const QString& path)
   // 0x1 invalid option
   // 0x3 no input
 
-  is_query_formats_avail_flag =
+  have_quvi_feature_query_formats =
     p.exitStatus() == 0x0 && p.exitCode() == 0x3;
 
 #ifdef _0
-  qDebug() << "have_query_formats" << is_query_formats_avail_flag;
+  qDebug() << "have_query_formats" << have_quvi_feature_query_formats;
 #endif
 }
 
@@ -512,47 +516,6 @@ to_process_errmsg (QProcess::ProcessError n)
   return e;
 }
 
-bool
-choose_from_feed (QWidget *parent, QString& dst)
-{
-  if (feed.isEmpty())
-    return false;
-
-  FeedIterator i(feed);
-  QStringList items;
-
-  while (i.hasNext())
-    items << i.next().first;
-
-  bool ok = false;
-
-  QString title = QInputDialog::getItem (
-                    parent,
-                    QObject::tr ("Choose video"),
-                    QObject::tr ("Video"),
-                    items,
-                    0,
-                    false,
-                    &ok
-                  );
-
-  if (ok)
-    {
-      i = FeedIterator(feed);
-      while (i.hasNext())
-        {
-          QPair<QString,QString> p = i.next();
-          if (p.first == title)
-            {
-              dst = p.second;
-              break;
-            }
-        }
-    }
-
-  return ok;
-}
-
 QString
 reverse_line_order(const QString& s, const QString& sep/*="\n"*/)
 {
@@ -566,6 +529,28 @@ reverse_line_order(const QString& s, const QString& sep/*="\n"*/)
     r += i.previous() + "\n";
 
   return r;
+}
+
+void convert_old_umph_path(QWidget *parent)
+{
+  QString s = shPrefs.get(SharedPreferences::UmphPath).toString();
+  if (s.contains("%"))
+    {
+      info(parent,
+           QObject::tr("Converted deprecated umph path to new default "
+                       "value. Please check the Preferences for the "
+                       "updated value."));
+      shPrefs.set(SharedPreferences::UmphPath, "umph");
+    }
+}
+
+void check_for_umph_feature(const QString& feature)
+{
+  QString s = shPrefs.get(SharedPreferences::UmphPath).toString();
+  if (s.isEmpty())
+    return;
+
+  have_umph_feature_all = nn::feed::umph_supports(s, feature);
 }
 
 } // End of namespace.

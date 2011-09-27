@@ -64,7 +64,7 @@ Preferences::Preferences (QWidget *parent)
     shPrefs.get (SharedPreferences::UmphPath).toString ());
 
   if (umphPathEdit->text ().isEmpty ())
-    umphPathEdit->setText ("umph --json -t %t -s %s -m %m %i");
+    umphPathEdit->setText("umph");
 
   saveDirEdit->setText (
     shPrefs.get (SharedPreferences::SaveDir).toString ());
@@ -382,7 +382,6 @@ Preferences::done (int r)
 
   if (r == QDialog::Accepted)
     {
-
       shPrefs.set (SharedPreferences::QuviPath,
                    append (quviPathEdit));
 
@@ -393,18 +392,7 @@ Preferences::done (int r)
                    append (playerPathEdit));
 
       shPrefs.set (SharedPreferences::UmphPath,
-                   append (umphPathEdit,
-                           QStringList ()
-                           << "--json"
-                           << "-t"
-                           << "%t"
-                           << "-s"
-                           << "%s"
-                           << "-m"
-                           << "%m"
-                           << "%i"
-                          )
-                  );
+                  umphPathEdit->text());
 
       shPrefs.set (SharedPreferences::SaveDir,
                    saveDirEdit->text ());

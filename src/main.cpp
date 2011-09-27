@@ -19,7 +19,11 @@
 
 #include <QApplication>
 #include <QLibraryInfo>
+#ifdef _0
 #include <QDebug>
+#endif
+
+#include <NFeed>
 
 #include "util.h"
 #include "Recent.h"
@@ -47,11 +51,14 @@ Recent recent;
 // Global: Log.
 Log log;
 
-// Global: Feed.
-NomNom::Feed feed;
+// Global: We have quvi --query-formats
+bool have_quvi_feature_query_formats = false;
 
-// Global: --query-formats availability flag
-bool is_query_formats_avail_flag = false;
+// Global: Feed items.
+nn::feed::NFeedList feedItems;
+
+// Global: We have umph --all feature
+bool have_umph_feature_all = false;
 
 int
 main (int argc, char *argv[])

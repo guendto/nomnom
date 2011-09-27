@@ -21,7 +21,11 @@
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QRegExp>
+#ifdef _0
 #include <QDebug>
+#endif
+
+#include <NFeedDialog>
 
 #include <NAboutDialog>
 
@@ -32,7 +36,6 @@
 #include "Preferences.h"
 #include "LogView.h"
 #include "Reminder.h"
-#include "YoutubeFeed.h"
 #include "MainWindow.h"
 
 #define QSETTINGS_GROUP             "MainWindow"
@@ -40,7 +43,7 @@
 
 // main.cpp
 
-extern bool is_query_formats_avail_flag;
+extern bool have_quvi_feature_query_formats;
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
 extern Recent recent;
@@ -106,6 +109,8 @@ MainWindow::MainWindow  ()
   if (shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ())
     changeProgramIcon ();
 
+  NomNom::convert_old_umph_path(this);
+  NomNom::check_for_umph_feature("--all");
 }
 
 void
@@ -320,7 +325,7 @@ MainWindow::handleURL (const QString& url)
 
   QStringList formats;
 
-  if (is_query_formats_avail_flag)
+  if (have_quvi_feature_query_formats)
     {
       if (!queryFormats(formats, quviPath, url))
         formats.clear();
@@ -640,14 +645,16 @@ MainWindow::onPreferences ()
   const QString icon_path =
     shPrefs.get (SharedPreferences::ProgramIconPath).toString ();
 
-  Preferences dlg (this);
+  Preferences *d = new Preferences(this);
 
-  if (dlg.exec () == QDialog::Accepted)
+  if (d->exec() == QDialog::Accepted)
     {
+      NomNom::convert_old_umph_path(this);
+      NomNom::check_for_umph_feature("--all");
 
       // User requested app restart.
 
-      if (dlg.restartAfter ())
+      if (d->restartAfter())
         {
           close ();
           QProcess::startDetached (QCoreApplication::applicationFilePath ());
@@ -686,9 +693,7 @@ MainWindow::onPreferences ()
         {
           changeProgramIcon ();
         }
-
     }
-
 }
 
 // Slot: About.
@@ -757,53 +762,17 @@ MainWindow::onAddress()
   handleURL (url);
 }
 
-// main.cpp
-extern NomNom::Feed feed;
-
 // Slot: on feed.
 
 void
 MainWindow::onFeed ()
 {
   const QString path =
-    shPrefs.get (SharedPreferences::UmphPath).toString ();
+    shPrefs.get(SharedPreferences::UmphPath).toString();
 
-  if (path.isEmpty ())
-    {
-      NomNom::crit (this,
-                    tr ("Specify path to the umph(1) command in the Preferences."));
-      return;
-    }
-
-  QString url;
-
-  if (!feed.empty ())
-    {
-
-      const int rc = NomNom::ask (this, tr ("Choose from old results?"));
-
-      if (rc == QMessageBox::Yes)
-        {
-          if (!NomNom::choose_from_feed (this, url))
-            return;
-        }
-
-    }
-
-  if (url.isEmpty ())
-    {
-
-      YoutubeFeed d (this);
-
-      if (d.exec () != QDialog::Accepted || !d.gotItems ())
-        return;
-
-      if (!NomNom::choose_from_feed (this, url))
-        return;
-
-    }
-
-  handleURL (url);
+  nn::NFeedDialog *d = new nn::NFeedDialog(this, path);
+  if (d->exec() == QDialog::Accepted)
+    handleURL(d->selected());
 }
 
 // Slot: quvi finished.

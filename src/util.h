@@ -105,11 +105,11 @@ format_filename (
 QString
 to_process_errmsg (QProcess::ProcessError);
 
-bool
-choose_from_feed (QWidget *, QString&);
-
 QString
 reverse_line_order(const QString&, const QString& sep="\n");
+
+void convert_old_umph_path(QWidget *parent);
+void check_for_umph_feature(const QString&);
 
 } // End of namespace.
 
