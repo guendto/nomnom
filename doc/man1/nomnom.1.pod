@@ -63,9 +63,15 @@ see the following links for the technical details:
 
 =back
 
+=head1 LICENSE
+
+NomNom is free software, licensed under the GPLv3+.
+
 =head1 WWW
 
-  <http://nomnom.sourceforge.net/>
-  <http://repo.or.cz/w/nomnom.git>
+ Home  : <http://nomnom.sourceforge.net/>
+ gitweb: <http://repo.or.cz/w/nomnom.git>
 
-=cut
+=head1 AUTHOR
+
+Toni Gundogdu <legatvs at sign gmail com>
