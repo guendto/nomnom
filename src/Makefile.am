@@ -2,7 +2,6 @@
 BUILT_SOURCES=\
  ui_LogView.h \
  ui_Reminder.h \
- ui_About.h \
  ui_MainWindow.h \
  ui_YoutubeFeed.h \
  ui_Preferences.h
@@ -10,15 +9,16 @@ BUILT_SOURCES=\
 noinst_HEADERS=\
  rc/LogView.ui \
  rc/Reminder.ui \
- rc/About.ui \
  rc/MainWindow.ui \
  rc/YoutubeFeed.ui \
  rc/Preferences.ui \
  rc/img/nomnom.png \
  rc/img/README \
+ rc/text/COPYING \
  rc/nomnom.qrc
 
 nodist_nomnom_SOURCES=\
+ moc_naboutdialog.cpp \
  moc_Preferences.cpp \
  moc_YoutubeFeed.cpp \
  moc_MainWindow.cpp \
@@ -26,7 +26,6 @@ nodist_nomnom_SOURCES=\
  moc_DownloadDiag.cpp \
  moc_ProcProgDiag.cpp \
  moc_LogView.cpp \
- moc_About.cpp \
  moc_Video.cpp \
  qrc_nomnom.cpp
 
@@ -47,9 +46,6 @@ ui_Reminder.h:
 ui_LogView.h:
 	$(UIC) -o $@ $(top_srcdir)/src/rc/LogView.ui
 
-ui_About.h:
-	$(UIC) -o $@ $(top_srcdir)/src/rc/About.ui
-
 moc_Preferences.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/i/Preferences.h
 
@@ -65,9 +61,6 @@ moc_Reminder.cpp:
 moc_LogView.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/i/LogView.h
 
-moc_About.cpp:
-	$(MOC) -o $@ $(top_srcdir)/src/i/About.h
-
 moc_DownloadDiag.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/DownloadDiag.h
 
@@ -77,12 +70,15 @@ moc_ProcProgDiag.cpp:
 moc_Video.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/Video.h
 
+moc_naboutdialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/about/naboutdialog.h
+
 qrc_nomnom.cpp:
 	$(RCC) -o $@ $(top_srcdir)/src/rc/nomnom.qrc
 
 src=\
+ about/naboutdialog.cpp \
  i/MainWindow.cpp \
- i/About.cpp \
  i/LogView.cpp \
  i/Reminder.cpp \
  i/YoutubeFeed.cpp \
@@ -97,8 +93,9 @@ src=\
  Video.cpp
 
 hdr=\
+ NAboutDialog \
+ about/naboutdialog.h \
  i/MainWindow.h \
- i/About.h \
  i/LogView.h \
  i/Reminder.h \
  i/YoutubeFeed.h \

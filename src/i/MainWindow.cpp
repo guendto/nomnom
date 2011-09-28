@@ -15,17 +15,20 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
+
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QRegExp>
 #include <QDebug>
 
+#include <NAboutDialog>
+
 #include "util.h"
 #include "Log.h"
 #include "Recent.h"
 // UI
-#include "About.h"
 #include "Preferences.h"
 #include "LogView.h"
 #include "Reminder.h"
@@ -690,11 +693,16 @@ MainWindow::onPreferences ()
 
 // Slot: About.
 
+#define WWW "http://nomnom.sourceforge.net/"
+
 void
 MainWindow::onAbout ()
 {
-  About (this).exec ();
+  nn::NAboutDialog *d = new nn::NAboutDialog(VERSION, WWW, this);
+  d->exec();
 }
+
+#undef WWW
 
 // Slot: Recent.
 
