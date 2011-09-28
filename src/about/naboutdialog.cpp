@@ -30,8 +30,8 @@ namespace nn
 {
 
 NAboutDialog::NAboutDialog(const QString& version,
-const QString& www,
-QWidget *parent/*=NULL*/)
+                           const QString& www,
+                           QWidget *parent/*=NULL*/)
   : QDialog(parent)
 {
 
