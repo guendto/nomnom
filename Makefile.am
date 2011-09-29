@@ -6,6 +6,7 @@ EXTRA_DIST=\
  README.packagers \
  nomnom.xpm \
  gen-ver.sh \
+ gen-tr.sh \
  VERSION
 
 desktopdir=	$(datarootdir)/applications
