@@ -28,74 +28,46 @@
 namespace NomNom
 {
 
-void
-restore_size(
-  QSettings&,
-  QWidget*,
-  const QString&,
-  const QSize& defaultSize=QSize(400,350)
-);
-
-void
-restore_pos (
-  QSettings&,
-  QWidget*,
-  const QString&,
-  const QPoint& defaultPos=QPoint(200,200)
-);
-
-void
-save_size   (
-  QSettings&,
-  QWidget*,
-  const QString&
-);
-
-void
-save_pos    (
-  QSettings&,
-  QWidget*,
-  const QString&
-);
-
-void
-info    (QWidget*, const QString&);
-
-void
-crit    (QWidget*, const QString&);
+void restore_size(QSettings&,
+                  QWidget*,
+                  const QString&,
+                  const QSize& defaultSize=QSize(400,350)
+                 );
+void restore_pos(QSettings&,
+                 QWidget*,
+                 const QString&,
+                 const QPoint& defaultPos=QPoint(200,200)
+                );
+void save_size(QSettings&,
+               QWidget*,
+               const QString&
+              );
+void save_pos(QSettings&,
+              QWidget*,
+              const QString&
+             );
+void info(QWidget*, const QString&);
+void crit(QWidget*, const QString&);
 
 #define DEFAULTBTNS QMessageBox::Yes|QMessageBox::No
-
-QMessageBox::StandardButton
-ask (QWidget*, const QString&, QMessageBox::StandardButtons=DEFAULTBTNS);
-
+QMessageBox::StandardButton ask(QWidget*,
+                                const QString&,
+                                QMessageBox::StandardButtons=DEFAULTBTNS);
 #undef DEFAULTBTNS
-
-bool
-parse_quvi_version (const QString& path, QString& output);
-
-bool
-parse_quvi_support (const QString& path, QString& errmsg);
 
 void check_query_formats(const QString&);
 
-bool
-format_filename (
-  QWidget*,
-  const QString& user_regexp,
-  const QString& title,
-  const QString& suffix,
-  const QString& host,
-  const QString& id,
-  QString& dst
-);
+bool format_filename(QWidget*,
+                     const QString& user_regexp,
+                     const QString& title,
+                     const QString& suffix,
+                     const QString& host,
+                     const QString& id,
+                     QString& dst
+                    );
 
-QString
-to_process_errmsg (QProcess::ProcessError);
-
-QString
-reverse_line_order(const QString&, const QString& sep="\n");
-
+QString to_process_errmsg(QProcess::ProcessError);
+QString reverse_line_order(const QString&, const QString& sep="\n");
 void convert_old_umph_path(QWidget *parent);
 void check_for_umph_feature(const QString&);
 
