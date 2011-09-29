@@ -31,7 +31,6 @@
 #include <NFeed>
 
 #include "Preferences.h"
-#include "Log.h"
 #include "util.h"
 
 // main.cpp
@@ -41,7 +40,6 @@ extern QMap<QString,QString> qmFiles;
 extern bool have_umph_feature_all;
 extern SharedPreferences shPrefs;
 extern QStringList qmLangNames;
-extern Log log;
 
 namespace NomNom
 {
@@ -261,8 +259,6 @@ parse_quvi_version (const QString& path, QString& output)
   QStringList args =
     QStringList () << path.split (" ").takeFirst () << "--version";
 
-  log << args.join (" ");
-
   const QString cmdPath = args.takeFirst ();
 
   QProcess proc;
@@ -296,8 +292,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
   QStringList args =
     QStringList () << path.split (" ").takeFirst () << "--support";
 
-  log << args.join (" ");
-
   const QString cmdPath = args.takeFirst ();
 
   QProcess proc;
@@ -324,8 +318,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
     if (ln.isEmpty())
       continue;
 
-    log << ln;
-
     if (re.indexIn(ln) != -1)
       {
         const QString host  = re.cap (1).simplified ();
@@ -347,7 +339,6 @@ parse_quvi_support (const QString& path, QString& errmsg)
 void check_query_formats(const QString& path)
 {
   QStringList args = QStringList() << path.split(" ").takeFirst() << "-F";
-  log << args.join(" ");
 
   const QString cmd = args.takeFirst();
 

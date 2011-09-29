@@ -30,11 +30,9 @@
 #include <NAboutDialog>
 
 #include "util.h"
-#include "Log.h"
 #include "Recent.h"
 // UI
 #include "Preferences.h"
-#include "LogView.h"
 #include "Reminder.h"
 #include "MainWindow.h"
 
@@ -47,7 +45,6 @@ extern bool have_quvi_feature_query_formats;
 extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
 extern Recent recent;
-extern Log log;
 
 // Modes.
 
@@ -102,8 +99,6 @@ MainWindow::MainWindow  ()
 
   proc->setLabelRegExp (h);
 
-  log << tr ("Program started.") + "\n";
-
   // Custom program icon.
 
   if (shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ())
@@ -142,7 +137,6 @@ MainWindow::createContextMenu ()
   add_s;
   creat_a (tr("Overwrite"),   _,          true);
   add_s;
-  creat_a (tr("Log..."),         onLog,         false);
   creat_a (tr("Preferences..."), onPreferences, false);
   add_s;
   creat_a (tr("About..."),    onAbout,    false);
@@ -162,7 +156,6 @@ MainWindow::createContextMenu ()
   // --
   _wrap (tr("Overwrite"),     "Ctrl+W");
   // --
-  _wrap (tr("Log..."),        "Ctrl+L");
   _wrap (tr("Preferences..."),"Ctrl+E");
   // --
   _wrap (tr("Quit"),          "Ctrl+Q");
@@ -303,12 +296,10 @@ MainWindow::handleURL (const QString& url)
   if (playerPath.isEmpty ())
     {
 
-      NomNom::crit (this,
+      NomNom::crit(this,
                     tr ("You must specify path to a stream-capable media "
                         "player command."));
-
-      onPreferences ();
-
+      onPreferences();
       return;
     }
 
@@ -355,7 +346,6 @@ MainWindow::handleURL (const QString& url)
     return;
 
   args << "-f" << fmt;
-  log << args.join (" ") + "\n";
 
   json.clear ();
 
@@ -455,8 +445,6 @@ MainWindow::streamVideo ()
     .toString ().simplified ().split (" ");
 
   args = args.replaceInStrings ("%u", video->get (Video::Link).toString ());
-
-  log  << args.join(" ") + "\n";
 
   const bool ok = QProcess::startDetached (args.takeFirst (), args);
 
@@ -559,14 +547,12 @@ MainWindow::downloadVideo ()
 
       args = args.replaceInStrings ("%u", fpath);
 
-      log  << args.join(" ") + "\n";
-
       const bool ok = QProcess::startDetached (args.takeFirst (), args);
 
       if (!ok)
         {
-          NomNom::crit (this,
-                        tr ("Unable to start player command, check the Preferences."));
+          NomNom::crit (this, tr ("Unable to start player command, "
+                                  "check the Preferences."));
         }
 
     }
@@ -738,14 +724,6 @@ MainWindow::onRecent ()
     return;
 
   handleURL (s);
-}
-
-// Slot: Log.
-
-void
-MainWindow::onLog ()
-{
-  LogView (this).exec ();
 }
 
 // Slot: Download.

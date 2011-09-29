@@ -15,16 +15,16 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifdef _0
 #include <QDebug>
+#endif
 
 #include "util.h"
-#include "Log.h"
 #include "Preferences.h"
 #include "DownloadDiag.h"
 
 // main.cpp
 extern SharedPreferences shPrefs;
-extern Log log;
 
 DownloadDialog::DownloadDialog (QWidget *parent/*=NULL*/)
   : QProgressDialog (parent), _canceled (false)
@@ -65,8 +65,6 @@ DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video)
 
   args.replaceInStrings ("%u", video->get (Video::Link).toString ());
   args.replaceInStrings ("%f", fpath);
-
-  log << args.join (" ") + "\n";
 
   _canceled = false;
 

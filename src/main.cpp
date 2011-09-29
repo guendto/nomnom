@@ -27,7 +27,6 @@
 
 #include "util.h"
 #include "Recent.h"
-#include "Log.h"
 // UI:
 #include "Preferences.h"
 #include "MainWindow.h"
@@ -47,9 +46,6 @@ SharedPreferences shPrefs;
 
 // Global: Recent.
 Recent recent;
-
-// Global: Log.
-Log log;
 
 // Global: We have quvi --query-formats
 bool have_quvi_feature_query_formats = false;

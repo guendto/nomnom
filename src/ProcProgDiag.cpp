@@ -18,11 +18,7 @@
 #include <QDebug>
 
 #include "util.h"
-#include "Log.h"
 #include "ProcProgDiag.h"
-
-// main.cpp
-extern Log log;
 
 ProcessProgressDialog::ProcessProgressDialog (QWidget *parent/*=NULL*/)
   : QProgressDialog (parent),
@@ -78,8 +74,6 @@ ProcessProgressDialog::start (QStringList& args)
 
   _canceled = false;
 
-  log << args.join (" ") + "\n";
-
   show ();
   _proc.start (args.takeFirst (), args);
   exec ();
@@ -108,14 +102,10 @@ ProcessProgressDialog::onProcReadyRead ()
 
   while (_proc.readLine (data, sizeof (data)))
     {
-
       QString ln = QString::fromLocal8Bit (data);
-
       _buffer += ln;
-      log     << ln;
 
       QHashIterator<QString, QRegExp> i (_rx_label);
-
       while (i.hasNext ())
         {
 

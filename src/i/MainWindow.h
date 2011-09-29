@@ -61,7 +61,6 @@ private slots:
   void onFeed         ();
   void onAbout        ();
   void onRecent       ();
-  void onLog          ();
   // quvi.
   void onProcFinished (QString);
 private:
