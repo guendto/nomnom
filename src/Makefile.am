@@ -73,6 +73,7 @@ src=\
  feed/nfeeddialog.cpp \
  feed/nfeedprogressdialog.cpp \
  feed/nfeed.cpp \
+ lang/nlang.cpp \
  i/MainWindow.cpp \
  i/Reminder.cpp \
  i/Preferences.cpp \
@@ -86,13 +87,15 @@ src=\
 
 hdr=\
  NAboutDialog \
- about/naboutdialog.h \
+  about/naboutdialog.h \
  NFeedProgressDialog \
  NFeedDialog \
  NFeed \
- feed/nfeedprogressdialog.h \
- feed/nfeed.h \
- feed/nfeeddialog.h \
+  feed/nfeedprogressdialog.h \
+  feed/nfeeddialog.h \
+  feed/nfeed.h \
+ NLang \
+  lang/nlang.h \
  i/MainWindow.h \
  i/Reminder.h \
  i/Preferences.h \

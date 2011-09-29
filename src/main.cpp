@@ -19,11 +19,13 @@
 
 #include <QApplication>
 #include <QLibraryInfo>
+
 #ifdef _0
 #include <QDebug>
 #endif
 
 #include <NFeed>
+#include <NLang>
 
 #include "util.h"
 #include "Recent.h"
@@ -36,10 +38,6 @@ QMap<QString,QStringList> hosts;
 
 // Global: quvi version.
 QString quviVersion;
-
-// Global: Language.
-QMap<QString,QString> qmFiles;
-QStringList qmLangNames;
 
 // Global: Preferences.
 SharedPreferences shPrefs;
@@ -59,54 +57,46 @@ bool have_umph_feature_all = false;
 int
 main (int argc, char *argv[])
 {
-  qsrand (time (NULL));
-
   QApplication app(argc, argv);
+  qsrand(time(NULL));
 
 #define APPNAME   "NomNom"
 #define APPDOMAIN "nomnom.sourceforge.net"
-
-  QCoreApplication::setOrganizationName   (APPNAME);
+  QCoreApplication::setOrganizationName  (APPNAME);
   QCoreApplication::setOrganizationDomain(APPDOMAIN);
   QCoreApplication::setApplicationName   (APPNAME);
   QCoreApplication::setApplicationVersion(PACKAGE_VERSION);
+#undef APPNAME
+#undef APPDOMAIN
 
+// Qt translation.
+
+  QTranslator qtTranslator;
 #ifdef _0
-  qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-  qDebug() << "qt_"+QLocale::system().name();
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__
+           << "qt_" + QLocale::system().name()
+           << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 #endif
+  qtTranslator.load("qt_" + QLocale::system().name(),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  app.installTranslator(&qtTranslator);
 
-  // Load qt translation, chosen based on the system locale setting.
+// Application translation.
 
-  QTranslator qtTr;
+  bool r = false;
 
-  qtTr.load("qt_" + QLocale::system().name(),
-            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  QSettings s;
+  if (s.contains("language"))
+    r = nn::lang::choose(s.value("language").toString());
 
-  app.installTranslator(&qtTr);
+  if (!r) // Use system locale.
+    nn::lang::choose();
 
-  // Load NomNom translation, chosen based on user definition.
+// Window.
 
-  //: "English" is the default language. This string is not intended to be translated.
-  qmLangNames << QObject::tr ("English");
-  qmFiles = NomNom::find_qm(qmLangNames);
-
-  QTranslator *t = NomNom::load_qm();
-  if (t) QCoreApplication::installTranslator(t);
-
-#ifdef _0
-  // Read preferences. Done in MainWindow ctor.
-  shPrefs.read();
-#endif
-
-  // Read recent.
-
+  MainWindow *w = new MainWindow;
   recent.read();
-
-  // Show main window.
-
-  (new MainWindow)->show();
-
+  w->show();
   return app.exec();
 }
 

@@ -28,9 +28,6 @@
 namespace NomNom
 {
 
-typedef QListIterator<QPair<QString,QString> > FeedIterator;
-typedef QList< QPair<QString,QString> > Feed;
-
 void
 restore_size(
   QSettings&,
@@ -73,15 +70,6 @@ QMessageBox::StandardButton
 ask (QWidget*, const QString&, QMessageBox::StandardButtons=DEFAULTBTNS);
 
 #undef DEFAULTBTNS
-
-QMap<QString,QString>
-find_qm (QStringList&);
-
-bool
-choose_lang (QWidget*, QString&);
-
-QTranslator*
-load_qm ();
 
 bool
 parse_quvi_version (const QString& path, QString& output);

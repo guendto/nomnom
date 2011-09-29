@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011  Toni Gundogdu
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,11 @@
 #include <QFileDialog>
 #include <QSettings>
 #include <QImageReader>
+#ifdef _0
 #include <QDebug>
+#endif
+
+#include <NLang>
 
 #include "util.h"
 #include "Recent.h"
@@ -333,25 +337,24 @@ Preferences::onClearRecent ()
 void
 Preferences::onLanguage ()
 {
-  QString langName;
-
-  if (!NomNom::choose_lang (this, langName))
-    return;
-
-  QSettings s;
-  s.setValue ("language", langName);
-
-  if (NomNom::ask (this,
-                   tr ("The language will be changed after you restart NomNom. "
-                       "Restart NomNom?"))
-      == QMessageBox::No)
+  QString lang;
+  if (nn::lang::choose_dialog(this, lang))
     {
-      return;
+      QSettings s;
+      s.setValue("language", lang);
+      if (NomNom::ask(this,
+                      tr("The language will be changed after you "
+                         "restart NomNom. Restart NomNom?"))
+          == QMessageBox::No)
+        {
+          return;
+        }
+#ifdef _0
+      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << lang;
+#endif
+      _restartAfter = true;
+      done(QDialog::Accepted);
     }
-
-  _restartAfter = true;
-
-  done (QDialog::Accepted);
 }
 
 static QString
@@ -392,7 +395,7 @@ Preferences::done (int r)
                    append (playerPathEdit));
 
       shPrefs.set (SharedPreferences::UmphPath,
-                  umphPathEdit->text());
+                   umphPathEdit->text());
 
       shPrefs.set (SharedPreferences::SaveDir,
                    saveDirEdit->text ());
@@ -574,11 +577,13 @@ SharedPreferences::set (Option opt, const QVariant& v)
       dontPromptFilename = v.toBool ();
       break;
     default:
+#ifdef _0
       qDebug()
           << __PRETTY_FUNCTION__
           << __LINE__
           << "invalid option id"
           << opt;
+#endif
       break;
     }
 }
@@ -621,11 +626,13 @@ SharedPreferences::get (Option opt) const
     case DontPromptFilename:
       return QVariant (dontPromptFilename);
     default:
+#ifdef _0
       qDebug()
           << __PRETTY_FUNCTION__
           << __LINE__
           << "invalid option id"
           << opt;
+#endif
       break;
     }
 

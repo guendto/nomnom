@@ -25,9 +25,9 @@
 #include <QDebug>
 #endif
 
-#include <NFeedDialog>
-
 #include <NAboutDialog>
+#include <NFeedDialog>
+#include <NLang>
 
 #include "util.h"
 #include "Recent.h"
