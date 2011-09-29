@@ -40,7 +40,6 @@
 // main.cpp
 
 extern bool have_quvi_feature_query_formats;
-extern QMap<QString,QStringList> hosts;
 extern SharedPreferences shPrefs;
 extern Recent recent;
 
@@ -271,16 +270,7 @@ MainWindow::handleURL (const QString& url)
       return;
     }
 
-  if (hosts.isEmpty ())
-    {
-      QString errmsg;
-      if (!NomNom::parse_quvi_support (quviPath, errmsg))
-        {
-          NomNom::crit (this, errmsg);
-          return;
-        }
-      NomNom::check_query_formats(quviPath);
-    }
+  NomNom::check_query_formats(quviPath);
 
   const QString playerPath =
     shPrefs.get (SharedPreferences::PlayerPath).toString ().simplified ();
@@ -289,8 +279,8 @@ MainWindow::handleURL (const QString& url)
     {
 
       NomNom::crit(this,
-                    tr ("You must specify path to a stream-capable media "
-                        "player command."));
+                   tr ("You must specify path to a stream-capable media "
+                       "player command."));
       onPreferences();
       return;
     }
@@ -315,22 +305,6 @@ MainWindow::handleURL (const QString& url)
 
       if (proc->canceled())
         return;
-    }
-
-  if (formats.isEmpty())
-    {
-      foreach (const QString key, hosts.keys())
-      {
-        QString tmp = key;
-        tmp.replace("%", "\\"); // Lua uses '%' to escape. Convert.
-
-        QRegExp rx(tmp);
-        if (rx.indexIn(url) != -1)
-          {
-            formats = hosts.value(key);
-            break;
-          }
-      }
     }
 
   QString fmt;

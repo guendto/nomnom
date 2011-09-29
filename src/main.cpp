@@ -33,26 +33,11 @@
 #include "Preferences.h"
 #include "MainWindow.h"
 
-// Global: Hosts (or websites) that quvi supports.
-QMap<QString,QStringList> hosts;
-
-// Global: quvi version.
-QString quviVersion;
-
-// Global: Preferences.
-SharedPreferences shPrefs;
-
-// Global: Recent.
-Recent recent;
-
-// Global: We have quvi --query-formats
 bool have_quvi_feature_query_formats = false;
-
-// Global: Feed items.
-nn::feed::NFeedList feedItems;
-
-// Global: We have umph --all feature
 bool have_umph_feature_all = false;
+nn::feed::NFeedList feedItems;
+SharedPreferences shPrefs;
+Recent recent;
 
 int
 main (int argc, char *argv[])

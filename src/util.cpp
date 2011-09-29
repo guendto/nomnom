@@ -35,11 +35,8 @@
 
 // main.cpp
 extern bool have_quvi_feature_query_formats;
-extern QMap<QString,QStringList> hosts;
-extern QMap<QString,QString> qmFiles;
 extern bool have_umph_feature_all;
 extern SharedPreferences shPrefs;
-extern QStringList qmLangNames;
 
 namespace NomNom
 {
@@ -129,60 +126,6 @@ parse_quvi_version (const QString& path, QString& output)
   const QStringList r = o.split("\n");
 
   output = (*r.begin()).simplified();
-
-  return true;
-}
-
-bool
-parse_quvi_support (const QString& path, QString& errmsg)
-{
-  errmsg.clear ();
-
-  // Use command path (arg0) and "--support" only.
-
-  QStringList args =
-    QStringList () << path.split (" ").takeFirst () << "--support";
-
-  const QString cmdPath = args.takeFirst ();
-
-  QProcess proc;
-  proc.setProcessChannelMode(QProcess::MergedChannels);
-  proc.start(cmdPath, args);
-
-  if (!proc.waitForFinished())
-    {
-      errmsg =
-        QObject::tr("error: %1: %2")
-        .arg(cmdPath)
-        .arg(proc.errorString ());
-
-      return false;
-    }
-
-  const QRegExp re("(.*)\\s+(.*)$");
-
-  const QString output =
-    QString::fromLocal8Bit(proc.readAll());
-
-  foreach (QString ln, output.split("\n"))
-  {
-    if (ln.isEmpty())
-      continue;
-
-    if (re.indexIn(ln) != -1)
-      {
-        const QString host  = re.cap (1).simplified ();
-        QStringList formats = re.cap (2).simplified ().split ("|");
-
-        // Keep "default" at the beginning of the list.
-
-        const QString top = formats.takeFirst ();
-        formats.sort ();
-        formats.prepend (top);
-
-        hosts[host] = formats;
-      }
-  }
 
   return true;
 }
