@@ -33,11 +33,9 @@
 #include "Recent.h"
 // UI
 #include "Preferences.h"
-#include "Reminder.h"
 #include "MainWindow.h"
 
 #define QSETTINGS_GROUP             "MainWindow"
-#define QSETTINGS_REMINDER_SHOWTIPS "showTips"
 
 // main.cpp
 
@@ -253,13 +251,7 @@ MainWindow::readSettings ()
   modeCBox->setCurrentIndex(s.value("modeCBox").toInt());
   s.endGroup();
 
-  Reminder (this, "SharedPreferences").conditionalExec ();
-
-  // Re-read (now updated) "showReminder" value. This was previously done
-  // in main.cpp, but has to be done here if we expect the Preferences
-  // "show tips" box value to match the one set in the Reminder dialog.
-
-  shPrefs.read ();
+  shPrefs.read();
 }
 
 // Handle (dropped) URL.

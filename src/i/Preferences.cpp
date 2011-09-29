@@ -115,12 +115,6 @@ Preferences::Preferences (QWidget *parent)
     : Qt::Unchecked
   );
 
-  showReminderBox->setChecked (
-    shPrefs.get (SharedPreferences::ShowReminder).toBool ()
-    ? Qt::Checked
-    : Qt::Unchecked
-  );
-
   dontPromptFilenameBox->setChecked (
     shPrefs.get (SharedPreferences::DontPromptFilename).toBool ()
     ? Qt::Checked
@@ -433,9 +427,6 @@ Preferences::done (int r)
       shPrefs.set (SharedPreferences::PlayWhenDone,
                    playWhenDoneBox->isChecked ());
 
-      shPrefs.set (SharedPreferences::ShowReminder,
-                   showReminderBox->isChecked ());
-
       shPrefs.set (SharedPreferences::DontPromptFilename,
                    dontPromptFilenameBox->isChecked ());
 
@@ -478,7 +469,6 @@ SharedPreferences::write () const
   s.setValue ("minToTray",    minToTray);
   s.setValue ("stayOnTop",    stayOnTop);
   s.setValue ("playWhenDone", playWhenDone);
-  s.setValue ("showReminder", showReminder);
   s.setValue ("dontPromptFilename", dontPromptFilename);
 
   s.endGroup ();
@@ -505,7 +495,6 @@ SharedPreferences::read ()
   minToTray    = s.value ("minToTray").toBool ();
   stayOnTop    = s.value ("stayOnTop").toBool ();
   playWhenDone = s.value ("playWhenDone").toBool ();
-  showReminder = s.value ("showReminder").toBool ();
   dontPromptFilename = s.value ("dontPromptFilename").toBool ();
 
   s.endGroup ();
@@ -570,9 +559,6 @@ SharedPreferences::set (Option opt, const QVariant& v)
     case PlayWhenDone   :
       playWhenDone = v.toBool ();
       break;
-    case ShowReminder   :
-      showReminder = v.toBool ();
-      break;
     case DontPromptFilename:
       dontPromptFilename = v.toBool ();
       break;
@@ -621,8 +607,6 @@ SharedPreferences::get (Option opt) const
       return QVariant (stayOnTop);
     case PlayWhenDone :
       return QVariant (playWhenDone);
-    case ShowReminder :
-      return QVariant (showReminder);
     case DontPromptFilename:
       return QVariant (dontPromptFilename);
     default:

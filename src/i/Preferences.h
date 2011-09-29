@@ -68,7 +68,7 @@ public:
     MinToTray,
     StayOnTop,
     PlayWhenDone,
-    ShowReminder,
+    ShowReminder, // Obsolete
     DontPromptFilename
   };
 public:
@@ -92,7 +92,6 @@ private:
   bool    minToTray;
   bool    stayOnTop;
   bool    playWhenDone;
-  bool    showReminder;
   bool    dontPromptFilename;
 };
 

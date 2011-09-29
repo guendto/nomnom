@@ -58,7 +58,6 @@ int
 main (int argc, char *argv[])
 {
   QApplication app(argc, argv);
-  qsrand(time(NULL));
 
 #define APPNAME   "NomNom"
 #define APPDOMAIN "nomnom.sourceforge.net"

@@ -1,11 +1,9 @@
 
 BUILT_SOURCES=\
- ui_Reminder.h \
  ui_MainWindow.h \
  ui_Preferences.h
  
 noinst_HEADERS=\
- rc/Reminder.ui \
  rc/MainWindow.ui \
  rc/Preferences.ui \
  rc/img/nomnom.png \
@@ -19,7 +17,6 @@ nodist_nomnom_SOURCES=\
  moc_nfeeddialog.cpp \
  moc_Preferences.cpp \
  moc_MainWindow.cpp \
- moc_Reminder.cpp \
  moc_DownloadDiag.cpp \
  moc_ProcProgDiag.cpp \
  moc_Video.cpp \
@@ -33,17 +30,11 @@ ui_Preferences.h:
 ui_MainWindow.h:
 	$(UIC) -o $@ $(top_srcdir)/src/rc/MainWindow.ui
 
-ui_Reminder.h:
-	$(UIC) -o $@ $(top_srcdir)/src/rc/Reminder.ui
-
 moc_Preferences.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/i/Preferences.h
 
 moc_MainWindow.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/i/MainWindow.h
-
-moc_Reminder.cpp:
-	$(MOC) -o $@ $(top_srcdir)/src/i/Reminder.h
 
 moc_DownloadDiag.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/DownloadDiag.h
@@ -75,13 +66,11 @@ src=\
  feed/nfeed.cpp \
  lang/nlang.cpp \
  i/MainWindow.cpp \
- i/Reminder.cpp \
  i/Preferences.cpp \
  ProcProgDiag.cpp \
  DownloadDiag.cpp \
  main.cpp \
  util.cpp \
- tips.cpp \
  Recent.cpp \
  Video.cpp
 
@@ -97,12 +86,10 @@ hdr=\
  NLang \
   lang/nlang.h \
  i/MainWindow.h \
- i/Reminder.h \
  i/Preferences.h \
  ProcProgDiag.h \
  DownloadDiag.h \
  util.h \
- tips.h \
  Recent.h \
  Video.h
 
