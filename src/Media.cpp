@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -15,22 +15,25 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QString>
-#include <QVariant>
-#include <QLabel>
-#include <QScriptEngine>
 #include <QScriptValueIterator>
-#include <QDebug>
+#include <QScriptEngine>
+#include <QVariant>
+#include <QString>
+#include <QLabel>
 
-#include "Video.h"
+#ifdef _0
+#include <QDebug>
+#endif
+
+#include "Media.h"
 
 // Ctor.
 
-Video::Video ()
+Media::Media ()
   : QObject(), _length (0)
 { }
 
-Video::Video (const Video& v)
+Media::Media (const Media& v)
   : QObject(), _length(0)
 {
   _link        = v._link;
@@ -43,8 +46,8 @@ Video::Video (const Video& v)
   _ctype       = v._ctype;
 }
 
-Video&
-Video::operator=(const Video&)
+Media&
+Media::operator=(const Media&)
 {
   return *this;
 }
@@ -52,7 +55,7 @@ Video::operator=(const Video&)
 // Parse from JSON.
 
 bool
-Video::fromJSON (const QString& data, QString& error)
+Media::fromJSON (const QString& data, QString& error)
 {
   QScriptEngine e;
 
@@ -75,7 +78,7 @@ Video::fromJSON (const QString& data, QString& error)
 
   if ( !i.hasNext () )
     {
-      error = tr("Expected at least one video link from quvi(1), got none.");
+      error = tr("Expected at least one media link from quvi(1), got none.");
       return false;
     }
 
@@ -101,7 +104,7 @@ Video::fromJSON (const QString& data, QString& error)
 // Get.
 
 QVariant
-Video::get (Detail d) const
+Media::get (Detail d) const
 {
   switch (d)
     {
@@ -131,7 +134,7 @@ Video::get (Detail d) const
 // Set.
 
 void
-Video::set (Detail d, const QString& s)
+Media::set (Detail d, const QString& s)
 {
   bool ignored = false;
   switch (d)
@@ -168,16 +171,16 @@ Video::set (Detail d, const QString& s)
     }
 }
 
-// VideoException: ctor.
+// MediaException: ctor.
 
-VideoException::VideoException (const QString& errmsg)
+MediaException::MediaException (const QString& errmsg)
   : errmsg(errmsg)
 { }
 
-// VideoException: what.
+// MediaException: what.
 
 const QString&
-VideoException::what() const
+MediaException::what() const
 {
   return errmsg;
 }

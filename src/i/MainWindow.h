@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
+* Copyright (C) 2010-2011 Toni Gundogdu.
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 #include <QMenu>
 #include <QHash>
 
-#include "Video.h"
+#include "Media.h"
 #include "DownloadDiag.h"
 #include "ProcProgDiag.h"
 
@@ -48,8 +48,8 @@ private:
   void readSettings       ();
   void handleURL          (const QString&);
   bool parseOK            (QString&);
-  void streamVideo        ();
-  void downloadVideo      ();
+  void streamMedia        ();
+  void downloadMedia      ();
   void changeProgramIcon  ();
   bool queryFormats       (QStringList&,
                            const QString&,
@@ -72,7 +72,7 @@ private:
   QPointer<DownloadDialog> download;
   QHash<QString,QAction*> actions;
   QPointer<QMenu> trayMenu;
-  QPointer<Video> video;
+  QPointer<Media> media;
   QString json;
 };
 

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=NomNom
-Comment=Download videos from Youtube, Dailymotion, etc.
+Comment=Download media from Youtube, Dailymotion, etc.
 Exec=@prefix@/bin/nomnom
 Icon=nomnom.xpm
 Type=Application

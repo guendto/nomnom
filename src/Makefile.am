@@ -19,7 +19,7 @@ nodist_nomnom_SOURCES=\
  moc_MainWindow.cpp \
  moc_DownloadDiag.cpp \
  moc_ProcProgDiag.cpp \
- moc_Video.cpp \
+ moc_Media.cpp \
  qrc_nomnom.cpp
 
 CLEANFILES=	$(nodist_nomnom_SOURCES) $(BUILT_SOURCES)
@@ -42,8 +42,8 @@ moc_DownloadDiag.cpp:
 moc_ProcProgDiag.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/ProcProgDiag.h
 
-moc_Video.cpp:
-	$(MOC) -o $@ $(top_srcdir)/src/Video.h
+moc_Media.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/Media.h
 
 moc_naboutdialog.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/about/naboutdialog.h
@@ -72,7 +72,7 @@ src=\
  main.cpp \
  util.cpp \
  Recent.cpp \
- Video.cpp
+ Media.cpp
 
 hdr=\
  NAboutDialog \
@@ -91,7 +91,7 @@ hdr=\
  DownloadDiag.h \
  util.h \
  Recent.h \
- Video.h
+ Media.h
 
 bin_PROGRAMS=	nomnom
 nomnom_SOURCES=	$(src) $(hdr)

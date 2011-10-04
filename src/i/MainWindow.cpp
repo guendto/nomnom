@@ -45,7 +45,7 @@ extern Recent recent;
 
 // Modes.
 
-enum { StreamVideo=0, DownloadVideo };
+enum { StreamMedia=0, DownloadMedia };
 
 // Ctor.
 
@@ -60,9 +60,9 @@ MainWindow::MainWindow()
   if (shPrefs.get (SharedPreferences::StayOnTop).toBool ())
     setWindowFlags (windowFlags () | Qt::WindowStaysOnTopHint);
 
-  // Create Video instance.
+  // Create Media instance.
 
-  video  = new Video;
+  media  = new Media;
 
   // Create context menu.
 
@@ -319,10 +319,10 @@ void MainWindow::handleURL(const QString& url)
   QString errmsg;
   if (parseOK(errmsg))
     {
-      if (modeCBox->currentIndex() == StreamVideo)
-        streamVideo();
+      if (modeCBox->currentIndex() == StreamMedia)
+        streamMedia();
       else
-        downloadVideo();
+        downloadMedia();
     }
   else
     NomNom::crit(this, errmsg);
@@ -413,15 +413,15 @@ bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
   return ok && !fmt.isEmpty();
 }
 
-// View video (stream).
+// View media (stream).
 
-void MainWindow::streamVideo()
+void MainWindow::streamMedia()
 {
   QStringList args =
     shPrefs.get (SharedPreferences::PlayerPath)
     .toString ().simplified ().split (" ");
 
-  args = args.replaceInStrings ("%u", video->get (Video::Link).toString ());
+  args = args.replaceInStrings ("%u", media->get (Media::Link).toString ());
 
   const bool ok = QProcess::startDetached (args.takeFirst (), args);
 
@@ -432,23 +432,23 @@ void MainWindow::streamVideo()
     }
 }
 
-// Download video (to a file).
+// Download media (to a file).
 
-void MainWindow::downloadVideo()
+void MainWindow::downloadMedia()
 {
   QString fname =
     shPrefs.get (SharedPreferences::FilenameFormat).toString ();
 
   const QString suffix =
-    video->get (Video::Suffix).toString ().simplified ();
+    media->get (Media::Suffix).toString ().simplified ();
 
   bool ok = NomNom::format_filename (
               this,
               shPrefs.get (SharedPreferences::Regexp).toString (),
-              video->get (Video::Title).toString ().simplified (),
+              media->get (Media::Title).toString ().simplified (),
               suffix,
-              video->get (Video::Host).toString ().simplified (),
-              video->get (Video::ID).toString ().simplified (),
+              media->get (Media::Host).toString ().simplified (),
+              media->get (Media::ID).toString ().simplified (),
               fname
             );
 
@@ -474,7 +474,7 @@ void MainWindow::downloadVideo()
 
       fpath = QFileDialog::getSaveFileName (
                 this,
-                tr ("Save video as"),
+                tr ("Save media as"),
                 fpath,
                 suffix, // Filter.
                 0,      // Selected filter.
@@ -486,7 +486,7 @@ void MainWindow::downloadVideo()
     }
 
   const qint64 expected_bytes =
-    video->get (Video::Length).toLongLong ();
+    media->get (Media::Length).toLongLong ();
 
   if (QFileInfo (fpath).size () < expected_bytes)
     {
@@ -494,7 +494,7 @@ void MainWindow::downloadVideo()
       const QString cmd =
         shPrefs.get (SharedPreferences::CurlPath).toString ().simplified ();
 
-      download->start (cmd, fpath, video);
+      download->start (cmd, fpath, media);
     }
 
   const bool completeFile =
@@ -573,7 +573,7 @@ bool MainWindow::parseOK(QString& errmsg)
       return false;
     }
 
-  return video->fromJSON(json.mid(n), errmsg);
+  return media->fromJSON(json.mid(n), errmsg);
 }
 
 // Slot: Icon activated.
@@ -698,7 +698,7 @@ void MainWindow::onRecent()
 void MainWindow::onAddress()
 {
   const QString url =
-    QInputDialog::getText (this, tr ("Address"), tr ("Video URL:"));
+    QInputDialog::getText (this, tr ("Address"), tr ("Media URL:"));
 
   if (url.isEmpty ())
     return;

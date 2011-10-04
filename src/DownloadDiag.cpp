@@ -53,17 +53,17 @@ DownloadDialog::DownloadDialog (QWidget *parent/*=NULL*/)
 }
 
 void
-DownloadDialog::start (const QString& cmd, const QString& fpath, Video *video)
+DownloadDialog::start (const QString& cmd, const QString& fpath, Media *media)
 {
   Q_ASSERT (!cmd.isEmpty ());
   Q_ASSERT (!fpath.isEmpty ());
-  Q_ASSERT (video != NULL);
+  Q_ASSERT (media != NULL);
 
   _lastError.clear ();
 
   QStringList args = cmd.split (" ");
 
-  args.replaceInStrings ("%u", video->get (Video::Link).toString ());
+  args.replaceInStrings ("%u", media->get (Media::Link).toString ());
   args.replaceInStrings ("%f", fpath);
 
   _canceled = false;

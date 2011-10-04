@@ -15,8 +15,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef nomnom_video_h
-#define nomnom_video_h
+#ifndef nomnom_media_h
+#define nomnom_media_h
 
 #include <QPointer>
 #include <QRegExp>
@@ -24,16 +24,16 @@
 
 class QLabel;
 
-class Video : public QObject
+class Media : public QObject
 {
   Q_OBJECT
 public:
   enum Detail
   { Link=0, Title, PageURL, ID, Format, Length, Suffix, ContentType, Host };
 public:
-  Video ();
-  Video (const Video&);
-  Video& operator=(const Video&);
+  Media();
+  Media(const Media&);
+  Media& operator=(const Media&);
 public:
   bool     fromJSON   (const QString&, QString&);
   QVariant get        (Detail) const;
@@ -51,10 +51,10 @@ private:
   QString _host;
 };
 
-class VideoException
+class MediaException
 {
 public:
-  VideoException (const QString&);
+  MediaException(const QString&);
   const QString& what() const;
 private:
   QString errmsg;

@@ -21,7 +21,7 @@
 #include <QProgressDialog>
 #include <QProcess>
 
-#include "Video.h"
+#include "Media.h"
 
 class DownloadDialog : public QProgressDialog
 {
@@ -29,7 +29,7 @@ class DownloadDialog : public QProgressDialog
 public:
   DownloadDialog (QWidget *parent=NULL);
 public:
-  void start (const QString&, const QString&, Video*);
+  void start (const QString&, const QString&, Media*);
 signals:
   void error ();
 private slots:
