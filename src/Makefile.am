@@ -1,21 +1,22 @@
 
 BUILT_SOURCES=\
- ui_MainWindow.h \
- ui_Preferences.h
+ ui_MainWindow.h
  
 noinst_HEADERS=\
  rc/MainWindow.ui \
- rc/Preferences.ui \
  rc/img/nomnom.png \
  rc/img/README \
  rc/text/COPYING \
  rc/nomnom.qrc
 
 nodist_nomnom_SOURCES=\
- moc_naboutdialog.cpp \
  moc_nfeedprogressdialog.cpp \
+ moc_nsettingsdialog.cpp \
+ moc_ndetectdialog.cpp \
+ moc_ntripwireedit.cpp \
+ moc_naboutdialog.cpp \
  moc_nfeeddialog.cpp \
- moc_Preferences.cpp \
+ moc_nsystray.cpp \
  moc_MainWindow.cpp \
  moc_DownloadDiag.cpp \
  moc_ProcProgDiag.cpp \
@@ -24,14 +25,8 @@ nodist_nomnom_SOURCES=\
 
 CLEANFILES=	$(nodist_nomnom_SOURCES) $(BUILT_SOURCES)
 
-ui_Preferences.h:
-	$(UIC) -o $@ $(top_srcdir)/src/rc/Preferences.ui
-
 ui_MainWindow.h:
 	$(UIC) -o $@ $(top_srcdir)/src/rc/MainWindow.ui
-
-moc_Preferences.cpp:
-	$(MOC) -o $@ $(top_srcdir)/src/i/Preferences.h
 
 moc_MainWindow.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/i/MainWindow.h
@@ -45,51 +40,90 @@ moc_ProcProgDiag.cpp:
 moc_Media.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/Media.h
 
-moc_naboutdialog.cpp:
-	$(MOC) -o $@ $(top_srcdir)/src/about/naboutdialog.h
-
 moc_nfeedprogressdialog.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/feed/nfeedprogressdialog.h
 
 moc_nfeeddialog.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/feed/nfeeddialog.h
 
+moc_nsettingsdialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/settings/nsettingsdialog.h
+
+moc_ndetectdialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/detect/ndetectdialog.h
+
+moc_ntripwireedit.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/widgets/ntripwireedit.h
+
+moc_naboutdialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/about/naboutdialog.h
+
+moc_nsystray.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/systray/nsystray.h
+
 qrc_nomnom.cpp:
 	$(RCC) -o $@ $(top_srcdir)/src/rc/nomnom.qrc
 
 src=\
+ settings/nsettingsdialog_options_appearance.cpp \
+ settings/nsettingsdialog_options_behaviour.cpp \
+ settings/nsettingsdialog_options_systray.cpp \
+ settings/nsettingsdialog_commands.cpp \
+ settings/nsettingsdialog_download.cpp \
+ settings/nsettingsdialog_options.cpp \
+ settings/nsettingsdialog_proxy.cpp \
+ settings/nsettingsmutator.cpp \
+ settings/nsettingsdialog.cpp \
+ settings/nsettings.cpp \
+ widgets/ntripwireedit.cpp \
+ detect/ndetectdialog.cpp \
+ detect/ndetect.cpp \
  about/naboutdialog.cpp \
  feed/nfeeddialog_properties.cpp \
+ feed/nfeedprogressdialog.cpp \
  feed/nfeeddialog_items.cpp \
  feed/nfeeddialog.cpp \
- feed/nfeedprogressdialog.cpp \
  feed/nfeed.cpp \
  lang/nlang.cpp \
+ util/nutil.cpp \
+ systray/nsystray.cpp \
  i/MainWindow.cpp \
- i/Preferences.cpp \
  ProcProgDiag.cpp \
  DownloadDiag.cpp \
  main.cpp \
- util.cpp \
  Recent.cpp \
  Media.cpp
 
 hdr=\
- NAboutDialog \
-  about/naboutdialog.h \
  NFeedProgressDialog \
  NFeedDialog \
  NFeed \
   feed/nfeedprogressdialog.h \
   feed/nfeeddialog.h \
   feed/nfeed.h \
+ NSettingsMutator \
+ NSettingsDialog \
+ NSettings \
+  settings/nsettingsmutator.h \
+  settings/nsettingsdialog.h \
+  settings/nsettings.h \
+ NDetectDialog \
+ NDetect \
+  detect/ndetectdialog.h \
+  detect/ndetect.h \
+ NTripwireEdit \
+  widgets/ntripwireedit.h \
+ NSysTray \
+  systray/nsystray.h \
+ NAboutDialog \
+  about/naboutdialog.h \
  NLang \
   lang/nlang.h \
+ NUtil \
+  util/nutil.h \
  i/MainWindow.h \
- i/Preferences.h \
  ProcProgDiag.h \
  DownloadDiag.h \
- util.h \
  Recent.h \
  Media.h
 
@@ -102,7 +136,13 @@ AM_CPPFLAGS+=	-DDATADIR='"$(datadir)"'
 AM_CPPFLAGS+=	$(QtScript_CFLAGS)
 AM_CPPFLAGS+=	$(QtCore_CFLAGS)
 AM_CPPFLAGS+=	$(QtGui_CFLAGS)
+#if ENABLE_LIBPROXY
+#AM_CPPFLAGS+=	$(libproxy_CFLAGS)
+#endif
 
 nomnom_LDADD=	$(QtScript_LIBS)
 nomnom_LDADD+=	$(QtCore_LIBS)
 nomnom_LDADD+=	$(QtGui_LIBS)
+#if ENABLE_LIBPROXY
+#nomnom_LDADD+=	$(libproxy_LIBS)
+#endif

@@ -29,13 +29,13 @@ extern nn::feed::NFeedList feedItems; // main.cpp
 namespace nn
 {
 
-NFeedDialog::NFeedDialog(QWidget *parent, const QString& umphPath)
+NFeedDialog::NFeedDialog(QWidget *parent, const QStringList& args)
   : QDialog(parent), _toolbox(NULL)
 {
 
 // Toolbox
 
-  NFeedProperties *info = new NFeedProperties(umphPath);
+  NFeedProperties *info = new NFeedProperties(args);
   connect(info, SIGNAL(parse(QStringList)), this, SLOT(parse(QStringList)));
 
   NFeedItems *items = new NFeedItems;

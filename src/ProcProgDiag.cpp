@@ -1,39 +1,42 @@
 /*
-* Copyright (C) 2010 Toni Gundogdu.
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * NomNom
+ * Copyright (C) 2010-2011 Toni Gundogdu.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifdef _0
 #include <QDebug>
 #endif
 
 #include "ProcProgDiag.h"
-#include "util.h"
+
+static QHash<QString,QRegExp> rx_labels;
 
 ProcessProgressDialog::ProcessProgressDialog(QWidget *parent/*=NULL*/)
   : QProgressDialog(parent),
-    _rx_error(QRegExp("error:\\s+(.*)$")),
     _canceled(false)
 {
+  _proc.setProcessChannelMode(QProcess::MergedChannels);
+
 #define _conn(s,sl) \
-    do { connect(&_proc, SIGNAL(s), this, SLOT(sl)); } while(0)
+    do { connect(&_proc, SIGNAL(s), this, SLOT(sl)); } while (0)
   _conn(started(), onProcStarted());
   _conn(error(QProcess::ProcessError), onProcError(QProcess::ProcessError));
   _conn(readyRead(), onProcReadyRead());
   _conn(finished(int, QProcess::ExitStatus),
-         onProcFinished(int, QProcess::ExitStatus));
+        onProcFinished(int, QProcess::ExitStatus));
 #undef _conn
 
   connect(this, SIGNAL(canceled()), this, SLOT(onCanceled()));
@@ -41,17 +44,11 @@ ProcessProgressDialog::ProcessProgressDialog(QWidget *parent/*=NULL*/)
   setWindowModality(Qt::WindowModal);
   setAutoClose(false);
 
-  _proc.setProcessChannelMode(QProcess::MergedChannels);
-}
-
-void ProcessProgressDialog::setLabelRegExp(const QHash<QString,QRegExp>& h)
-{
-  _rx_label = h;
-}
-
-void ProcessProgressDialog::setErrorRegExp(const QRegExp& rx)
-{
-  _rx_error = rx;
+#define _wrap(s,r) do { rx_labels[s] = QRegExp(r); } while (0)
+  _wrap(tr("Checking..."),  "^:: Check");
+  _wrap(tr("Fetching..."),  "^:: Fetch");
+  _wrap(tr("Verifying..."), "^:: Verify");
+#undef _wrap
 }
 
 bool ProcessProgressDialog::canceled() const
@@ -71,30 +68,58 @@ QString ProcessProgressDialog::errmsg() const
 
 void ProcessProgressDialog::start(QStringList& args)
 {
-  _buffer.clear();
-  _errmsg.clear();
-
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#endif
   _canceled = false;
 
+  _buffer.clear();
+  _errmsg.clear();
+  _args = args;
+
   show();
+#ifdef _1
+  _proc.setProcessEnvironment(NomNom::proc_env());
+#endif
   _proc.start(args.takeFirst(), args);
   exec();
 }
 
-void ProcessProgressDialog::onProcStarted() { }
+void ProcessProgressDialog::onProcStarted()
+{
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__;
+#endif
+}
 
 void ProcessProgressDialog::onProcError(QProcess::ProcessError n)
 {
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << n;
+#endif
   if (!_canceled)
     {
       hide();
-      _errmsg = NomNom::to_process_errmsg(n);
-#ifdef _0
-      qDebug() << __PRETTY_FUNCTION__ << _errmsg;
-#endif
+      _errmsg = tr("Error while running command:<p>%1</p>"
+                   "Qt error message follows (code #%2):<p>%3</p>")
+                .arg(_args.join(" "))
+                .arg(n)
+                .arg(_proc.errorString());
       emit error();
     }
   cancel();
+}
+
+static void update_label(QProgressDialog *d,
+                         const QString& ln)
+{
+  QHashIterator<QString, QRegExp> i(rx_labels);
+  while (i.hasNext())
+    {
+      i.next();
+      if (i.value().indexIn(ln) != -1)
+        d->setLabelText(i.key());
+    }
 }
 
 void ProcessProgressDialog::onProcReadyRead()
@@ -102,18 +127,16 @@ void ProcessProgressDialog::onProcReadyRead()
   static char data[1024];
   while (_proc.readLine(data, sizeof(data)))
     {
-      QString ln = QString::fromLocal8Bit(data);
+      const QString ln = QString::fromLocal8Bit(data);
+      update_label(this, ln);
       _buffer += ln;
-
-      QHashIterator<QString, QRegExp> i(_rx_label);
-      while (i.hasNext())
-        {
-          i.next();
-          if (i.value().indexIn(ln) != -1)
-            setLabelText(i.key());
-        }
+#ifdef _0
+      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << ln;
+#endif
     }
 }
+
+static QRegExp rx_error("error:\\s+(.*)$");
 
 void ProcessProgressDialog::onProcFinished(int ec, QProcess::ExitStatus es)
 {
@@ -125,8 +148,17 @@ void ProcessProgressDialog::onProcFinished(int ec, QProcess::ExitStatus es)
         {
           hide();
           _errmsg = _buffer;
-          if (_rx_error.indexIn(_buffer) != -1)
-            _errmsg = "error: " + _rx_error.cap(1).simplified();
+          if (rx_error.indexIn(_buffer) != -1)
+            {
+              _errmsg = tr("Error while running command:<p>%1</p>"
+                           "quvi error message follows (code #%2):<p>%3</p>")
+                        .arg(_args.join(" "))
+                        .arg(ec)
+                        .arg(rx_error.cap(1).simplified());
+            }
+#ifdef _0
+          qDebug() << __PRETTY_FUNCTION__ << __LINE__ << _errmsg;
+#endif
           emit error();
         }
     }

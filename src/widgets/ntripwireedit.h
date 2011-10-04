@@ -15,42 +15,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QStringList>
-#include <QFileInfo>
-#include <QProcess>
+#ifndef ntripwireedit_h
+#define ntripwireedit_h
 
-#include <NFeed>
+#include <QLineEdit>
+
+class QMouseEvent;
+class QKeyEvent;
 
 namespace nn
 {
 
-namespace feed
+class NTripwireEdit : public QLineEdit
 {
-
-QStringList to_args(const QStringList& _args,
-                    const QString& type,
-                    const QString& ident,
-                    const int startIndex,
-                    const int maxResults,
-                    const bool all)
-{
-  QStringList args = _args;
-  args << "--json"
-       << "-t"
-       << type
-       << ident;
-  if (all)
-    args << "-a";
-  else
-    {
-      args << "-s" << QString::number(startIndex);
-      args << "-m" << QString::number(maxResults);
-    }
-  return args;
-}
-
-} // namespace feed
+  Q_OBJECT
+public:
+  NTripwireEdit(QWidget *parent=NULL);
+protected:
+  virtual void mousePressEvent(QMouseEvent*);
+signals:
+  void entered();
+};
 
 } // namespace nn
+
+#endif // ntripwireedit_h
 
 /* vim: set ts=2 sw=2 tw=72 expandtab: */

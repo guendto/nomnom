@@ -31,6 +31,18 @@ PKG_CHECK_MODULES([QtScript], [QtScript >= 4.6.0])
 PKG_CHECK_MODULES([QtCore],   [QtCore >= 4.6.0])
 PKG_CHECK_MODULES([QtGui],    [QtGui >= 4.6.0])
 
+# --enable-libproxy
+#AC_ARG_ENABLE([libproxy],
+#  [AS_HELP_STRING([--enable-libproxy], [Build with libproxy])])
+#
+#AM_CONDITIONAL([ENABLE_LIBPROXY], [test -n "$enable_libproxy"])
+#
+#AS_IF([test -n "$enable_libproxy"], [
+#  PKG_CHECK_MODULES([libproxy], [libproxy-1.0 >= 0.4.7], [], [
+#    PKG_CHECK_MODULES([libproxy], [libproxy >= 0.4.7])])
+#  AC_DEFINE([HAVE_LIBPROXY], [1], [We have libproxy])
+#])
+
 # Checks for Qt programs.
 
 LRELEASE=`$PKG_CONFIG --variable=lrelease_location QtCore 2>/dev/null`
@@ -100,14 +112,15 @@ AC_CONFIG_FILES([
 AC_OUTPUT
 
 AC_MSG_NOTICE([
- nomnom version: ${VERSION} (${VN})
- host setup:     ${host}
- prefix:         ${prefix}
- install manual: ${with_manual}
+ nomnom version:  ${VERSION} (${VN})
+ host setup:      ${host}
+options:
+ install prefix:  ${prefix}
+ with manual:     ${with_manual}
 qt:
- lrelease:       ${LRELEASE}
- moc:            ${MOC}
- rcc:            ${RCC}
- uic:            ${UIC}])
+ lrelease:        ${LRELEASE}
+ moc:             ${MOC}
+ rcc:             ${RCC}
+ uic:             ${UIC}])
 
 # vim: set ts=2 sw=2 tw=72 expandtab:

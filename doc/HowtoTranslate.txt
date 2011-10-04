@@ -87,12 +87,8 @@ Note that the last step does not have to include the LANG setting.
 It is possible to use the linguist application (File / Release) for the
 same effect that of running "gen-tr.sh -r".
 
-You should be able to choose the language from the dialog (Preferences /
-Options / Language) and make it this way a permanent setting in the
-config file.
-
-You can find the path to the config file in the same dialog page
-(Preferences / Options) if you're not sure where it is located.
+You should now be able to choose the language from the application
+settings.
 
 
 Updating an existing translation

@@ -60,7 +60,7 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <slots>
   <slot>onLanguage()</slot>
-  <slot>onPreferences()</slot>
+  <slot>onSettings()</slot>
   <slot>onAbout()</slot>
   <slot>onStop()</slot>
  </slots>

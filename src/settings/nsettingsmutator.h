@@ -15,42 +15,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QStringList>
-#include <QFileInfo>
-#include <QProcess>
+#ifndef nsettingsmutator_h
+#define nsettingsmutator_h
 
-#include <NFeed>
+#include <QVariant>
+#include <QHash>
+
+#include <NSettings>
+
+#define NSETTINGS_CMDPATH_SEPARATOR "^"
 
 namespace nn
 {
 
-namespace feed
+class NSettingsMutator
 {
-
-QStringList to_args(const QStringList& _args,
-                    const QString& type,
-                    const QString& ident,
-                    const int startIndex,
-                    const int maxResults,
-                    const bool all)
-{
-  QStringList args = _args;
-  args << "--json"
-       << "-t"
-       << type
-       << ident;
-  if (all)
-    args << "-a";
-  else
-    {
-      args << "-s" << QString::number(startIndex);
-      args << "-m" << QString::number(maxResults);
-    }
-  return args;
-}
-
-} // namespace feed
+public:
+  QVariant eitherValue(SettingKey, SettingKey) const;
+  void setValue(SettingKey, const QVariant&);
+  QVariant value(SettingKey) const;
+public:
+  static SettingKey toKey(const QString&);
+  static QString toString(SettingKey);
+public:
+  void write();
+  void read();
+private:
+  QHash<SettingKey,QVariant> values;
+};
 
 } // namespace nn
+
+#endif
 
 /* vim: set ts=2 sw=2 tw=72 expandtab: */

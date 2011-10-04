@@ -38,7 +38,7 @@ class NFeedDialog : public QDialog
 public:
   static void m_info(QWidget*, const QString&);
 public:
-  NFeedDialog(QWidget *parent, const QString&);
+  NFeedDialog(QWidget *parent, const QStringList&);
 public:
   QString selected() const;
   QString errmsg() const;
@@ -71,7 +71,7 @@ class NFeedProperties : public NFeedWidget
 {
   Q_OBJECT
 public:
-  NFeedProperties(const QString&, QWidget *parent=NULL);
+  NFeedProperties(const QStringList&, QWidget *parent=NULL);
 protected:
   virtual void init();
 private slots:
@@ -90,7 +90,7 @@ private:
   QSpinBox *_indexSpin;
   QLabel *_identLabel;
   QSpinBox *_maxSpin;
-  QString _umphPath;
+  QStringList _args;
 };
 
 class NFeedItems : public NFeedWidget

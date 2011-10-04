@@ -1,28 +1,26 @@
 /*
-* Copyright (C) 2010-2011 Toni Gundogdu.
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * NomNom
+ * Copyright (C) 2010-2011 Toni Gundogdu.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef nomnom_mainwindow_h
 #define nomnom_mainwindow_h
 
 #include <QSystemTrayIcon>
-#include <QProcess>
 #include <QPointer>
-#include <QLabel>
-#include <QMenu>
 #include <QHash>
 
 #include "Media.h"
@@ -35,43 +33,41 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 {
   Q_OBJECT
 public:
-  MainWindow  ();
+  MainWindow();
 protected:
-  void showEvent      (QShowEvent*);
-  void hideEvent      (QHideEvent*);
-  void closeEvent     (QCloseEvent*);
-  void dragEnterEvent (QDragEnterEvent*);
-  void dropEvent      (QDropEvent*);
+  void dragEnterEvent(QDragEnterEvent*);
+  void closeEvent(QCloseEvent*);
+  void dropEvent(QDropEvent*);
 private:
-  void createContextMenu  ();
-  void createTray         ();
-  void readSettings       ();
-  void handleURL          (const QString&);
-  bool parseOK            (QString&);
-  void streamMedia        ();
-  void downloadMedia      ();
-  void changeProgramIcon  ();
-  bool queryFormats       (QStringList&,
-                           const QString&,
-                           const QString&,
-                           bool&);
-  bool selectFormat       (QStringList&, QString&);
+  bool selectFormat(QStringList&, QString&);
+  void handleURL(const QString&);
+  bool queryFormats(QStringList&,
+                    const QStringList&,
+                    const QString&,
+                    bool&);
+  void createContextMenu();
+  void changeProgramIcon();
+  bool parseOK(QString&);
+  void createTrayIcon();
+  void downloadMedia();
+  void streamMedia();
+  void restore();
+  void save();
 private slots:
   // UI
-  void onTrayActivated(QSystemTrayIcon::ActivationReason);
-  void onPreferences  ();
-  void onAddress      ();
-  void onFeed         ();
-  void onAbout        ();
-  void onRecent       ();
+  void activated(QSystemTrayIcon::ActivationReason);
+  void onTerminate();
+  void onSettings();
+  void onAddress();
+  void onRecent();
+  void onAbout();
+  void onFeed();
   // quvi.
   void onProcFinished (QString);
 private:
   QPointer<ProcessProgressDialog> proc;
-  QPointer<QSystemTrayIcon> trayIcon;
   QPointer<DownloadDialog> download;
   QHash<QString,QAction*> actions;
-  QPointer<QMenu> trayMenu;
   QPointer<Media> media;
   QString json;
 };

@@ -32,9 +32,7 @@ namespace feed
 typedef QPair<QString,QString> NFeedItem;
 typedef QList<NFeedItem> NFeedList;
 
-bool umph_supports(const QString&, const QString&);
-
-QStringList to_args(const QString&,
+QStringList to_args(const QStringList&,
                     const QString&,
                     const QString&,
                     const int,

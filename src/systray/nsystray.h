@@ -15,42 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QStringList>
-#include <QFileInfo>
-#include <QProcess>
+#ifndef nsystray_h
+#define nsystray_h
 
-#include <NFeed>
+#include <QSystemTrayIcon>
+
+class QAction;
+class QMenu;
 
 namespace nn
 {
 
-namespace feed
+class NSysTray : public QSystemTrayIcon
 {
-
-QStringList to_args(const QStringList& _args,
-                    const QString& type,
-                    const QString& ident,
-                    const int startIndex,
-                    const int maxResults,
-                    const bool all)
-{
-  QStringList args = _args;
-  args << "--json"
-       << "-t"
-       << type
-       << ident;
-  if (all)
-    args << "-a";
-  else
-    {
-      args << "-s" << QString::number(startIndex);
-      args << "-m" << QString::number(maxResults);
-    }
-  return args;
-}
-
-} // namespace feed
+  Q_OBJECT
+public:
+  NSysTray(QObject *parent=NULL, const QString& text="");
+  NSysTray& operator<<(const QString&);
+public:
+  void addTrayMenuAction(const char *signal,
+                         QObject *receiver,
+                         const char *method,
+                         const QString& text,
+                         const bool checkable=false);
+  void addTrayMenuSeparator();
+  QAction *findTrayMenuAction(const QString&);
+  void setTrayMenu();
+private:
+  QMenu *trayMenu;
+};
 
 } // namespace nn
+
+#endif
 
 /* vim: set ts=2 sw=2 tw=72 expandtab: */

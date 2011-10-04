@@ -68,7 +68,7 @@ static const char *tooltips[] =
 typedef enum { Uploads=0x00, Favorites, Playlist } Type;
 typedef enum { All=0x00, Select } Mode;
 
-NFeedProperties::NFeedProperties(const QString& umphPath,
+NFeedProperties::NFeedProperties(const QStringList& args,
                                  QWidget *parent/*=NULL*/)
   : NFeedWidget(parent),
     _rangeGroup(NULL),
@@ -78,7 +78,7 @@ NFeedProperties::NFeedProperties(const QString& umphPath,
     _indexSpin(NULL),
     _identLabel(NULL),
     _maxSpin(NULL),
-    _umphPath(umphPath)
+    _args(args)
 {
 
 // Widgets
@@ -216,7 +216,7 @@ void NFeedProperties::parse()
       break;
     }
 
-  QStringList args = feed::to_args(_umphPath,
+  QStringList args = feed::to_args(_args,
                                    type,
                                    _identEdit->text(),
                                    _indexSpin->value(),

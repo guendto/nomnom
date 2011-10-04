@@ -15,42 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QStringList>
-#include <QFileInfo>
-#include <QProcess>
-
-#include <NFeed>
+#ifndef nutil_h
+#define nutil_h
 
 namespace nn
 {
 
-namespace feed
-{
-
-QStringList to_args(const QStringList& _args,
-                    const QString& type,
-                    const QString& ident,
-                    const int startIndex,
-                    const int maxResults,
-                    const bool all)
-{
-  QStringList args = _args;
-  args << "--json"
-       << "-t"
-       << type
-       << ident;
-  if (all)
-    args << "-a";
-  else
-    {
-      args << "-s" << QString::number(startIndex);
-      args << "-m" << QString::number(maxResults);
-    }
-  return args;
-}
-
-} // namespace feed
+bool check_for_cmd_feature(SettingKey, SettingKey, const QString&, const int);
+QStringList to_cmd_args(const QString&);
+void info(QWidget*, const QString&);
+int ask(QWidget*, const QString&);
 
 } // namespace nn
+
+#endif
 
 /* vim: set ts=2 sw=2 tw=72 expandtab: */

@@ -18,6 +18,10 @@
 #include <QScriptValueIterator>
 #include <QScriptEngine>
 
+#ifdef _0
+#include <QDebug>
+#endif
+
 #include <NFeedProgressDialog>
 
 extern QString umph_path;
@@ -52,6 +56,9 @@ bool NFeedProgressDialog::open(QStringList& args)
   setMinimum(0);
   _args = args;
   show();
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#endif
   _proc->start(args.takeFirst(), args);
   exec();
   return _errmsg.isEmpty();
@@ -127,14 +134,19 @@ void NFeedProgressDialog::finished(int ec, QProcess::ExitStatus es)
       if (!_cancelled)
         {
           QRegExp rx("error: (.*)");
-          if (rx.indexIn(_buffer) != -1)
-            _errmsg = rx.cap(1).simplified();
-          else
-            _errmsg = _buffer;
+          QString m = (rx.indexIn(_buffer) != -1)
+                      ? rx.cap(1).simplified()
+                      : _buffer;
+          _errmsg = tr("Error while running command:<p>%1</p>"
+                       "Error message follows (code #%2):<p>%3</p>")
+                    .arg(_args.join(" "))
+                    .arg(ec)
+                    .arg(m);
         }
     }
   cancel();
 }
+
 
 void NFeedProgressDialog::cleanup()
 {
