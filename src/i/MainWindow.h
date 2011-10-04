@@ -47,11 +47,14 @@ private:
   void createTray         ();
   void readSettings       ();
   void handleURL          (const QString&);
-  bool parseOK            ();
+  bool parseOK            (QString&);
   void streamVideo        ();
   void downloadVideo      ();
   void changeProgramIcon  ();
-  bool queryFormats       (QStringList&, const QString&, const QString&);
+  bool queryFormats       (QStringList&,
+                           const QString&,
+                           const QString&,
+                           bool&);
   bool selectFormat       (QStringList&, QString&);
 private slots:
   // UI

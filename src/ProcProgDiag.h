@@ -33,6 +33,8 @@ public:
   void setLabelRegExp (const QHash<QString,QRegExp>&);
   void setErrorRegExp (const QRegExp&);
   bool canceled       () const;
+  bool failed         () const;
+  QString errmsg      () const;
 private slots:
   void onProcStarted   ();
   void onProcError     (QProcess::ProcessError);
@@ -47,7 +49,7 @@ private:
   QRegExp _rx_error;
   QString _buffer;
   QProcess _proc;
-  QString _error;
+  QString _errmsg;
   bool _canceled;
 };
 

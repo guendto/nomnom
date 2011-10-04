@@ -49,7 +49,7 @@ enum { StreamVideo=0, DownloadVideo };
 
 // Ctor.
 
-MainWindow::MainWindow  ()
+MainWindow::MainWindow()
 {
   setupUi (this);
 
@@ -105,8 +105,7 @@ MainWindow::MainWindow  ()
   NomNom::check_for_umph_feature("--all");
 }
 
-void
-MainWindow::createContextMenu ()
+void MainWindow::createContextMenu()
 {
 #define creat_a(t,f,c) \
     do { \
@@ -152,7 +151,6 @@ MainWindow::createContextMenu ()
   _wrap (tr("Preferences..."),"Ctrl+E");
   // --
   _wrap (tr("Quit"),          "Ctrl+Q");
-
 #undef _wrap
 
   // Add the context menu.
@@ -162,11 +160,9 @@ MainWindow::createContextMenu ()
 
 // Create tray icon.
 
-void
-MainWindow::createTray ()
+void MainWindow::createTray()
 {
   trayMenu = new QMenu(this);
-
 #define creat_a(t,f) \
     do { \
         QAction *a = new QAction(t, this); \
@@ -174,15 +170,12 @@ MainWindow::createTray ()
         actions[t] = a; \
         trayMenu->addAction(a); \
     } while (0)
-
   creat_a ( tr("Open"), showNormal() );
   trayMenu->addSeparator();
   creat_a ( tr("Quit"), close() );
-
 #undef creat_a
 
   trayIcon = new QSystemTrayIcon (this);
-
   trayIcon->setContextMenu (trayMenu);
   trayIcon->setIcon (QIcon (":img/nomnom.png"));
 
@@ -192,8 +185,7 @@ MainWindow::createTray ()
 
 // Show event.
 
-void
-MainWindow::showEvent (QShowEvent *e)
+void MainWindow::showEvent(QShowEvent *e)
 {
   trayIcon->hide();
   e->accept();
@@ -201,8 +193,7 @@ MainWindow::showEvent (QShowEvent *e)
 
 // Hide event.
 
-void
-MainWindow::hideEvent (QHideEvent *e)
+void MainWindow::hideEvent(QHideEvent *e)
 {
   if (QSystemTrayIcon::isSystemTrayAvailable()
       && shPrefs.get(SharedPreferences::MinToTray).toBool())
@@ -216,8 +207,7 @@ MainWindow::hideEvent (QHideEvent *e)
 
 // Close event.
 
-void
-MainWindow::closeEvent (QCloseEvent *e)
+void MainWindow::closeEvent(QCloseEvent *e)
 {
   QSettings s;
   NomNom::save_size (s, this, QSETTINGS_GROUP);
@@ -234,8 +224,7 @@ MainWindow::closeEvent (QCloseEvent *e)
 
 // Read.
 
-void
-MainWindow::readSettings ()
+void MainWindow::readSettings()
 {
   QSettings s;
 
@@ -251,8 +240,7 @@ MainWindow::readSettings ()
 
 // Handle (dropped) URL.
 
-void
-MainWindow::handleURL (const QString& url)
+void MainWindow::handleURL(const QString& url)
 {
   // Check paths.
 
@@ -291,17 +279,29 @@ MainWindow::handleURL (const QString& url)
     quviPath.split (" ").replaceInStrings ("%u", url);
 
   // Choose format.
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__ << have_quvi_feature_query_formats;
+#endif
 
   QStringList formats;
-
   if (have_quvi_feature_query_formats)
     {
-      if (!queryFormats(formats, quviPath, url))
+      bool failed = false;
+
+      if (!queryFormats(formats, quviPath, url, failed))
         formats.clear();
+
+      if (failed)
+        {
+          NomNom::crit(this, proc->errmsg());
+          return;
+        }
 
       if (proc->canceled())
         return;
     }
+
+  json.clear();
 
   QString fmt;
   if (!selectFormat(formats, fmt))
@@ -309,24 +309,29 @@ MainWindow::handleURL (const QString& url)
 
   args << "-f" << fmt;
 
-  json.clear ();
+  proc->setLabelText(tr ("Checking ..."));
+  proc->setMaximum(0);
+  proc->start(args);
 
-  proc->setLabelText (tr ("Checking ..."));
-  proc->setMaximum (0);
-  proc->start (args);
+  if (proc->canceled())
+    return;
 
-  if (parseOK ())
+  QString errmsg;
+  if (parseOK(errmsg))
     {
       if (modeCBox->currentIndex() == StreamVideo)
-        streamVideo ();
+        streamVideo();
       else
         downloadVideo();
     }
+  else
+    NomNom::crit(this, errmsg);
 }
 
 bool MainWindow::queryFormats(QStringList& formats,
                               const QString& quviPath,
-                              const QString& url)
+                              const QString& url,
+                              bool& failed)
 {
   QStringList args =
     QStringList()
@@ -338,6 +343,17 @@ bool MainWindow::queryFormats(QStringList& formats,
   proc->setLabelText(tr("Checking ..."));
   proc->setMaximum(0);
   proc->start(args);
+#ifdef _0
+  qDebug() << __PRETTY_FUNCTION__;
+#endif
+
+  failed = proc->failed();
+  if (failed)
+    return false;
+
+#ifdef _0
+  qDebug() <<  __PRETTY_FUNCTION__ << __LINE__ << failed;
+#endif
 
   QStringList lns = json.split("\n");
   lns.removeDuplicates();
@@ -399,8 +415,7 @@ bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
 
 // View video (stream).
 
-void
-MainWindow::streamVideo ()
+void MainWindow::streamVideo()
 {
   QStringList args =
     shPrefs.get (SharedPreferences::PlayerPath)
@@ -419,8 +434,7 @@ MainWindow::streamVideo ()
 
 // Download video (to a file).
 
-void
-MainWindow::downloadVideo ()
+void MainWindow::downloadVideo()
 {
   QString fname =
     shPrefs.get (SharedPreferences::FilenameFormat).toString ();
@@ -520,8 +534,7 @@ MainWindow::downloadVideo ()
 
 // Change program icon.
 
-void
-MainWindow::changeProgramIcon ()
+void MainWindow::changeProgramIcon()
 {
   const bool customProgramIcon =
     shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ();
@@ -545,29 +558,27 @@ MainWindow::changeProgramIcon ()
 
 // Parse JSON data returned by quvi.
 
-bool
-MainWindow::parseOK ()
+bool MainWindow::parseOK(QString& errmsg)
 {
-  const int n = json.indexOf ("{");
-
-  if (n == -1)
-    return false;
-
-  QString error;
-
-  if (!video->fromJSON (json.mid (n), error))
+  if (proc->failed())
     {
-      NomNom::crit (this, error);
+      errmsg = proc->errmsg();
       return false;
     }
 
-  return true;
+  const int n = json.indexOf("{");
+  if (n == -1)
+    {
+      errmsg = tr("quvi returned unexpected data");
+      return false;
+    }
+
+  return video->fromJSON(json.mid(n), errmsg);
 }
 
 // Slot: Icon activated.
 
-void
-MainWindow::onTrayActivated (QSystemTrayIcon::ActivationReason r)
+void MainWindow::onTrayActivated(QSystemTrayIcon::ActivationReason r)
 {
   switch (r)
     {
@@ -581,8 +592,7 @@ MainWindow::onTrayActivated (QSystemTrayIcon::ActivationReason r)
 
 // Slot: Preferences.
 
-void
-MainWindow::onPreferences ()
+void MainWindow::onPreferences()
 {
   const bool icon_state =
     shPrefs.get (SharedPreferences::CustomProgramIcon).toBool ();
@@ -645,8 +655,7 @@ MainWindow::onPreferences ()
 
 #define WWW "http://nomnom.sourceforge.net/"
 
-void
-MainWindow::onAbout ()
+void MainWindow::onAbout()
 {
   nn::NAboutDialog *d = new nn::NAboutDialog(VERSION, WWW, this);
   d->exec();
@@ -656,8 +665,7 @@ MainWindow::onAbout ()
 
 // Slot: Recent.
 
-void
-MainWindow::onRecent ()
+void MainWindow::onRecent()
 {
   const QStringList lst = recent.toStringList ();
 
@@ -687,8 +695,7 @@ MainWindow::onRecent ()
 
 // Slot: Download.
 
-void
-MainWindow::onAddress()
+void MainWindow::onAddress()
 {
   const QString url =
     QInputDialog::getText (this, tr ("Address"), tr ("Video URL:"));
@@ -701,8 +708,7 @@ MainWindow::onAddress()
 
 // Slot: on feed.
 
-void
-MainWindow::onFeed ()
+void MainWindow::onFeed()
 {
   const QString path =
     shPrefs.get(SharedPreferences::UmphPath).toString();
@@ -714,28 +720,23 @@ MainWindow::onFeed ()
 
 // Slot: quvi finished.
 
-void
-MainWindow::onProcFinished (QString output )
+void MainWindow::onProcFinished(QString output)
 {
   json = output;
 }
 
 // Event: DragEnter.
 
-void
-MainWindow::dragEnterEvent (QDragEnterEvent *e)
+void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
-
   QUrl url(e->mimeData()->text());
-
   if (url.isValid() && url.scheme().toLower() == "http")
     e->acceptProposedAction();
 }
 
 // Event: Drop.
 
-void
-MainWindow::dropEvent (QDropEvent *e)
+void MainWindow::dropEvent(QDropEvent *e)
 {
   handleURL (e->mimeData ()->text ().simplified ());
   e->acceptProposedAction ();
