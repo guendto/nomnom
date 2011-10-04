@@ -132,8 +132,6 @@ MainWindow::createContextMenu ()
   creat_a (tr("Feed..."),     onFeed,     false);
   creat_a (tr("Recent..."),   onRecent,   false);
   add_s;
-  creat_a (tr("Overwrite"),   _,          true);
-  add_s;
   creat_a (tr("Preferences..."), onPreferences, false);
   add_s;
   creat_a (tr("About..."),    onAbout,    false);
@@ -150,8 +148,6 @@ MainWindow::createContextMenu ()
   _wrap (tr("Address..."),    "Ctrl+A");
   _wrap (tr("Feed..."),       "Ctrl+F");
   _wrap (tr("Recent..."),     "Ctrl+R");
-  // --
-  _wrap (tr("Overwrite"),     "Ctrl+W");
   // --
   _wrap (tr("Preferences..."),"Ctrl+E");
   // --
@@ -474,9 +470,6 @@ MainWindow::downloadVideo ()
       if (fpath.isEmpty ())
         return;
     }
-
-  if (actions[tr("Overwrite")]->isChecked ())
-    QDir ().remove (fpath);
 
   const qint64 expected_bytes =
     video->get (Video::Length).toLongLong ();
