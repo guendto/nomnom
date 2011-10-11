@@ -44,6 +44,7 @@ private slots:
   void cleanup();
   void read();
 private:
+  QStringList _args;
   QString _buffer;
   QString _errmsg;
   QProcess *_proc;

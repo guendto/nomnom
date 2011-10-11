@@ -50,6 +50,7 @@ bool NFeedProgressDialog::open(QStringList& args)
   _errmsg.clear();
   setMaximum(0);
   setMinimum(0);
+  _args = args;
   show();
   _proc->start(args.takeFirst(), args);
   exec();
@@ -99,48 +100,16 @@ bool NFeedProgressDialog::results(feed::NFeedList& dst, QString& err)
   return true;
 }
 
-static QString to_errmsg(const QProcess::ProcessError e)
-{
-  QString s;
-  switch (e)
-    {
-    case QProcess::FailedToStart:
-      s = QObject::tr("The process failed to start. Either the invoked "
-                      "program is missing, or you may have insufficient "
-                      "permissions to invoke the program.");
-      break;
-    case QProcess::Crashed:
-      s = QObject::tr("The process crashed some time after "
-                      "starting successfully.");
-      break;
-    case QProcess::Timedout:
-      s = QObject::tr("The last waitFor...() function timed out. "
-                      "The state of QProcess is unchanged, and you "
-                      "can try calling waitFor...() again.");
-      break;
-    case QProcess::WriteError:
-      s = QObject::tr("An error occurred when attempting to write "
-                      "to the process. For example, the process may "
-                      "not be running, or it may have closed its input "
-                      "channel.");
-      break;
-    case QProcess::ReadError:
-      s = QObject::tr("An error occurred when attempting to read "
-                      "from the process. For example, the process "
-                      "may not be running.");
-      break;
-    case QProcess::UnknownError:
-    default:
-      s = QObject::tr("An unknown error occurred.");
-      break;
-    }
-  return s;
-}
-
-void NFeedProgressDialog::error(QProcess::ProcessError e)
+void NFeedProgressDialog::error(QProcess::ProcessError n)
 {
   if (!_cancelled)
-    _errmsg = to_errmsg(e);
+    {
+      _errmsg = tr("Error while running command:<p>%1</p>"
+                   "Qt error message follows (code #%2):<p>%3</p>")
+                .arg(_args.first())
+                .arg(n)
+                .arg(_proc->errorString());
+    }
   cancel();
 }
 
