@@ -130,7 +130,7 @@ void NFeedProgressDialog::finished(int ec, QProcess::ExitStatus es)
           if (rx.indexIn(_buffer) != -1)
             _errmsg = rx.cap(1).simplified();
           else
-            _errmsg = tr("Unknown error occurred");
+            _errmsg = _buffer;
         }
     }
   cancel();
