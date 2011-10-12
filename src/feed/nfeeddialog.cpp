@@ -77,8 +77,16 @@ void NFeedDialog::done(int n)
     {
       if (_selected.isEmpty())
         {
-          _toolbox->setCurrentIndex(1);
-          m_info(this, tr("Please select an item from the list"));
+          if (feedItems.count() == 0)
+            {
+              _toolbox->setCurrentIndex(0);
+              m_info(this, tr("Please read a feed"));
+            }
+          else
+            {
+              _toolbox->setCurrentIndex(1);
+              m_info(this, tr("Please select an item from the list"));
+            }
           return;
         }
     }
