@@ -35,7 +35,7 @@ NFeedDialog::NFeedDialog(QWidget *parent, const QString& umphPath)
 
 // Toolbox
 
-  NFeedInfo *info = new NFeedInfo(umphPath);
+  NFeedProperties *info = new NFeedProperties(umphPath);
   connect(info, SIGNAL(parse(QStringList)), this, SLOT(parse(QStringList)));
 
   NFeedItems *items = new NFeedItems;
@@ -43,8 +43,8 @@ NFeedDialog::NFeedDialog(QWidget *parent, const QString& umphPath)
   connect(items, SIGNAL(selected(QString)), this, SLOT(selected(QString)));
 
   _toolbox = new QToolBox;
-  _toolbox->addItem(info, tr("&Information"));
-  _toolbox->addItem(items, tr("I&tems"));
+  _toolbox->addItem(info, tr("&Properties"));
+  _toolbox->addItem(items, tr("&Items"));
 
 // Button box
 

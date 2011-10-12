@@ -67,11 +67,11 @@ protected:
   friend class NFeedDialog;
 };
 
-class NFeedInfo : public NFeedWidget
+class NFeedProperties : public NFeedWidget
 {
   Q_OBJECT
 public:
-  NFeedInfo(const QString&, QWidget *parent=NULL);
+  NFeedProperties(const QString&, QWidget *parent=NULL);
 protected:
   virtual void init();
 private slots:

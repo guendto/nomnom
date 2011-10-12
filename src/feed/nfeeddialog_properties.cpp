@@ -68,7 +68,8 @@ static const char *tooltips[] =
 typedef enum { Uploads=0x00, Favorites, Playlist } Type;
 typedef enum { All=0x00, Select } Mode;
 
-NFeedInfo::NFeedInfo(const QString& umphPath, QWidget *parent/*=NULL*/)
+NFeedProperties::NFeedProperties(const QString& umphPath,
+                                 QWidget *parent/*=NULL*/)
   : NFeedWidget(parent),
     _rangeGroup(NULL),
     _typeCombo(NULL),
@@ -167,29 +168,29 @@ NFeedInfo::NFeedInfo(const QString& umphPath, QWidget *parent/*=NULL*/)
   setLayout(box);
 }
 
-void NFeedInfo::init()
+void NFeedProperties::init()
 {
   reset();
   typeChanged(_typeCombo->currentIndex());
   modeChanged(_bgroup->checkedId());
 }
 
-void NFeedInfo::enableRange(bool state/*=true*/)
+void NFeedProperties::enableRange(bool state/*=true*/)
 {
   _rangeGroup->setEnabled(state);
 }
 
-void NFeedInfo::modeChanged(int n)
+void NFeedProperties::modeChanged(int n)
 {
   enableRange(n == Select);
 }
 
-void NFeedInfo::typeChanged(int n)
+void NFeedProperties::typeChanged(int n)
 {
   _identLabel->setText(n == 2 ? tr("I&D") : tr("for &user"));
 }
 
-void NFeedInfo::parse()
+void NFeedProperties::parse()
 {
   if (_identEdit->text().isEmpty())
     {
@@ -224,7 +225,7 @@ void NFeedInfo::parse()
   emit parse(args);
 }
 
-void NFeedInfo::reset()
+void NFeedProperties::reset()
 {
   _typeCombo->setCurrentIndex(0);
   _indexSpin->setValue(1);

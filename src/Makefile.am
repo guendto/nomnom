@@ -59,7 +59,7 @@ qrc_nomnom.cpp:
 
 src=\
  about/naboutdialog.cpp \
- feed/nfeeddialog_info.cpp \
+ feed/nfeeddialog_properties.cpp \
  feed/nfeeddialog_items.cpp \
  feed/nfeeddialog.cpp \
  feed/nfeedprogressdialog.cpp \
