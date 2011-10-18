@@ -1,20 +1,7 @@
 
-
-NomNom
-===========
-
 NomNom is an application for downloading media from Youtube and other similar
 media websites that require flash to view the media content. Media streaming
-or downloading can be started simply by dropping an URL onto the application
-window.
-
-NomNom relies on a number of different other programs: quvi(1) to parse the
-media links, curl(1) to download the media, and a media streaming capable
-player software, such as vlc(1), to stream the media. NomNom is written in
-C++ to use the Qt framework.
-
-The name of the application refers to the sound effect that is made when
-eating something tasty or nutritious.
+or downloading can be started by dropping an URL onto the application window.
 
 Home  : <http://nomnom.sourceforge.net/>
 gitweb: <http://repo.or.cz/w/nomnom.git>
