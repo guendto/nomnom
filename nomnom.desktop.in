@@ -1,8 +1,9 @@
 [Desktop Entry]
 Name=NomNom
-Comment=Download media from Youtube, Dailymotion, etc.
+Comment=Download and stream media
 Exec=@prefix@/bin/nomnom
 Icon=nomnom.xpm
 Type=Application
 Terminal=false
-Categories=AudioVideo;
+Categories=Network;AudioVideo;
+Version=@VERSION@
