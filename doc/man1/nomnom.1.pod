@@ -9,59 +9,149 @@ NomNom - The graphical media download tool
 
 NomNom is an application for downloading media from Youtube and other similar
 media websites that require flash to view the media content. Media streaming
-or downloading can be started simply by dropping an URL onto the application
-window.
+or downloading can be started by dropping an URL onto the application window.
 
-NomNom relies on a number of different other programs: C<quvi(1)> to parse
-the media links, C<curl(1)> to download the media, and a media streaming
-capable player software, such as C<vlc(1)>, to stream the media. NomNom is
-written in C++ to use the Qt framework.
+=head2 Project name
 
 The name of the application refers to the sound effect that is made when
 eating something tasty or nutritious.
 
 =head1 GETTING STARTED
 
-  * Right-click on the window to open the context-menu
+=head2 Right-click opens the context-menu
 
-  * Check the configuration (Preferences, Ctrl+E)
+Most the application features can be accessed via this menu.
 
-    - Check the paths to quvi(1), curl(1) and player (e.g. vlc(1))
+=head2 Check the settings (Ctrl+E)
 
-      The default values should work on most systems out of the box.
-      Make any changes you see necessary.
+NomNom will attempt to detect the available commands when you run it the
+first time. Going over the settings before use is recommended. The
+dialog will not close (by clicking OK) unless you have entered
+everything needed.
 
-  * Drag and drop media page URLs from, for example, your web browser.
-  This starts the download (or streaming if selected).
+=head2 Check that NomNom is set to do what you expect
 
-  * You can make NomNom stay on top of other windows (Preferences / Other).
-  This will make it easier to use NomNom if you have limited screen space.
+Make a note of the combobox widget on the main window. You may choose to
+either C<Download> or C<Stream> from the widget.
 
-  * Nomnom resumes file transfers by default (determined by the curl command
-  in the Preferences). Check "Overwrite" in the context menu if you want to
-  overwrite the existing files.
+=head2 Drop media page URLs to main window
+
+You could, for example, have a web browser open from which you then drag
+the URLs onto the main window of NomNom. Alternatively, open the
+right-click context-menu and choose C<Address...>.
+
+You may also consider making sure that NomNom stays on top of other
+windows if you are working on a small screen. There is an option for
+this in the application settings.
+
+=head2 NomNom defaults to resume interrupted transfers
+
+See also the L</KNOWN ISSUES> for more about this. You can also choose
+to overwrite any existing media files if you'd prefer this.
+
+=head2 You can grab media page URLs from YouTube feeds
+
+Choose C<Feed...> from the context-menu or hit the key-shortcut (Ctrl+F)
+to open the dialog.
+
+=head1 COMMAND LINE
+
+NomNom supports the following command line options.
+
+=head2 --config-path
+
+Prints the path to the local user config file and exits.
+
+=head2 --detect
+
+Prints the detected commands and exits.
+
+=head2 --verbose
+
+Turns on verbose output. Please make a note that NomNom must be
+configured and built with the C<--enable-verbose> switch for this to be
+available in the application.
+
+=head2 --help
+
+Prints the help and exits.
+
+=head2 --version
+
+Prints the version and exits.
+
+=head1 GLOSSARY
+
+=head2 Media page URL
+
+NomNom feasts on media page URLs. You can drop these URLs to the
+main window to start the process of downloading (or streaming).
+
+These URLs are known to go around also as C<video page URLs>.
+
+=head3 Example
+
+http://vimeo.com/1485507
+
+=head2 Media stream URL
+
+Not to be confused with L</Media page URL>. The media I<stream> URL is
+the URL to the media resource that is returned by the C<quvi(1)>
+command and then used by NomNom to either download or stream from it.
+
+=head2 YouTube feeds
+
+NomNom can read, with the help of C<umph(1)> command, and grab media
+URLs from YouTube feeds. These feeds may be I<playlists>, user
+I<favorites> and user I<uploads>.
+
+You can open the user-interface by selecting it from the right-click
+context-menu (C<Feed...>) or by hitting the key-shortcut (Ctrl+F).
+
+=head2 YouTube format strings
+
+The YouTube C<fmtNN> string IDs are documented at:
+ http://en.wikipedia.org/wiki/YouTube#Quality_and_codecs
+
+=head1 KNOWN ISSUES
+
+=head2 Resuming partially transferred files may fail
+
+Some websites are known to refuse to work with the HTTP requests to
+resume a file transfer. Either check "Always overwrite existing media
+files" in the settings or remove the existing file manually.
+
+=head2 Using of HTTP proxies
+
+If you use an HTTP proxy, please make sure you have configured all of
+the commands that NomNom uses (see C<settings> and open C<commands>) to
+use the same proxy. Some websites refuse to work with requests coming
+from different sources (IP addresses) trying to access the same
+media stream URL which is may be unique to an IP address.
+
+=head1 TIPS
+
+=head2 Use configuration files
+
+Although it is possible to configure custom commands for NomNom to use
+(via C<settings> and C<commands>), another way is to add appropriate
+configuration files for the commands that NomNom uses.
+
+=head3 Examples
+
+ ~/.quvirc ;# refer to the quvi(1) documentation
+ ~/.umphrc ;# refer to the umph(1) documentation
+ ~/.curlrc ;# refer to the curl(1) documentation
+
+Same goes for whatever media player you choose to use.
 
 =head1 FILES
 
-=over 4
+=head2 Configuration file
 
-=item Application settings
-
-The location where the application settings are depends on the platform.
-Open the Preferences dialog to see the path to the config file. On a
-typical Unix-like system, the path is typically one of the following:
-
-  ~/.config/NomNom/NomNom.conf
-  /etc/xdg/NomNom/NomNom.conf
-  /etc/xdg/NomNom.conf
-  /etc/NomNom.conf
-
-NomNom uses the QSettings class to save the application settings, please
-see the following links for the technical details:
-  <http://doc.trolltech.com/4.7/qsettings.html>
-  <http://doc.trolltech.com/4.7/qsettings.html#platform-specific-notes>
-
-=back
+The location of this file may vary and depends on how Qt was configured.
+You can use the C<--config-path> program option to print it, if you are
+not sure. See also L</COMMAND LINE>.
 
 =head1 LICENSE
 
