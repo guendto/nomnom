@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <cstdlib>
 
 #include <QCoreApplication>
@@ -28,7 +30,7 @@
 #include <QRegExp>
 #include <QDir>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -164,7 +166,7 @@ static bool load(const QString& qmFilePath)
   QTranslator *t = new QTranslator;
   if (t->load(qmFilePath))
     {
-#ifdef _0
+#ifdef ENABLE_VERBOSE
       qDebug() << __PRETTY_FUNCTION__ << __LINE__ << qmFilePath;
 #endif
       qApp->installTranslator(t);
@@ -246,7 +248,8 @@ bool choose_dialog(QWidget *parent, QString& lang)
 bool choose(const QString initial/*=""*/)
 {
   const QLocale l = QLocale::system();
-#ifdef _0
+
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__
            << l.language()
            << l.name()
@@ -254,16 +257,18 @@ bool choose(const QString initial/*=""*/)
            << QLocale::countryToString(l.country())
            << QLocale::languageToString(l.language());
 #endif
+
   foreach(const NResultPair p, qm_files())
   {
     if (initial.isEmpty())
       {
-#ifdef _0
+#ifdef ENABLE_VERBOSE
         qDebug() << __PRETTY_FUNCTION__ << __LINE__
                  << p.first
                  << p.second
                  << QLocale::languageToString(l.language());
 #endif
+
         if (p.first == QLocale::languageToString(l.language()))
           return load(p.second);
       }

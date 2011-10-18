@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QStringList>
 
 #include <NSettings>
@@ -83,12 +85,12 @@ static bool apply_regexp(const QString& regexp,
 
   const QString p = cap.at(1);
   const bool g = cap.at(2).contains("g");
-#ifdef _0
+#ifdef _1
   const bool i = cap.at(2).contains("i");
 #endif
 
   QRegExp rx(p);
-#ifdef _0
+#ifdef _1
   rx.setCaseSensitivity(i ? Qt::CaseInsensitive : Qt::CaseSensitive);
 #endif
 

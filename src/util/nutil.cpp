@@ -21,7 +21,7 @@
 #include <QMessageBox>
 #include <QProcess>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -92,7 +92,8 @@ bool check_for_cmd_feature(SettingKey a,
   QStringList args = QStringList()
                      << to_cmd_args(q).takeFirst()
                      << feature;
-#ifdef _0
+
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
 
@@ -102,7 +103,7 @@ bool check_for_cmd_feature(SettingKey a,
   if (!p->waitForFinished())
     return false;
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__
            << "exit_status=" << p->exitStatus()
            << "exit_code="<< p->exitCode();
@@ -127,8 +128,8 @@ bool check_for_cmd_feature(SettingKey a,
  */
 QStringList to_cmd_args(const QString& s)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << s;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "parse=" << s;
 #endif
 
 // $cmd_path:$cmd_args

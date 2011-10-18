@@ -25,10 +25,6 @@
 #include <QSpinBox>
 #include <QLabel>
 
-#ifdef _0
-#include <QDebug>
-#endif
-
 #include <NSettingsMutator>
 #include <NSettingsDialog>
 

@@ -15,10 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QScriptValueIterator>
 #include <QScriptEngine>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -49,18 +51,23 @@ NFeedProgressDialog::NFeedProgressDialog(QWidget *parent/*=NULL*/)
 bool NFeedProgressDialog::open(QStringList& args)
 {
   setLabelText(tr("Working..."));
+
   _cancelled = false;
+  _args = args;
+
   _buffer.clear();
   _errmsg.clear();
+
   setMaximum(0);
   setMinimum(0);
-  _args = args;
+
   show();
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
   _proc->start(args.takeFirst(), args);
   exec();
+
   return _errmsg.isEmpty();
 }
 

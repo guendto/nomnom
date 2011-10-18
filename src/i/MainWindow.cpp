@@ -26,7 +26,7 @@
 #include <QSettings>
 #include <QRegExp>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -192,8 +192,8 @@ void MainWindow::handleURL(const QString& url)
   QStringList q_args = nn::to_cmd_args(s);
   const QString q = q_args.first();
 
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << q;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "quvi_path=" << q;
 #endif
 
   if (q.isEmpty())
@@ -234,9 +234,9 @@ void MainWindow::handleURL(const QString& url)
 
 // Query formats to an URL.
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__
-           << "have_quvi_feature_query_formats:"
+           << "have_quvi_feature_query_formats="
            << have_quvi_feature_query_formats;
 #endif
 
@@ -270,8 +270,9 @@ void MainWindow::handleURL(const QString& url)
 
   q_args.replaceInStrings("%u", url);
   q_args << "-f" << fmt;
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << q_args;
+
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "q_args=" << q_args;
 #endif
 
   proc->setLabelText(tr("Checking ..."));
@@ -306,8 +307,8 @@ bool MainWindow::queryFormats(QStringList& formats,
   args.replaceInStrings("%u", url);
   args << "-F";
 
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
 
   json.clear();
@@ -320,8 +321,8 @@ bool MainWindow::queryFormats(QStringList& formats,
   if (failed)
     return false;
 
-#ifdef _0
-  qDebug() <<  __PRETTY_FUNCTION__ << __LINE__ << failed;
+#ifdef ENABLE_VERBOSE
+  qDebug() <<  __PRETTY_FUNCTION__ << __LINE__ << "failed=" << failed;
 #endif
 
   QStringList lns = json.split("\n");
@@ -336,9 +337,11 @@ bool MainWindow::queryFormats(QStringList& formats,
                   << "default"
                   << "best"
                   << rx.cap(1).simplified().split("|");
-#ifdef _0
-        qDebug() << __PRETTY_FUNCTION__ << __LINE__ << formats;
+
+#ifdef ENABLE_VERBOSE
+        qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "formats=" << formats;
 #endif
+
         return true;
       }
   }
@@ -478,8 +481,8 @@ void MainWindow::downloadMedia()
   const bool playWhenDone =
     settings.value(nn::PlayWhenDoneDownloading).toBool();
 
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "file="
            << QFileInfo(fpath).size()
            << expected_bytes
            << completeFile
@@ -575,12 +578,12 @@ static void check_window_flags(QWidget *w)
 
 static bool check_language(QWidget *w, const QString& lang)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__
-           << "lang="
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "lang="
            << lang
            << settings.value(nn::Language).toString();
 #endif
+
   if (lang != settings.value(nn::Language).toString())
     {
       if (nn::ask(w, QObject::tr("Language will be changed after "
@@ -733,9 +736,10 @@ static void update_show_state(QWidget *w)
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-#ifdef _0
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__;
 #endif
+
   if (settings.value(nn::TerminateInstead).toBool()
       || !systray->isVisible())
     {
@@ -761,7 +765,7 @@ void MainWindow::onTerminate()
 {
   // When systray icon is visible: the default behaviour is to ignore
   // calls to 'close' mainwindow unless "terminate instead" is true.
-#ifdef _0
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__;
 #endif
   // Although the line below uses "settings" value "TerminateInstead",

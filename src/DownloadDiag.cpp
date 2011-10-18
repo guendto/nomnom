@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef _0
+#include "config.h"
+
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -59,8 +61,8 @@ QString DownloadDialog::errmsg() const
 
 void DownloadDialog::start(QStringList& args)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
   _canceled = false;
 
@@ -82,8 +84,8 @@ void DownloadDialog::onCurlStarted()
 
 void DownloadDialog::onCurlError(QProcess::ProcessError n)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << n;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "code=" << n;
 #endif
   if (!_canceled)
     {
@@ -105,9 +107,11 @@ static void update_label(QProgressDialog *d, const QString& ln)
   QStringList lst = ln.split(" ");
   if (lst.count() < 12)
     return; // Full line updates only.
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << lst;
+
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "lst=" << lst;
 #endif
+
   enum {PERCENT=0, ETA=10, RATE=11};
 
   QString rate = lst[RATE];
@@ -115,9 +119,11 @@ static void update_label(QProgressDialog *d, const QString& ln)
     rate = QString("%1k").arg(rate.toLongLong()/1024.0,2,'f',1);
 
   const QString s = QObject::tr("Copying %1/s, %2").arg(rate).arg(lst[ETA]);
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << s;
+
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "s=" << s;
 #endif
+
   d->setValue(lst[PERCENT].toInt());
   d->setLabelText(s);
 }
@@ -130,9 +136,11 @@ void DownloadDialog::onCurlReadyRead()
   while (_proc.readLine(data, sizeof(data)))
     {
       const QString ln = QString::fromLocal8Bit(data).simplified();
-#ifdef _0
-      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << ln;
+
+#ifdef ENABLE_VERBOSE
+      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "ln=" << ln;
 #endif
+
       if (rx_err.indexIn(ln) != -1)
         {
           _errmsg = tr("Error while running command:<p>%1</p>"

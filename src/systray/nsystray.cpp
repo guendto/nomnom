@@ -15,9 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QMenu>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -110,12 +112,11 @@ QAction *NSysTray::findTrayMenuAction(const QString& text)
     if (action->text() == text)
       return action;
   }
-#ifdef _0
-  qWarning() << __PRETTY_FUNCTION__
-             << __LINE__
-             << "Action"
+#ifdef ENABLE_VERBOSE
+  qWarning() << __PRETTY_FUNCTION__ << __LINE__
+             << "Action \""
              << text
-             << "not found in tray menu";
+             << "\" not found in tray menu";
 #endif
   return NULL;
 }

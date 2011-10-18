@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef _0
+#include "config.h"
+
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -68,8 +70,8 @@ QString ProcessProgressDialog::errmsg() const
 
 void ProcessProgressDialog::start(QStringList& args)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << args;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
   _canceled = false;
 
@@ -87,15 +89,15 @@ void ProcessProgressDialog::start(QStringList& args)
 
 void ProcessProgressDialog::onProcStarted()
 {
-#ifdef _0
+#ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__;
 #endif
 }
 
 void ProcessProgressDialog::onProcError(QProcess::ProcessError n)
 {
-#ifdef _0
-  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << n;
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "code=" << n;
 #endif
   if (!_canceled)
     {
@@ -130,8 +132,8 @@ void ProcessProgressDialog::onProcReadyRead()
       const QString ln = QString::fromLocal8Bit(data);
       update_label(this, ln);
       _buffer += ln;
-#ifdef _0
-      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << ln;
+#ifdef ENABLE_VERBOSE
+      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "ln=" << ln;
 #endif
     }
 }
@@ -156,8 +158,8 @@ void ProcessProgressDialog::onProcFinished(int ec, QProcess::ExitStatus es)
                         .arg(ec)
                         .arg(rx_error.cap(1).simplified());
             }
-#ifdef _0
-          qDebug() << __PRETTY_FUNCTION__ << __LINE__ << _errmsg;
+#ifdef ENABLE_VERBOSE
+          qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "errmsg=" << _errmsg;
 #endif
           emit error();
         }

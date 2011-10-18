@@ -92,6 +92,13 @@ AC_FUNC_ERROR_AT_LINE
 VN=`$srcdir/gen-ver.sh $srcdir`
 AC_DEFINE_UNQUOTED([VN],["$VN"], [We have version number from gen-ver.sh])
 
+# --enable-verbose
+AC_ARG_ENABLE([verbose],
+  AS_HELP_STRING([--enable-verbose], [Enable --verbose program option]))
+
+AS_IF([test "x$enable_verbose" = "xyes"], [
+  AC_DEFINE([ENABLE_VERBOSE], [1], [Enable --verbose option])])
+
 # --with-manual
 AC_ARG_WITH([manual],
   [AS_HELP_STRING([--with-manual],
@@ -117,6 +124,7 @@ AC_MSG_NOTICE([
 options:
  install prefix:  ${prefix}
  with manual:     ${with_manual}
+ --verbose:       ${enable_verbose}
 qt:
  lrelease:        ${LRELEASE}
  moc:             ${MOC}

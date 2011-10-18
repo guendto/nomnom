@@ -15,10 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QStringList>
 #include <QSettings>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -82,9 +84,9 @@ void NSettingsMutator::read()
     SettingKey k = toKey(key);
     if (k != (int)-1)
       values[k] = s.value(key);
-#ifdef _0
+#ifdef ENABLE_VERBOSE
     else
-      qWarning() << __PRETTY_FUNCTION__ << __LINE__ << "Ignored" << key;
+      qWarning() << __PRETTY_FUNCTION__ << __LINE__ << "ignored" << key;
 #endif
   }
   s.endGroup();

@@ -16,13 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QScriptValueIterator>
 #include <QScriptEngine>
 #include <QVariant>
 #include <QString>
 #include <QLabel>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -91,12 +93,12 @@ Media::fromJSON (const QString& data, QString& error)
   _suffix = v.property ("file_suffix").toString ();
   _link   = v.property ("url").toString ();
 
-#ifdef _0
-  qDebug ()
-      << _length
-      << _ctype
-      << _suffix
-      << _link;
+#ifdef ENABLE_VERBOSE
+  qDebug () << __PRETTY_FUNCTION__ << __LINE__ << "media="
+            << _length
+            << _ctype
+            << _suffix
+            << _link;
 #endif
 
   return true;

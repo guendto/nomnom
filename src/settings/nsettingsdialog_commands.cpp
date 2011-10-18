@@ -15,13 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QLabel>
 
-#ifdef _0
+#ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
@@ -42,8 +44,8 @@ static void detect_type(const DetectType t, QComboBox *c)
       foreach (const NDetectResult p, r)
       {
         c->addItem(p.first, p.second.first);
-#ifdef _0
-        qDebug() << p;
+#ifdef ENABLE_VERBOSE
+        qDebug() << __PRETTY_FUNCTION__ << __LINE__ << p;
 #endif
       }
     }
@@ -257,9 +259,11 @@ static void _read(SettingKey comboKey,
   const int n = combo->findText(a[0]);
   if (n != -1)
     {
-#ifdef _0
+#ifdef ENABLE_VERBOSE
       qDebug() << __PRETTY_FUNCTION__ << __LINE__
-               << n << a[0] << a[1];
+               << n
+               << a[0]
+               << a[1];
 #endif
       combo->setItemData(n, a[1]);
       combo->setCurrentIndex(n);
