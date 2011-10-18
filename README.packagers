@@ -2,15 +2,46 @@
 PACKAGERS
 =========
 
-Please consider packaging a preconfigured system wide configuration file
-with nomnom. See "examples/NomNom.conf" for an example of this.
+Prerequisites
+-------------
 
-nomnom will set the default values (e.g. paths to commands) which may
-not always be correct which is why installing a preconfigured configuration
-file with nomnom is recommended.
+Make sure you read the INSTALL file for the application prerequisites.
 
-You could also run nomnom, edit the preferences and then reuse the
-configuration file in your package. You can see the path to the config
-file in the Preferences / Other.
 
-Please see also the manual page notes.
+System wide configuration file
+------------------------------
+
+You can distribute 0.2 without a system wide configuration file.
+
+NomNom was, until 0.2, a tedious application to configure -- which is
+why installing a system wide config file with predefined values was
+previously a recommended step.
+
+You may still do this, if you like. Refer to the Qt documentation
+(look up QSettings) for the typical search paths, e.g. on Unix-like
+systems:
+
+  /etc/xdg/NomNom/NomNom.conf
+  /etc/xdg/NomNom.conf
+  /etc/NomNom.conf
+
+Keep in mind, however, that the "system wide config values" are nothing
+more than recommendations as the users may override them (in settings) at
+anytime.
+
+Example (/etc/NomNom.conf):
+
+  [Settings]
+  ParseUsing=other:
+  ParseUsingOther=/foo/bar^-f -b %u
+
+Make a note of the use of "other". This would make "/foo/bar" to be
+used as the default value for "Parse using" command. The command line
+arguments follow after the "^".
+
+Full list of the supported variables, can be found in:
+
+  $top_srcdir/src/settings/nsettings.cpp
+
+Or take a look at your local user config. Run "nomnom --config-path"
+to find the path to it.
