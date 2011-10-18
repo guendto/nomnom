@@ -3,14 +3,11 @@
 Prerequisites
 =============
 
-* quvi (0.2.16.1+)  <http://quvi.googlecode.com/>
+* quvi (0.2.16.1+)  <http://quvi.sourceforge.net/>
 * umph (0.1.6+)     <http://umph.googlecode.com/>
 * curl (7.20.0+)    <http://curl.haxx.se/>
 * qt   (4.6+)       <http://qt.nokia.com/>
 * media player that supports streaming (e.g. vlc, mplayer)
-
-Note that nomnom may or may not compile with earlier versions.
-The above versions are the ones that I've tested.
 
 
 Installation from source
@@ -20,7 +17,12 @@ Installation from source
 If you are compiling nomnom from the development code from the git
 repository, see "Installation from development code", instead.
 
-  --without-manual    Do not install manual page(s)
+  --enable-verbose    Enable --verbose program option
+                        If enabled, the program can use --verbose to
+                        turn on verbose output to stderr. Recommended
+                        for debugging purposes only.
+
+  --without-manual    Do not install manual pages
 
 
 Installation from development code
@@ -34,5 +36,5 @@ repository. You will need:
   * GNU autoconf
   * GNU automake
 
-Once the files have been generated, follow the instructions in "Installation
+Once the files have been generated, follow the instructions of "Installation
 from source" above.
