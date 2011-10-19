@@ -62,6 +62,10 @@ NomNom supports the following command line options.
 
 Prints the path to the local user config file and exits.
 
+=head2 --locale
+
+Prints the system locale (as returned by Qt) and exits.
+
 =head2 --detect
 
 Prints the detected commands and exits.
