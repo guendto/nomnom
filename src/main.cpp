@@ -69,7 +69,7 @@ static void first_run(QSettings& s)
   settings.write();
 }
 
-static bool config_path(const QSettings& s)
+static bool print_config_path(const QSettings& s)
 {
   std::clog << qPrintable(s.fileName()) << std::endl;
   return true;
@@ -82,7 +82,7 @@ static void print_nresult(const nn::detect::NResult& r)
             << std::endl;
 }
 
-static void dump_nresults(const nn::DetectType n, const QString& s)
+static void print_nresults(const nn::DetectType n, const QString& s)
 {
   nn::detect::NResultList l;
   nn::detect::find(n, l);
@@ -93,21 +93,31 @@ static void dump_nresults(const nn::DetectType n, const QString& s)
   }
 }
 
-static bool detect_cmds()
+static bool print_cmds()
 {
   std::clog << "Detect commands from $PATH..." << std::endl;
-  dump_nresults(MediaParser, "Media parsers:");
-  dump_nresults(MediaPlayer, "Media players:");
-  dump_nresults(FeedParser, "Feed parsers:");
-  dump_nresults(Downloader, "Downloaders:");
+  print_nresults(MediaParser, "Media parsers:");
+  print_nresults(MediaPlayer, "Media players:");
+  print_nresults(FeedParser, "Feed parsers:");
+  print_nresults(Downloader, "Downloaders:");
 }
 
-static bool version()
+static bool print_locale()
+{
+  std::clog
+      << "System locale:\n  "
+      << qPrintable(QLocale::system().name())
+      << "\nQt translations:\n  "
+      << qPrintable(QLibraryInfo::location(QLibraryInfo::TranslationsPath))
+      << std::endl;
+}
+
+static bool print_version()
 {
   std::clog << PACKAGE_VERSION << std::endl;
 }
 
-static bool help()
+static bool print_help()
 {
   const QString arg0 = QCoreApplication::arguments()[0];
   std::clog
@@ -118,6 +128,7 @@ static bool help()
 #ifdef ENABLE_VERBOSE
       << "  --verbose      Turn on verbose output\n"
 #endif
+      << "  --locale       Print system locale (as returned by Qt) and exit\n"
       << "  --version      Print version and exit\n"
       << "  --help         Print help and exit"
       << std::endl;
@@ -134,17 +145,19 @@ static bool parse_args(const QSettings& qs)
   foreach (const QString s, args)
   {
     if (s == "--config-path")
-      return config_path(qs);
+      return print_config_path(qs);
     else if (s == "--detect")
-      return detect_cmds();
+      return print_cmds();
 #ifdef ENABLE_VERBOSE
     else if (s == "--verbose")
       verbose = true;
 #endif
+    else if (s == "--locale")
+      return print_locale();
     else if (s == "--version")
-      return version();
+      return print_version();
     else if (s == "--help")
-      return help();
+      return print_help();
     else
       {
         std::clog << "error: invalid option: " << qPrintable(s) << std::endl;
