@@ -42,7 +42,7 @@ enum { StartIndexTooltip=0x00, MaxResultsTooltip };
 
 static const char *tooltips[] =
 {
-  QT_TRANSLATE_NOOP("Tooltip",
+  QT_TRANSLATE_NOOP("nn::NFeedProperties",
   "The start index parameter specifies the index of the first matching\n"
   "result that should be included in the result set. This parameter uses\n"
   "a one-based index, meaning the first result is 1, the second result\n"
@@ -53,7 +53,7 @@ static const char *tooltips[] =
   "start index parameter to 11 and the max results parameter to 10.\n"
   "  -- YouTube Developer's Guide: Data API Protocol"
                    ),
-  QT_TRANSLATE_NOOP("Tooltip",
+  QT_TRANSLATE_NOOP("nn::NFeedProperties",
   "The max results parameter specifies the maximum number of\n"
   "results that should be included in the result set.\n\n"
   "This parameter works in conjunction with the start index parameter\n"
