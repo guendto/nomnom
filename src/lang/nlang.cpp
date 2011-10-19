@@ -204,8 +204,8 @@ bool choose_dialog(QWidget *parent, QString& lang)
   bool ok = false;
   const QString s = QInputDialog::getItem(
                       parent,
-                      QObject::tr("Select language"),
-                      QObject::tr("Language:"),
+                      qApp->translate("nn::NLang", "Select language"),
+                      qApp->translate("nn::NLang", "Language:"),
                       languages,
                       0,
                       false,

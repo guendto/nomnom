@@ -18,6 +18,8 @@
 
 #include "config.h"
 
+#include <QCoreApplication>
+
 #ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
@@ -79,7 +81,7 @@ void DownloadDialog::start(QStringList& args)
 
 void DownloadDialog::onCurlStarted()
 {
-  setLabelText(tr("Starting download ..."));
+  setLabelText(tr("Starting download..."));
 }
 
 void DownloadDialog::onCurlError(QProcess::ProcessError n)
@@ -118,7 +120,8 @@ static void update_label(QProgressDialog *d, const QString& ln)
   if (rx_rate.indexIn(rate) == -1)
     rate = QString("%1k").arg(rate.toLongLong()/1024.0,2,'f',1);
 
-  const QString s = QObject::tr("Copying %1/s, %2").arg(rate).arg(lst[ETA]);
+  const QString s = qApp->translate("DownloadDialog", "Copying %1/s, %2")
+                    .arg(rate).arg(lst[ETA]);
 
 #ifdef ENABLE_VERBOSE
   qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "s=" << s;

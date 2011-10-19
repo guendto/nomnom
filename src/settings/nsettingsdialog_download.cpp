@@ -17,6 +17,7 @@
 
 #include "config.h"
 
+#include <QCoreApplication>
 #include <QFileDialog>
 #include <QGridLayout>
 #include <QVBoxLayout>
@@ -111,7 +112,10 @@ void NSettingsDownload::init()
 static bool _verify(QLineEdit *edit, QString& msg)
 {
   if (edit->text().isEmpty())
-    msg = QObject::tr("Please fill the required fields");
+    {
+      msg = qApp->translate("nn::NSettingsDownload",
+                            "Please fill the required fields");
+    }
   return msg.isEmpty();
 }
 

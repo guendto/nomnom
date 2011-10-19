@@ -17,6 +17,7 @@
 
 #include "config.h"
 
+#include <QCoreApplication>
 #include <QImageReader>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -141,7 +142,8 @@ bool NSettingsAppearance::verify(QString&)
 
 static QString construct_filter()
 {
-  QString filter = QObject::tr("Images") + " (";
+  QString filter =
+    qApp->translate("nn::NSettingsAppearance","Images") + " (";
 
   foreach(QByteArray b, QImageReader::supportedImageFormats())
   {
@@ -158,7 +160,7 @@ static bool browse(QWidget *parent, QString& fname)
 {
   fname = QFileDialog::getOpenFileName(
             parent,
-            QObject::tr("Open image"),
+            qApp->translate("nn::NSettingsAppearance", "Open image"),
             QDir::homePath(),
             construct_filter());
   return ! fname.isEmpty();

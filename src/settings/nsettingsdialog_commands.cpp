@@ -17,6 +17,7 @@
 
 #include "config.h"
 
+#include <QCoreApplication>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QComboBox>
@@ -49,40 +50,19 @@ static void detect_type(const DetectType t, QComboBox *c)
 #endif
       }
     }
-  c->addItem(QObject::tr("Other"));
+  c->addItem(qApp->translate("nn::NSettingsCommands", "Other"));
 }
-
-static const char *recommended[] =
-{
-  QT_TR_NOOP("Recommended value: \"%1\""),
-  NULL
-};
-
-static const char *f_spec[] =
-{
-  QT_TR_NOOP("  %f .. Path to downloaded media file"),
-  NULL
-};
-
-static const char *u_spec[] =
-{
-  QT_TR_NOOP("  %u .. Media page URL"),
-  NULL
-};
-
-static const char *m_spec[] =
-{
-  QT_TR_NOOP("  %m .. Media stream URL or path to downloaded media file"),
-  NULL
-};
 
 static QVBoxLayout* newVBox(QWidget *p,
                             const QString& t,
                             QComboBox **c,
                             QLineEdit **e,
                             const char *f,
-                            const QString& r,
-                            const QStringList& specs=QStringList())
+                            const QString& tt)
+#ifdef _1
+const QString& r,
+      const QStringList& specs=QStringList())
+#endif
 {
   *c = new QComboBox;
   p->connect(*c, SIGNAL(currentIndexChanged(QString)), p, f);
@@ -90,12 +70,14 @@ static QVBoxLayout* newVBox(QWidget *p,
   *e = new QLineEdit;
   (*e)->hide();
 
+#ifdef _1
   QString tooltip = r;
   foreach (const QString s, specs)
   {
     tooltip += "\n" + s;
   }
-  (*e)->setToolTip(tooltip);
+#endif
+  (*e)->setToolTip(tt);
 
   QLabel *l = new QLabel(t);
   l->setBuddy(*c);
@@ -111,6 +93,45 @@ static QVBoxLayout* newVBox(QWidget *p,
   return vbox;
 }
 
+typedef enum
+{
+  Recommended = 0x1,
+  SpecF = 0x2,
+  SpecU = 0x4,
+  SpecM = 0x8
+} TooltipType;
+
+static QString tooltip(const int t, const QString& arg1)
+{
+  static const char *str[] =
+  {
+    QT_TRANSLATE_NOOP("nn::NSettingsCommands",
+    "Recommended value: \"%1\""),
+
+    QT_TRANSLATE_NOOP("nn::NSettingsCommands",
+    "  %f .. Path to downloaded media file"),
+
+    QT_TRANSLATE_NOOP("nn::NSettingsCommands",
+    "  %u .. Media page URL"),
+
+    QT_TRANSLATE_NOOP("nn::NSettingsCommands",
+    "  %m .. Media stream URL or path to downloaded media file"),
+  };
+
+  QString s = NSettingsCommands::tr(str[0]).arg(arg1);
+
+  if (t & SpecF)
+    s += "\n" + NSettingsCommands::tr(str[1]);
+
+  if (t & SpecU)
+    s += "\n" + NSettingsCommands::tr(str[2]);
+
+  if (t & SpecM)
+    s += "\n" + NSettingsCommands::tr(str[3]);
+
+  return s;
+}
+
 NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
   : NSettingsWidget(parent)
 {
@@ -123,8 +144,7 @@ NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
             &parseUsingCombo,
             &parseUsingEdit,
             SLOT(parseUsingChanged(QString)),
-            QString(recommended[0]).arg("quvi --category-http %u"),
-            QStringList() << u_spec[0]
+            tooltip(SpecU, "quvi --category-http %u")
            );
   detect_type(MediaParser, parseUsingCombo);
 
@@ -136,8 +156,7 @@ NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
             &downloadUsingCombo,
             &downloadUsingEdit,
             SLOT(downloadUsingChanged(QString)),
-            QString(recommended[0]).arg("curl -L -C - -o %f %u"),
-            QStringList() << f_spec[0] << u_spec[0]
+            tooltip(SpecU|SpecF, "curl -L -C - -o %f %u")
            );
   detect_type(Downloader, downloadUsingCombo);
 
@@ -149,8 +168,7 @@ NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
             &playUsingCombo,
             &playUsingEdit,
             SLOT(playUsingChanged(QString)),
-            QString(recommended[0]).arg("xdg-open %m"),
-            QStringList() << m_spec[0]
+            tooltip(SpecM, "xdg-open %m")
            );
   detect_type(MediaPlayer, playUsingCombo);
 
@@ -162,7 +180,7 @@ NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
             &feedUsingCombo,
             &feedUsingEdit,
             SLOT(feedUsingChanged(QString)),
-            QString(recommended[0]).arg("umph")
+            tooltip(Recommended, "umph")
            );
   detect_type(FeedParser, feedUsingCombo);
 
@@ -184,9 +202,11 @@ void NSettingsCommands::init()
 static bool _verify(QComboBox *combo, QLineEdit *edit, QString& msg)
 {
   const QString text = combo->currentText();
-  if (text == QObject::tr("Other") && edit->text().isEmpty())
+  if (text == qApp->translate("nn::NSettingsCommands", "Other")
+      && edit->text().isEmpty())
     {
-      msg = QObject::tr("Please enter a custom command");
+      msg = qApp->translate("nn::NSettingsCommands",
+                            "Please enter a custom command");
       edit->setFocus();
     }
   return msg.isEmpty();
@@ -205,9 +225,9 @@ bool NSettingsCommands::verify(QString& msg)
 }
 
 static void _write(SettingKey comboKey,
-                   QComboBox *combo,
-                   SettingKey editKey,
-                   QLineEdit *edit)
+       QComboBox *combo,
+       SettingKey editKey,
+       QLineEdit *edit)
 {
   const int n = combo->currentIndex();
   const QVariant v = combo->itemData(n);
@@ -216,7 +236,7 @@ static void _write(SettingKey comboKey,
 // of using the combobox UI string which may be a translated string.
 
   QString ct = combo->currentText();
-  if (ct == QObject::tr("Other"))
+  if (ct == qApp->translate("nn::NSettingsCommands", "Other"))
     ct = "other";
 
   settings.setValue(comboKey, QString("%1%2%3")
@@ -254,7 +274,7 @@ static void _read(SettingKey comboKey,
 // of using the combobox UI string which may be a translated string.
 
   if (a[0] == "other")
-    a[0] = QObject::tr("Other");
+    a[0] = qApp->translate("nn::NSettingsCommands", "Other");
 
   const int n = combo->findText(a[0]);
   if (n != -1)

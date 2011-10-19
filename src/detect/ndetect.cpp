@@ -17,6 +17,7 @@
 
 #include "config.h"
 
+#include <QCoreApplication>
 #include <QTextStream>
 #include <QStringList>
 #include <QProcess>
@@ -135,22 +136,34 @@ bool find(const DetectType type,
     default:
       l = static_cast<const struct _lookup_s*>(lookup_media_parsers);
       if (log)
-        *log << QObject::tr("<b>Find media parser</b> ...");
+        {
+          *log << qApp->translate("nn::NDetect",
+                                  "<b>Find media parser</b> ...");
+        }
       break;
     case MediaPlayer:
       l = static_cast<const struct _lookup_s*>(lookup_media_players);
       if (log)
-        *log << QObject::tr("<b>Find media player</b> ...");
+        {
+          *log << qApp->translate("nn::NDetect",
+                                  "<b>Find media player</b> ...");
+        }
       break;
     case FeedParser:
       l = static_cast<const struct _lookup_s*>(lookup_feed_parsers);
       if (log)
-        *log << QObject::tr("<b>Find YouTube feed parser</b> ...");
+        {
+          *log << qApp->translate("nn::NDetect",
+                                  "<b>Find YouTube feed parser</b> ...");
+        }
       break;
     case Downloader:
       l = static_cast<const struct _lookup_s*>(lookup_downloaders);
       if (log)
-        *log << QObject::tr("<b>Find downloader</b> ...");
+        {
+          *log << qApp->translate("nn::NDetect",
+                                  "<b>Find downloader</b> ...");
+        }
       break;
     }
 
@@ -164,7 +177,10 @@ bool find(const DetectType type,
   while (l[i].cmd)
     {
       if (log)
-        *log << QObject::tr("Check for %1 ...").arg(l[i].cmd);
+        {
+          *log << qApp->translate("nn::NDetect",
+                                  "Check for %1 ...").arg(l[i].cmd);
+        }
 
       NResultPair found;
 
@@ -186,7 +202,9 @@ bool find(const DetectType type,
       else
         {
           if (log)
-            *log << QObject::tr("no") << "<br>";
+            {
+              *log << qApp->translate("nn::NDetect","no") << "<br>";
+            }
         }
       ++i;
     }

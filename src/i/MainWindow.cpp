@@ -275,7 +275,7 @@ void MainWindow::handleURL(const QString& url)
   qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "q_args=" << q_args;
 #endif
 
-  proc->setLabelText(tr("Checking ..."));
+  proc->setLabelText(tr("Checking..."));
   proc->setMaximum(0);
   proc->start(q_args);
 
@@ -313,7 +313,7 @@ bool MainWindow::queryFormats(QStringList& formats,
 
   json.clear();
 
-  proc->setLabelText(tr("Checking ..."));
+  proc->setLabelText(tr("Checking..."));
   proc->setMaximum(0);
   proc->start(args);
 
@@ -586,9 +586,10 @@ static bool check_language(QWidget *w, const QString& lang)
 
   if (lang != settings.value(nn::Language).toString())
     {
-      if (nn::ask(w, QObject::tr("Language will be changed after "
-                                 "you restart the application. "
-                                 "Restart now?"))
+      if (nn::ask(w, qApp->translate("MainWindow",
+                                     "Language will be changed after "
+                                     "you restart the application. "
+                                     "Restart now?"))
           == QMessageBox::No)
         {
           return false;
@@ -728,9 +729,13 @@ void MainWindow::dropEvent(QDropEvent *e)
 static void update_show_state(QWidget *w)
 {
   const bool v = !w->isVisible();
-  QAction *a = systray->findTrayMenuAction(QObject::tr("Show"));
+
+  QAction *a = systray->findTrayMenuAction(
+                 qApp->translate("MainWindow", "Show"));
+
   if (a)
     a->setChecked(v);
+
   w->setVisible(v);
 }
 
