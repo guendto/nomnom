@@ -46,6 +46,16 @@ locale is set to the appropriate value, e.g.:
 
   env LANG=de_DE.UTF-8 ./src/nomnom
 
+
+Key accelerators
+----------------
+
+Please make sure you set accelerators so that they are not in conflict
+with one another. For example, instead of two widgets using the same
+(e.g. Alt+F) use a different combination for the other so that they
+do not interfere with one another.
+
+
 Untranslatable strings
 ----------------------
 
