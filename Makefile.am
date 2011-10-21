@@ -1,7 +1,6 @@
 ACLOCAL_AMFLAGS=-I m4
 
 EXTRA_DIST=\
- examples/NomNom.conf \
  nomnom.desktop.in \
  README.packagers \
  nomnom.xpm \
