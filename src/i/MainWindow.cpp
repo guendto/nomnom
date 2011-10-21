@@ -139,7 +139,7 @@ void MainWindow::createContextMenu()
 
 void MainWindow::createTrayIcon()
 {
-  systray = new nn::NSysTray(this, QString("<b>NomNom</b> %1").arg(VERSION));
+  systray = new nn::NSysTray(this, QString("<b>NomNom</b> %1").arg(VN));
 
   connect(systray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           this, SLOT(activated(QSystemTrayIcon::ActivationReason)));
@@ -625,7 +625,7 @@ void MainWindow::onSettings()
 
 void MainWindow::onAbout()
 {
-  nn::NAboutDialog *d = new nn::NAboutDialog(VERSION, WWW, this);
+  nn::NAboutDialog *d = new nn::NAboutDialog(VN, WWW, this);
   d->exec();
 }
 

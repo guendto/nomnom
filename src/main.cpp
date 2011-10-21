@@ -114,7 +114,7 @@ static bool print_locale()
 
 static bool print_version()
 {
-  std::clog << PACKAGE_VERSION << std::endl;
+  std::clog << VN << std::endl;
 }
 
 static bool print_help()
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
   QCoreApplication::setOrganizationName  (APPNAME);
   QCoreApplication::setOrganizationDomain(APPDOMAIN);
   QCoreApplication::setApplicationName   (APPNAME);
-  QCoreApplication::setApplicationVersion(PACKAGE_VERSION);
+  QCoreApplication::setApplicationVersion(VN);
 #undef APPNAME
 #undef APPDOMAIN
 
