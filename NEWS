@@ -1,4 +1,23 @@
 
+0.2.0  Fri Oct 21 2011  Toni Gundogdu
+
+Changes:
+  - Revise YouTube feed (umph) integration, add support for umph "--all"
+  - Add command (media stream parser, player, ...) detection from $PATH
+  - Add command line options (--detect, --locale, --config-path, ...)
+  - Improve progress dialogs used with quvi and curl commands
+  - Improve error handling with commands
+  - Revise system icon tray integration
+  - Use GNU Autotools instead of CMake
+  - Remove subsystems log and tips
+  - Revise translation subsystem
+  - Update Finnish translation
+  - Revise nomnom.desktop file
+  - Revise settings subsystem
+  - Revise about dialog
+  - Revise manual page
+
+
 0.1.4  Sat Jun 18 2011  Toni Gundogdu
 
 Changes:
