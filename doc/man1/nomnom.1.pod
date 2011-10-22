@@ -1,6 +1,3 @@
-
-=pod
-
 =head1 NAME
 
 NomNom - The graphical media download tool
@@ -122,24 +119,40 @@ The YouTube C<fmtNN> string IDs are documented at:
 =head2 Resuming partially transferred files may fail
 
 Some websites are known to refuse to work with the HTTP requests to
-resume a file transfer. Either check "Always overwrite existing media
-files" in the settings or remove the existing file manually.
+resume a file transfer.
 
-=head2 Using of HTTP proxies
+=head3 Workaround
 
-If you use an HTTP proxy, please make sure you have configured all of
-the commands that NomNom uses (see C<settings> and open C<commands>) to
-use the same proxy. Some websites refuse to work with requests coming
-from different sources (IP addresses) trying to access the same
-media stream URL which is may be unique to an IP address.
+Either check "Always overwrite existing media files" in the settings
+or remove the existing file manually.
+
+=head2 HTTP user-agent
+
+Some websites refuse to play nice with renegade user-agent strings.
+
+=head3 Recommendations
+
+Make sure both C<quvi(1)> and C<curl(1)> use the same user-agent string.
+Note that C<quvi(1)> uses "Mozilla/5.0" by default.
+
+=head2 HTTP proxy
+
+Generally OK, although some proxies may have been configured to
+C<cook up> the HTTP headers before they are sent back to the server.
+This may sometimes lead to issues with the servers.
+
+=head3 Recommendations
+
+If you use an HTTP proxy, make sure you have configured all of the commands
+that NomNom uses (e.g. C<quvi(1)>, C<curl(1)>, etc.) to use the same proxy.
 
 =head1 TIPS
 
 =head2 Use configuration files
 
 Although it is possible to configure custom commands for NomNom to use
-(via C<settings> and C<commands>), another way is to add appropriate
-configuration files for the commands that NomNom uses.
+(via C<settings> and C<commands>), another way is to add/edit the appropriate
+configuration files for these commands.
 
 =head3 Examples
 
@@ -147,15 +160,15 @@ configuration files for the commands that NomNom uses.
  ~/.umphrc ;# refer to the umph(1) documentation
  ~/.curlrc ;# refer to the curl(1) documentation
 
-Same goes for whatever media player you choose to use.
+Same goes for whatever media player you choose to use with NomNom.
 
 =head1 FILES
 
 =head2 Configuration file
 
 The location of this file may vary and depends on how Qt was configured.
-You can use the C<--config-path> program option to print it, if you are
-not sure. See also L</COMMAND LINE>.
+You can use the C<--config-path> program option to print it. See also
+L</COMMAND LINE>.
 
 =head1 LICENSE
 
@@ -168,4 +181,7 @@ NomNom is free software, licensed under the GPLv3+.
 
 =head1 AUTHOR
 
-Toni Gundogdu <legatvs at sign gmail com>
+Toni Gundogdu E<lt>legatvs at sign gmail comE<gt>
+
+Thanks to all those who have contributed to the project by sending
+patches, reporting bugs and writing feedback. You know who you are.
