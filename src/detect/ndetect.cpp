@@ -105,7 +105,7 @@ static const struct _lookup_s lookup_feed_parsers[] =
 
 static const struct _lookup_s lookup_downloaders[] =
 {
-  {"curl", "-L -C - -o %f %u"},
+  {"curl", "-L -C - -o %f %u --user-agent Mozilla/5.0"},
   {NULL, NULL}
 };
 

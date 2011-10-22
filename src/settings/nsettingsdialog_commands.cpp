@@ -156,7 +156,8 @@ NSettingsCommands::NSettingsCommands(QWidget *parent/*=NULL*/)
             &downloadUsingCombo,
             &downloadUsingEdit,
             SLOT(downloadUsingChanged(QString)),
-            tooltip(SpecU|SpecF, "curl -L -C - -o %f %u")
+            tooltip(SpecU|SpecF,
+                    "curl -L -C - -o %f %u --user-agent Mozilla/5.0")
            );
   detect_type(Downloader, downloadUsingCombo);
 
