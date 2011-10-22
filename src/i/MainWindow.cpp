@@ -499,6 +499,10 @@ void MainWindow::downloadMedia()
       QStringList args = nn::to_cmd_args(p);
       args.replaceInStrings("%m", fpath);
 
+#ifdef ENABLE_VERBOSE
+      qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
+#endif
+
       const QString cmd = args.takeFirst();
 
       if (!QProcess::startDetached(cmd, args))
