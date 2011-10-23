@@ -15,42 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef nfeedprogressdialog_h
-#define nfeedprogressdialog_h
+#ifndef nerrorwhiledialog_h
+#define nerrorwhiledialog_h
 
-#include <QProgressDialog>
-#include <QProcess>
-
-#include <NFeed>
+#include <QDialog>
 
 class QStringList;
+class QString;
 
 namespace nn
 {
 
-class NFeedProgressDialog : public QProgressDialog
+class NErrorWhileDialog : public QDialog
 {
   Q_OBJECT
 public:
-  NFeedProgressDialog(QWidget *parent=NULL);
-public:
-  bool results(feed::NFeedList&, QString&);
-  bool open(QStringList);
-  QString errmsg() const;
-  bool cancelled() const;
-  int errcode() const;
-private slots:
-  void finished(int, QProcess::ExitStatus);
-  void error(QProcess::ProcessError);
-  void cleanup();
-  void read();
-private:
-  QStringList _args;
-  QString _buffer;
-  QString _errmsg;
-  QProcess *_proc;
-  bool _cancelled;
-  int _errcode;
+  NErrorWhileDialog(const QStringList&,
+                    const QString&,
+                    const int,
+                    QWidget *parent=NULL);
 };
 
 } // namespace nn

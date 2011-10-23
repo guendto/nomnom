@@ -11,6 +11,7 @@ noinst_HEADERS=\
 
 nodist_nomnom_SOURCES=\
  moc_nfeedprogressdialog.cpp \
+ moc_nerrorwhiledialog.cpp \
  moc_nsettingsdialog.cpp \
  moc_ndetectdialog.cpp \
  moc_ntripwireedit.cpp \
@@ -39,6 +40,9 @@ moc_ProcProgDiag.cpp:
 
 moc_Media.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/Media.h
+
+moc_nerrorwhiledialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/errorwhile/nerrorwhiledialog.h
 
 moc_nfeedprogressdialog.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/feed/nfeedprogressdialog.h
@@ -75,6 +79,7 @@ src=\
  settings/nsettingsmutator.cpp \
  settings/nsettingsdialog.cpp \
  settings/nsettings.cpp \
+ errorwhile/nerrorwhiledialog.cpp \
  widgets/ntripwireedit.cpp \
  detect/ndetectdialog.cpp \
  detect/ndetect.cpp \
@@ -95,6 +100,8 @@ src=\
  Media.cpp
 
 hdr=\
+ NErrorWhileDialog \
+  errorwhile/nerrorwhiledialog.h \
  NFeedProgressDialog \
  NFeedDialog \
  NFeed \

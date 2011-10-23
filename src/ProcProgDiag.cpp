@@ -27,8 +27,7 @@
 static QHash<QString,QRegExp> rx_labels;
 
 ProcessProgressDialog::ProcessProgressDialog(QWidget *parent/*=NULL*/)
-  : QProgressDialog(parent),
-    _canceled(false)
+  : QProgressDialog(parent), _canceled(false), _errcode(-1)
 {
   _proc.setProcessChannelMode(QProcess::MergedChannels);
 
@@ -68,6 +67,11 @@ QString ProcessProgressDialog::errmsg() const
   return _errmsg;
 }
 
+int ProcessProgressDialog::errcode() const
+{
+  return _errcode;
+}
+
 void ProcessProgressDialog::start(QStringList& args)
 {
 #ifdef ENABLE_VERBOSE
@@ -102,11 +106,8 @@ void ProcessProgressDialog::onProcError(QProcess::ProcessError n)
   if (!_canceled)
     {
       hide();
-      _errmsg = tr("Error while running command:<p>%1</p>"
-                   "Qt error message follows (code #%2):<p>%3</p>")
-                .arg(_args.join(" "))
-                .arg(n)
-                .arg(_proc.errorString());
+      _errcode = static_cast<int>(n);
+      _errmsg  = _proc.errorString();
       emit error();
     }
   cancel();
@@ -152,11 +153,8 @@ void ProcessProgressDialog::onProcFinished(int ec, QProcess::ExitStatus es)
           _errmsg = _buffer;
           if (rx_error.indexIn(_buffer) != -1)
             {
-              _errmsg = tr("Error while running command:<p>%1</p>"
-                           "quvi error message follows (code #%2):<p>%3</p>")
-                        .arg(_args.join(" "))
-                        .arg(ec)
-                        .arg(rx_error.cap(1).simplified());
+              _errmsg  = rx_error.cap(1).simplified();
+              _errcode = static_cast<int>(ec);
             }
 #ifdef ENABLE_VERBOSE
           qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "errmsg=" << _errmsg;

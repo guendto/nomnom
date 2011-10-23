@@ -27,7 +27,7 @@
 #include "DownloadDiag.h"
 
 DownloadDialog::DownloadDialog(QWidget *parent/*=NULL*/)
-  : QProgressDialog(parent), _canceled(false)
+  : QProgressDialog(parent), _canceled(false), _errcode(-1)
 {
   _proc.setProcessChannelMode(QProcess::MergedChannels);
 
@@ -61,6 +61,11 @@ QString DownloadDialog::errmsg() const
   return _errmsg;
 }
 
+int DownloadDialog::errcode() const
+{
+  return _errcode;
+}
+
 void DownloadDialog::start(QStringList& args)
 {
 #ifdef ENABLE_VERBOSE
@@ -92,11 +97,8 @@ void DownloadDialog::onCurlError(QProcess::ProcessError n)
   if (!_canceled)
     {
       hide();
-      _errmsg = tr("Error while running command:<p>%1</p>"
-                   "Qt error message follows (code #%2):<p>%3</p>")
-                .arg(_args.join(" "))
-                .arg(n)
-                .arg(_proc.errorString());
+      _errmsg = _proc.errorString();
+      _errcode = n;
       emit error();
     }
   cancel();
@@ -146,10 +148,8 @@ void DownloadDialog::onCurlReadyRead()
 
       if (rx_err.indexIn(ln) != -1)
         {
-          _errmsg = tr("Error while running command:<p>%1</p>"
-                       "curl error message follows:<p>%3</p>")
-                    .arg(_args.join(" "))
-                    .arg(rx_err.cap(1));
+          _errmsg = rx_err.cap(1);
+          _errcode = -1;
           break;
         }
       update_label(this, ln);

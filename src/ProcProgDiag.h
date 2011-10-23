@@ -32,6 +32,7 @@ public:
   void start(QStringList&);
   QString errmsg() const;
   bool canceled() const;
+  int errcode() const;
   bool failed() const;
 private slots:
   void onProcFinished(int, QProcess::ExitStatus);
@@ -45,9 +46,10 @@ signals:
 private:
   QStringList _args;
   QString _buffer;
-  QProcess _proc;
   QString _errmsg;
+  QProcess _proc;
   bool _canceled;
+  int _errcode;
 };
 
 #endif

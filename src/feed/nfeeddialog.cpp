@@ -24,6 +24,7 @@
 #include <QToolBox>
 
 #include <NFeedProgressDialog>
+#include <NErrorWhileDialog>
 #include <NFeedDialog>
 
 extern nn::feed::NFeedList feedItems; // main.cpp
@@ -122,11 +123,19 @@ void NFeedDialog::parse(QStringList args)
   if (d->cancelled())
     return;
 
+  NErrorWhileDialog *ewd = NULL;
+
   if (r)
     {
-      QString msg;
-      if (!d->results(feedItems, msg))
-        NFeedDialog::m_info(this, msg);
+      QString errmsg;
+      if (!d->results(feedItems, errmsg))
+        {
+          ewd = new NErrorWhileDialog(args,
+                                      errmsg,
+                                      -1,
+                                      this);
+          ewd->exec();
+        }
       else
         {
           _toolbox->setCurrentIndex(1);
@@ -134,7 +143,13 @@ void NFeedDialog::parse(QStringList args)
         }
     }
   else
-    m_info(this, d->errmsg());
+    {
+      ewd = new NErrorWhileDialog(args,
+                                  d->errmsg(),
+                                  d->errcode(),
+                                  this);
+      ewd->exec();
+    }
 }
 
 void NFeedDialog::selected(QString s)

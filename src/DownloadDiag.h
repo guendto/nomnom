@@ -33,6 +33,7 @@ public:
   void start(QStringList&);
   QString errmsg() const;
   bool canceled() const;
+  int errcode() const;
   bool failed() const;
 signals:
   void finished();
@@ -48,6 +49,7 @@ private:
   QString _errmsg;
   QProcess _proc;
   bool _canceled;
+  int _errcode;
 };
 
 #endif

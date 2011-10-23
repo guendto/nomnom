@@ -32,7 +32,7 @@ namespace nn
 {
 
 NFeedProgressDialog::NFeedProgressDialog(QWidget *parent/*=NULL*/)
-  : QProgressDialog(parent), _proc(NULL), _cancelled(false)
+  : QProgressDialog(parent), _cancelled(false), _errcode(-1), _proc(NULL)
 {
   _proc = new QProcess;
   _proc->setProcessChannelMode(QProcess::MergedChannels);
@@ -48,7 +48,7 @@ NFeedProgressDialog::NFeedProgressDialog(QWidget *parent/*=NULL*/)
   setAutoClose(false);
 }
 
-bool NFeedProgressDialog::open(QStringList& args)
+bool NFeedProgressDialog::open(QStringList args)
 {
   setLabelText(tr("Working..."));
 
@@ -118,11 +118,8 @@ void NFeedProgressDialog::error(QProcess::ProcessError n)
 {
   if (!_cancelled)
     {
-      _errmsg = tr("Error while running command:<p>%1</p>"
-                   "Qt error message follows (code #%2):<p>%3</p>")
-                .arg(_args.first())
-                .arg(n)
-                .arg(_proc->errorString());
+      _errmsg = _proc->errorString();
+      _errcode = n;
     }
   cancel();
 }
@@ -144,11 +141,8 @@ void NFeedProgressDialog::finished(int ec, QProcess::ExitStatus es)
           QString m = (rx.indexIn(_buffer) != -1)
                       ? rx.cap(1).simplified()
                       : _buffer;
-          _errmsg = tr("Error while running command:<p>%1</p>"
-                       "Error message follows (code #%2):<p>%3</p>")
-                    .arg(_args.join(" "))
-                    .arg(ec)
-                    .arg(m);
+          _errcode = ec;
+          _errmsg = m;
         }
     }
   cancel();
@@ -165,6 +159,11 @@ void NFeedProgressDialog::cleanup()
 QString NFeedProgressDialog::errmsg() const
 {
   return _errmsg;
+}
+
+int NFeedProgressDialog::errcode() const
+{
+  return _errcode;
 }
 
 bool NFeedProgressDialog::cancelled() const

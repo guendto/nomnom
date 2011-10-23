@@ -30,6 +30,7 @@
 #include <QDebug>
 #endif
 
+#include <NErrorWhileDialog>
 #include <NSettingsMutator>
 #include <NSettingsDialog>
 #include <NAboutDialog>
@@ -250,7 +251,12 @@ void MainWindow::handleURL(const QString& url)
 
       if (failed)
         {
-          nn::info(this, proc->errmsg());
+          nn::NErrorWhileDialog *d =
+            new nn::NErrorWhileDialog(q_args,
+                                      proc->errmsg(),
+                                      proc->errcode(),
+                                      this);
+          d->exec();
           return;
         }
 
@@ -293,7 +299,14 @@ void MainWindow::handleURL(const QString& url)
         downloadMedia();
     }
   else
-    nn::info(this, errmsg);
+    {
+      nn::NErrorWhileDialog *d =
+        new nn::NErrorWhileDialog(q_args,
+                                  errmsg,
+                                  proc->errcode(),
+                                  this);
+      d->exec();
+    }
 }
 
 // Query formats to an URL.
@@ -397,7 +410,15 @@ void MainWindow::streamMedia()
   const QString cmd = args.takeFirst();
 
   if (!QProcess::startDetached(cmd, args))
-    nn::info(this, tr("Error while running command:<p>%1</p>").arg(cmd));
+    {
+      nn::NErrorWhileDialog *d =
+        new nn::NErrorWhileDialog(QStringList() << cmd << args,
+                                  tr("Unknown error while attempting to "
+                                     "start a detached process"),
+                                  -1,
+                                  this);
+      d->exec();
+    }
 }
 
 // Download media (to a file).
@@ -470,7 +491,12 @@ void MainWindow::downloadMedia()
 
       if (download->failed())
         {
-          nn::info(this, download->errmsg());
+          nn::NErrorWhileDialog *d =
+            new nn::NErrorWhileDialog(args,
+                                      download->errmsg(),
+                                      download->errcode(),
+                                      this);
+          d->exec();
           return;
         }
     }
@@ -507,8 +533,13 @@ void MainWindow::downloadMedia()
 
       if (!QProcess::startDetached(cmd, args))
         {
-          nn::info(this,
-                   tr("Error while running command:<p>%1</p>").arg(cmd));
+          nn::NErrorWhileDialog *d =
+            new nn::NErrorWhileDialog(QStringList() << cmd << args,
+                                      tr("Unknown error while attempting to "
+                                         "start a detached process"),
+                                      -1,
+                                      this);
+          d->exec();
         }
     }
 }
