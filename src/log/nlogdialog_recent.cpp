@@ -28,6 +28,8 @@
 #include <NRecentMutator>
 #include <NRecentEntry>
 #include <NLogDialog>
+#include <NSettings>
+#include <NUtil>
 
 extern nn::NRecentMutator recent;
 
@@ -82,22 +84,16 @@ void NLogRecent::selected()
     emit selected(i->text(0));
 }
 
-int NLogRecent::confirmClear()
-{
-  return QMessageBox::question(this,
-                               qApp->applicationName(),
-                               tr("All records will be lost permanently. "
-                                  "Really clear?"),
-                               QMessageBox::Yes|QMessageBox::No);
-}
-
 void NLogRecent::reset()
 {
   if (_treew->topLevelItemCount() == 0)
     return;
 
-  if (confirmClear() != QMessageBox::Yes)
-    return;
+  if (ask(this, tr("All records will be lost permanently. Really clear?"))
+      != QMessageBox::Yes)
+    {
+      return;
+    }
 
   _treew->clear();
   recent.clear();

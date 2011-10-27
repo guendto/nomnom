@@ -24,6 +24,8 @@
 #include <QToolBox>
 
 #include <NLogDialog>
+#include <NSettings>
+#include <NUtil>
 
 namespace nn
 {
@@ -84,7 +86,7 @@ void NLogDialog::done(int n)
       if (_selected.isEmpty())
         {
           _toolbox->setCurrentIndex(0);
-          m_info(tr("Please select an item from the list"));
+          info(this, tr("Please select an item from the list"));
           return;
         }
     }
@@ -100,11 +102,6 @@ void NLogDialog::selected(QString s)
 QString NLogDialog::selected() const
 {
   return _selected;
-}
-
-void NLogDialog::m_info(const QString& msg)
-{
-  QMessageBox::information(this, QCoreApplication::applicationName(), msg);
 }
 
 // NLogWidget

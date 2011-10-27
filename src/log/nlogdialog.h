@@ -36,7 +36,6 @@ public:
 protected:
   void done(int);
 private:
-  void m_info(const QString& msg);
   void foreachWidget();
 private slots:
   void selected(QString);
@@ -74,8 +73,6 @@ protected:
 #ifdef _1
   virtual void read();
 #endif
-private:
-  int confirmClear();
 private:
   QTreeWidget *_treew;
 };
