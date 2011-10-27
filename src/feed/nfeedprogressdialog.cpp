@@ -17,12 +17,14 @@
 
 #include "config.h"
 
-#include <QScriptValueIterator>
-#include <QScriptEngine>
+#include <QCoreApplication>
+#include <QVariant>
 
 #ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
+
+#include <qjson/parser.h>
 
 #include <NFeedProgressDialog>
 
@@ -71,46 +73,33 @@ bool NFeedProgressDialog::open(QStringList args)
   return _errmsg.isEmpty();
 }
 
-bool NFeedProgressDialog::results(feed::NFeedList& dst, QString& err)
+bool NFeedProgressDialog::results(feed::NFeedList& dst, QString& errmsg)
 {
   const int n = _buffer.indexOf("{");
   if (n == -1)
     {
-      err = tr("Unexpected data from umph");
+      errmsg = tr("Unexpected data from umph");
       return false;
     }
 
-  QScriptEngine e;
-  QScriptValue v = e.evaluate("("+_buffer.mid(n)+")");
-  if (e.hasUncaughtException())
+  QJson::Parser p;
+  bool ok;
+
+  QVariantMap r = p.parse(_buffer.mid(n).toLocal8Bit(), &ok).toMap();
+  if (!ok)
     {
-      err = tr("Uncaught exception at line %1: %2")
-            .arg(e.uncaughtExceptionLineNumber())
-            .arg(v.toString());
+      errmsg = tr("An error occurred while parsing JSON");
       return false;
     }
 
-  QScriptValueIterator i(v.property("video"));
-  if (!i.hasNext())
-    {
-      err = tr("umph did not return any video entries");
-      return false;
-    }
   dst.clear();
 
-  QString t,u;
-  while (i.hasNext())
-    {
-      i.next();
-      if (i.flags() & QScriptValue::SkipInEnumeration)
-        continue;
-      v = i.value();
-      t = v.property("title").toString();
-      u = v.property("url").toString();
-
-      feed::NFeedItem item(t,u);
-      dst.append(item);
-    }
+  foreach (const QVariant v, r["video"].toList())
+  {
+    const QVariantMap m = v.toMap();
+    feed::NFeedItem i(m["title"].toString(), m["url"].toString());
+    dst.append(i);
+  }
   return true;
 }
 
