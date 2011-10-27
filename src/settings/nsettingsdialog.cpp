@@ -25,6 +25,7 @@
 
 #include <NSettingsMutator>
 #include <NSettingsDialog>
+#include <NUtil>
 
 extern nn::NSettingsMutator settings; // main.cpp
 
@@ -78,11 +79,6 @@ void NSettingsDialog::done(int n)
   close();
 }
 
-void NSettingsDialog::m_info(QWidget *parent, const QString& msg)
-{
-  QMessageBox::information(parent, QCoreApplication::applicationName(), msg);
-}
-
 bool NSettingsDialog::foreachWidget(Mode mode)
 {
   const int c = toolbox->count();
@@ -96,7 +92,7 @@ bool NSettingsDialog::foreachWidget(Mode mode)
       if (mode == To && !s->verify(msg))
         {
           toolbox->setCurrentWidget(s);
-          NSettingsDialog::m_info(this, msg);
+          info(this, msg);
           return false;
         }
 

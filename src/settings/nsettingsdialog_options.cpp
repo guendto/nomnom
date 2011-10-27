@@ -22,6 +22,7 @@
 
 #include <NSettingsMutator>
 #include <NSettingsDialog>
+#include <NUtil>
 
 extern nn::NSettingsMutator settings; // main.cpp
 
@@ -79,7 +80,7 @@ bool NSettingsOptions::foreachWidget(Mode mode)
       if (!o->verify(msg))
         {
           tabWidget->setCurrentWidget(o);
-          NSettingsDialog::m_info(this, msg);
+          info(this, msg);
           return false;
         }
 

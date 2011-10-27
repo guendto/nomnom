@@ -36,8 +36,6 @@ class NFeedDialog : public QDialog
 {
   Q_OBJECT
 public:
-  static void m_info(QWidget*, const QString&);
-public:
   NFeedDialog(QWidget *parent, const QStringList&);
 public:
   QString selected() const;

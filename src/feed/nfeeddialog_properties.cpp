@@ -31,7 +31,9 @@
 #include <QLabel>
 
 #include <NFeedDialog>
+#include <NSettings>
 #include <NFeed>
+#include <NUtil>
 
 extern bool have_umph_feature_all; // main.cpp
 
@@ -198,7 +200,7 @@ void NFeedProperties::parse()
     {
       // Potential translation hack-up.
       QString s = _identLabel->text().remove("&").split(" ").takeLast();
-      NFeedDialog::m_info(this, tr("Please enter %1").arg(s));
+      info(this, tr("Please enter %1").arg(s));
       _identEdit->setFocus();
       return;
     }

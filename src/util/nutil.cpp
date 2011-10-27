@@ -49,7 +49,7 @@ namespace nn
 int ask(QWidget *p, const QString& t)
 {
   const QMessageBox::StandardButtons b = QMessageBox::Yes|QMessageBox::No;
-  return QMessageBox::question(p, QCoreApplication::applicationName(), t, b);
+  return QMessageBox::question(p, qApp->applicationName(), t, b);
 }
 
 /*
@@ -63,7 +63,7 @@ int ask(QWidget *p, const QString& t)
  */
 void info(QWidget *p, const QString& t)
 {
-  QMessageBox::information(p, QCoreApplication::applicationName(), t);
+  QMessageBox::information(p, qApp->applicationName(), t);
 }
 
 /*

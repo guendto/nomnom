@@ -44,8 +44,6 @@ class NSettingsDialog : public QDialog
   Q_OBJECT
 public:
   NSettingsDialog(QWidget *parent=NULL);
-public:
-  static void m_info(QWidget*, const QString&);
 protected:
   void done(int);
 private:

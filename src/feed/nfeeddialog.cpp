@@ -26,6 +26,8 @@
 #include <NFeedProgressDialog>
 #include <NErrorWhileDialog>
 #include <NFeedDialog>
+#include <NSettings>
+#include <NUtil>
 
 extern nn::feed::NFeedList feedItems; // main.cpp
 
@@ -83,23 +85,18 @@ void NFeedDialog::done(int n)
           if (feedItems.count() == 0)
             {
               _toolbox->setCurrentIndex(0);
-              m_info(this, tr("Please read a feed"));
+              info(this, tr("Please read a feed"));
             }
           else
             {
               _toolbox->setCurrentIndex(1);
-              m_info(this, tr("Please select an item from the list"));
+              info(this, tr("Please select an item from the list"));
             }
           return;
         }
     }
   QDialog::done(n);
   close();
-}
-
-void NFeedDialog::m_info(QWidget *parent, const QString& msg)
-{
-  QMessageBox::information(parent, QCoreApplication::applicationName(), msg);
 }
 
 bool NFeedDialog::foreachWidget()

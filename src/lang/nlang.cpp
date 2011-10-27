@@ -68,7 +68,7 @@ static QFileInfoList scan_for_qm(const QString& scanDir,
  */
 static QString filemask()
 {
-  return QString("%1_??_??.qm").arg(QCoreApplication::applicationName());
+  return QString("%1_??_??.qm").arg(qApp->applicationName());
 }
 
 /*
