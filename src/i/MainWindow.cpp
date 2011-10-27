@@ -41,7 +41,8 @@
 #include <NUtil>
 
 #include "Recent.h"
-// UI
+#include "DownloadDiag.h"
+#include "ProcProgDiag.h"
 #include "MainWindow.h"
 
 #define QSETTINGS_GROUP             "MainWindow"
@@ -59,20 +60,19 @@ extern Recent recent;
 enum { StreamMedia=0, DownloadMedia };
 
 MainWindow::MainWindow()
-  : media(new Media)
 {
   setupUi(this);
   restore();
 
 // Create Download dialog.
 
-  download = new DownloadDialog(this);
+  _download = new DownloadDialog(this);
 
 // Create Process Progress dialog for quvi.
 
-  proc = new ProcessProgressDialog(this);
+  _proc = new ProcessProgressDialog(this);
 
-  connect(proc, SIGNAL(finished(QString)),
+  connect(_proc, SIGNAL(finished(QString)),
           this, SLOT(onProcFinished(QString)));
 
 // Custom program icon.
@@ -95,7 +95,7 @@ void MainWindow::createContextMenu()
         else \
             connect(a, SIGNAL(triggered()), SLOT(f())); \
         textBrowser->addAction(a); \
-        actions[t] = a; \
+        _actions[t] = a; \
     } while (0)
 
 #define add_s \
@@ -120,7 +120,7 @@ void MainWindow::createContextMenu()
   // Add key shortcuts.
 
 #define _wrap(s,k) \
-    do { actions[s]->setShortcut(QKeySequence(k)); } while (0)
+    do { _actions[s]->setShortcut(QKeySequence(k)); } while (0)
 
   _wrap(tr("Address..."),    "Ctrl+A");
   _wrap(tr("Feed..."),       "Ctrl+F");
@@ -253,18 +253,18 @@ void MainWindow::handleURL(const QString& url)
         {
           nn::NErrorWhileDialog *d =
             new nn::NErrorWhileDialog(q_args,
-                                      proc->errmsg(),
-                                      proc->errcode(),
+                                      _proc->errmsg(),
+                                      _proc->errcode(),
                                       this);
           d->exec();
           return;
         }
 
-      if (proc->canceled())
+      if (_proc->canceled())
         return;
     }
 
-  json.clear();
+  _json.clear();
 
 // Choose format.
 
@@ -281,11 +281,11 @@ void MainWindow::handleURL(const QString& url)
   qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "q_args=" << q_args;
 #endif
 
-  proc->setLabelText(tr("Checking..."));
-  proc->setMaximum(0);
-  proc->start(q_args);
+  _proc->setLabelText(tr("Checking..."));
+  _proc->setMaximum(0);
+  _proc->start(q_args);
 
-  if (proc->canceled())
+  if (_proc->canceled())
     return;
 
 // Download media or pass media stream URL to a media player.
@@ -303,7 +303,7 @@ void MainWindow::handleURL(const QString& url)
       nn::NErrorWhileDialog *d =
         new nn::NErrorWhileDialog(q_args,
                                   errmsg,
-                                  proc->errcode(),
+                                  _proc->errcode(),
                                   this);
       d->exec();
     }
@@ -324,13 +324,13 @@ bool MainWindow::queryFormats(QStringList& formats,
   qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
 #endif
 
-  json.clear();
+  _json.clear();
 
-  proc->setLabelText(tr("Checking..."));
-  proc->setMaximum(0);
-  proc->start(args);
+  _proc->setLabelText(tr("Checking..."));
+  _proc->setMaximum(0);
+  _proc->start(args);
 
-  failed = proc->failed();
+  failed = _proc->failed();
   if (failed)
     return false;
 
@@ -338,7 +338,7 @@ bool MainWindow::queryFormats(QStringList& formats,
   qDebug() <<  __PRETTY_FUNCTION__ << __LINE__ << "failed=" << failed;
 #endif
 
-  QStringList lns = json.split("\n");
+  QStringList lns = _json.split("\n");
   lns.removeDuplicates();
 
   const QRegExp rx("^(.*)\\s+:\\s+");
@@ -405,7 +405,7 @@ void MainWindow::streamMedia()
                     .simplified();
 
   QStringList args = nn::to_cmd_args(p);
-  args.replaceInStrings("%m", media->get(Media::Link).toString());
+  args.replaceInStrings("%m", _media.get(Media::StreamURL).toString());
 
   const QString cmd = args.takeFirst();
 
@@ -428,13 +428,13 @@ void MainWindow::downloadMedia()
   QString fname = settings.value(nn::FilenameFormat).toString();
 
   const QString suffix =
-    media->get(Media::Suffix).toString().simplified();
+    _media.get(Media::FileSuffix).toString().simplified();
 
   bool ok = nn::format_filename(
               settings.value(nn::FilenameRegExp).toString(),
-              media->get(Media::Title).toString().simplified(),
-              media->get(Media::ID).toString().simplified(),
-              media->get(Media::Host).toString().simplified(),
+              _media.get(Media::PageTitle).toString().simplified(),
+              _media.get(Media::MediaID).toString().simplified(),
+              _media.get(Media::Host).toString().simplified(),
               suffix,
               fname
             );
@@ -471,7 +471,7 @@ void MainWindow::downloadMedia()
     QDir().remove(fpath);
 
   const qint64 expected_bytes =
-    media->get(Media::Length).toLongLong();
+    _media.get(Media::LengthBytes).toLongLong();
 
   if (QFileInfo(fpath).size() < expected_bytes)
     {
@@ -481,20 +481,20 @@ void MainWindow::downloadMedia()
                         .simplified();
 
       QStringList args = nn::to_cmd_args(p);
-      args.replaceInStrings("%u", media->get(Media::Link).toString());
+      args.replaceInStrings("%u", _media.get(Media::StreamURL).toString());
       args.replaceInStrings("%f", fpath);
 
-      download->start(args);
+      _download->start(args);
 
-      if (download->canceled())
+      if (_download->canceled())
         return;
 
-      if (download->failed())
+      if (_download->failed())
         {
           nn::NErrorWhileDialog *d =
             new nn::NErrorWhileDialog(args,
-                                      download->errmsg(),
-                                      download->errcode(),
+                                      _download->errmsg(),
+                                      _download->errcode(),
                                       this);
           d->exec();
           return;
@@ -573,20 +573,18 @@ void MainWindow::changeProgramIcon()
 
 bool MainWindow::parseOK(QString& errmsg)
 {
-  if (proc->failed())
+  if (_proc->failed())
     {
-      errmsg = proc->errmsg();
+      errmsg = _proc->errmsg();
       return false;
     }
-
-  const int n = json.indexOf("{");
+  const int n = _json.indexOf("{");
   if (n == -1)
     {
       errmsg = tr("quvi returned unexpected data");
       return false;
     }
-
-  return media->fromJSON(json.mid(n), errmsg);
+  return _media.fromJSON(_json.mid(n), errmsg);
 }
 
 static void check_window_flags(QWidget *w)
@@ -741,7 +739,7 @@ void MainWindow::onFeed()
 
 void MainWindow::onProcFinished(QString output)
 {
-  json = output;
+  _json = output;
 }
 
 // Event: DragEnter.

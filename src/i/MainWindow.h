@@ -20,14 +20,14 @@
 #define nomnom_mainwindow_h
 
 #include <QSystemTrayIcon>
-#include <QPointer>
 #include <QHash>
 
 #include "Media.h"
-#include "DownloadDiag.h"
-#include "ProcProgDiag.h"
 
 #include "ui_MainWindow.h"
+
+class ProcessProgressDialog;
+class DownloadDialog;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -63,13 +63,13 @@ private slots:
   void onAbout();
   void onFeed();
   // quvi.
-  void onProcFinished (QString);
+  void onProcFinished(QString);
 private:
-  QPointer<ProcessProgressDialog> proc;
-  QPointer<DownloadDialog> download;
-  QHash<QString,QAction*> actions;
-  QPointer<Media> media;
-  QString json;
+  QHash<QString,QAction*> _actions;
+  ProcessProgressDialog *_proc;
+  DownloadDialog *_download;
+  QString _json;
+  Media _media;
 };
 
 #endif
