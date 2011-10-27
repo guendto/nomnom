@@ -17,13 +17,45 @@
 
 #include <QDialogButtonBox>
 #include <QPlainTextEdit>
+#include <QApplication>
 #include <QVBoxLayout>
+#include <QPushButton>
+#include <QClipboard>
 #include <QLabel>
 
 #include <NErrorWhileDialog>
 
 namespace nn
 {
+
+typedef enum
+{
+  ErrorWhileRunning = 0x00,
+  ErrorMessageFollows,
+  ErrorCode,
+} LabelType;
+
+static QString label(const LabelType t, const QString& arg1="")
+{
+  static const char *str[] =
+  {
+    QT_TRANSLATE_NOOP("nn::NErrorWhileDialog",
+    "Error while running command:"),
+
+    QT_TRANSLATE_NOOP("nn::NErrorWhileDialog",
+    "Error message follows:"),
+
+    QT_TRANSLATE_NOOP("nn::NErrorWhileDialog",
+    "[code #%1]")
+  };
+
+  QString s = NErrorWhileDialog::tr(str[t]);
+
+  if (!arg1.isEmpty())
+    s = NErrorWhileDialog::tr(str[t]).arg(arg1);
+
+  return s;
+}
 
 NErrorWhileDialog::NErrorWhileDialog(const QStringList& args,
                                      const QString& errmsg,
@@ -33,30 +65,66 @@ NErrorWhileDialog::NErrorWhileDialog(const QStringList& args,
 {
   QVBoxLayout *box = new QVBoxLayout;
 
-  QLabel *l = new QLabel(tr("Error while running command:"));
+// Label
+
+  QLabel *l = new QLabel(label(ErrorWhileRunning));
   box->addWidget(l);
+
+// Command args
 
   QPlainTextEdit *t = new QPlainTextEdit(this);
   t->setPlainText(args.join(" "));
   t->setReadOnly(true);
   box->addWidget(t);
 
-  l = new QLabel(tr("Error message follows:"));
+// Label
+
+  l = new QLabel(label(ErrorMessageFollows));
   box->addWidget(l);
 
+// Error message
+
   t = new QPlainTextEdit(this);
-  t->setPlainText(tr("%1\n[code #%2]").arg(errmsg).arg(errcode));
+  const QString s = label(ErrorCode, QString("%1").arg(errcode));
+  t->setPlainText(QString("%1\n%2").arg(errmsg).arg(s));
   t->setReadOnly(true);
   box->addWidget(t);
 
+// Button box
+
   QDialogButtonBox *bb = new QDialogButtonBox(QDialogButtonBox::Ok);
+  QPushButton *b = new QPushButton(tr("Co&py"));
+  b->setToolTip(tr("Copy to clipboard"));
+
+  bb->addButton(b, QDialogButtonBox::ActionRole);
+
   connect(bb, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(b, SIGNAL(clicked()), this, SLOT(copy()));
   box->addWidget(bb);
+
+// Window
 
   setFixedSize(QSize(400,340));
   setWindowTitle(tr("Error"));
   setLayout(box);
   show();
+
+// Save
+
+  _errcode = errcode;
+  _errmsg = errmsg;
+  _args = args;
+}
+
+void NErrorWhileDialog::copy()
+{
+  QClipboard *c = QApplication::clipboard();
+  c->setText(QString("%1\n%2\n\n%3\n%4\n%5\n")
+             .arg(label(ErrorWhileRunning))
+             .arg(_args.join(" "))
+             .arg(label(ErrorMessageFollows))
+             .arg(_errmsg)
+             .arg(label(ErrorCode, QString("%1").arg(_errcode))));
 }
 
 } // namespace nn

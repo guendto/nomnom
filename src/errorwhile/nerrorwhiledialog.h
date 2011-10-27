@@ -18,10 +18,8 @@
 #ifndef nerrorwhiledialog_h
 #define nerrorwhiledialog_h
 
+#include <QStringList>
 #include <QDialog>
-
-class QStringList;
-class QString;
 
 namespace nn
 {
@@ -34,6 +32,12 @@ public:
                     const QString&,
                     const int,
                     QWidget *parent=NULL);
+private slots:
+  void copy();
+private:
+  QStringList _args;
+  QString _errmsg;
+  int _errcode;
 };
 
 } // namespace nn
