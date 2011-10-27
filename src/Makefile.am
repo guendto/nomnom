@@ -15,8 +15,10 @@ nodist_nomnom_SOURCES=\
  moc_nsettingsdialog.cpp \
  moc_ndetectdialog.cpp \
  moc_ntripwireedit.cpp \
+ moc_nrecententry.cpp \
  moc_naboutdialog.cpp \
  moc_nfeeddialog.cpp \
+ moc_nlogdialog.cpp \
  moc_nsystray.cpp \
  moc_MainWindow.cpp \
  moc_DownloadDiag.cpp \
@@ -36,6 +38,12 @@ moc_DownloadDiag.cpp:
 
 moc_ProcProgDiag.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/ProcProgDiag.h
+
+moc_nrecententry.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/log/nrecententry.h
+
+moc_nlogdialog.cpp:
+	$(MOC) -o $@ $(top_srcdir)/src/log/nlogdialog.h
 
 moc_nerrorwhiledialog.cpp:
 	$(MOC) -o $@ $(top_srcdir)/src/errorwhile/nerrorwhiledialog.h
@@ -65,6 +73,20 @@ qrc_nomnom.cpp:
 	$(RCC) -o $@ $(top_srcdir)/src/rc/nomnom.qrc
 
 src=\
+ about/naboutdialog.cpp \
+ detect/ndetectdialog.cpp \
+ detect/ndetect.cpp \
+ errorwhile/nerrorwhiledialog.cpp \
+ feed/nfeeddialog_properties.cpp \
+ feed/nfeedprogressdialog.cpp \
+ feed/nfeeddialog_items.cpp \
+ feed/nfeeddialog.cpp \
+ feed/nfeed.cpp \
+ lang/nlang.cpp \
+ log/nlogdialog_recent.cpp \
+ log/nrecentmutator.cpp \
+ log/nrecententry.cpp \
+ log/nlogdialog.cpp \
  settings/nsettingsdialog_options_appearance.cpp \
  settings/nsettingsdialog_options_behaviour.cpp \
  settings/nsettingsdialog_options_systray.cpp \
@@ -75,27 +97,22 @@ src=\
  settings/nsettingsmutator.cpp \
  settings/nsettingsdialog.cpp \
  settings/nsettings.cpp \
- errorwhile/nerrorwhiledialog.cpp \
- widgets/ntripwireedit.cpp \
- detect/ndetectdialog.cpp \
- detect/ndetect.cpp \
- about/naboutdialog.cpp \
- feed/nfeeddialog_properties.cpp \
- feed/nfeedprogressdialog.cpp \
- feed/nfeeddialog_items.cpp \
- feed/nfeeddialog.cpp \
- feed/nfeed.cpp \
- lang/nlang.cpp \
- util/nutil.cpp \
  systray/nsystray.cpp \
+ util/nutil.cpp \
+ widgets/ntripwireedit.cpp \
  i/MainWindow.cpp \
  ProcProgDiag.cpp \
  DownloadDiag.cpp \
  main.cpp \
- Recent.cpp \
  Media.cpp
 
 hdr=\
+ NAboutDialog \
+  about/naboutdialog.h \
+ NDetectDialog \
+ NDetect \
+  detect/ndetectdialog.h \
+  detect/ndetect.h \
  NErrorWhileDialog \
   errorwhile/nerrorwhiledialog.h \
  NFeedProgressDialog \
@@ -104,30 +121,29 @@ hdr=\
   feed/nfeedprogressdialog.h \
   feed/nfeeddialog.h \
   feed/nfeed.h \
+ NLang \
+  lang/nlang.h \
+ NRecentMutator \
+ NRecentEntry \
+ NLogDialog \
+  log/nrecentmutator.h \
+  log/nrecententry.h \
+  log/nlogdialog.h \
+ NTripwireEdit \
+  widgets/ntripwireedit.h \
  NSettingsMutator \
  NSettingsDialog \
  NSettings \
   settings/nsettingsmutator.h \
   settings/nsettingsdialog.h \
   settings/nsettings.h \
- NDetectDialog \
- NDetect \
-  detect/ndetectdialog.h \
-  detect/ndetect.h \
- NTripwireEdit \
-  widgets/ntripwireedit.h \
  NSysTray \
   systray/nsystray.h \
- NAboutDialog \
-  about/naboutdialog.h \
- NLang \
-  lang/nlang.h \
  NUtil \
   util/nutil.h \
  i/MainWindow.h \
  ProcProgDiag.h \
  DownloadDiag.h \
- Recent.h \
  Media.h
 
 bin_PROGRAMS=	nomnom

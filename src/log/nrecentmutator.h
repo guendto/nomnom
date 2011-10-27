@@ -1,6 +1,5 @@
-/*
- * NomNom
- * Copyright (C) 2010  Toni Gundogdu <legatvs@gmail.com>
+/* NomNom
+ * Copyright (C) 2011  Toni Gundogdu <legatvs@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,32 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef nomnom_recent_h
-#define nomnom_recent_h
+#ifndef nrecentmutator_h
+#define nrecentmutator_h
 
-#include <QStringList>
+#include <QList>
 
-class Recent
+class QTreeWidget;
+
+namespace nn
+{
+
+class NRecentEntry;
+
+class NRecentMutator
 {
 public:
-  Recent ();
-  virtual ~Recent();
+  NRecentMutator();
+  NRecentMutator& operator<<(const NRecentEntry&);
+public:
+  typedef void (*foreach_callback)(const NRecentEntry&);
 public:
   void setMaxItems(const int);
-public:
-  void write () const;
-  void read  ();
-  void append(const QString&);
-  void clear ();
-public:
-  QStringList toStringList () const;
-public:
-  Recent& operator<< (const QString&);
+  void append(const NRecentEntry&, const bool ignoreLimit=false);
+  void update(const NRecentEntry&);
+  void for_each(foreach_callback);
+  void populate(QTreeWidget*);
+  void write();
+  void clear();
+  void read();
 private:
-  QStringList drops;
-  int maxItems;
+  QList<NRecentEntry*> _entries;
+  int _maxItems;
 };
+
+} // namespace nn
 
 #endif
 
-// vim: set ts=2 sw=2 tw=72 expandtab:
+/* vim: set ts=2 sw=2 tw=72 expandtab: */

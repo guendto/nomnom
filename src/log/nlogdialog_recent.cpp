@@ -1,0 +1,108 @@
+/* NomNom
+ * Copyright (C) 2011  Toni Gundogdu <legatvs@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "config.h"
+
+#include <QCoreApplication>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QTextStream>
+#include <QTreeWidget>
+#include <QMessageBox>
+
+#include <NRecentMutator>
+#include <NRecentEntry>
+#include <NLogDialog>
+
+extern nn::NRecentMutator recent;
+
+namespace nn
+{
+
+NLogRecent::NLogRecent(QWidget *parent/*=NULL*/)
+  : NLogWidget(parent), _treew(NULL)
+{
+
+// Widgets
+
+  _treew = new QTreeWidget;
+  _treew->setHeaderLabels(QStringList() << tr("Title") << tr("Added"));
+  _treew->setColumnCount(2);
+
+  connect(_treew, SIGNAL(itemSelectionChanged()), this, SLOT(selected()));
+
+  QDialogButtonBox *bb = new QDialogButtonBox(QDialogButtonBox::Reset);
+
+  connect(bb->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
+          this, SLOT(reset()));
+
+// Layout
+
+  QVBoxLayout *box = new QVBoxLayout;
+  box->addWidget(_treew);
+  box->addWidget(bb);
+  setLayout(box);
+}
+
+#ifdef _1
+void NLogRecent::read()
+{
+  recent.read();
+}
+#endif
+
+void NLogRecent::init()
+{
+  recent.populate(_treew);
+  _treew->resizeColumnToContents(1);
+  _treew->sortByColumn(1);
+  _treew->setSortingEnabled(true);
+}
+
+void NLogRecent::selected()
+{
+  QTreeWidgetItem *i = _treew->selectedItems().first();
+  i = (i->childCount() > 0) ? i->child(0) : i;
+  if (i)
+    emit selected(i->text(0));
+}
+
+int NLogRecent::confirmClear()
+{
+  return QMessageBox::question(this,
+                               qApp->applicationName(),
+                               tr("All records will be lost permanently. "
+                                  "Really clear?"),
+                               QMessageBox::Yes|QMessageBox::No);
+}
+
+void NLogRecent::reset()
+{
+  if (_treew->topLevelItemCount() == 0)
+    return;
+
+  if (confirmClear() != QMessageBox::Yes)
+    return;
+
+  _treew->clear();
+  recent.clear();
+}
+
+} // namespace nn
+
+/* vim: set ts=2 sw=2 tw=72 expandtab: */

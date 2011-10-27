@@ -33,14 +33,16 @@
 #include <NErrorWhileDialog>
 #include <NSettingsMutator>
 #include <NSettingsDialog>
+#include <NRecentMutator>
+#include <NRecentEntry>
 #include <NAboutDialog>
 #include <NFeedDialog>
+#include <NLogDialog>
 #include <NSettings>
 #include <NSysTray>
 #include <NLang>
 #include <NUtil>
 
-#include "Recent.h"
 #include "DownloadDiag.h"
 #include "ProcProgDiag.h"
 #include "MainWindow.h"
@@ -52,10 +54,8 @@
 extern bool have_quvi_feature_query_formats;
 extern nn::NSettingsMutator settings;
 extern bool have_umph_feature_all;
+extern nn::NRecentMutator recent;
 extern nn::NSysTray *systray;
-extern Recent recent;
-
-// Modes.
 
 enum { StreamMedia=0, DownloadMedia };
 
@@ -74,6 +74,10 @@ MainWindow::MainWindow()
 
   connect(_proc, SIGNAL(finished(QString)),
           this, SLOT(onProcFinished(QString)));
+
+// Read recent URLs into memory.
+
+  recent.read();
 
 // Custom program icon.
 
@@ -117,7 +121,7 @@ void MainWindow::createContextMenu()
 #undef add_s
 #undef creat_a
 
-  // Add key shortcuts.
+// Add key shortcuts.
 
 #define _wrap(s,k) \
     do { _actions[s]->setShortcut(QKeySequence(k)); } while (0)
@@ -131,12 +135,10 @@ void MainWindow::createContextMenu()
   _wrap(tr("Quit"),          "Ctrl+Q");
 #undef _wrap
 
-  // Add the context menu.
+// Add the context menu.
 
   textBrowser->setContextMenuPolicy(Qt::ActionsContextMenu);
 }
-
-// Create tray icon.
 
 void MainWindow::createTrayIcon()
 {
@@ -181,7 +183,12 @@ void MainWindow::createTrayIcon()
     show();
 }
 
-// Handle (dropped) URL.
+#ifdef ENABLE_VERBOSE
+static void print_url(const nn::NRecentEntry& r)
+{
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << r.url();
+}
+#endif
 
 void MainWindow::handleURL(const QString& url)
 {
@@ -223,7 +230,14 @@ void MainWindow::handleURL(const QString& url)
 
 // Recent.
 
-  recent << url;
+  nn::NRecentEntry e;
+  e.setURL(url);
+
+  recent << e;
+
+#ifdef ENABLE_VERBOSE
+  recent.for_each(print_url);
+#endif
 
 // 0x1=invalid input, 0x3=no input
 
@@ -288,11 +302,19 @@ void MainWindow::handleURL(const QString& url)
   if (_proc->canceled())
     return;
 
-// Download media or pass media stream URL to a media player.
+// Check for quvi errors.
 
   QString errmsg;
   if (parseOK(errmsg))
     {
+      // Update recent entry. Media URL is set already. Update title
+      // only.
+
+      e.setTitle(_media.get(Media::PageTitle).toString().simplified());
+      recent.update(e);
+
+      // Download media or pass media stream URL.
+
       if (modeCBox->currentIndex() == StreamMedia)
         streamMedia();
       else
@@ -308,8 +330,6 @@ void MainWindow::handleURL(const QString& url)
       d->exec();
     }
 }
-
-// Query formats to an URL.
 
 bool MainWindow::queryFormats(QStringList& formats,
                               const QStringList& q_args,
@@ -361,8 +381,6 @@ bool MainWindow::queryFormats(QStringList& formats,
   return false;
 }
 
-// Select a format.
-
 bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
 {
   // Prompt only if count exceeds 1 ("default)".
@@ -395,8 +413,6 @@ bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
   return ok && !fmt.isEmpty();
 }
 
-// View media (stream).
-
 void MainWindow::streamMedia()
 {
   const QString p = settings.eitherValue(nn::PlayUsing,
@@ -420,8 +436,6 @@ void MainWindow::streamMedia()
       d->exec();
     }
 }
-
-// Download media (to a file).
 
 void MainWindow::downloadMedia()
 {
@@ -544,8 +558,6 @@ void MainWindow::downloadMedia()
     }
 }
 
-// Change program icon.
-
 void MainWindow::changeProgramIcon()
 {
 #ifdef _1
@@ -568,8 +580,6 @@ void MainWindow::changeProgramIcon()
   setWindowIcon(icon);
 #endif // _1
 }
-
-// Parse JSON data returned by quvi.
 
 bool MainWindow::parseOK(QString& errmsg)
 {
@@ -652,8 +662,6 @@ void MainWindow::onSettings()
     }
 }
 
-// Slot: About.
-
 #define WWW "http://nomnom.sourceforge.net/"
 
 void MainWindow::onAbout()
@@ -664,34 +672,12 @@ void MainWindow::onAbout()
 
 #undef WWW
 
-// Slot: Recent.
-
 void MainWindow::onRecent()
 {
-  const QStringList lst = recent.toStringList();
-
-  if (lst.size() == 0)
-    {
-      nn::info(this, tr("No record of recently visited URLs found."));
-      return;
-    }
-
-  bool ok = false;
-  const QString s =
-    QInputDialog::getItem(this,
-                          tr("Recent URLs"),
-                          tr("Select URL (most recent first):"),
-                          lst,
-                          0,
-                          false,
-                          &ok);
-  if (!ok)
-    return;
-
-  handleURL(s);
+  nn::NLogDialog *d = new nn::NLogDialog(this);
+  if (d->exec() == QDialog::Accepted)
+    handleURL(d->selected());
 }
-
-// Slot: Download.
 
 void MainWindow::onAddress()
 {
@@ -703,8 +689,6 @@ void MainWindow::onAddress()
 
   handleURL(url);
 }
-
-// Slot: on feed.
 
 void MainWindow::onFeed()
 {
@@ -735,14 +719,10 @@ void MainWindow::onFeed()
     handleURL(d->selected());
 }
 
-// Slot: quvi finished.
-
 void MainWindow::onProcFinished(QString output)
 {
   _json = output;
 }
-
-// Event: DragEnter.
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
@@ -750,8 +730,6 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *e)
   if (url.isValid() && url.scheme().toLower() == "http")
     e->acceptProposedAction();
 }
-
-// Event: Drop.
 
 void MainWindow::dropEvent(QDropEvent *e)
 {

@@ -30,25 +30,22 @@
 #endif
 
 #include <NSettingsMutator>
+#include <NRecentMutator>
 #include <NDetectDialog>
 #include <NSysTray>
 #include <NFeed>
 #include <NLang>
 
-#include "Recent.h"
-// UI:
 #include "MainWindow.h"
-
-using namespace nn;
 
 bool have_quvi_feature_query_formats = false;
 bool have_umph_feature_all = false;
-NSettingsMutator settings;
-feed::NFeedList feedItems;
-NSysTray *systray = NULL;
-Recent recent;
+nn::NSettingsMutator settings;
+nn::feed::NFeedList feedItems;
+nn::NSysTray *systray = NULL;
+nn::NRecentMutator recent;
 
-static void set_value(const SettingKey k, const detect::NResult& r)
+static void set_value(const nn::SettingKey k, const nn::detect::NResult& r)
 {
   settings.setValue(k, QString("%1%2%3")
                     .arg(r.first)
@@ -58,13 +55,13 @@ static void set_value(const SettingKey k, const detect::NResult& r)
 
 static void first_run(QSettings& s)
 {
-  NDetectDialog *d = new NDetectDialog;
+  nn::NDetectDialog *d = new nn::NDetectDialog;
   d->showModeComboBox(false);
   d->exec();
-  set_value(DownloadUsing, d->downloader());
-  set_value(ParseUsing,    d->mediaParser());
-  set_value(PlayUsing,     d->mediaPlayer());
-  set_value(FeedUsing,     d->feedParser());
+  set_value(nn::DownloadUsing, d->downloader());
+  set_value(nn::ParseUsing,    d->mediaParser());
+  set_value(nn::PlayUsing,     d->mediaPlayer());
+  set_value(nn::FeedUsing,     d->feedParser());
   s.setValue("FirstRun", false);
   settings.write();
 }
@@ -96,10 +93,10 @@ static void print_nresults(const nn::DetectType n, const QString& s)
 static bool print_cmds()
 {
   std::clog << "Detect commands from $PATH..." << std::endl;
-  print_nresults(MediaParser, "Media parsers:");
-  print_nresults(MediaPlayer, "Media players:");
-  print_nresults(FeedParser, "Feed parsers:");
-  print_nresults(Downloader, "Downloaders:");
+  print_nresults(nn::MediaParser, "Media parsers:");
+  print_nresults(nn::MediaPlayer, "Media players:");
+  print_nresults(nn::FeedParser, "Feed parsers:");
+  print_nresults(nn::Downloader, "Downloaders:");
 }
 
 static bool print_locale()
@@ -239,10 +236,10 @@ int main(int argc, char *argv[])
 
   s.beginGroup("Settings"); // settings/nsettingsmutator.cpp
   if (s.contains("Language"))
-    r = lang::choose(s.value("Language").toString());
+    r = nn::lang::choose(s.value("Language").toString());
 
   if (!r) // Use system locale.
-    lang::choose();
+    nn::lang::choose();
 
 // Detect commands if this is a first run.
 
@@ -259,7 +256,6 @@ int main(int argc, char *argv[])
 // Window.
 
   MainWindow *w = new MainWindow;
-  recent.read();
   return app.exec();
 }
 
