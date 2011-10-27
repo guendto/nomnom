@@ -19,37 +19,30 @@
 #ifndef nomnom_media_h
 #define nomnom_media_h
 
-#include <QPointer>
-#include <QRegExp>
-#include <QHash>
+#include <QVariantMap>
 
-class QLabel;
-
-class Media : public QObject
+class Media
 {
-  Q_OBJECT
 public:
-  enum Detail
-  { Link=0, Title, PageURL, ID, Format, Length, Suffix, ContentType, Host };
+  typedef enum
+  {
+    LengthBytes = 0x00,
+    FileSuffix,
+    PageTitle,
+    StreamURL,
+    PageURL,
+    MediaID,
+    Host
+  } Detail;
 public:
-  Media();
-  Media(const Media&);
   Media& operator=(const Media&);
+  Media(const Media&);
+  Media();
 public:
-  bool     fromJSON   (const QString&, QString&);
-  QVariant get        (Detail) const;
-  void     set        (Detail, const QString&);
+  bool fromJSON(const QString&, QString&);
+  QVariant get(Detail) const;
 private:
-  // Details.
-  QString _id;
-  QString _title;
-  QString _pageURL;
-  QString _link;
-  QString _format;
-  qint64  _length;
-  QString _suffix;
-  QString _ctype;
-  QString _host;
+  QVariantMap _results;
 };
 
 class MediaException

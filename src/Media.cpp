@@ -18,172 +18,94 @@
 
 #include "config.h"
 
-#include <QScriptValueIterator>
-#include <QScriptEngine>
+#include <QCoreApplication>
 #include <QVariant>
-#include <QString>
-#include <QLabel>
 
 #ifdef ENABLE_VERBOSE
 #include <QDebug>
 #endif
 
+#include <qjson/parser.h>
+
 #include "Media.h"
 
-// Ctor.
-
-Media::Media ()
-  : QObject(), _length (0)
-{ }
-
-Media::Media (const Media& v)
-  : QObject(), _length(0)
+Media::Media()
 {
-  _link        = v._link;
-  _title       = v._title;
-  _pageURL     = v._pageURL;
-  _id          = v._id;
-  _format      = v._format;
-  _length      = v._length;
-  _suffix      = v._suffix;
-  _ctype       = v._ctype;
 }
 
-Media&
-Media::operator=(const Media&)
+Media::Media(const Media& v)
 {
+  _results = v._results;
+}
+
+Media& Media::operator=(const Media& m)
+{
+  if (this != &m)
+    _results = m._results;
   return *this;
 }
 
-// Parse from JSON.
-
-bool
-Media::fromJSON (const QString& data, QString& error)
+bool Media::fromJSON(const QString& s, QString& errmsg)
 {
-  QScriptEngine e;
+  QJson::Parser p;
+  bool ok;
 
-  QScriptValue v = e.evaluate ("(" +data+ ")");
-
-  if (e.hasUncaughtException ())
+  QVariantMap r = p.parse(s.toLocal8Bit(), &ok).toMap();
+  if (!ok)
     {
-      error = tr ("Uncaught exception at line %1: %2")
-              .arg (e.uncaughtExceptionLineNumber ())
-              .arg (v.toString ());
+      errmsg = qApp->translate("Media",
+                               "An error occurred while parsing JSON");
       return false;
     }
 
-  _title   = v.property ("page_title").toString ().simplified ();
-  _pageURL = v.property ("page_url").toString ();
-  _id      = v.property ("id").toString ();
-  _host    = v.property ("host").toString ();
+  _results["page_title"] = r["page_title"];
+  _results["page_url"]   = r["page_url"];
+  _results["host"]       = r["host"];
+  _results["media_id"]   = r["id"];
 
-  QScriptValueIterator i (v.property ("link"));
+  QVariantMap l = r["link"].toList().first().toMap();
 
-  if ( !i.hasNext () )
-    {
-      error = tr("Expected at least one media link from quvi(1), got none.");
-      return false;
-    }
-
-  i.next  ();
-  v = i.value ();
-
-  _length = v.property ("length_bytes").toVariant ().toLongLong ();
-  _ctype  = v.property ("content_type").toString ();
-  _suffix = v.property ("file_suffix").toString ();
-  _link   = v.property ("url").toString ();
+  _results["length_bytes"] = l["length_bytes"];
+  _results["file_suffix"]  = l["file_suffix"];
+  _results["stream_url"]   = l["url"];
 
 #ifdef ENABLE_VERBOSE
-  qDebug () << __PRETTY_FUNCTION__ << __LINE__ << "media="
-            << _length
-            << _ctype
-            << _suffix
-            << _link;
+  qDebug () << __PRETTY_FUNCTION__ << __LINE__ << "media=" << _results;
 #endif
 
   return true;
 }
 
-// Get.
-
-QVariant
-Media::get (Detail d) const
+QVariant Media::get(Detail d) const
 {
   switch (d)
     {
-    case Link       :
-      return QVariant (_link);
-    case Title      :
-      return QVariant (_title);
-    case PageURL    :
-      return QVariant (_pageURL);
-    case ID         :
-      return QVariant (_id);
-    case Format     :
-      return QVariant (_format);
-    case Length     :
-      return QVariant (_length);
-    case Suffix     :
-      return QVariant (_suffix);
-    case ContentType:
-      return QVariant (_ctype);
-    case Host       :
-      return QVariant(_host);
+    case LengthBytes:
+      return _results["length_bytes"];
+    case FileSuffix:
+      return _results["file_suffix"];
+    case PageTitle:
+      return _results["page_title"];
+    case StreamURL:
+      return _results["stream_url"];
+    case PageURL:
+      return _results["page_url"];
+    case MediaID:
+      return _results["media_id"];
+    case Host:
+      return _results["host"];
     }
-
   return QVariant();
 }
 
-// Set.
+// MediaException
 
-void
-Media::set (Detail d, const QString& s)
+MediaException::MediaException(const QString& errmsg)
+  : errmsg(errmsg)
 {
-  bool ignored = false;
-  switch (d)
-    {
-    case Link       :
-      _link     = s;
-      break;
-    case Title      :
-      _title    = s;
-      break;
-    case PageURL    :
-      _pageURL  = s;
-      break;
-    case ID         :
-      _id       = s;
-      break;
-    case Format     :
-      _format   = s;
-      break;
-    case Length     :
-      _length   = s.toLongLong(&ignored);
-      break;
-    case Suffix     :
-      _suffix   = s;
-      break;
-    case ContentType:
-      _ctype    = s;
-      break;
-    case Host       :
-      _host     = s;
-      break;
-    default         :
-      break;
-    }
 }
 
-// MediaException: ctor.
-
-MediaException::MediaException (const QString& errmsg)
-  : errmsg(errmsg)
-{ }
-
-// MediaException: what.
-
-const QString&
-MediaException::what() const
+const QString& MediaException::what() const
 {
   return errmsg;
 }
