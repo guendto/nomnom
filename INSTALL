@@ -3,10 +3,11 @@
 Prerequisites
 =============
 
-* quvi (0.2.16.1+)  <http://quvi.sourceforge.net/>
-* umph (0.1.6+)     <http://umph.googlecode.com/>
-* curl (7.20.0+)    <http://curl.haxx.se/>
-* qt   (4.6+)       <http://qt.nokia.com/>
+* quvi  (0.2.16.1+)  <http://quvi.sourceforge.net/>
+* umph  (0.1.6+)     <http://umph.googlecode.com/>
+* curl  (7.20.0+)    <http://curl.haxx.se/>
+* qt    (4.6+)       <http://qt.nokia.com/>
+* qjson (0.7.1+)     <http://qjson.sourceforge.net>
 * media player that supports streaming (e.g. vlc, mplayer)
 
 

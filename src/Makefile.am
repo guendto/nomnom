@@ -143,6 +143,7 @@ AM_CPPFLAGS+=	-DDATADIR='"$(datadir)"'
 AM_CPPFLAGS+=	$(QtScript_CFLAGS)
 AM_CPPFLAGS+=	$(QtCore_CFLAGS)
 AM_CPPFLAGS+=	$(QtGui_CFLAGS)
+AM_CPPFLAGS+=	$(QJson_CFLAGS)
 #if ENABLE_LIBPROXY
 #AM_CPPFLAGS+=	$(libproxy_CFLAGS)
 #endif
@@ -150,6 +151,7 @@ AM_CPPFLAGS+=	$(QtGui_CFLAGS)
 nomnom_LDADD=	$(QtScript_LIBS)
 nomnom_LDADD+=	$(QtCore_LIBS)
 nomnom_LDADD+=	$(QtGui_LIBS)
+nomnom_LDADD+=	$(QJson_LIBS)
 #if ENABLE_LIBPROXY
 #nomnom_LDADD+=	$(libproxy_LIBS)
 #endif
