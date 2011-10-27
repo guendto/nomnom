@@ -136,7 +136,6 @@ nomnom_SOURCES=	$(src) $(hdr)
 AM_CPPFLAGS=	-I$(top_srcdir)/src
 AM_CPPFLAGS+=	-I$(top_srcdir)/src/i
 AM_CPPFLAGS+=	-DDATADIR='"$(datadir)"'
-AM_CPPFLAGS+=	$(QtScript_CFLAGS)
 AM_CPPFLAGS+=	$(QtCore_CFLAGS)
 AM_CPPFLAGS+=	$(QtGui_CFLAGS)
 AM_CPPFLAGS+=	$(QJson_CFLAGS)
@@ -144,8 +143,7 @@ AM_CPPFLAGS+=	$(QJson_CFLAGS)
 #AM_CPPFLAGS+=	$(libproxy_CFLAGS)
 #endif
 
-nomnom_LDADD=	$(QtScript_LIBS)
-nomnom_LDADD+=	$(QtCore_LIBS)
+nomnom_LDADD=	$(QtCore_LIBS)
 nomnom_LDADD+=	$(QtGui_LIBS)
 nomnom_LDADD+=	$(QJson_LIBS)
 #if ENABLE_LIBPROXY

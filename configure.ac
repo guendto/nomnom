@@ -27,7 +27,6 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
-PKG_CHECK_MODULES([QtScript], [QtScript >= 4.6.0])
 PKG_CHECK_MODULES([QtCore],   [QtCore >= 4.6.0])
 PKG_CHECK_MODULES([QtGui],    [QtGui >= 4.6.0])
 PKG_CHECK_MODULES([QJson],    [QJson >= 0.7.1])
