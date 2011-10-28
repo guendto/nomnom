@@ -70,6 +70,7 @@ NFeedDialog::NFeedDialog(QWidget *parent, const QStringList& args)
 
   setWindowTitle(tr("YouTube feed"));
   setMinimumSize(QSize(500,400));
+  setSizeGripEnabled(true);
   foreachWidget();
 
   if (feedItems.count() > 0)

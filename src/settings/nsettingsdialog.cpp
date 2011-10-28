@@ -65,6 +65,7 @@ NSettingsDialog::NSettingsDialog(QWidget *parent/*=NULL*/)
 
   setWindowTitle(tr("Settings"));
   setMinimumSize(QSize(540,450));
+  setSizeGripEnabled(true);
   fromConfig();
 }
 
