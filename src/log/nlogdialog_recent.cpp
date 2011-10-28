@@ -71,7 +71,7 @@ void NLogRecent::read()
 void NLogRecent::init()
 {
   recent.populate(_treew);
-  _treew->resizeColumnToContents(1);
+  _treew->resizeColumnToContents(0);
   _treew->sortByColumn(1);
   _treew->setSortingEnabled(true);
 }

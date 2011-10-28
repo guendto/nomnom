@@ -62,6 +62,7 @@ NLogDialog::NLogDialog(QWidget *parent/*=NULL*/)
 
   setMinimumSize(QSize(500,400));
   setWindowTitle(tr("Log"));
+  setSizeGripEnabled(true);
 
   foreachWidget();
 }
