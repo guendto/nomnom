@@ -75,8 +75,9 @@ MainWindow::MainWindow()
   connect(_proc, SIGNAL(finished(QString)),
           this, SLOT(onProcFinished(QString)));
 
-// Read recent URLs into memory.
+// Recent URLs.
 
+  recent.setMaxItems(25);
   recent.read();
 
 // Custom program icon.
