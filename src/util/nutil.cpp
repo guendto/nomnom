@@ -134,17 +134,20 @@ QStringList to_cmd_args(const QString& s)
 
 // $cmd_path:$cmd_args
 
-  if (s.simplified().contains(NSETTINGS_CMDPATH_SEPARATOR))
+  static const QString::SplitBehavior sb = QString::SkipEmptyParts;
+  static const QString sep = NSETTINGS_CMDPATH_SEPARATOR;
+
+  if (s.simplified().contains(sep))
     {
-      QStringList r, a = s.simplified().split(NSETTINGS_CMDPATH_SEPARATOR);
+      QStringList r, a = s.simplified().split(sep);
       r << a.takeFirst();
-      r << a.takeFirst().split(" ");
+      r << a.takeFirst().split(" ", sb);
       return r;
     }
 
 // "Other" value.
 
-  return s.simplified().split(" ");
+  return s.simplified().split(" ", sb);
 }
 
 } // namespace nn

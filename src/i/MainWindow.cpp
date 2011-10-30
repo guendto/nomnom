@@ -699,6 +699,9 @@ void MainWindow::onFeed()
                     .simplified();
 
   QStringList args = nn::to_cmd_args(p);
+#ifdef ENABLE_VERBOSE
+  qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "args=" << args;
+#endif
   const QString r = args.first();
 
   if (r.isEmpty())
