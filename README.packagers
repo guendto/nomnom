@@ -5,43 +5,39 @@ PACKAGERS
 Prerequisites
 -------------
 
-Make sure you read the INSTALL file for the application prerequisites.
+See the INSTALL file.
 
 
-System wide configuration file
+System-wide configuration file
 ------------------------------
 
-You can distribute 0.2 without a system wide configuration file.
+If you choose to install NomNom with a system-wide configuration file,
+please keep in mind that the users may override the values in the settings
+at any time.
 
-NomNom was, until 0.2, a tedious application to configure -- which is
-why installing a system wide config file with predefined values was
-previously a recommended step.
-
-You may still do this, if you like. Refer to the Qt documentation
-(look up QSettings) for the typical search paths, e.g. on Unix-like
-systems:
+Refer to the Qt documentation (look up QSettings) for the typical search
+paths as they tend to vary on how Qt was configured. For example, on a
+typical Unix-like systems these may be:
 
   /etc/xdg/NomNom/NomNom.conf
   /etc/xdg/NomNom.conf
   /etc/NomNom.conf
 
-Keep in mind, however, that the "system wide config values" are nothing
-more than recommendations as the users may override them (in settings) at
-anytime.
-
-Example (/etc/NomNom.conf):
+Example: Force the application to use command "/foo/bar" instead of
+         default "quvi"
 
   [Settings]
-  ParseUsing=other:
+  ParseUsing=other^
   ParseUsingOther=/foo/bar^-f -b %u
 
-Make a note of the use of "other". This would make "/foo/bar" to be
-used as the default value for "Parse using" command. The command line
-arguments follow after the "^".
+You can tell the application to use a custom command by setting (in
+this case) "ParseUsing" to "other^" and then add the "ParseUsingOther"
+variable that defines the (path) to the custom command with the args.
+Make also a note of the "^" that separates the command and the args.
 
-Full list of the supported variables, can be found in:
-
+For other supported Settings variables, see:
   $top_srcdir/src/settings/nsettings.cpp
 
-Or take a look at your local user config. Run "nomnom --config-path"
-to find the path to it.
+Or, alternatively, you could use your own local config file as a
+template config file. To find the path to the file, run:
+  nomnom --config-path
