@@ -4,24 +4,14 @@
 <context>
     <name>DownloadDialog</name>
     <message>
-        <location filename="../src/DownloadDiag.cpp" line="84"/>
+        <location filename="../src/DownloadDiag.cpp" line="89"/>
         <source>Starting download...</source>
         <translation>Kopioidaan...</translation>
     </message>
     <message>
-        <location filename="../src/DownloadDiag.cpp" line="95"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;Qt error message follows (code #%2):&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;Qt virhe (koodi #%2):&lt;p&gt;%3&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/DownloadDiag.cpp" line="123"/>
+        <location filename="../src/DownloadDiag.cpp" line="125"/>
         <source>Copying %1/s, %2</source>
         <translation>Kopioidaan %1/s, %2</translation>
-    </message>
-    <message>
-        <location filename="../src/DownloadDiag.cpp" line="149"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;curl error message follows:&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;curl virhe:&lt;p&gt;%3&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -57,134 +47,119 @@ p, li { white-space: pre-wrap; }
         <translation>Kopioi</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="107"/>
-        <location filename="../src/i/MainWindow.cpp" line="124"/>
+        <location filename="../src/i/MainWindow.cpp" line="113"/>
+        <location filename="../src/i/MainWindow.cpp" line="130"/>
         <source>Address...</source>
         <translation>Osoite...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="108"/>
-        <location filename="../src/i/MainWindow.cpp" line="125"/>
+        <location filename="../src/i/MainWindow.cpp" line="114"/>
+        <location filename="../src/i/MainWindow.cpp" line="131"/>
         <source>Feed...</source>
         <translation>Syöte...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="109"/>
-        <location filename="../src/i/MainWindow.cpp" line="126"/>
+        <location filename="../src/i/MainWindow.cpp" line="115"/>
+        <location filename="../src/i/MainWindow.cpp" line="132"/>
         <source>Recent...</source>
         <translation>Aikaisempi...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="111"/>
-        <location filename="../src/i/MainWindow.cpp" line="128"/>
-        <location filename="../src/i/MainWindow.cpp" line="159"/>
+        <location filename="../src/i/MainWindow.cpp" line="117"/>
+        <location filename="../src/i/MainWindow.cpp" line="134"/>
+        <location filename="../src/i/MainWindow.cpp" line="163"/>
         <source>Settings...</source>
         <translation>Asetukset...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="113"/>
+        <location filename="../src/i/MainWindow.cpp" line="119"/>
         <source>About...</source>
         <translation>Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="114"/>
-        <location filename="../src/i/MainWindow.cpp" line="130"/>
-        <location filename="../src/i/MainWindow.cpp" line="167"/>
+        <location filename="../src/i/MainWindow.cpp" line="120"/>
+        <location filename="../src/i/MainWindow.cpp" line="136"/>
+        <location filename="../src/i/MainWindow.cpp" line="171"/>
         <source>Quit</source>
         <translation>Sulje</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="150"/>
-        <location filename="../src/i/MainWindow.cpp" line="734"/>
+        <location filename="../src/i/MainWindow.cpp" line="154"/>
+        <location filename="../src/i/MainWindow.cpp" line="749"/>
         <source>Show</source>
         <translation>Näytä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="201"/>
+        <location filename="../src/i/MainWindow.cpp" line="210"/>
         <source>Please configure the path to the quvi. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku komentoon quvi. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="217"/>
+        <location filename="../src/i/MainWindow.cpp" line="226"/>
         <source>Please configure the path to a media player. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku media-toistin komentoon. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="278"/>
-        <location filename="../src/i/MainWindow.cpp" line="316"/>
+        <location filename="../src/i/MainWindow.cpp" line="299"/>
+        <location filename="../src/i/MainWindow.cpp" line="350"/>
         <source>Checking...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="364"/>
+        <location filename="../src/i/MainWindow.cpp" line="396"/>
         <source>Choose format</source>
         <translation>Valitse muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="365"/>
-        <location filename="../src/i/MainWindow.cpp" line="377"/>
+        <location filename="../src/i/MainWindow.cpp" line="397"/>
+        <location filename="../src/i/MainWindow.cpp" line="409"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="366"/>
-        <location filename="../src/i/MainWindow.cpp" line="373"/>
+        <location filename="../src/i/MainWindow.cpp" line="398"/>
+        <location filename="../src/i/MainWindow.cpp" line="405"/>
         <source>Enter your own</source>
         <translation>Syötä muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="376"/>
+        <location filename="../src/i/MainWindow.cpp" line="408"/>
         <source>Enter format</source>
         <translation>Syötä muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="400"/>
-        <location filename="../src/i/MainWindow.cpp" line="507"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;</translation>
+        <location filename="../src/i/MainWindow.cpp" line="433"/>
+        <location filename="../src/i/MainWindow.cpp" line="553"/>
+        <source>Unknown error while attempting to start a detached process</source>
+        <translation>Ulkoista ohjelmaa käynnistettäessa tapahtui tuntematon virhe</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="440"/>
+        <location filename="../src/i/MainWindow.cpp" line="476"/>
         <source>Save media as</source>
         <translation>Tallenna nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="550"/>
+        <location filename="../src/i/MainWindow.cpp" line="595"/>
         <source>quvi returned unexpected data</source>
         <translation>quvi-komento ei palauttanut odotettuja tietoja</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="589"/>
+        <location filename="../src/i/MainWindow.cpp" line="633"/>
         <source>Language will be changed after you restart the application. Restart now?</source>
         <translation>Kieli vaihdetaan ohjelman uudelleen käynnistyksen yhteydessä. Käynnistetäänkö ohjelma uudelleen?</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="642"/>
-        <source>No record of recently visited URLs found.</source>
-        <translation>Ei aiempia osoitteita.</translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="649"/>
-        <source>Recent URLs</source>
-        <translation>Aiemmat osoitteet</translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="650"/>
-        <source>Select URL (most recent first):</source>
-        <translation>Valitse osoite (viimeisin ensimmäisenä):</translation>
-    </message>
-    <message>
-        <location filename="../src/i/MainWindow.cpp" line="666"/>
+        <location filename="../src/i/MainWindow.cpp" line="686"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="666"/>
+        <location filename="../src/i/MainWindow.cpp" line="686"/>
         <source>Media page URL:</source>
         <translation>Internet-osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="688"/>
+        <location filename="../src/i/MainWindow.cpp" line="709"/>
         <source>Please configure the path to a feed reader. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku syötetietoja lukevaan komentoon. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
@@ -192,42 +167,27 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Media</name>
     <message>
-        <location filename="../src/Media.cpp" line="69"/>
-        <source>Uncaught exception at line %1: %2</source>
-        <translation>Tietoja luettaessa rivillä %1: tapahtui virhe %2</translation>
-    </message>
-    <message>
-        <location filename="../src/Media.cpp" line="84"/>
-        <source>Expected at least one media link from quvi(1), got none.</source>
-        <translation>quvi-komento ei palauttanut tietoja.</translation>
+        <location filename="../src/Media.cpp" line="56"/>
+        <source>An error occurred while parsing JSON</source>
+        <translation>JSON-tietoja jäsentäessä tapahtui virhe</translation>
     </message>
 </context>
 <context>
     <name>ProcessProgressDialog</name>
     <message>
-        <location filename="../src/ProcProgDiag.cpp" line="50"/>
+        <location filename="../src/ProcProgDiag.cpp" line="49"/>
         <source>Checking...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/ProcProgDiag.cpp" line="51"/>
+        <location filename="../src/ProcProgDiag.cpp" line="50"/>
         <source>Fetching...</source>
         <translation>Haetaan...</translation>
     </message>
     <message>
-        <location filename="../src/ProcProgDiag.cpp" line="52"/>
+        <location filename="../src/ProcProgDiag.cpp" line="51"/>
         <source>Verifying...</source>
         <translation>Todennetaan...</translation>
-    </message>
-    <message>
-        <location filename="../src/ProcProgDiag.cpp" line="105"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;Qt error message follows (code #%2):&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;Qt virhe (koodi #%2):&lt;p&gt;%3&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/ProcProgDiag.cpp" line="155"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;quvi error message follows (code #%2):&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;quvi virhe (koodi #%2):&lt;p&gt;%3&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -305,29 +265,62 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>nn::NErrorWhileDialog</name>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="42"/>
+        <source>Error while running command:</source>
+        <translation>Seuraavaa komentoa suorittaessa tapahtui virhe:</translation>
+    </message>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="45"/>
+        <source>Error message follows:</source>
+        <translation>Virhe:</translation>
+    </message>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="48"/>
+        <source>[code #%1]</source>
+        <translation>[koodi #%1]</translation>
+    </message>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="96"/>
+        <source>Co&amp;py</source>
+        <translation>&amp;Kopioi</translation>
+    </message>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="97"/>
+        <source>Copy to clipboard</source>
+        <translation>Kopioi leikepöydälle</translation>
+    </message>
+    <message>
+        <location filename="../src/errorwhile/nerrorwhiledialog.cpp" line="108"/>
+        <source>Error</source>
+        <translation>Virhe</translation>
+    </message>
+</context>
+<context>
     <name>nn::NFeedDialog</name>
     <message>
-        <location filename="../src/feed/nfeeddialog.cpp" line="48"/>
+        <location filename="../src/feed/nfeeddialog.cpp" line="51"/>
         <source>&amp;Properties</source>
         <translation>O&amp;minaisuudet</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog.cpp" line="49"/>
+        <location filename="../src/feed/nfeeddialog.cpp" line="52"/>
         <source>&amp;Items</source>
         <translation>&amp;Syötteen sisältö</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog.cpp" line="68"/>
+        <location filename="../src/feed/nfeeddialog.cpp" line="71"/>
         <source>YouTube feed</source>
         <translation>YouTube-syöte</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog.cpp" line="85"/>
+        <location filename="../src/feed/nfeeddialog.cpp" line="89"/>
         <source>Please read a feed</source>
         <translation>Ole hyvä ja hae syöte</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog.cpp" line="90"/>
+        <location filename="../src/feed/nfeeddialog.cpp" line="94"/>
         <source>Please select an item from the list</source>
         <translation>Ole hyvä ja valitse kohde listasta</translation>
     </message>
@@ -335,40 +328,25 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>nn::NFeedProgressDialog</name>
     <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="53"/>
+        <location filename="../src/feed/nfeedprogressdialog.cpp" line="55"/>
         <source>Working...</source>
         <translation>Työskennellään...</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="79"/>
+        <location filename="../src/feed/nfeedprogressdialog.cpp" line="81"/>
         <source>Unexpected data from umph</source>
         <translation>umph-komento ei palauttanut odotettuja tietoja</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="87"/>
-        <source>Uncaught exception at line %1: %2</source>
-        <translation>Tietoja lukiessa, rivillä %1: tapahtui virhe %2</translation>
-    </message>
-    <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="96"/>
-        <source>umph did not return any video entries</source>
-        <translation>umph-komento ei palauttanut tietoja</translation>
-    </message>
-    <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="121"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;Qt error message follows (code #%2):&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suoritettassa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;Qt virhe (koodi #%2):&lt;p&gt;%3&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/feed/nfeedprogressdialog.cpp" line="147"/>
-        <source>Error while running command:&lt;p&gt;%1&lt;/p&gt;Error message follows (code #%2):&lt;p&gt;%3&lt;/p&gt;</source>
-        <translation>Seuraavaa komentoa suoritettassa tapahtui virhe:&lt;p&gt;%1&lt;/p&gt;Virhe (koodi #%2):&lt;p&gt;%3&lt;/p&gt;</translation>
+        <location filename="../src/feed/nfeedprogressdialog.cpp" line="91"/>
+        <source>An error occurred while parsing JSON</source>
+        <translation>JSON-tietoja jäsentäessä tapahtui virhe</translation>
     </message>
 </context>
 <context>
     <name>nn::NFeedProperties</name>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="45"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="47"/>
         <source>The start index parameter specifies the index of the first matching
 result that should be included in the result set. This parameter uses
 a one-based index, meaning the first result is 1, the second result
@@ -382,7 +360,7 @@ start index parameter to 11 and the max results parameter to 10.
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="56"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="58"/>
         <source>The max results parameter specifies the maximum number of
 results that should be included in the result set.
 
@@ -398,67 +376,67 @@ you set the max results parameter to 10.
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="89"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="91"/>
         <source>Uploads</source>
         <translation>Lataukset</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="90"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="92"/>
         <source>Favorites</source>
         <translation>Suosikit</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="91"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="93"/>
         <source>Playlist</source>
         <translation>Soittolista</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="98"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="100"/>
         <source>YouTube username or playlist ID depending on your selection</source>
         <translation>YouTube käyttäjätunnus tai soittolistan tunnus</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="107"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="109"/>
         <source>&amp;Get the entire feed</source>
         <translation>&amp;Hae kaikki</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="109"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="111"/>
         <source>G&amp;et the specified range from the feed</source>
         <translation>H&amp;ae seuraavat</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="113"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="115"/>
         <source>Please install umph 0.2.0 or later to enable</source>
         <translation>Asenna umph 0.2.0 tai uudempi versio</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="128"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="130"/>
         <source>St&amp;art index:</source>
         <translation>A&amp;loita hakemiston kohdasta:</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="138"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="140"/>
         <source>&amp;Max. results:</source>
         <translation>&amp;Enimmäismäärä:</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="148"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="150"/>
         <source>Select range</source>
         <translation>Valitse raja-alue</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="192"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="194"/>
         <source>I&amp;D</source>
         <translation>&amp;tunnus</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="192"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="194"/>
         <source>for &amp;user</source>
         <translation>&amp;käyttäjälle</translation>
     </message>
     <message>
-        <location filename="../src/feed/nfeeddialog_properties.cpp" line="201"/>
+        <location filename="../src/feed/nfeeddialog_properties.cpp" line="203"/>
         <source>Please enter %1</source>
         <translation>Syötä %1</translation>
     </message>
@@ -482,6 +460,50 @@ you set the max results parameter to 10.
         <location filename="../src/about/naboutdialog.cpp" line="105"/>
         <source>License</source>
         <translation>Lisenssi</translation>
+    </message>
+</context>
+<context>
+    <name>nn::NLogDialog</name>
+    <message>
+        <location filename="../src/log/nlogdialog.cpp" line="44"/>
+        <source>&amp;Recent</source>
+        <translation>&amp;Aiemmat</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog.cpp" line="64"/>
+        <source>Log</source>
+        <translation>Historia</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog.cpp" line="90"/>
+        <source>Please select an item from the list</source>
+        <translation>Ole hyvä ja valitse kohde listasta</translation>
+    </message>
+</context>
+<context>
+    <name>nn::NLogRecent</name>
+    <message>
+        <location filename="../src/log/nlogdialog_recent.cpp" line="46"/>
+        <source>Title</source>
+        <translation>Otsikko</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog_recent.cpp" line="46"/>
+        <source>Added</source>
+        <translation>Lisätty</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog_recent.cpp" line="92"/>
+        <source>All records will be lost permanently. Really clear?</source>
+        <translation>Tiedot menetetään pysyvästi. Oletko varma?</translation>
+    </message>
+</context>
+<context>
+    <name>nn::NRecentMutator</name>
+    <message>
+        <location filename="../src/log/nrecentmutator.cpp" line="145"/>
+        <source>(no title)</source>
+        <translation>(ei otsikkotietoja)</translation>
     </message>
 </context>
 <context>
@@ -593,29 +615,29 @@ you set the max results parameter to 10.
         <translation>&amp;Kopioi komennolla</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="167"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="168"/>
         <source>Pl&amp;ay using</source>
         <translation>&amp;Toista komennolla</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="179"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="180"/>
         <source>Read &amp;YouTube feeds using</source>
         <translation>&amp;Lue YouTube-syötteitä komennolla</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="208"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="209"/>
         <source>Please enter a custom command</source>
         <translation>Syötä oma komento</translation>
     </message>
     <message>
         <location filename="../src/settings/nsettingsdialog_commands.cpp" line="53"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="205"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="239"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="277"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="324"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="329"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="334"/>
-        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="339"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="206"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="240"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="278"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="325"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="330"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="335"/>
+        <location filename="../src/settings/nsettingsdialog_commands.cpp" line="340"/>
         <source>Other</source>
         <translation>Oma</translation>
     </message>
@@ -623,27 +645,27 @@ you set the max results parameter to 10.
 <context>
     <name>nn::NSettingsDialog</name>
     <message>
-        <location filename="../src/settings/nsettingsdialog.cpp" line="41"/>
+        <location filename="../src/settings/nsettingsdialog.cpp" line="42"/>
         <source>Op&amp;tions</source>
         <translation>&amp;Vaihtoehdot</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog.cpp" line="42"/>
+        <location filename="../src/settings/nsettingsdialog.cpp" line="43"/>
         <source>Co&amp;mmands</source>
         <translation>Ko&amp;mennot</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog.cpp" line="43"/>
+        <location filename="../src/settings/nsettingsdialog.cpp" line="44"/>
         <source>&amp;Download</source>
         <translation>Kop&amp;iointi</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog.cpp" line="45"/>
+        <location filename="../src/settings/nsettingsdialog.cpp" line="46"/>
         <source>&amp;Proxy</source>
         <translation>&amp;Välityspalvelin</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog.cpp" line="65"/>
+        <location filename="../src/settings/nsettingsdialog.cpp" line="66"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
@@ -715,17 +737,17 @@ you set the max results parameter to 10.
 <context>
     <name>nn::NSettingsOptions</name>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options.cpp" line="38"/>
+        <location filename="../src/settings/nsettingsdialog_options.cpp" line="39"/>
         <source>&amp;Appearance</source>
         <translation>&amp;Ulkoiset ominaisuudet</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options.cpp" line="39"/>
+        <location filename="../src/settings/nsettingsdialog_options.cpp" line="40"/>
         <source>&amp;Behaviour</source>
         <translation>&amp;Ominaisuudet</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options.cpp" line="40"/>
+        <location filename="../src/settings/nsettingsdialog_options.cpp" line="41"/>
         <source>Sys&amp;tray</source>
         <translation></translation>
     </message>
