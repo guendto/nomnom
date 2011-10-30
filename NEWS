@@ -1,4 +1,21 @@
 
+0.3.0  Sun Oct 30 2011  Toni Gundogdu
+
+Changes:
+  - Add improved dialog for displaying "recent URLs"
+    - Revise log (recent) subsystem
+  - Add dialog for displaying "error while running command"
+  - Use QJson for parsing umph and quvi output
+    - Make QJson a new prerequisite
+    - Remove QtScript prerequisite
+  - Make curl use a custom user-agent by default
+  - Update Finnish translation
+
+Bugfixes:
+  - umph integration ("nothing found" even when feed contains items)
+    - Caused by incorrectly parsed and re-joined command line args
+
+
 0.2.0  Fri Oct 21 2011  Toni Gundogdu
 
 Changes:
