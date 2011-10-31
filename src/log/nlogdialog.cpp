@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QDialogButtonBox>
+#include <QPushButton>
 #include <QMessageBox>
 #include <QVBoxLayout>
 #include <QToolBox>
@@ -45,11 +46,16 @@ NLogDialog::NLogDialog(QWidget *parent/*=NULL*/)
 
 // Button box
 
-  QDialogButtonBox *bb = new QDialogButtonBox(
-    QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+  QDialogButtonBox *bb =
+    new QDialogButtonBox(QDialogButtonBox::Ok
+                         | QDialogButtonBox::Cancel
+                         | QDialogButtonBox::Reset);
 
   connect(bb, SIGNAL(accepted()), this, SLOT(accept()));
   connect(bb, SIGNAL(rejected()), this, SLOT(reject()));
+
+  connect(bb->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
+          this, SLOT(reset()));
 
 // Layout
 
@@ -73,9 +79,6 @@ void NLogDialog::foreachWidget()
   for (int i=0; i<c; ++i)
     {
       NLogWidget *l = dynamic_cast<NLogWidget*>(_toolbox->widget(i));
-#ifdef _1
-      l->read();
-#endif
       l->init();
     }
 }
@@ -103,6 +106,12 @@ void NLogDialog::selected(QString s)
 QString NLogDialog::selected() const
 {
   return _selected;
+}
+
+void NLogDialog::reset()
+{
+  NLogWidget *l = dynamic_cast<NLogWidget*>(_toolbox->currentWidget());
+  l->reset();
 }
 
 // NLogWidget

@@ -19,7 +19,6 @@
 
 #include <QCoreApplication>
 #include <QDialogButtonBox>
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QTextStream>
 #include <QTreeWidget>
@@ -48,16 +47,10 @@ NLogRecent::NLogRecent(QWidget *parent/*=NULL*/)
 
   connect(_treew, SIGNAL(itemSelectionChanged()), this, SLOT(selected()));
 
-  QDialogButtonBox *bb = new QDialogButtonBox(QDialogButtonBox::Reset);
-
-  connect(bb->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
-          this, SLOT(reset()));
-
 // Layout
 
   QVBoxLayout *box = new QVBoxLayout;
   box->addWidget(_treew);
-  box->addWidget(bb);
   setLayout(box);
 }
 

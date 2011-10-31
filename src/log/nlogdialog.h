@@ -39,6 +39,7 @@ private:
   void foreachWidget();
 private slots:
   void selected(QString);
+  void reset();
 private:
   QToolBox *_toolbox;
   QString _selected;
@@ -50,10 +51,8 @@ class NLogWidget : public QWidget
 public:
   NLogWidget(QWidget *parent);
 protected:
+  virtual void reset() = 0;
   virtual void init() = 0;
-#ifdef _1
-  virtual void read() = 0;
-#endif
 // Friends
   friend class NLogDialog;
 };
@@ -67,12 +66,9 @@ signals:
   void selected(QString);
 private slots:
   void selected();
-  void reset();
 protected:
+  virtual void reset();
   virtual void init();
-#ifdef _1
-  virtual void read();
-#endif
 private:
   QTreeWidget *_treew;
 };
