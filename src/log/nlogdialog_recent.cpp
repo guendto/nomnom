@@ -17,12 +17,13 @@
 
 #include "config.h"
 
-#include <QCoreApplication>
 #include <QDialogButtonBox>
+#include <QApplication>
 #include <QVBoxLayout>
 #include <QTextStream>
 #include <QTreeWidget>
 #include <QMessageBox>
+#include <QClipboard>
 
 #include <NRecentMutator>
 #include <NRecentEntry>
@@ -71,7 +72,7 @@ void NLogRecent::init()
 
 void NLogRecent::selected()
 {
-  QTreeWidgetItem *i = _treew->selectedItems().first();
+  QTreeWidgetItem *i = _treew->currentItem();
   i = (i->childCount() > 0) ? i->child(0) : i;
   if (i)
     emit selected(i->text(0));
@@ -90,6 +91,23 @@ void NLogRecent::reset()
 
   _treew->clear();
   recent.clear();
+}
+
+void NLogRecent::copy()
+{
+  QTreeWidgetItem *i = _treew->currentItem();
+  if (!i)
+    {
+      info(this, tr("Please select an item from the list"));
+      return;
+    }
+
+  i = (i->childCount() > 0) ? i : i->parent();
+
+  QApplication::clipboard()->setText(QString("%1\n  %2\n  %3\n")
+                                     .arg(i->text(0))
+                                     .arg(i->text(1))
+                                     .arg((i->child(0)->text(0))));
 }
 
 } // namespace nn

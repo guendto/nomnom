@@ -40,6 +40,7 @@ private:
 private slots:
   void selected(QString);
   void reset();
+  void copy();
 private:
   QToolBox *_toolbox;
   QString _selected;
@@ -53,6 +54,7 @@ public:
 protected:
   virtual void reset() = 0;
   virtual void init() = 0;
+  virtual void copy() = 0;
 // Friends
   friend class NLogDialog;
 };
@@ -69,6 +71,7 @@ private slots:
 protected:
   virtual void reset();
   virtual void init();
+  virtual void copy();
 private:
   QTreeWidget *_treew;
 };

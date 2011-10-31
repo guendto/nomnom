@@ -51,8 +51,14 @@ NLogDialog::NLogDialog(QWidget *parent/*=NULL*/)
                          | QDialogButtonBox::Cancel
                          | QDialogButtonBox::Reset);
 
+  QPushButton *b = new QPushButton(tr("Co&py"));
+  b->setToolTip(tr("Copy to clipboard"));
+
+  bb->addButton(b, QDialogButtonBox::ActionRole);
+
   connect(bb, SIGNAL(accepted()), this, SLOT(accept()));
   connect(bb, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(b, SIGNAL(clicked()), this, SLOT(copy()));
 
   connect(bb->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           this, SLOT(reset()));
@@ -112,6 +118,12 @@ void NLogDialog::reset()
 {
   NLogWidget *l = dynamic_cast<NLogWidget*>(_toolbox->currentWidget());
   l->reset();
+}
+
+void NLogDialog::copy()
+{
+  NLogWidget *l = dynamic_cast<NLogWidget*>(_toolbox->currentWidget());
+  l->copy();
 }
 
 // NLogWidget
