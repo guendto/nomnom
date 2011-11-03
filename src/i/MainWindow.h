@@ -28,6 +28,7 @@
 
 class ProcessProgressDialog;
 class DownloadDialog;
+class QUrl;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -43,7 +44,7 @@ private:
   void handleURL(const QString&);
   bool queryFormats(QStringList&,
                     const QStringList&,
-                    const QString&,
+                    const QUrl&,
                     bool&);
   void createContextMenu();
   void changeProgramIcon();

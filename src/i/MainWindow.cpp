@@ -191,8 +191,17 @@ static void print_url(const nn::NRecentEntry& r)
 }
 #endif
 
-void MainWindow::handleURL(const QString& url)
+void MainWindow::handleURL(const QString& u)
 {
+  const QUrl url = QUrl::fromUserInput(u);
+
+  if (!url.isValid())
+  {
+    // QUrl::errorString() is less than ideal.
+    nn::info(this, tr("Invalid URL: %1").arg(u));
+    return;
+  }
+
   QString s = settings.eitherValue(nn::ParseUsing,
                                    nn::ParseUsingOther)
               .toString()
@@ -232,7 +241,7 @@ void MainWindow::handleURL(const QString& url)
 // Recent.
 
   nn::NRecentEntry e;
-  e.setURL(url);
+  e.setURL(url.toEncoded());
 
   recent << e;
 
@@ -291,7 +300,7 @@ void MainWindow::handleURL(const QString& url)
 
 // Query media stream data.
 
-  q_args.replaceInStrings("%u", url);
+  q_args.replaceInStrings("%u", url.toEncoded());
   q_args << "-f" << fmt;
 
 #ifdef ENABLE_VERBOSE
@@ -336,11 +345,11 @@ void MainWindow::handleURL(const QString& url)
 
 bool MainWindow::queryFormats(QStringList& formats,
                               const QStringList& q_args,
-                              const QString& url,
+                              const QUrl& url,
                               bool& failed)
 {
   QStringList args = q_args;
-  args.replaceInStrings("%u", url);
+  args.replaceInStrings("%u", url.toEncoded());
   args << "-F";
 
 #ifdef ENABLE_VERBOSE
@@ -692,7 +701,10 @@ void MainWindow::onRecent()
 void MainWindow::onAddress()
 {
   const QString url =
-    QInputDialog::getText(this, tr("Address"), tr("Media page URL:"));
+    QInputDialog::getText(this,
+                          tr("Address"),
+                          tr("Media page URL:"))
+    .simplified();
 
   if (url.isEmpty())
     return;
@@ -746,7 +758,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 
 void MainWindow::dropEvent(QDropEvent *e)
 {
-  handleURL(e->mimeData()->text().simplified());
+  handleURL(e->mimeData()->text());
   e->acceptProposedAction();
 }
 
