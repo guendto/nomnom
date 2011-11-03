@@ -54,6 +54,7 @@ typedef enum
   AskWhereToSaveMediaFile,
   ClearURLRecordAtExit,
   ReplaceExistingMedia,
+  GetBestFormat,
 // Options: Systray
   ShowInTrayIcon,
   TerminateInstead,

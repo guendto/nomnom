@@ -256,8 +256,10 @@ void MainWindow::handleURL(const QString& url)
            << have_quvi_feature_query_formats;
 #endif
 
+  const bool get_best = settings.value(nn::GetBestFormat).toBool();
+
   QStringList formats;
-  if (have_quvi_feature_query_formats)
+  if (have_quvi_feature_query_formats && !get_best)
     {
       bool failed = false;
 
@@ -284,7 +286,7 @@ void MainWindow::handleURL(const QString& url)
 // Choose format.
 
   QString fmt;
-  if (!selectFormat(formats, fmt))
+  if (!selectFormat(formats, fmt, get_best))
     return;
 
 // Query media stream data.
@@ -382,12 +384,19 @@ bool MainWindow::queryFormats(QStringList& formats,
   return false;
 }
 
-bool MainWindow::selectFormat(QStringList& formats, QString& fmt)
+bool MainWindow::selectFormat(QStringList& formats,
+                              QString& fmt,
+                              const bool get_best)
 {
-  // Prompt only if count exceeds 1 ("default)".
-  if (formats.size() < 2)
+  if (get_best)
     {
-      fmt = "default"; // Do not translate. quvi understands only this.
+      fmt = "best";
+      return true;
+    }
+
+  if (formats.size() < 2) // Skip prompt unless >1 formats available
+    {
+      fmt = "default";
       return true;
     }
 

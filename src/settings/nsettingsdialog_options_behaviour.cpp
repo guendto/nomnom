@@ -40,8 +40,9 @@ NSettingsBehaviour::NSettingsBehaviour(QWidget *parent/*=NULL*/)
 
   QVBoxLayout *box = new QVBoxLayout;
   box->addWidget(clearURLRecordAtExitBox);
-  box->addWidget(replaceExistingMediaBox);
+  box->addWidget(getBestFormatBox);
   box->addWidget(askWhereSaveMediaBox);
+  box->addWidget(replaceExistingMediaBox);
   box->addWidget(keepAppWinTopBox);
   box->addWidget(playWhenDoneBox);
   box->addStretch(0);
@@ -64,6 +65,9 @@ void NSettingsBehaviour::createWidgets()
 
   replaceExistingMediaBox =
     new QCheckBox(tr("Al&ways replace existing media"));
+
+  getBestFormatBox =
+    new QCheckBox(tr("Always &get the best media format"));
 }
 
 void NSettingsBehaviour::init()
@@ -81,6 +85,7 @@ void NSettingsBehaviour::write()
   _write(ClearURLRecordAtExit,       clearURLRecordAtExitBox);
   _write(AskWhereToSaveMediaFile,    askWhereSaveMediaBox);
   _write(KeepApplicationWindowOnTop, keepAppWinTopBox);
+  _write(GetBestFormat,              getBestFormatBox);
   _write(PlayWhenDoneDownloading,    playWhenDoneBox);
 }
 
@@ -96,6 +101,7 @@ void NSettingsBehaviour::read()
   _read(ReplaceExistingMedia,       replaceExistingMediaBox);
   _read(ClearURLRecordAtExit,       clearURLRecordAtExitBox);
   _read(AskWhereToSaveMediaFile,    askWhereSaveMediaBox);
+  _read(GetBestFormat,              getBestFormatBox);
   _read(KeepApplicationWindowOnTop, keepAppWinTopBox);
   _read(PlayWhenDoneDownloading,    playWhenDoneBox);
 }

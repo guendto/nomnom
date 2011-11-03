@@ -39,7 +39,7 @@ protected:
   void closeEvent(QCloseEvent*);
   void dropEvent(QDropEvent*);
 private:
-  bool selectFormat(QStringList&, QString&);
+  bool selectFormat(QStringList&, QString&, const bool);
   void handleURL(const QString&);
   bool queryFormats(QStringList&,
                     const QStringList&,

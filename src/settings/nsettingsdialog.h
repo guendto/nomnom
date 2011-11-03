@@ -218,6 +218,7 @@ private:
   QCheckBox *clearURLRecordAtExitBox;
   QCheckBox *askWhereSaveMediaBox;
   QCheckBox *keepAppWinTopBox;
+  QCheckBox *getBestFormatBox;
   QCheckBox *playWhenDoneBox;
 };
 

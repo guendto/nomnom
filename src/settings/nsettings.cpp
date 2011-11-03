@@ -55,6 +55,7 @@ const char *key_strings[] =
   "AskWhereToSaveMediaFile",
   "ClearURLRecordAtExit",
   "ReplaceExistingMedia",
+  "GetBestFormat",
 // Options: Systray
   "ShowInTrayIcon",
   "TerminateInstead",
