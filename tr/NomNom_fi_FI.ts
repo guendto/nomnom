@@ -85,81 +85,86 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/i/MainWindow.cpp" line="154"/>
-        <location filename="../src/i/MainWindow.cpp" line="749"/>
+        <location filename="../src/i/MainWindow.cpp" line="770"/>
         <source>Show</source>
         <translation>Näytä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="210"/>
+        <location filename="../src/i/MainWindow.cpp" line="201"/>
+        <source>Invalid URL: %1</source>
+        <translation>Väärän tyyppinen internet-osoite: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/i/MainWindow.cpp" line="219"/>
         <source>Please configure the path to the quvi. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku komentoon quvi. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="226"/>
+        <location filename="../src/i/MainWindow.cpp" line="235"/>
         <source>Please configure the path to a media player. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku media-toistin komentoon. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="299"/>
-        <location filename="../src/i/MainWindow.cpp" line="350"/>
+        <location filename="../src/i/MainWindow.cpp" line="310"/>
+        <location filename="../src/i/MainWindow.cpp" line="361"/>
         <source>Checking...</source>
         <translation>Tarkastetaan...</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="396"/>
+        <location filename="../src/i/MainWindow.cpp" line="414"/>
         <source>Choose format</source>
-        <translation>Valitse muoto</translation>
+        <translation>Valitse media-muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="397"/>
-        <location filename="../src/i/MainWindow.cpp" line="409"/>
+        <location filename="../src/i/MainWindow.cpp" line="415"/>
+        <location filename="../src/i/MainWindow.cpp" line="427"/>
         <source>Format:</source>
         <translation>Muoto:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="398"/>
-        <location filename="../src/i/MainWindow.cpp" line="405"/>
+        <location filename="../src/i/MainWindow.cpp" line="416"/>
+        <location filename="../src/i/MainWindow.cpp" line="423"/>
         <source>Enter your own</source>
         <translation>Syötä muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="408"/>
+        <location filename="../src/i/MainWindow.cpp" line="426"/>
         <source>Enter format</source>
         <translation>Syötä muoto</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="433"/>
-        <location filename="../src/i/MainWindow.cpp" line="553"/>
+        <location filename="../src/i/MainWindow.cpp" line="451"/>
+        <location filename="../src/i/MainWindow.cpp" line="571"/>
         <source>Unknown error while attempting to start a detached process</source>
         <translation>Ulkoista ohjelmaa käynnistettäessa tapahtui tuntematon virhe</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="476"/>
+        <location filename="../src/i/MainWindow.cpp" line="494"/>
         <source>Save media as</source>
         <translation>Tallenna nimellä</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="595"/>
+        <location filename="../src/i/MainWindow.cpp" line="613"/>
         <source>quvi returned unexpected data</source>
         <translation>quvi-komento ei palauttanut odotettuja tietoja</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="633"/>
+        <location filename="../src/i/MainWindow.cpp" line="651"/>
         <source>Language will be changed after you restart the application. Restart now?</source>
         <translation>Kieli vaihdetaan ohjelman uudelleen käynnistyksen yhteydessä. Käynnistetäänkö ohjelma uudelleen?</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="686"/>
+        <location filename="../src/i/MainWindow.cpp" line="705"/>
         <source>Address</source>
         <translation>Osoite</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="686"/>
+        <location filename="../src/i/MainWindow.cpp" line="706"/>
         <source>Media page URL:</source>
         <translation>Internet-osoite:</translation>
     </message>
     <message>
-        <location filename="../src/i/MainWindow.cpp" line="709"/>
+        <location filename="../src/i/MainWindow.cpp" line="730"/>
         <source>Please configure the path to a feed reader. See under the &quot;commands&quot; in the settings.</source>
         <translation>Aseta polku syötetietoja lukevaan komentoon. Katso asetukset: kohta &quot;komennot&quot;.</translation>
     </message>
@@ -465,17 +470,27 @@ you set the max results parameter to 10.
 <context>
     <name>nn::NLogDialog</name>
     <message>
-        <location filename="../src/log/nlogdialog.cpp" line="44"/>
+        <location filename="../src/log/nlogdialog.cpp" line="45"/>
         <source>&amp;Recent</source>
         <translation>&amp;Aiemmat</translation>
     </message>
     <message>
-        <location filename="../src/log/nlogdialog.cpp" line="64"/>
+        <location filename="../src/log/nlogdialog.cpp" line="54"/>
+        <source>Co&amp;py</source>
+        <translation>&amp;Kopioi</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog.cpp" line="55"/>
+        <source>Copy to clipboard</source>
+        <translation>Kopioi leikepöydälle</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog.cpp" line="76"/>
         <source>Log</source>
         <translation>Historia</translation>
     </message>
     <message>
-        <location filename="../src/log/nlogdialog.cpp" line="90"/>
+        <location filename="../src/log/nlogdialog.cpp" line="99"/>
         <source>Please select an item from the list</source>
         <translation>Ole hyvä ja valitse kohde listasta</translation>
     </message>
@@ -493,9 +508,14 @@ you set the max results parameter to 10.
         <translation>Lisätty</translation>
     </message>
     <message>
-        <location filename="../src/log/nlogdialog_recent.cpp" line="92"/>
+        <location filename="../src/log/nlogdialog_recent.cpp" line="86"/>
         <source>All records will be lost permanently. Really clear?</source>
         <translation>Tiedot menetetään pysyvästi. Oletko varma?</translation>
+    </message>
+    <message>
+        <location filename="../src/log/nlogdialog_recent.cpp" line="101"/>
+        <source>Please select an item from the list</source>
+        <translation>Ole hyvä ja valitse kohde listasta</translation>
     </message>
 </context>
 <context>
@@ -557,29 +577,34 @@ you set the max results parameter to 10.
 <context>
     <name>nn::NSettingsBehaviour</name>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="54"/>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="55"/>
         <source>&amp;Keep application window on top</source>
         <translation>&amp;Pidä ohjelman ikkuna ylimmäisenä</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="57"/>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="58"/>
         <source>Pla&amp;y media when done downloading</source>
         <translation>Toi&amp;sta tiedosto kopioinnin päätyttyä</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="60"/>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="61"/>
         <source>A&amp;sk where to save media</source>
         <translation>Va&amp;litse nimi tallennettavalle tiedostolle kopioinnin alkaessa</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="63"/>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="64"/>
         <source>C&amp;lear record of visited URLs at exit</source>
         <translation>Unoh&amp;da aiemmat osoitteet ohjelman sulkeutuessa</translation>
     </message>
     <message>
-        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="66"/>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="67"/>
         <source>Al&amp;ways replace existing media</source>
         <translation>&amp;Korvaa aiempi tiedosto kopioinnin alkaessa</translation>
+    </message>
+    <message>
+        <location filename="../src/settings/nsettingsdialog_options_behaviour.cpp" line="70"/>
+        <source>Always &amp;get the best media format</source>
+        <translation>V&amp;alitse paras media-muoto automaattisesti</translation>
     </message>
 </context>
 <context>
