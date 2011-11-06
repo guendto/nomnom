@@ -1,4 +1,13 @@
 
+0.3.1  Sun Nov 06 2011  Toni Gundogdu
+
+Changes:
+    - Add "Copy to clipboard" to (recent) log dialog
+    - Add "Always get the best media format" option
+    - Improve handling of user entered URLs
+    - Update Finnish translation
+
+
 0.3.0  Sun Oct 30 2011  Toni Gundogdu
 
 Changes:
